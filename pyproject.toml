@@ -1,0 +1,39 @@
+
+[tool.poetry]
+name = "harp"
+version = "1.0.0"
+description = "Homogenized Ancillary Resource Provider"
+authors = [
+      "Joackim Orcière",
+]
+
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: POSIX :: Linux",
+]
+
+exclude = [
+    "misc",
+    "__pycache__",
+    "*__pycache__*",
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+numpy = "^1.18.0"
+netcdf4 = "^1.5.4"
+h5py = "^3.1.0"
+xarray = "*"
+dask = "*"
+
+core = { git = "https://github.com/hygeos/core.git",  branch = "main" }
+
+pydap  = "^3.4"
+pandas = "*"
+pyproj = "*"
+cdsapi = "*"
+lxml = "*"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
