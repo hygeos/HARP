@@ -26,7 +26,7 @@ def test_get_var_std_name():
 
 def test_get_var_std_name_local_file():
 
-    nm = Nomenclature(provider = 'MERRA2', csv_file='tests/ancillary/inputs/nomenclature/variables.csv')
+    nm = Nomenclature(provider = 'MERRA2', csv_file='tests/inputs/nomenclature/variables.csv')
 
     assert nm.get_new_name('SPEED') == 'local_surface_wind_speed'
 
