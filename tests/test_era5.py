@@ -70,6 +70,35 @@ def test_get_date():
         # check that the time interpolation did not occur
         assert len(np.atleast_1d(ds.time.values)) == 24
 
+def test_get_date_area():
+    with tempfile.TemporaryDirectory() as tmpdir:
+        
+        
+        era5 = ERA5(model=ERA5.models.reanalysis_single_level, directory=Path(tmpdir))
+        
+        area = [50, 40, 40, 50]
+        ds = era5.get_day(
+            variables=["ozone"], date=date(2019, 11, 30),
+            area=area
+        )  # download dataset
+
+        variables = list(ds)  # get dataset variables as list of str
+
+        assert "tco3" not in variables
+        assert "ozone" in variables
+
+        # test wrap
+        lons = ds.longitude.values
+        lats = ds.latitude.values
+        assert np.max(lons) > 49 and np.max(lons) < 51
+        assert np.min(lons) > 39 and np.min(lons) < 41
+        assert np.max(lats) > 49 and np.max(lats) < 51
+        assert np.min(lats) > 39 and np.min(lats) < 41
+
+
+        # check that the time interpolation did not occur
+        assert len(np.atleast_1d(ds.time.values)) == 24
+
 
 def test_get_local_var_def_file():
     with tempfile.TemporaryDirectory() as tmpdir:
@@ -98,7 +127,7 @@ def test_get_pressure_levels():
             model=ERA5.models.reanalysis_pressure_levels, directory=Path(tmpdir)
         )
 
-        area = [1, -1, -1, 1]
+        area = [1, -1, -1,  1]
         ds = era5.get(
             variables=["ozone_mass_mixing_ratio", "specific_humidity", "temperature"],
             dt=datetime(2013, 11, 30, 13, 35),

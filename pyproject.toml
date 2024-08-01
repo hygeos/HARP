@@ -32,7 +32,8 @@ pydap  = "^3.4"
 pandas = "*"
 pyproj = "*"
 cdsapi = "cdsapi>=0.7.0"
-lxml = "*"
+scipy  = "*"
+lxml   = "*"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

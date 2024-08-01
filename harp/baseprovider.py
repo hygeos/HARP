@@ -57,7 +57,11 @@ class BaseProvider:
         vars_to_compute, vars_to_query = (None, variables) if self.no_std else self._find_computable_variables(variables)
         
         filepath = self.download(vars_to_query, date, area)
-        ds = xr.open_mfdataset(filepath)                      # open dataset
+        ds = xr.open_mfdataset(filepath) # open dataset
+        
+        # New CDS changed time dimension name, rename to time
+        if "time" not in ds and "valid_time" in ds:
+            ds = ds.rename({'valid_time': 'time'})
         
         if self.no_std: # do not standardize, return as is
             return ds
@@ -87,6 +91,10 @@ class BaseProvider:
         day = date(dt.year, dt.month, dt.day) # get the day wether dt is a datetime or a datetime
         filepath = self.download(vars_to_query, day, area)
         ds = xr.open_mfdataset(filepath)
+        
+        # New CDS changed time dimension name, rename to time
+        if "time" not in ds and "valid_time" in ds:
+            ds = ds.rename({'valid_time': 'time'})
         
         # download next day if necessary
         if dt.hour == 23:
@@ -188,6 +196,7 @@ class BaseProvider:
     
     @abstract # to be defined by subclasses
     def standardize(self, ds: xr.Dataset) -> xr.Dataset:
+        raise RuntimeError('Should not be executed')
         pass
         
     

@@ -13,31 +13,33 @@ from core.static import interface
 from harp.nomenclature import Nomenclature
 from harp.baseprovider import BaseProvider
 from harp.era5_models import ERA5_Models
-from harp.utils import wrap
+from harp.utils import wrap, center_longitude
 
 
 class ERA5(BaseProvider):
-    '''
+    """
     Ancillary data provider using ERA5
 
     - model: valid ERA5 models are listed in ERA5.models object
     - directory: local folder path, where to download files 
     - nomenclature_file: local file path to a nomenclature CSV to be used by the nomenclature module
     - no_std: bypass the standardization to the nomenclature module, keeping the dataset as provided
-
-    '''
+    """
     
     models = ERA5_Models
     
     def standardize(self, ds: xr.Dataset) -> xr.Dataset:
-        '''
+        """
         Open an ERA5 file and format it for consistency
         with the other ancillary data sources
-        '''
+        """
         
         ds = self.names.rename_dataset(ds) # rename dataset according to nomenclature module
         
-        if np.min(ds.longitude) == -180 and 175.0 <= np.max(ds.longitude) < 180:
+        ds = center_longitude(ds)
+        
+        lons = ds.longitude.values
+        if np.min(lons) == -180.0 and np.max(lons) > 179.0 and np.max(lons) != 180.0: 
             ds = wrap(ds, 'longitude', -180, 180)
         
         return ds

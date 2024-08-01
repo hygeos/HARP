@@ -7,6 +7,16 @@ import xarray as xr
 # sub package imports
 # ...
 
+def center_longitude(ds: xr.Dataset):
+    """
+    Center longitudes from [0, 360] to [-180, 180]
+    """
+    lon = (ds.longitude.values + 180) % 360 - 180
+    
+    ds = ds.assign_coords(longitude=lon)
+    ds = ds.sortby("longitude")
+    return ds
+
 
 def wrap(ds: xr.Dataset, dim: str, vmin: float, vmax: float):
     """
