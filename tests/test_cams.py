@@ -125,7 +125,7 @@ def test_get_local_var_def_file():
         cams = CAMS(
             model=CAMS.models.global_atmospheric_composition_forecast,
             directory=Path(tmpdir),
-            nomenclature_file=Path("tests/ancillary/inputs/nomenclature/variables.csv"),
+            nomenclature_file=Path("tests/inputs/nomenclature/variables.csv"),
         )
         
         ds = cams.get(
@@ -165,7 +165,7 @@ def test_get_no_std():
 def test_fail_get_offline():
     cams = CAMS(
         model=CAMS.models.global_atmospheric_composition_forecast,
-        directory=Path("tests/ancillary/inputs/CAMS/"),
+        directory=Path("tests/inputs/CAMS/"),
         offline=True,
     )
 
@@ -184,7 +184,7 @@ def test_download_offline():
     # empy file but with correct nomenclature
     cams = CAMS(
         model=CAMS.models.global_atmospheric_composition_forecast,
-        directory=Path("tests/ancillary/inputs/CAMS/"),
+        directory=Path("tests/inputs/CAMS/"),
         offline=True,
     )
 
@@ -199,7 +199,7 @@ def test_download_offline_area():
     # empy file but with correct nomenclature
     cams = CAMS(
         model=CAMS.models.global_atmospheric_composition_forecast,
-        directory=Path("tests/ancillary/inputs/CAMS/"),
+        directory=Path("tests/inputs/CAMS/"),
         offline=True,
     )
 

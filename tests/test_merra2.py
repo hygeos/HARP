@@ -23,7 +23,7 @@ def test_get_datetime():
         merra = MERRA2(
                     model=MERRA2.models.M2T1NXRAD,
                     directory=tmpdir,
-                    config_file=Path('tests/ancillary/inputs/merra2.json'),
+                    config_file=Path('tests/inputs/merra2.json'),
                     )
         
         ds = merra.get(variables=['cloud_cov', 'cloud_od'], dt=datetime(2023, 9, 10, 22, 35))
@@ -49,7 +49,7 @@ def test_get_date():
         merra = MERRA2(
                     model=MERRA2.models.M2T1NXRAD,
                     directory=tmpdir,
-                    config_file=Path('tests/ancillary/inputs/merra2.json'),
+                    config_file=Path('tests/inputs/merra2.json'),
                     )
         
         ds = merra.get_day(variables=['cloud_cov', 'cloud_od'], date=date(2023, 9, 10))
@@ -73,9 +73,9 @@ def test_get_local_var_def_file():
         tmpdir = Path(tmpdir)
     
         merra = MERRA2(model=MERRA2.models.M2I1NXASM,
-                    config_file=Path('tests/ancillary/inputs/merra2.json'), 
+                    config_file=Path('tests/inputs/merra2.json'), 
                     directory=tmpdir,
-                    nomenclature_file=Path('tests/ancillary/inputs/nomenclature/variables.csv')
+                    nomenclature_file=Path('tests/inputs/nomenclature/variables.csv')
                     )
         
         ds = merra.get(variables=['local_total_column_ozone'], dt=datetime(2023, 9, 10, 13, 35))
@@ -95,7 +95,7 @@ def test_no_std():
         tmpdir = Path(tmpdir)
     
         merra = MERRA2(model=MERRA2.models.M2T1NXRAD,
-                       config_file=Path('tests/ancillary/inputs/merra2.json'), 
+                       config_file=Path('tests/inputs/merra2.json'), 
                        directory=tmpdir,
                        no_std=True,
                     )
@@ -114,7 +114,7 @@ def test_fail_get_offline():
         tmpdir = Path(tmpdir)
         
         merra = MERRA2(model=MERRA2.models.M2T1NXRAD,
-                       config_file=Path('tests/ancillary/inputs/merra2.json'), 
+                       config_file=Path('tests/inputs/merra2.json'), 
                        directory=tmpdir,
                        offline=True,
                        )
@@ -126,8 +126,8 @@ def test_fail_get_offline():
 
 def test_download_offline():
     merra = MERRA2(model=MERRA2.models.M2I1NXINT,
-                   config_file=Path('tests/ancillary/inputs/merra2.json'), 
-                   directory=Path('tests/ancillary/inputs/MERRA2/'),
+                   config_file=Path('tests/inputs/merra2.json'), 
+                   directory=Path('tests/inputs/MERRA2/'),
                    offline=True,
                    )
             
@@ -138,8 +138,8 @@ def test_download_offline():
     
 def test_fail_download_offline():
     merra = MERRA2(model=MERRA2.models.M2I1NXINT,
-                   config_file=Path('tests/ancillary/inputs/merra2.json'), 
-                   directory=Path('tests/ancillary/inputs/MERRA2/'),
+                   config_file=Path('tests/inputs/merra2.json'), 
+                   directory=Path('tests/inputs/MERRA2/'),
                    offline=True,
                    )
     

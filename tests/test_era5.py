@@ -76,7 +76,7 @@ def test_get_local_var_def_file():
         era5 = ERA5(
             model=ERA5.models.reanalysis_single_level,
             directory=Path(tmpdir),
-            nomenclature_file=Path("tests/ancillary/inputs/nomenclature/variables.csv"),
+            nomenclature_file=Path("tests/inputs/nomenclature/variables.csv"),
         )
         ds = era5.get(
             variables=["local_total_column_ozone"], dt=datetime(2019, 11, 30, 13, 35)
@@ -134,7 +134,7 @@ def test_get_no_std():
 def test_fail_get_offline():
     era5 = ERA5(
         model=ERA5.models.reanalysis_single_level,
-        directory=Path("tests/ancillary/inputs/ERA5"),
+        directory=Path("tests/inputs/ERA5"),
         offline=True,
     )
 
@@ -147,7 +147,7 @@ def test_download_offline():
     # empy file but with correct nomenclature
     era5 = ERA5(
         model=ERA5.models.reanalysis_single_level,
-        directory=Path("tests/ancillary/inputs/ERA5"),
+        directory=Path("tests/inputs/ERA5"),
         offline=True,
     )
 
@@ -162,7 +162,7 @@ def test_fail_download_offline():
     # empy file but with correct nomenclature
     era5 = ERA5(
         model=ERA5.models.reanalysis_single_level,
-        directory=Path("tests/ancillary/inputs/ERA5"),
+        directory=Path("tests/inputs/ERA5"),
         offline=True,
     )
 
@@ -185,7 +185,7 @@ def test_fail_folder_do_not_exist():
 def test_fail_non_defined_var():
     era5 = ERA5(
         model=ERA5.models.reanalysis_single_level,
-        directory=Path("tests/ancillary/inputs/ERA5"),
+        directory=Path("tests/inputs/ERA5"),
     )
 
     with pytest.raises(LookupError):
