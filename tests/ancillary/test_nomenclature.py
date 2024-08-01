@@ -14,14 +14,14 @@ def test_get_var_std_name():
     # test for MERRA2
     nm = Nomenclature(provider = 'MERRA2')
     
-    assert nm.get_new_name('SPEED') == 'surface_wind_speed'
-    assert nm.get_new_name('TQV')   == 'total_column_water_vapor'
+    assert nm.get_new_name('SPEED') == 'surf_wind'
+    assert nm.get_new_name('TQV')   == 'water_vapor'
     
     # test for CAMS
     nm_cams = Nomenclature(provider = 'CAMS')
     
-    assert nm_cams.get_new_name('aod550')   == 'total_aerosol_optical_depth_550nm'
-    assert nm_cams.get_new_name('suaod550') == 'sulfate_aerosol_optical_depth_550nm'
+    assert nm_cams.get_new_name('aod550')   == 'aod_550nm'
+    assert nm_cams.get_new_name('suaod550') == 'sulfate_aod_550nm'
 
 
 def test_get_var_std_name_local_file():

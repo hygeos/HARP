@@ -1,2 +1,3 @@
-# harp
-Homogenized Ancillary Resource Provider
+# Harp
+Harmonized Ancillary Resource Provider
+
