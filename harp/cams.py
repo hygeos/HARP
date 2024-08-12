@@ -9,12 +9,13 @@ import pandas as pd
 import numpy as np
 import os
 from core.static import interface
+from core.floats import feq
 
 # sub package imports
 from harp.baseprovider import BaseProvider
 from harp.cams_models import CAMS_Models
 from harp import cdsapi_parser 
-from harp.utils import wrap
+from harp.utils import wrap, center_longitude
 
 class CAMS(BaseProvider):
     """
@@ -29,16 +30,25 @@ class CAMS(BaseProvider):
     models = CAMS_Models
     
     def standardize(self, ds: xr.Dataset) -> xr.Dataset:
-        '''
+        """
         Open a CAMS file and standardize it for consistency
         with the other ancillary data sources
-        '''
+        """
         
         ds = self.names.rename_dataset(ds) # rename dataset according to nomenclature module
         
-        if np.min(ds.longitude) == -180 and 175.0 <= np.max(ds.longitude) < 180 :
+        # new ADS longitudes E [0, 360]
+        ds = center_longitude(ds) # center longitude to 0 -> [-180, 180] 
+        
+        lons = ds.longitude.values # if full map, make data a circle for proper interpolation
+        
+        if np.min(lons) != -180.0 and feq(np.min(lons), -180.0, tol=1e-6):
+            tresh = -(180 - 1e-6) # ~= -179.999999
+            lons[lons <= tresh] = -180.0 # force value to be -180 if closer than 1e-6, necessary for wrap
+            ds = ds.assign_coords(longitude = lons) # reassign new lons
+        
+        if feq(np.min(lons), -180.0) and np.max(lons) > 179.0 and not feq(np.max(lons), 180.0): 
             ds = wrap(ds, 'longitude', -180, 180)
-            
         return ds
     
     

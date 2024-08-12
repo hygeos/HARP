@@ -2,8 +2,10 @@
 from tempfile import TemporaryDirectory
 from datetime import datetime, date
 from pathlib import Path
+from random import randint
 
 # third party imports
+from core.floats import feq 
 import numpy as np
 import pytest
 
@@ -11,8 +13,20 @@ import pytest
 from harp import CAMS
 
 
+# def get_randomized_date():
+#     """
+#     returns year, month, day
+#     """
+#     # randomize requested day
+#     day = randint(1, 28) # E [1, 28]
+#     month = randint(1, 12) # E [1, 12]
+#     year = datetime.now().year - 1 - randint(0, 3) # E [-4, -1] # avoid current year as data may not be present
+    
+#     return year, month, day
+
 def test_get_datetime():
     with TemporaryDirectory() as tmpdir:
+        
         cams = CAMS(
             model=CAMS.models.global_atmospheric_composition_forecast,
             directory=Path(tmpdir),
@@ -30,8 +44,8 @@ def test_get_datetime():
         assert "aod_670nm" in variables
 
         # test wrap
-        assert np.max(ds.longitude.values) == 180.0
-        assert np.min(ds.longitude.values) == -180.0
+        assert feq(np.max(ds.longitude.values),  180.0)
+        assert feq(np.min(ds.longitude.values), -180.0)
 
         # check that the time interpolation occured
         assert len(np.atleast_1d(ds.time.values)) == 1
@@ -46,7 +60,7 @@ def test_get_datetime_area():
         
         ds = cams.get(
             variables=["aod_469nm", "aod_670nm"], dt=datetime(2020, 3, 22, 14, 35),
-            area=[10, -10, 9, -9]
+            area = [50, 40, 40, 50]
         )
 
         # check that the variables have been correctly renamed
@@ -56,9 +70,13 @@ def test_get_datetime_area():
         assert "aod_469nm" in variables
         assert "aod_670nm" in variables
 
-        # test wrap
-        assert np.max(ds.longitude.values) != 180.0
-        assert np.min(ds.longitude.values) != -180.0
+        # check area
+        lons = ds.longitude.values
+        lats = ds.latitude.values
+        assert np.max(lons) > 49 and np.max(lons) < 51
+        assert np.min(lons) > 39 and np.min(lons) < 41
+        assert np.max(lats) > 49 and np.max(lats) < 51
+        assert np.min(lats) > 39 and np.min(lats) < 41
 
         # check that the time interpolation occured
         assert len(np.atleast_1d(ds.time.values)) == 1
@@ -98,8 +116,8 @@ def test_get_date():
         assert "aod_670nm" in variables
 
         # test wrap
-        assert np.max(ds.longitude.values) == 180.0
-        assert np.min(ds.longitude.values) == -180.0
+        assert feq(np.max(ds.longitude.values),  180.0)
+        assert feq(np.min(ds.longitude.values), -180.0)
 
         # check that the time interpolation did not occur
         assert len(np.atleast_1d(ds.time.values)) == 24
@@ -140,8 +158,8 @@ def test_get_local_var_def_file():
         assert "local_total_column_ozone" in variables
 
         # test wrap
-        assert np.max(ds.longitude.values) == 180.0
-        assert np.min(ds.longitude.values) == -180.0
+        assert feq(np.max(ds.longitude.values),  180.0)
+        assert feq(np.min(ds.longitude.values), -180.0)
 
 
 def test_get_no_std():

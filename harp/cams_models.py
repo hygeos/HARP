@@ -24,22 +24,22 @@ class CAMS_Models:
         - d: date of the dataset
         """
         
-        if area is None:
-            area = [90, -180, -90, 180]
-        
         if cams.client is None:
             cams.client = cdsapi.Client(url=cams.cdsapi_cfg['url'], 
                                         key=cams.cdsapi_cfg['key'])
-            
-        cams.client.retrieve(
-            'cams-global-atmospheric-composition-forecasts',
-            {
-                'date': str(d)+'/'+str(d),
-                'type': 'forecast',
-                'format': 'netcdf',
+        
+        dataset = 'cams-global-atmospheric-composition-forecasts'
+        d_str = d.strftime("%Y-%m-%d")
+        request = {
                 'variable': cams.ads_variables,
+                'date': [f"{d_str}/{d_str}"], # ['2024-08-08/2024-08-08']
                 'time': ['00:00', '12:00'],
-                'leadtime_hour': ['0', '1', '2', '3', '4', '5', 
-                                  '6', '7', '8', '9', '10', '11'],
-                'area': area,
-            }, target)
+                'leadtime_hour': ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'],
+                'type': ['forecast'],
+                'data_format': 'netcdf',
+            }
+        
+        if area is not None: 
+            request['area'] = area
+        
+        cams.client.retrieve(dataset, request, target)

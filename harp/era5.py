@@ -8,6 +8,7 @@ import xarray as xr
 import pandas as pd
 import numpy as np
 from core.static import interface
+from core.floats import feq
 
 # sub package imports
 from harp.nomenclature import Nomenclature
@@ -36,10 +37,11 @@ class ERA5(BaseProvider):
         
         ds = self.names.rename_dataset(ds) # rename dataset according to nomenclature module
         
-        ds = center_longitude(ds)
+        # new CDS longitudes E [0, 360]
+        ds = center_longitude(ds) # center longitude to 0 -> [-180, 180] 
         
-        lons = ds.longitude.values
-        if np.min(lons) == -180.0 and np.max(lons) > 179.0 and np.max(lons) != 180.0: 
+        lons = ds.longitude.values # if full map, make data a circle for proper interpolation
+        if feq(np.min(lons), -180.0) and np.max(lons) > 179.0 and not feq(np.max(lons), 180.0): 
             ds = wrap(ds, 'longitude', -180, 180)
         
         return ds

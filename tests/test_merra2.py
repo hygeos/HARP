@@ -4,6 +4,7 @@ from datetime import datetime, date
 from pathlib import Path
 
 # third party imports
+from core.floats import feq
 import numpy as np
 import pytest
 
@@ -33,6 +34,10 @@ def test_get_datetime():
         assert 'CLDTOT' not in variables
         assert 'TAUTOT' not in variables
         
+        # test wrap
+        assert feq(np.max(ds.longitude.values),  180.0)
+        assert feq(np.min(ds.longitude.values), -180.0)
+        
         # check that the time interpolation occured
         assert len(np.atleast_1d(ds.time.values)) == 1
 
@@ -58,6 +63,10 @@ def test_get_date():
         variables = list(ds)
         assert 'CLDTOT' not in variables
         assert 'TAUTOT' not in variables
+        
+        # test wrap
+        assert feq(np.max(ds.longitude.values),  180.0)
+        assert feq(np.min(ds.longitude.values), -180.0)
         
         # check that the time interpolation occured
         assert len(np.atleast_1d(ds.time.values)) == 24
@@ -104,6 +113,7 @@ def test_no_std():
         
         # check that the variables have not changed and kept their original short names
         variables = list(ds)
+        
         assert 'CLDTOT' in variables
         assert 'total_cloud_cover' not in variables
 

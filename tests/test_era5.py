@@ -4,6 +4,7 @@ from pathlib import Path
 import tempfile
 
 # third party imports
+from core.floats import feq
 import numpy as np
 import pytest
 
@@ -28,8 +29,8 @@ def test_get_datetime():
         assert "ozone" in variables
 
         # test wrap
-        assert np.max(ds.longitude.values) == 180.0
-        assert np.min(ds.longitude.values) == -180.0
+        assert feq(np.max(ds.longitude.values),  180.0)
+        assert feq(np.min(ds.longitude.values), -180.0)
 
         # check that the time interpolation occured
         assert len(np.atleast_1d(ds.time.values)) == 1
@@ -64,8 +65,8 @@ def test_get_date():
         assert "ozone" in variables
 
         # test wrap
-        assert np.max(ds.longitude.values) == 180.0
-        assert np.min(ds.longitude.values) == -180.0
+        assert feq(np.max(ds.longitude.values),  180.0)
+        assert feq(np.min(ds.longitude.values), -180.0)
 
         # check that the time interpolation did not occur
         assert len(np.atleast_1d(ds.time.values)) == 24
@@ -117,8 +118,8 @@ def test_get_local_var_def_file():
         assert "local_total_column_ozone" in variables
 
         # test wrap
-        assert np.max(ds.longitude.values) == 180.0
-        assert np.min(ds.longitude.values) == -180.0
+        assert feq(np.max(ds.longitude.values),  180.0)
+        assert feq(np.min(ds.longitude.values), -180.0)
 
 
 def test_get_pressure_levels():

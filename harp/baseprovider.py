@@ -59,9 +59,30 @@ class BaseProvider:
         filepath = self.download(vars_to_query, date, area)
         ds = xr.open_mfdataset(filepath) # open dataset
         
-        # New CDS changed time dimension name, rename to time
+        # ==========================================
+        # TODO: move Beta-CDS and Beta-ADS specific Harmonization outside of BaseProvider
+        # ==========================================
+        
+        # TODO: Move theses sections to Provider.standardize(...)
+        
+        # New Beta-ADS API introduced a split time dimension between forecast_period and forecast_reference_time
+        if "time" not in ds and "forecast_period" in ds:
+            ds = ds.stack({"time" : ("forecast_reference_time", "forecast_period")}, create_index=False)
+            ds = ds.drop_vars(["forecast_period", "forecast_reference_time"])
+            ds = ds.assign_coords(time=ds.valid_time.values)
+            ds = ds.drop_vars(["valid_time"])
+        
+        # New Beta-CDS API changed time dimension name, rename to time
         if "time" not in ds and "valid_time" in ds:
             ds = ds.rename({'valid_time': 'time'})
+            
+        # New Beta-CDS API introduced a variable, without meaningfull data, that interfer with time interpolation
+        if "expver" in ds: # we remove it from de dataset
+            ds = ds.drop_vars(["expver"])
+            
+        # ========================================== 
+        # End of CDS/ADS specific harmonization
+        # ==========================================    
         
         if self.no_std: # do not standardize, return as is
             return ds
@@ -92,9 +113,30 @@ class BaseProvider:
         filepath = self.download(vars_to_query, day, area)
         ds = xr.open_mfdataset(filepath)
         
-        # New CDS changed time dimension name, rename to time
+        # ==========================================
+        # TODO: move Beta-CDS and Beta-ADS specific Harmonization outside of BaseProvider
+        # ==========================================
+        
+        # TODO: Move theses sections to Provider.standardize(...)
+        
+        # New Beta-ADS API introduced a split time dimension between forecast_period and forecast_reference_time
+        if "time" not in ds and "forecast_period" in ds:
+            ds = ds.stack({"time" : ("forecast_reference_time", "forecast_period")}, create_index=False)
+            ds = ds.drop_vars(["forecast_period", "forecast_reference_time"])
+            ds = ds.assign_coords(time=ds.valid_time.values)
+            ds = ds.drop_vars(["valid_time"])
+        
+        # New Beta-CDS API changed time dimension name, rename to time
         if "time" not in ds and "valid_time" in ds:
             ds = ds.rename({'valid_time': 'time'})
+            
+        # New Beta-CDS API introduced a variable, without meaningfull data, that interfer with time interpolation
+        if "expver" in ds: # we remove it from de dataset
+            ds = ds.drop_vars(["expver"])
+            
+        # ========================================== 
+        # End of CDS/ADS specific harmonization
+        # ==========================================    
         
         # download next day if necessary
         if dt.hour == 23:
