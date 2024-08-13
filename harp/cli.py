@@ -28,9 +28,6 @@ def entry(args=None):
     try: # Better keyboard interupt
 
         if args.cmd == "copy-table":
-            
-            print(args)
-            
             folder_path = Path(args.destination) if args.destination is not None else Path.cwd()
                 
             if not folder_path.is_dir():
