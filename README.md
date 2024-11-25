@@ -15,8 +15,8 @@
 
 ## What is HARP ?
 
-Harp is an harmonisation layer for the different geospatial data providers. It also acts as a proxy for executing the API requests. It allow to standardize the way of querying and accessing data, despite the various differences between the providers.
-For example it can querry data from ECMWF, or from NASA. Currently the project interfaces with ERA5, CAMS global athmospheric composition forecast and MERRA2
+Harp is a harmonisation layer for the different geospatial data providers. It also acts as a proxy for executing the API requests. It standardizes data queries, despite the various differences between the providers.
+For example it can query data from ECMWF or from NASA. Currently the project interfaces with ERA5, CAMS global atmospheric composition forecast and MERRA2
 
 HARP has been developped as an internal tool for HYGEOS, and is still in development.
 
@@ -26,7 +26,7 @@ HARP has been developped as an internal tool for HYGEOS, and is still in develop
 - Cached source data
 - Harmonized xarray objects
 
-HARP facilitate the development of generic algorithms, because it standardizes both the request and the output data. 
+HARP facilitates the development of generic algorithms, by providing an abstracted layer above specific data queries and integrating harmonization routines
 
 ## Quickstart
 
@@ -46,5 +46,5 @@ pip install git+https://github.com/hygeos/HARP.git
 
 ## Extending HARP
 
-HARP is modular and conceived to be extended when required. New providers can be added by creating a new class and inheriting BaseProvider, new products can be added inside the existing Providers class
+HARP is modular and conceived to be extended when required. New providers can be added by creating a new class and inheriting BaseProvider, new products can be added inside the existing Providers class.
 
