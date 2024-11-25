@@ -14,7 +14,7 @@ def test_get_var_std_name():
     # test for MERRA2
     nm = Nomenclature(provider = 'MERRA2')
     
-    assert nm.get_new_name('SPEED') == 'surf_wind'
+    assert nm.get_new_name('SPEED') == 'wind_speed'
     assert nm.get_new_name('TQV')   == 'water_vapor'
     
     # test for CAMS

@@ -24,7 +24,8 @@ class ERA5_Models:
         """
         
         if era5.client is None:
-            era5.client = cdsapi.Client()
+            era5.client = cdsapi.Client(url=era5.cdsapi_cfg['url'], 
+                                        key=era5.cdsapi_cfg['key'])
 
         print(f'Downloading {target}...')
         

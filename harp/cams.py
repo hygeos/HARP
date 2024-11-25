@@ -9,7 +9,6 @@ import pandas as pd
 import numpy as np
 import os
 from core.static import interface
-from core.floats import feq
 
 # sub package imports
 from harp.baseprovider import BaseProvider
@@ -42,12 +41,12 @@ class CAMS(BaseProvider):
         
         lons = ds.longitude.values # if full map, make data a circle for proper interpolation
         
-        if np.min(lons) != -180.0 and feq(np.min(lons), -180.0, tol=1e-6):
+        if np.min(lons) != -180.0 and np.isclose(np.min(lons), -180.0, tol=1e-6):
             tresh = -(180 - 1e-6) # ~= -179.999999
             lons[lons <= tresh] = -180.0 # force value to be -180 if closer than 1e-6, necessary for wrap
             ds = ds.assign_coords(longitude = lons) # reassign new lons
         
-        if feq(np.min(lons), -180.0) and np.max(lons) > 179.0 and not feq(np.max(lons), 180.0): 
+        if np.isclose(np.min(lons), -180.0) and np.max(lons) > 179.0 and not np.isclose(np.max(lons), 180.0): 
             ds = wrap(ds, 'longitude', -180, 180)
         return ds
     

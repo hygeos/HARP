@@ -5,7 +5,6 @@ from pathlib import Path
 from random import randint
 
 # third party imports
-from core.floats import feq 
 import numpy as np
 import pytest
 
@@ -33,19 +32,19 @@ def test_get_datetime():
         )
         
         ds = cams.get(
-            variables=["aod_469nm", "aod_670nm"], dt=datetime(2020, 3, 22, 14, 35)
+            variables=["aod_469", "aod_670"], dt=datetime(2020, 3, 22, 14, 35)
         )
 
         # check that the variables have been correctly renamed
         variables = list(ds)
         assert "aod670" not in variables
         assert "aod469" not in variables
-        assert "aod_469nm" in variables
-        assert "aod_670nm" in variables
+        assert "aod_469" in variables
+        assert "aod_670" in variables
 
         # test wrap
-        assert feq(np.max(ds.longitude.values),  180.0)
-        assert feq(np.min(ds.longitude.values), -180.0)
+        assert np.isclose(np.max(ds.longitude.values),  180.0)
+        assert np.isclose(np.min(ds.longitude.values), -180.0)
 
         # check that the time interpolation occured
         assert len(np.atleast_1d(ds.time.values)) == 1
@@ -59,7 +58,7 @@ def test_get_datetime_area():
         )
         
         ds = cams.get(
-            variables=["aod_469nm", "aod_670nm"], dt=datetime(2020, 3, 22, 14, 35),
+            variables=["aod_469", "aod_670"], dt=datetime(2020, 3, 22, 14, 35),
             area = [50, 40, 40, 50]
         )
 
@@ -67,8 +66,8 @@ def test_get_datetime_area():
         variables = list(ds)
         assert "aod670" not in variables
         assert "aod469" not in variables
-        assert "aod_469nm" in variables
-        assert "aod_670nm" in variables
+        assert "aod_469" in variables
+        assert "aod_670" in variables
 
         # check area
         lons = ds.longitude.values
@@ -90,7 +89,7 @@ def test_get_computed():
         )
         
         ds = cams.get(
-            variables=["surf_wind", "angstr_coef_550nm"],
+            variables=["wind_speed", "angstr_coef_550"],
             dt=datetime(2023, 3, 22, 14, 35),
         )
 
@@ -98,8 +97,8 @@ def test_get_computed():
         variables = list(ds)
 
         # check that the constructed variable has been computed
-        assert "angstr_coef_550nm" in variables
-        assert "surf_wind" in variables
+        assert "angstr_coef_550" in variables
+        assert "wind_speed" in variables
 
 
 def test_get_date():
@@ -108,16 +107,16 @@ def test_get_date():
             model=CAMS.models.global_atmospheric_composition_forecast,
             directory=Path(tmpdir),
         )
-        ds = cams.get_day(variables=["aod_469nm", "aod_670nm"], date=date(2020, 3, 22))
+        ds = cams.get_day(variables=["aod_469", "aod_670"], date=date(2020, 3, 22))
 
         # check that the variables have been correctly renamed
         variables = list(ds)
-        assert "aod_469nm" in variables
-        assert "aod_670nm" in variables
+        assert "aod_469" in variables
+        assert "aod_670" in variables
 
         # test wrap
-        assert feq(np.max(ds.longitude.values),  180.0)
-        assert feq(np.min(ds.longitude.values), -180.0)
+        assert np.isclose(np.max(ds.longitude.values),  180.0)
+        assert np.isclose(np.min(ds.longitude.values), -180.0)
 
         # check that the time interpolation did not occur
         assert len(np.atleast_1d(ds.time.values)) == 24
@@ -130,7 +129,7 @@ def test_get_range():
             directory=Path(tmpdir),
         )
         ds = cams.get_range(
-            variables=["aod_469nm", "aod_670nm"],
+            variables=["aod_469", "aod_670"],
             date_start=date(2020, 3, 22),
             date_end=date(2020, 3, 23),
         )
@@ -158,8 +157,8 @@ def test_get_local_var_def_file():
         assert "local_total_column_ozone" in variables
 
         # test wrap
-        assert feq(np.max(ds.longitude.values),  180.0)
-        assert feq(np.min(ds.longitude.values), -180.0)
+        assert np.isclose(np.max(ds.longitude.values),  180.0)
+        assert np.isclose(np.min(ds.longitude.values), -180.0)
 
 
 def test_get_no_std():
@@ -176,8 +175,8 @@ def test_get_no_std():
         variables = list(ds)
         assert "aod670" in variables
         assert "aod469" in variables
-        assert "aod_469nm" not in variables
-        assert "aod_670nm" not in variables
+        assert "aod_469" not in variables
+        assert "aod_670" not in variables
 
 
 def test_fail_get_offline():
@@ -191,7 +190,7 @@ def test_fail_get_offline():
         cams.get(
             variables=[
                 "ozone",
-                "organic_carbon_aod_550nm",
+                "organic_carbon_aod_550",
             ],
             dt=datetime(2003, 3, 22, 13, 35),
         )
@@ -221,7 +220,7 @@ def test_download_offline_area():
         offline=True,
     )
 
-    f = cams.download(variables=["aod_469nm", "aod_670nm"], d=date(2020, 3, 22), area=[10, -10, 9, -9])
+    f = cams.download(variables=["aod_469", "aod_670"], d=date(2020, 3, 22), area=[10, -10, 9, -9])
 
     assert f.exists()
 
@@ -239,7 +238,7 @@ def test_fail_download_offline():
             cams.download(
                 variables=[
                     "ozone",
-                    "black_carbon_aod_550nm",
+                    "black_carbon_aod_550",
                 ],
                 d=date(2003, 3, 22),
             )

@@ -7,13 +7,13 @@ from pathlib import Path
 import xarray as xr
 import pandas as pd
 import numpy as np
+import os
 from core.static import interface
-from core.floats import feq
 
 # sub package imports
-from harp.nomenclature import Nomenclature
 from harp.baseprovider import BaseProvider
 from harp.era5_models import ERA5_Models
+from harp import cdsapi_parser 
 from harp.utils import wrap, center_longitude
 
 
@@ -41,7 +41,7 @@ class ERA5(BaseProvider):
         ds = center_longitude(ds) # center longitude to 0 -> [-180, 180] 
         
         lons = ds.longitude.values # if full map, make data a circle for proper interpolation
-        if feq(np.min(lons), -180.0) and np.max(lons) > 179.0 and not feq(np.max(lons), 180.0): 
+        if np.isclose(np.min(lons), -180.0) and np.max(lons) > 179.0 and not np.isclose(np.max(lons), 180.0): 
             ds = wrap(ds, 'longitude', -180, 180)
         
         return ds
@@ -61,8 +61,8 @@ class ERA5(BaseProvider):
         self.model_specs = self.model_specs.apply(lambda x: x.str.strip() if x.dtype == 'object' else x) # remove trailing whitespaces
         self.model_specs = self.model_specs[~self.model_specs['name'].astype(str).str.startswith('#')]                      # remove comment lines
         
-        # General variable nomenclature preparation
-        self.names = Nomenclature(provider=name, csv_file=nomenclature_file)
+        # get credentials from .cdsapirc file
+        self.cdsapi_cfg = self._parse_cdsapirc()
         
         # computables variables and their requirements
         # functions needs to have the same parameters: (ds, new_var)
@@ -128,3 +128,14 @@ class ERA5(BaseProvider):
         
         return self.model_specs[self.model_specs['short_name'] == short_name]['cds_name'].values[0]
     
+    
+    def _parse_cdsapirc(self):
+        """
+        after retrieval the function sets attributes cdsapi_url and cdsapi_key to
+        pass as parameter in the Client constructor
+        """
+        # taken from ECMWF's cdsapi code
+        dotrc = os.environ.get("CDSAPI_RC", os.path.expanduser("~/.cdsapirc"))
+        config = cdsapi_parser.read_config('cds', dotrc) 
+        # save the credentials as attributes
+        return config

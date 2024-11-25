@@ -4,7 +4,6 @@ from datetime import datetime, date
 from pathlib import Path
 
 # third party imports
-from core.floats import feq
 import numpy as np
 import pytest
 
@@ -35,8 +34,8 @@ def test_get_datetime():
         assert 'TAUTOT' not in variables
         
         # test wrap
-        assert feq(np.max(ds.longitude.values),  180.0)
-        assert feq(np.min(ds.longitude.values), -180.0)
+        assert np.isclose(np.max(ds.longitude.values),  180.0)
+        assert np.isclose(np.min(ds.longitude.values), -180.0)
         
         # check that the time interpolation occured
         assert len(np.atleast_1d(ds.time.values)) == 1
@@ -65,8 +64,8 @@ def test_get_date():
         assert 'TAUTOT' not in variables
         
         # test wrap
-        assert feq(np.max(ds.longitude.values),  180.0)
-        assert feq(np.min(ds.longitude.values), -180.0)
+        assert np.isclose(np.max(ds.longitude.values),  180.0)
+        assert np.isclose(np.min(ds.longitude.values), -180.0)
         
         # check that the time interpolation occured
         assert len(np.atleast_1d(ds.time.values)) == 24
