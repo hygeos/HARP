@@ -11,14 +11,15 @@ import numpy as np
 from core.fileutils import filegen
 from core.cache import cache_json 
 from core.static import interface
+from core import log
 from core import ftp
 
 # sub package imports
-from harp.merra2_models import MERRA2_Models
-from harp.merra2parser import Merra2Parser
+from .merra2_models import MERRA2_Models
+from ..merra2_parser import Merra2Parser
 from harp.baseprovider import BaseProvider
 from harp.nomenclature import Nomenclature
-from harp.utils import wrap
+from harp.utils import wrap, center_longitude
 
 class MERRA2(BaseProvider):
     '''
@@ -44,17 +45,23 @@ class MERRA2(BaseProvider):
         Modify a MERRA2 dataset variable names according to the name standard from nomenclature.py
         '''
         
-        ds = ds.rename_dims({'lat': 'latitude', 'lon': 'longitude'})
+        ds = self.names.rename_dataset(ds) # rename dataset according to nomenclature module
+        
+        ds = ds.rename_dims({'lat': 'latitude', 'lon': 'longitude'}) # rename merra2 names to ECMWF convention
         ds = ds.rename_vars({'lat': 'latitude', 'lon': 'longitude'})
+        
+        lons = ds.longitude.values
         
         if np.min(ds.longitude) == -180 and 175.0 <= np.max(ds.longitude) < 180 :
             ds = wrap(ds, 'longitude', -180, 180)
             
-        return self.names.rename_dataset(ds)
+        if np.isclose(np.min(lons), -180.0) and np.max(lons) > 179.0 and not np.isclose(np.max(lons), 180.0): 
+            ds = wrap(ds, 'longitude', -180, 180)
+        return ds
     
     @interface
     def __init__(self, model: Callable, directory: Path, nomenclature_file=None, offline:bool=False, 
-                 verbose:bool=True, no_std: bool=False, config_file: Path=Path('merra2.json'),
+                 verbose:bool=True, no_std: bool=False, merra2_layout_file: Path=None,
                 ):
 
         name = 'MERRA2'
@@ -70,11 +77,16 @@ class MERRA2(BaseProvider):
             
             
         self.model = model.__name__ # trick to allow autocompletion
-        self.config_file = Path(config_file).resolve()
         
+        if merra2_layout_file is None: # load pre-parsed config by default
+            merra2_layout_file = Path(__file__).parent / "merra2_parsed_layout.json"
+        
+        self.merra2_layout = Path(merra2_layout_file).resolve()
+        
+        # parse merra2 data on specific date (to get data layout) if required
         dat = date(2022, 12, 12) # TODO change hardcoded value ?
         parser = Merra2Parser()
-        cache_file = Path(self.config_file)
+        cache_file = Path(self.merra2_layout)
         self.config = cache_json(cache_file, inputs="ignore")(parser.get_model_specs)(dat)
         
         # get models version, and verify all models have the same
@@ -122,10 +134,10 @@ class MERRA2(BaseProvider):
                 raise ResourceWarning(f'Could not find local file {file_path}, and online mode is off')
                 
             if self.verbose:
-                print(f'downloading: {file_path.name}')
+                log.info(f'downloading: {file_path.name}')
             self._download_file(file_path, variables, d, area)
         elif self.verbose:
-                print(f'found locally: {file_path.name}')
+                log.info(f'found locally: {file_path.name}')
         
         return file_path
 

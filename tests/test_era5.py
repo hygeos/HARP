@@ -8,7 +8,7 @@ import numpy as np
 import pytest
 
 # sub package imports
-from harp import ERA5
+from harp.providers import ERA5
 
 
 def test_get_datetime():

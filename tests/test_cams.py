@@ -9,7 +9,7 @@ import numpy as np
 import pytest
 
 # sub package imports
-from harp import CAMS
+from harp.providers import CAMS
 
 
 # def get_randomized_date():

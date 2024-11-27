@@ -7,13 +7,16 @@ from pathlib import Path
 import xarray as xr
 import pandas as pd
 import numpy as np
+import cdsapi
 import os
 from core.static import interface
+from core import log
 
 # sub package imports
 from harp.baseprovider import BaseProvider
-from harp.cams_models import CAMS_Models
-from harp import cdsapi_parser 
+
+from .cams_models import CAMS_Models
+from harp.providers import cdsapi_parser 
 from harp.utils import wrap, center_longitude
 
 class CAMS(BaseProvider):
@@ -41,7 +44,7 @@ class CAMS(BaseProvider):
         
         lons = ds.longitude.values # if full map, make data a circle for proper interpolation
         
-        if np.min(lons) != -180.0 and np.isclose(np.min(lons), -180.0, tol=1e-6):
+        if np.min(lons) != -180.0 and np.isclose(np.min(lons), -180.0):
             tresh = -(180 - 1e-6) # ~= -179.999999
             lons[lons <= tresh] = -180.0 # force value to be -180 if closer than 1e-6, necessary for wrap
             ds = ds.assign_coords(longitude = lons) # reassign new lons
@@ -74,7 +77,9 @@ class CAMS(BaseProvider):
         self.computables['#totangstr'] = (CAMS.compute_totangstr, ['aod469', 'aod670'])
         self.computables['#windspeed'] = (CAMS.compute_windspeed, ['u10', 'v10'])
         
-    
+        # init cdsapi client
+        self.client = cdsapi.Client(url=self.cdsapi_cfg['url'], key=self.cdsapi_cfg['key'])
+        
     # ----{ computed variables }----
     @staticmethod
     def compute_totangstr(ds, new_var) -> xr.Dataset:
@@ -123,11 +128,11 @@ class CAMS(BaseProvider):
                 raise ResourceWarning(f'Could not find local file {file_path}, offline mode is set')
                 
             if self.verbose:
-                print(f'downloading: {file_path.name}')
+                log.info(f'downloading: {file_path.name}')
             self.model(self, file_path, d, area) # download file
             
         elif self.verbose: # elif → file already exists
-            print(f'found locally: {file_path.name}')
+            log.info(f'found locally: {file_path.name}')
                 
         return file_path
         

@@ -7,13 +7,16 @@ from pathlib import Path
 import xarray as xr
 import pandas as pd
 import numpy as np
+import cdsapi
 import os
 from core.static import interface
+from core import log
 
 # sub package imports
 from harp.baseprovider import BaseProvider
-from harp.era5_models import ERA5_Models
-from harp import cdsapi_parser 
+from .era5_models import ERA5_Models
+from harp.providers import cdsapi_parser 
+
 from harp.utils import wrap, center_longitude
 
 
@@ -68,6 +71,8 @@ class ERA5(BaseProvider):
         # functions needs to have the same parameters: (ds, new_var)
         self.computables['#windspeed'] = (ERA5.compute_windspeed, ['u10', 'v10'])
         
+        # init cdsapi client
+        self.client = cdsapi.Client(url=self.cdsapi_cfg['url'], key=self.cdsapi_cfg['key'])
         
     # ----{ computed variables }----
     @staticmethod
@@ -109,11 +114,11 @@ class ERA5(BaseProvider):
                 raise ResourceWarning(f'Could not find local file {file_path}, offline mode is set')
             
             if self.verbose: 
-                print(f'downloading: {file_path.name}')
+                log.info(f'downloading: {file_path.name}')
             self.model(self, file_path, d, area) # download file
             
         elif self.verbose: # elif → file already exists
-            print(f'found locally: {file_path.name}')
+            log.info(f'found locally: {file_path.name}')
                 
         return file_path
         
@@ -127,7 +132,7 @@ class ERA5(BaseProvider):
             raise KeyError(f'Could not find short_name {short_name} in csv file')
         
         return self.model_specs[self.model_specs['short_name'] == short_name]['cds_name'].values[0]
-    
+
     
     def _parse_cdsapirc(self):
         """

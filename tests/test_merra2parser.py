@@ -7,7 +7,7 @@ from core.cache import cache_json
 import pytest
 
 # sub package imports
-from harp.merra2parser import Merra2Parser
+from harp.providers.merra2_parser import Merra2Parser
 
 
 def test_get_versions():

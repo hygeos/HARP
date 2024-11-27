@@ -6,6 +6,7 @@ import subprocess
 from pydap.cas.urs import setup_session
 from pydap.client import open_url
 from core import ftp
+from core import log
 
 # sub package imports
 # ...
@@ -50,8 +51,8 @@ class Merra2Parser:
             session = setup_session(username, password, check_url=dataset_url)
             dataset = open_url(dataset_url, session=session)
         except AttributeError as e:
-            print('Error:', e)
-            print('Please verify that the dataset URL points to an OPeNDAP server, the OPeNDAP server is accessible, or that your username and password are correct.')
+            log.error('Error:', e)
+            log.error('Please verify that the dataset URL points to an OPeNDAP server, the OPeNDAP server is accessible, or that your username and password are correct.')
             
         res = list(dataset)
         
@@ -95,7 +96,7 @@ class Merra2Parser:
         nbr = len(products_vers)    # used for better IO message
         specs = {}
         
-        print(f'Parsing MERRA-2 products: [0/{nbr}]')
+        log.info(f'Parsing MERRA-2 products: [0/{nbr}]')
         for product in products_vers:   # 
             cpt += 1
             
@@ -107,7 +108,7 @@ class Merra2Parser:
             
             # add values to the dictionnary
             specs[product] = {'name': name, 'version': version, 'generic_filename': filename, 'variables': variables}
-            print(f'Parsing MERRA-2 products: [{cpt}/{nbr}] \t {name}')
+            log.info(f'Parsing MERRA-2 products: [{cpt}/{nbr}] \t {name}')
         return specs
     
     

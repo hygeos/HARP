@@ -20,8 +20,8 @@ def test_get_var_std_name():
     # test for CAMS
     nm_cams = Nomenclature(provider = 'CAMS')
     
-    assert nm_cams.get_new_name('aod550')   == 'aod_550nm'
-    assert nm_cams.get_new_name('suaod550') == 'sulfate_aod_550nm'
+    assert nm_cams.get_new_name('aod550')   == 'aod_550'
+    assert nm_cams.get_new_name('suaod550') == 'sulfate_aod_550'
 
 
 def test_get_var_std_name_local_file():

@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 
 # sub package imports
-from harp import cdsapi_parser as pa
+from harp.providers import cdsapi_parser as pa
 
 
 def test_parse_correct_config():

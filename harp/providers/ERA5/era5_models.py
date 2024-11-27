@@ -5,6 +5,7 @@ from pathlib import Path
 # third party imports
 import cdsapi
 from core.fileutils import filegen
+from core import log
 
 # sub package imports
 # ...
@@ -22,12 +23,8 @@ class ERA5_Models:
         - target: path to the target file after download
         - d: date of the dataset
         """
-        
-        if era5.client is None:
-            era5.client = cdsapi.Client(url=era5.cdsapi_cfg['url'], 
-                                        key=era5.cdsapi_cfg['key'])
 
-        print(f'Downloading {target}...')
+        log.info(f'Downloading {target}...')
         
         dataset = "reanalysis-era5-single-levels"
         request = {
@@ -60,10 +57,7 @@ class ERA5_Models:
         - d: date of the dataset
         """
         
-        if era5.client is None:
-            era5.client = cdsapi.Client()
-
-        print(f'Downloading {target}...')
+        log.info(f'Downloading {target}...')
         
         dataset = "reanalysis-era5-pressure-levels"
         request = {
