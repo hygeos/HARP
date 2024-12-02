@@ -13,7 +13,7 @@ from core.static import interface
 from core import log
 
 # sub package imports
-from harp.baseprovider import BaseProvider
+from harp.providers.baseprovider import BaseProvider
 
 from .cams_models import CAMS_Models
 from harp.providers import cdsapi_parser 

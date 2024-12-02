@@ -17,7 +17,7 @@ from core import ftp
 # sub package imports
 from .merra2_models import MERRA2_Models
 from ..merra2_parser import Merra2Parser
-from harp.baseprovider import BaseProvider
+from harp.providers.baseprovider import BaseProvider
 from harp.nomenclature import Nomenclature
 from harp.utils import wrap, center_longitude
 
