@@ -1,0 +1,101 @@
+harp_name,                    raw_name,           units,                        long_name
+,                             SNOMAS,             kg m-2,                       Total_snow_storage_land
+,                             Var_SNOMAS,         kg m-2 kg m-2,                Variance_of_SNOMAS
+,                             Var_SPLAND,         W m-2 W m-2,                  Variance_of_SPLAND
+,                             Var_GHLAND,         W m-2 W m-2,                  Variance_of_GHLAND
+,                             SFMC,               m-3 m-3,                      water_surface_layer
+,                             TSOIL5,             K,                            soil_temperatures_layer_5
+,                             TSOIL3,             K,                            soil_temperatures_layer_3
+,                             FRUNST,             1,                            fractional_area_of_unsaturated_zone
+,                             Var_FRUNST,         1 1,                          Variance_of_FRUNST
+,                             Var_FRSAT,          1 1,                          Variance_of_FRSAT
+,                             SPWATR,             kg m-2 s-1,                   rate_of_spurious_land_water_source
+,                             PARDRLAND,          W m-2,                        surface_downwelling_par_beam_flux
+,                             Var_ECHANGE,        W m-2 W m-2,                  Variance_of_ECHANGE
+,                             RUNOFF,             kg m-2 s-1,                   overland_runoff_including_throughflow
+,                             EVPSOIL,            W m-2,                        baresoil_evap_energy_flux
+,                             Var_TSOIL1,         K K,                          Variance_of_TSOIL1
+,                             Var_TSURF,          K K,                          Variance_of_TSURF
+,                             Var_TSOIL2,         K K,                          Variance_of_TSOIL2
+,                             Var_QINFIL,         kg m-2 s-1 kg m-2 s-1,        Variance_of_QINFIL
+,                             Var_PRECSNOLAND,    kg m-2 s-1 kg m-2 s-1,        Variance_of_PRECSNOLAND
+,                             Var_LHLAND,         W m-2 W m-2,                  Variance_of_LHLAND
+,                             TSOIL4,             K,                            soil_temperatures_layer_4
+,                             Var_SPWATR,         kg m-2 s-1 kg m-2 s-1,        Variance_of_SPWATR
+,                             FRSNO,              1,                            fractional_area_of_land_snowcover
+,                             PRECSNOLAND,        kg m-2 s-1,                   snowfall_land
+,                             Var_TPSNOW,         K K,                          Variance_of_TPSNOW
+,                             Var_SNODP,          m m,                          Variance_of_SNODP
+,                             SWLAND,             W m-2,                        Net_shortwave_land
+,                             Var_GWETROOT,       1 1,                          Variance_of_GWETROOT
+,                             Var_GWETTOP,        1 1,                          Variance_of_GWETTOP
+,                             PRECTOTLAND,        kg m-2 s-1,                   Total_precipitation_land
+,                             Var_TSAT,           K K,                          Variance_of_TSAT
+,                             SNODP,              m,                            snow_depth
+,                             Var_SHLAND,         W m-2 W m-2,                  Variance_of_SHLAND
+,                             FRWLT,              1,                            fractional_area_of_wilting_zone
+,                             Var_LAI,            1 1,                          Variance_of_LAI
+,                             Var_SPSNOW,         W m-2 W m-2,                  Variance_of_SPSNOW
+,                             TSOIL2,             K,                            soil_temperatures_layer_2
+,                             Var_TWLT,           K K,                          Variance_of_TWLT
+,                             Var_EVPSOIL,        W m-2 W m-2,                  Variance_of_EVPSOIL
+,                             ECHANGE,            W m-2,                        rate_of_change_of_total_land_energy
+,                             EVPINTR,            W m-2,                        interception_loss_energy_flux
+,                             GHLAND,             W m-2,                        Ground_heating_land
+,                             Var_EVPTRNS,        W m-2 W m-2,                  Variance_of_EVPTRNS
+,                             LHLAND,             W m-2,                        Latent_heat_flux_land
+,                             TPSNOW,             K,                            surface_temperature_of_snow
+,                             Var_GWETPROF,       1 1,                          Variance_of_GWETPROF
+,                             PRMC,               m-3 m-3,                      water_profile
+,                             SHLAND,             W m-2,                        Sensible_heat_flux_land
+,                             Var_FRWLT,          1 1,                          Variance_of_FRWLT
+,                             SPSNOW,             W m-2,                        rate_of_spurious_snow_energy
+,                             EVPSBLN,            W m-2,                        snow_ice_evaporation_energy_flux
+,                             Var_TSOIL6,         K K,                          Variance_of_TSOIL6
+,                             Var_EVPINTR,        W m-2 W m-2,                  Variance_of_EVPINTR
+,                             GWETTOP,            1,                            surface_soil_wetness
+,                             Var_SFMC,           m-3 m-3 m-3 m-3,              Variance_of_SFMC
+,                             Var_TWLAND,         kg m-2 kg m-2,                Variance_of_TWLAND
+,                             TUNST,              K,                            surface_temperature_of_unsaturated_zone
+,                             Var_RZMC,           m-3 m-3 m-3 m-3,              Variance_of_RZMC
+,                             Var_TSOIL3,         K K,                          Variance_of_TSOIL3
+,                             PARDFLAND,          W m-2,                        surface_downwelling_par_diffuse_flux
+,                             LWLAND,             W m-2,                        Net_longwave_land
+,                             GWETPROF,           1,                            ave_prof_soil_moisture
+,                             EVLAND,             kg m-2 s-1,                   Evaporation_land
+,                             TWLAND,             kg m-2,                       Avail_water_storage_land
+,                             Var_FRSNO,          1 1,                          Variance_of_FRSNO
+,                             TSAT,               K,                            surface_temperature_of_saturated_zone
+,                             Var_WCHANGE,        kg m-2 s-1 kg m-2 s-1,        Variance_of_WCHANGE
+,                             LAI,                1,                            leaf_area_index
+,                             Var_EVLAND,         kg m-2 s-1 kg m-2 s-1,        Variance_of_EVLAND
+,                             BASEFLOW,           kg m-2 s-1,                   baseflow_flux
+,                             Var_BASEFLOW,       kg m-2 s-1 kg m-2 s-1,        Variance_of_BASEFLOW
+,                             GWETROOT,           1,                            root_zone_soil_wetness
+,                             QINFIL,             kg m-2 s-1,                   Soil_water_infiltration_rate
+,                             Var_TSOIL4,         K K,                          Variance_of_TSOIL4
+,                             GRN,                1,                            greeness_fraction
+,                             Var_GRN,            1 1,                          Variance_of_GRN
+,                             FRSAT,              1,                            fractional_area_of_saturated_zone
+,                             TWLT,               K,                            surface_temperature_of_wilted_zone
+,                             Var_SWLAND,         W m-2 W m-2,                  Variance_of_SWLAND
+,                             Var_TSOIL5,         K K,                          Variance_of_TSOIL5
+,                             Var_PARDFLAND,      W m-2 W m-2,                  Variance_of_PARDFLAND
+,                             TSOIL1,             K,                            soil_temperatures_layer_1
+,                             TSOIL6,             K,                            soil_temperatures_layer_6
+,                             Var_TELAND,         J m-2 J m-2,                  Variance_of_TELAND
+,                             Var_PARDRLAND,      W m-2 W m-2,                  Variance_of_PARDRLAND
+,                             Var_RUNOFF,         kg m-2 s-1 kg m-2 s-1,        Variance_of_RUNOFF
+,                             Var_LWLAND,         W m-2 W m-2,                  Variance_of_LWLAND
+,                             WCHANGE,            kg m-2 s-1,                   rate_of_change_of_total_land_water
+,                             EVPTRNS,            W m-2,                        transpiration_energy_flux
+,                             Var_TUNST,          K K,                          Variance_of_TUNST
+,                             Var_PRMC,           m-3 m-3 m-3 m-3,              Variance_of_PRMC
+,                             SMLAND,             kg m-2 s-1,                   Snowmelt_flux_land
+,                             SPLAND,             W m-2,                        rate_of_spurious_land_energy_source
+,                             TSURF,              K,                            surface_temperature_of_land_incl_snow
+,                             RZMC,               m-3 m-3,                      water_root_zone
+,                             TELAND,             J m-2,                        Total_energy_storage_land
+,                             Var_EVPSBLN,        W m-2 W m-2,                  Variance_of_EVPSBLN
+,                             Var_SMLAND,         kg m-2 s-1 kg m-2 s-1,        Variance_of_SMLAND
+,                             Var_PRECTOTLAND,    kg m-2 s-1 kg m-2 s-1,        Variance_of_PRECTOTLAND

@@ -1,0 +1,29 @@
+{
+    "long_name": "MERRA2 inst3_2d_gas_Nx: 2d,3-Hourly,Instantaneous,Single-Level,Assimilation,Aerosol Optical Depth Analysis Diurnal Mean",
+    "short_name": "M2IUNXGAS",
+    "generic_name": "MERRA2_400.instU_2d_gas_Nx.%Y%m.nc4",
+    "source": "NASA Global Modeling and Assimilation Office",
+    "version": "5.12.4",
+    "doi": "10.5067/TVJ4MHBED39L",
+    "doi_authority": "http://dx.doi.org/",
+    "coverage": "global",
+    "spatial_degrees": "0.5 x 0.625",
+    "data_resolution": {
+        "time": 8,
+        "latitude": 361,
+        "longitude": 576
+    },
+    "southernmost_lat": "-90.0",
+    "northernmost_lat": "90.0",
+    "westernmost_lon": "-180.0",
+    "easternmost_lon": "179.375",
+    "dimensions": [
+        "time",
+        "latitude",
+        "longitude"
+    ],
+    "timestep_start": "00:00:00.000000",
+    "timestep_end": "21:00:00.000000",
+    "date_start": "2012-12-01",
+    "date_end": "2012-12-31"
+}

@@ -1,0 +1,51 @@
+harp_name,                    raw_name,           units,                        long_name
+,                             SNOMAS,             kg m-2,                       Total_snow_storage_land
+,                             SFMC,               m-3 m-3,                      water_surface_layer
+,                             TSOIL5,             K,                            soil_temperatures_layer_5
+,                             TSOIL3,             K,                            soil_temperatures_layer_3
+,                             FRUNST,             1,                            fractional_area_of_unsaturated_zone
+,                             SPWATR,             kg m-2 s-1,                   rate_of_spurious_land_water_source
+,                             PARDRLAND,          W m-2,                        surface_downwelling_par_beam_flux
+,                             RUNOFF,             kg m-2 s-1,                   overland_runoff_including_throughflow
+,                             EVPSOIL,            W m-2,                        baresoil_evap_energy_flux
+,                             TSOIL4,             K,                            soil_temperatures_layer_4
+,                             FRSNO,              1,                            fractional_area_of_land_snowcover
+,                             PRECSNOLAND,        kg m-2 s-1,                   snowfall_land
+,                             SWLAND,             W m-2,                        Net_shortwave_land
+,                             PRECTOTLAND,        kg m-2 s-1,                   Total_precipitation_land
+,                             SNODP,              m,                            snow_depth
+,                             FRWLT,              1,                            fractional_area_of_wilting_zone
+,                             TSOIL2,             K,                            soil_temperatures_layer_2
+,                             ECHANGE,            W m-2,                        rate_of_change_of_total_land_energy
+,                             EVPINTR,            W m-2,                        interception_loss_energy_flux
+,                             GHLAND,             W m-2,                        Ground_heating_land
+,                             LHLAND,             W m-2,                        Latent_heat_flux_land
+,                             TPSNOW,             K,                            surface_temperature_of_snow
+,                             PRMC,               m-3 m-3,                      water_profile
+,                             SHLAND,             W m-2,                        Sensible_heat_flux_land
+,                             SPSNOW,             W m-2,                        rate_of_spurious_snow_energy
+,                             EVPSBLN,            W m-2,                        snow_ice_evaporation_energy_flux
+,                             GWETTOP,            1,                            surface_soil_wetness
+,                             TUNST,              K,                            surface_temperature_of_unsaturated_zone
+,                             PARDFLAND,          W m-2,                        surface_downwelling_par_diffuse_flux
+,                             LWLAND,             W m-2,                        Net_longwave_land
+,                             GWETPROF,           1,                            ave_prof_soil_moisture
+,                             EVLAND,             kg m-2 s-1,                   Evaporation_land
+,                             TWLAND,             kg m-2,                       Avail_water_storage_land
+,                             TSAT,               K,                            surface_temperature_of_saturated_zone
+,                             LAI,                1,                            leaf_area_index
+,                             BASEFLOW,           kg m-2 s-1,                   baseflow_flux
+,                             GWETROOT,           1,                            root_zone_soil_wetness
+,                             QINFIL,             kg m-2 s-1,                   Soil_water_infiltration_rate
+,                             GRN,                1,                            greeness_fraction
+,                             FRSAT,              1,                            fractional_area_of_saturated_zone
+,                             TWLT,               K,                            surface_temperature_of_wilted_zone
+,                             TSOIL1,             K,                            soil_temperatures_layer_1
+,                             TSOIL6,             K,                            soil_temperatures_layer_6
+,                             WCHANGE,            kg m-2 s-1,                   rate_of_change_of_total_land_water
+,                             EVPTRNS,            W m-2,                        transpiration_energy_flux
+,                             SMLAND,             kg m-2 s-1,                   Snowmelt_flux_land
+,                             SPLAND,             W m-2,                        rate_of_spurious_land_energy_source
+,                             TSURF,              K,                            surface_temperature_of_land_incl_snow
+,                             RZMC,               m-3 m-3,                      water_root_zone
+,                             TELAND,             J m-2,                        Total_energy_storage_land

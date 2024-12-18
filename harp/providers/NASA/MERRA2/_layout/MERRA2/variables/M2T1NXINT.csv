@@ -1,0 +1,98 @@
+harp_name,                    raw_name,           units,                        long_name
+,                             DHDT_PHY,           W m-2,                        total_potential_energy_tendency_due_to_physics
+,                             DHDT_ANA,           W m-2,                        total_potential_energy_tendency_due_to_analysis
+,                             DPDT_PHY,           W m-2,                        mountain_work_tendency_due_to_physics
+,                             DMDT_DYN,           kg m-2 s-1,                   vertically_integrated_mass_tendency_due_to_dynamics
+,                             UFLXQL,             kg m-1 s-1,                   eastward_flux_of_atmospheric_liquid_water
+,                             VFLXCPT,            J m-1 s-1,                    northward_flux_of_atmospheric_enthalpy
+,                             DHDT_RAY,           W m-2,                        vertically_integrated_potential_energy_tendency_due_to_Rayleigh_friction
+,                             DHDT_MST,           W m-2,                        vertically_integrated_potential_energy_tendency_across_moist
+,                             DHDT_FRI,           W m-2,                        vertically_integrated_potential_energy_tendency_due_to_friction
+,                             DQVDT_ANA,          kg m-2 s-1,                   vertically_integrated_water_vapor_tendency_due_to_analysis
+,                             EVPRN,              kg m-2 s-1,                   evaporation_loss_of_precip_water
+,                             DHDT_GWD,           W m-2,                        vertically_integrated_potential_energy_tendency_across_gwd
+,                             DOXDT_PHY,          kg m-2 s-1,                   vertically_integrated_odd_oxygen_tendency_due_to_physics
+,                             SUBSN,              kg m-2 s-1,                   sumblimation_loss_of_precip_ice
+,                             DKDT_GWDRES,        W m-2,                        vertically_integrated_kinetic_energy_residual_for_total_energy_conservation
+,                             COLCNVSN,           kg m-2 s-1,                   accretion_loss_of_cloud_water_to_snow
+,                             QTFILL,             kg m-2 s-1,                   vertically_integrated_total_water_adjustment_from_filling
+,                             CUCNVCL,            kg m-2 s-1,                   convective_source_of_cloud_water
+,                             DQLDT_DYN,          kg m-2 s-1,                   vertically_integrated_liquid_water_tendency_due_to_dynamics
+,                             DKDT_ORO,           W m-2,                        vertically_integrated_kinetic_energy_dissipation_due_to_orographic_gravity_waves
+,                             DHDT_RES,           W m-2,                        vertically_integrated_cpt_tendency_residual
+,                             DMDT_ANA,           kg m-2 s-1,                   vertically_integrated_mass_tendency_due_to_analysis
+,                             DKDT_GWD,           W m-2,                        vertically_integrated_kinetic_energy_tendency_across_gwd
+,                             LSCNVRN,            kg m-2 s-1,                   spurious_rain_from_RH_cleanup
+,                             BKGERR,             W m-2,                        vertically_integrated_kinetic_energy_residual_for_BKG_energy_conservation
+,                             DOXDT_DYN,          kg m-2 s-1,                   vertically_integrated_ozone_tendency_due_to_dynamics
+,                             DQVDT_TRB,          kg m-2 s-1,                   vertically_integrated_water_vapor_tendency_due_to_turbulence
+,                             DOXDT_CHM,          kg m-2 s-1,                   vertically_integrated_odd_oxygen_tendency_due_to_chemistry
+,                             DQLDT_MST,          kg m-2 s-1,                   vertically_integrated_liquid_water_tendency_due_to_moist_processes
+,                             DQIDT_DYN,          kg m-2 s-1,                   vertically_integrated_ice_water_tendency_due_to_dynamics
+,                             DTHDT_DYN,          K kg m-2 s-1,                 vertically_integrated_THV_tendency_due_to_dynamics
+,                             SDMCI,              kg m-2 s-1,                   sedimentation_loss_of_cloud_ice
+,                             EVAP,               kg m-2 s-1,                   evaporation_from_turbulence
+,                             DPDT_ANA,           W m-2,                        mountain_work_tendency_due_to_analysis
+,                             DQLDT_PHY,          kg m-2 s-1,                   vertically_integrated_liquid_water_tendency_due_to_physics
+,                             LSCNVCI,            kg m-2 s-1,                   statistical_source_of_cloud_ice
+,                             DTHDT_ANA,          K kg m-2 s-1,                 vertically_integrated_THV_tendency_due_to_analysis
+,                             DHDT_CUF,           W m-2,                        vertically_integrated_potential_energy_tendency_due_to_cumulus_friction
+,                             PRECLS,             kg m-2 s-1,                   large_scale_rainfall
+,                             DQVDT_MST,          kg m-2 s-1,                   vertically_integrated_water_vapor_tendency_due_to_moist_processes
+,                             DQLDT_ANA,          kg m-2 s-1,                   vertically_integrated_liquid_water_tendency_due_to_analysis
+,                             AUTCNVRN,           kg m-2 s-1,                   autoconversion_loss_of_cloud_water
+,                             DKDT_TRB,           W m-2,                        vertically_integrated_kinetic_energy_tendency_across_turbulence
+,                             DKDT_TOP,           W m-2,                        vertically_integrated_kinetic_energy_dissipation_due_to_topographic_friction
+,                             DKDT_MST,           W m-2,                        vertically_integrated_kinetic_energy_tendency_across_moist
+,                             CUCNVCI,            kg m-2 s-1,                   convective_source_of_cloud_ice
+,                             UFLXCPT,            J m-1 s-1,                    eastward_flux_of_atmospheric_enthalpy
+,                             DQIDT_PHY,          kg m-2 s-1,                   vertically_integrated_ice_tendency_due_to_physics
+,                             DKDT_BKG,           W m-2,                        vertically_integrated_kinetic_energy_dissipation_due_to_gravity_wave_background
+,                             UFLXQV,             kg m-1 s-1,                   eastward_flux_of_atmospheric_water_vapor
+,                             UFLXPHI,            J m-1 s-1,                    eastward_flux_of_atmospheric_potential_energy
+,                             VFLXPHI,            J m-1 s-1,                    northward_flux_of_atmospheric_potential_energy
+,                             VFLXQV,             kg m-1 s-1,                   northward_flux_of_atmospheric_water_vapor
+,                             LSCNVCL,            kg m-2 s-1,                   statistical_source_of_cloud_water
+,                             DQVDT_CHM,          kg m-2 s-1,                   vertically_integrated_water_vapor_tendency_due_to_chemistry
+,                             DQVDT_FIL,          kg m-2 s-1,                   vertically_integrated_qv_adjustment_from_filling
+,                             DKDT_RAY,           W m-2,                        vertically_integrated_kinetic_energy_dissipation_due_to_Rayleigh_friction
+,                             FRZRN,              kg m-2 s-1,                   net_freezing_of_precip_condensate
+,                             DPDT_DYN,           W m-2,                        mountain_work_tendency_due_to_dynamics
+,                             LWTNET,             W m-2,                        upwelling_longwave_flux_at_toa
+,                             DKDT_ANA,           W m-2,                        total_kinetic_energy_tendency_due_to_analysis
+,                             VFLXQL,             kg m-1 s-1,                   northward_flux_of_atmospheric_liquid_water
+,                             VFLXQI,             kg m-1 s-1,                   northward_flux_of_atmospheric_ice
+,                             DOXDT_FIL,          kg m-2 s-1,                   vertically_integrated_ox_adjustment_from_filling
+,                             DQIDT_MST,          kg m-2 s-1,                   vertically_integrated_ice_tendency_due_to_moist_processes
+,                             DHDT_RAD,           W m-2,                        vertically_integrated_potential_energy_tendency_across_radiation
+,                             DTHDT_PHY,          K kg m-2 s-1,                 vertically_integrated_THV_tendency_due_to_physics
+,                             PRECCU,             kg m-2 s-1,                   convective_rainfall
+,                             DQLDT_FIL,          kg m-2 s-1,                   vertically_integrated_ql_adjustment_from_filling
+,                             DHDT_TRB,           W m-2,                        vertically_integrated_potential_energy_tendency_across_turbulence
+,                             DOXDT_ANA,          kg m-2 s-1,                   vertically_integrated_ozone_tendency_due_to_analysis
+,                             DQIDT_FIL,          kg m-2 s-1,                   vertically_integrated_qi_adjustment_from_filling
+,                             UFLXKE,             J m-1 s-1,                    eastward_flux_of_atmospheric_kinetic_energy
+,                             DHDT_BKG,           W m-2,                        vertically_integrated_potential_energy_tendency_due_to_gravity_wave_background
+,                             DKDT_DYN,           W m-2,                        vertically_integrated_kinetic_energy_tendency_due_to_dynamics
+,                             DKDT_INT,           W m-2,                        vertically_integrated_kinetic_energy_dissipation_due_to_diffusion
+,                             PRECSN,             kg m-2 s-1,                   snowfall
+,                             DHDT_ORO,           W m-2,                        vertically_integrated_potential_energy_tendency_due_to_orographic_gravity_waves
+,                             DQVDT_PHY,          kg m-2 s-1,                   vertically_integrated_water_vapor_tendency_due_to_physics
+,                             HFLUX,              W m-2,                        sensible_heat_flux_from_turbulence
+,                             COLCNVRN,           kg m-2 s-1,                   accretion_loss_of_cloud_water_to_rain
+,                             SWNETTOA,           W m-2,                        toa_net_downward_shortwave_flux
+,                             VFLXKE,             J m-1 s-1,                    northward_flux_of_atmospheric_kinetic_energy
+,                             UFLXQI,             kg m-1 s-1,                   eastward_flux_of_atmospheric_ice
+,                             DKDT_PHY,           W m-2,                        vertically_integrated_kinetic_energy_tendency_due_to_physics
+,                             SUBCI,              kg m-2 s-1,                   sumblimation_loss_of_cloud_ice
+,                             EVPCL,              kg m-2 s-1,                   evaporation_loss_of_cloud_water
+,                             DQVDT_DYN,          kg m-2 s-1,                   vertically_integrated_water_vapor_tendency_due_to_dynamics
+,                             CUCNVRN,            kg m-2 s-1,                   convective_production_of_rain_water
+,                             DKDT_SRF,           W m-2,                        vertically_integrated_kinetic_energy_dissipation_due_to_surface_friction
+,                             DHDT_DYN,           W m-2,                        vertically_integrated_potential_energy_tendency_due_to_dynamics
+,                             FRZCL,              kg m-2 s-1,                   net_freezing_of_cloud_condensate
+,                             LWGNET,             W m-2,                        surface_net_downward_longwave_flux
+,                             DKDT_PHYPHY,        W m-2,                        vertically_integrated_kinetic_energy_tendency_across_physics
+,                             DQIDT_ANA,          kg m-2 s-1,                   vertically_integrated_ice_water_tendency_due_to_analysis
+,                             SWNETSRF,           W m-2,                        surface_net_downward_shortwave_flux
+,                             DMDT_PHY,           kg m-2 s-1,                   vertically_integrated_mass_tendency_due_to_physics

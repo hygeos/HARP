@@ -1,0 +1,12 @@
+
+Name,   Description,                    HarpName,
+cp,     Convective precipitation,       ,
+sp,     Surface pressure,               surface_pressure,
+skt,    Skin temperature,               ,
+lsm,    Land-sea mask,                  ,
+tp,     Total precipitation,            ,
+z,      Geopotential,                   ,
+t2m,    2 metre temperature,            ,
+d2m,    2 metre dewpoint temperature,   ,
+tcw,    Total column wa ter,            ,
+msl,    Mean sea level pressure,        sea_level_pressure,
