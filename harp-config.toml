@@ -1,2 +1,0 @@
-dir_storage = "/mnt/ceph/user/joackim/data/test"
-verbose_lvl = "debug" # error, warning, info, debug

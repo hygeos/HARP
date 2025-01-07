@@ -1,24 +1,42 @@
 from pathlib import Path
+from typing import Literal
+
 from core.config import Config
+from core.static import constraint
 from core import log
+from core import env
 
-import harp
+import toml
 
+config_dict = {"General": {}}
 cfg_path = Path.cwd() / "harp-config.toml"
-if not cfg_path.is_file():
-    log.error("Harp requires a local config file", e=ValueError)
+if cfg_path.is_file():
+    log.debug(f"Harp ingested a local config file {cfg_path}", e=ValueError)
+    config_dict = toml.load(cfg_path)
 
+harp_config = Config(config_dict)                           # all data from toml
+general_config = Config(harp_config.get_subsection("General")) # just the 'general' subsection
 
-config = Config(cfg_path)
-
-if not config.get(key="dir_storage").is_dir():
-    log.error("Harp requires an existing folder as storage", e=ValueError)
-
-vlvl = config.get(key="verbose_lvl")
-if not vlvl in ["error", "warning", "info", "debug"]:
-    log.error("Harp setting verbose_lvl must be one of [error, warning, info, debug]", e=ValueError)
+try:
+    path_from_env = env.getdir("DIR_DATA", create=False)
+except NotADirectoryError as e:
+    path_from_env = None
     
-if vlvl == "error":     log.silence(harp, log.lvl.WARNING) 
-if vlvl == "warning":   log.silence(harp, log.lvl.INFO) 
-if vlvl == "info":      log.silence(harp, log.lvl.DEBUG) 
-if vlvl == "debug":     pass
+
+if path_from_env == "None": path_from_env = None
+
+default_config = dict(
+    dir_storage = path_from_env,
+    harmonize = True,
+    offline = False,
+    verbose_lvl = "debug"
+)
+
+default_config_constraints = dict(
+    dir_storage     = constraint.path(exists=True, mode="dir"),
+    harmonize       = constraint.bool(),
+    offline         = constraint.bool(),
+    verbose_lvl     = constraint.literal(["error","warning","info","debug"])
+)
+
+general_config.ingest(default_config)

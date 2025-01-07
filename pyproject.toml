@@ -22,13 +22,14 @@ exclude = [
 python = "^3.10"
 numpy = "^1.18.0"
 netcdf4 = "*"
+h5netcdf = "*"
 xarray = "*"
-dask = "*"
+# dask = "*"
 h5py = "*"
 
 core = {git = "ssh://git@github.com/hygeos/core.git"}
 
-pydap  = "^3.4"
+pydap  = "3.5"
 pandas = "*"
 cdsapi = ">=0.7.0"
 scipy  = "*"

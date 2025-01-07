@@ -12,6 +12,8 @@ lat_name  = "latitude"
 lon_name  = "longitude"
 longitude_center = 0 # should be either 0 or 180
 
+harp_col = "harp_name"
+
 
 def center_longitude(ds: xr.Dataset, center:Literal[0, 180]=0):
     """
@@ -28,4 +30,5 @@ def center_longitude(ds: xr.Dataset, center:Literal[0, 180]=0):
     
     ds = ds.assign_coords({lon_name:lon})
     ds = ds.sortby(lon_name)
+    
     return ds
