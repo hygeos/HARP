@@ -3,7 +3,7 @@ from typing import Literal
 from math import isnan
 
 from core.static import interface
-from core import log, rgb 
+from core import log
 from core import table
 
 from harp.backend import harp_std
@@ -15,7 +15,7 @@ import pandas as pd
 def _load_csv_table(path: Path):
     
     if not path.is_file():
-        log.error(f"Could not find file ", log.rgb.orange(path), e=FileNotFoundError)
+        log.error(f"Could not find file ", path, e=FileNotFoundError)
         
     table = pd.read_csv(path, sep=",", skipinitialspace=True, keep_default_na=True)
     # table = table.dropna()
@@ -61,7 +61,7 @@ class Nomenclature:
         # assert table has standard harp name column
         if harp_std.harp_col not in cols_list: 
             log.error(f"Invalid table format, cannot find harp column ", 
-                      log.rgb.orange(harp_std.harp_col),
+                      harp_std.harp_col,
                       f"in tables for {context}", 
                       e=KeyError
             )
@@ -79,24 +79,23 @@ class Nomenclature:
         missing = [n for n in linked_harp_names if n not in all_harp_names]
         if len(missing) > 0:
             mess  = f"Referencing Non-existant harp-names in file"
-            mess +=  log.rgb.orange
             mess +=  "\n    Concerned values: \n      - "
             mess +=  "\n      - ".join(missing)
             log.error(mess, e=KeyError)
 
-
+    @interface
     def get_std_name(self, raw_name):
         lines = table.select(self.table, where=(self.raw_col, "=", raw_name))
         if not lines.values.size > 0:
             log.error(f"Could not find any match for raw name ",
-                      log.rgb.orange(raw_name),
+                      raw_name,
                       " in harp internal layout files", 
                       e=KeyError
             )
             
         # we can assume the dataset contains at least one match
         if not lines.values.size > 1: # should not happend because it is guarded by the _check_table_for_doubles call
-            log.error(f"Duplicate values ", log.rgb.orange(raw_name), " for column raw_name in file ",
+            log.error(f"Duplicate values ", raw_name, " for column raw_name in file ",
                       "in harp internal layout files. "
                       "\nThis error should not happen here, but earlier in the code.", 
                       e=KeyError
@@ -105,25 +104,25 @@ class Nomenclature:
         name = lines[harp_std.harp_col].values[0]
         
         if type(name) != str and isnan(name):
-            log.error(f"Variable ", log.rgb.orange(raw_name), 
+            log.error(f"Variable ", raw_name, 
                       f" is not interfaced (yet) with any harp name in {self.context} internal layout files",
                       e=KeyError
             )
         return name
 
-        
-    def get_raw_name(self, harp_name):
+    @interface
+    def get_raw_name(self, harp_name: str):
         lines = table.select(self.table, where=(harp_std.harp_col, "=", harp_name))
         if not lines.values.size > 0:
             log.error(f"Could not find any match for harp name ",
-                      log.rgb.orange(harp_name),
+                      harp_name,
                       " in ", self.context, " internal layout files", 
                       e=KeyError
             )
             
         # we can assume the dataset contains at least one match
         if not lines.values.size > 1: # should not happend because it is guarded by the _check_table_for_doubles call
-            log.error(f"Duplicate values ", log.rgb.orange(harp_name), f" for column {harp_std.harp_col} in file ",
+            log.error(f"Duplicate values ", harp_name, f" for column {harp_std.harp_col} in file ",
                       " in ", self.context, " internal layout files",
                       "\nThis error should not happen here, but earlier in the code.", 
                       e=KeyError
@@ -132,13 +131,23 @@ class Nomenclature:
         name = lines[self.raw_col].values[0]
         
         if type(name) != str and isnan(name):
-            log.error(f"Variable ", log.rgb.orange(harp_name), 
+            log.error(f"Variable ", harp_name, 
                       f" is not interfaced (yet) with any harp name in {self.context} internal layout files",
                       e=KeyError
             )
         return name
 
+    @interface
+    def check_has_raw_name(self, raw_name: str):
+        lines = table.select(self.table, where=(self.raw_col, "=", raw_name))
+        if not lines.values.size > 0:
+            log.error(f"Could not find any match for raw name ",
+                      raw_name,
+                      " in harp internal layout files", 
+                      e=KeyError
+            )
     
+    @interface
     def _assert_col_has_no_doubles(self, col: str):
         """Asserts that the provided column in table has no double values
         Args:

@@ -167,6 +167,9 @@ class CdsDatasetProvider(BaseDatasetProvider):
     
     def _find_missing_variables(self, variables, timesteps, area=None):
         
+        if area is not None:
+            log.error("Not implemented yet", e=RuntimeError)
+        
         missing_variables = []
         
         for variable in variables:
