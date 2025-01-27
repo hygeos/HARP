@@ -1,6 +1,8 @@
 import difflib
 from pathlib import Path
 
+from core import log
+
 list_name = [
     "temperature at 10m",
     "u wind at 10m",
@@ -35,8 +37,21 @@ list_name = [
     "temperature",
 ]
 
+def fuzzy_score(search_terms, string: str, threshold = 0.71):
+    score = 0
 
-def fuzzy_search(list_search, list_name, threshold = 0.75) :
+    for term in search_terms: #for each term
+        string = string.replace("_", " ")
+        string = string.replace("-", " ")
+        string = string.replace(",", " ")
+        for word in string.split():
+            res = difflib.SequenceMatcher(None, term, word).ratio() #check match
+            if res >= threshold: 
+                score += 1            
+    return score
+    
+
+def fuzzy_search(list_search, list_name, threshold = 0.71) :
     results_key_index = {} #{key0 : 0, ..., keyn : n}
     index = 0
     list_tuples = [] #[[key0, cpt0] ... [keyn, cptn]]
@@ -54,8 +69,8 @@ def fuzzy_search(list_search, list_name, threshold = 0.75) :
                         list_tuples.append([name,1])
                     
     sorted_return_list = sorted(list_tuples, key=lambda x: x[1], reverse=True)
-    for i in sorted_return_list:
-        print(i)
+    # for i in sorted_return_list:
+        # print(i)
     return sorted_return_list
 
 

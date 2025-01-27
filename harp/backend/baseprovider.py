@@ -70,7 +70,28 @@ class BaseDatasetProvider:
         self.config = self._compute_final_config(self.config_subsection, kwargs)
         
         self._check_config()
-        self.binds = {} # map of runtime defined std_names -> raw_names        
+        self.binds = {} # map of runtime defined std_names -> raw_names
+        
+        
+    @interface
+    def _get_meta_table(self):
+        """
+        Returns a dataframe containing all interfaced variables with the columns:
+            harp_name, raw_name, long_name, units
+            
+        This method is meant to be overriden when necessary 
+            (ex: Copernicus internal layout doesn't have these columns, conversion needed)
+        """
+        
+        return self.nomenclature.table
+        
+    @interface
+    def bind_computable(self, name, func, operands):
+        """
+        Binds a virtual variable via a function and the input variables required
+        
+        func must be of the form lambda ds: ds
+        """
         
     @interface
     def bind(self, variables: dict):
@@ -111,9 +132,10 @@ class BaseDatasetProvider:
         path = self.config.get("dir_storage")
         if path is None:
             log.error(f"Key \'dir_storage\' not provided in config for {context} object", e=RuntimeError)
-        constraint.path(context=f"{context} object config", exists=True, mode="dir").check(self.config.get("dir_storage"))
-
-
+            
+        c = constraint.path(context=f"{context} object config", exists=True, mode="dir")
+        c.check(self.config.get("dir_storage"))
+        # log.warning(log.rgb.red, self.config.get("dir_storage"))
     
     def _get_var_map_raw_to_std(self, std_variables) -> dict[str]:
         """
