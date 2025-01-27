@@ -1,0 +1,101 @@
+harp_name,                    raw_name,           units,                        long_name
+,                             Var_SSSMASS,        kg m-3 kg m-3,                Variance_of_SSSMASS
+,                             SSSMASS25,          kg m-3,                       Sea Salt Surface Mass Concentration - PM 2.5
+,                             DUSCATAU,           1,                            Dust Scattering AOT [550 nm]
+,                             Var_SO2SMASS,       kg m-3 kg m-3,                Variance_of_SO2SMASS
+,                             Var_SUANGSTR,       1 1,                          Variance_of_SUANGSTR
+,                             Var_OCSMASS,        kg m-3 kg m-3,                Variance_of_OCSMASS
+,                             BCSCATAU,           1,                            Black Carbon Scattering AOT [550 nm]
+,                             Var_BCSMASS,        kg m-3 kg m-3,                Variance_of_BCSMASS
+,                             DUEXTTAU,           1,                            Dust Extinction AOT [550 nm]
+,                             Var_BCCMASS,        kg m-2 kg m-2,                Variance_of_BCCMASS
+,                             Var_DUFLUXU,        kg m-1 s-1 kg m-1 s-1,        Variance_of_DUFLUXU
+,                             BCFLUXU,            kg m-1 s-1,                   Black Carbon column u-wind mass flux
+,                             Var_SO4SMASS,       kg m-3 kg m-3,                Variance_of_SO4SMASS
+,                             Var_SSANGSTR,       1 1,                          Variance_of_SSANGSTR
+,                             OCFLUXV,            kg m-1 s-1,                   Organic Carbon column v-wind mass flux 
+,                             BCANGSTR,           1,                            Black Carbon Angstrom parameter [470-870 nm]
+,                             Var_TOTSCATAU,      1 1,                          Variance_of_TOTSCATAU
+,                             SUFLUXV,            kg m-1 s-1,                   SO4 column v-wind mass flux 
+,                             Var_DUSMASS,        kg m-3 kg m-3,                Variance_of_DUSMASS
+,                             Var_OCSCATAU,       1 1,                          Variance_of_OCSCATAU
+,                             Var_DUSMASS25,      kg m-3 kg m-3,                Variance_of_DUSMASS25
+,                             Var_SSEXTTAU,       1 1,                          Variance_of_SSEXTTAU
+,                             Var_TOTANGSTR,      1 1,                          Variance_of_TOTANGSTR
+,                             SSSMASS,            kg m-3,                       Sea Salt Surface Mass Concentration
+,                             Var_SO2CMASS,       kg m-2 kg m-2,                Variance_of_SO2CMASS
+,                             Var_SSSCAT25,       1 1,                          Variance_of_SSSCAT25
+,                             Var_OCANGSTR,       1 1,                          Variance_of_OCANGSTR
+,                             OCSMASS,            kg m-3,                       Organic Carbon Surface Mass Concentration 
+,                             BCCMASS,            kg m-2,                       Black Carbon Column Mass Density
+,                             Var_DUEXTTAU,       1 1,                          Variance_of_DUEXTTAU
+,                             BCSMASS,            kg m-3,                       Black Carbon Surface Mass Concentration
+,                             Var_SSFLUXU,        kg m-1 s-1 kg m-1 s-1,        Variance_of_SSFLUXU
+,                             SO4CMASS,           kg m-2,                       SO4 Column Mass Density 
+,                             SSFLUXU,            kg m-1 s-1,                   Sea Salt column u-wind mass flux
+,                             DUCMASS,            kg m-2,                       Dust Column Mass Density
+,                             SSEXTTAU,           1,                            Sea Salt Extinction AOT [550 nm]
+,                             Var_SO4CMASS,       kg m-2 kg m-2,                Variance_of_SO4CMASS
+,                             Var_SUFLUXU,        kg m-1 s-1 kg m-1 s-1,        Variance_of_SUFLUXU
+,                             SO2CMASS,           kg m-2,                       SO2 Column Mass Density 
+,                             Var_DUSCATAU,       1 1,                          Variance_of_DUSCATAU
+,                             Var_BCFLUXU,        kg m-1 s-1 kg m-1 s-1,        Variance_of_BCFLUXU
+,                             OCANGSTR,           1,                            Organic Carbon Angstrom parameter [470-870 nm] 
+,                             OCCMASS,            kg m-2,                       Organic Carbon Column Mass Density 
+,                             Var_DUSCAT25,       1 1,                          Variance_of_DUSCAT25
+,                             TOTEXTTAU,          1,                            Total Aerosol Extinction AOT [550 nm]
+,                             DUSCAT25,           1,                            Dust Scattering AOT [550 nm] - PM 2.5
+,                             TOTANGSTR,          1,                            Total Aerosol Angstrom parameter [470-870 nm]
+,                             DMSCMASS,           kg m-2,                       DMS Column Mass Density 
+,                             SSEXTT25,           1,                            Sea Salt Extinction AOT [550 nm] - PM 2.5
+,                             Var_TOTEXTTAU,      1 1,                          Variance_of_TOTEXTTAU
+,                             Var_BCANGSTR,       1 1,                          Variance_of_BCANGSTR
+,                             DUANGSTR,           1,                            Dust Angstrom parameter [470-870 nm]
+,                             Var_OCEXTTAU,       1 1,                          Variance_of_OCEXTTAU
+,                             Var_BCFLUXV,        kg m-1 s-1 kg m-1 s-1,        Variance_of_BCFLUXV
+,                             DMSSMASS,           kg m-3,                       DMS Surface Mass Concentration 
+,                             Var_OCFLUXU,        kg m-1 s-1 kg m-1 s-1,        Variance_of_OCFLUXU
+,                             BCEXTTAU,           1,                            Black Carbon Extinction AOT [550 nm]
+,                             SSSCATAU,           1,                            Sea Salt Scattering AOT [550 nm]
+,                             DUFLUXV,            kg m-1 s-1,                   Dust column v-wind mass flux
+,                             Var_DUANGSTR,       1 1,                          Variance_of_DUANGSTR
+,                             DUFLUXU,            kg m-1 s-1,                   Dust column u-wind mass flux
+,                             Var_OCFLUXV,        kg m-1 s-1 kg m-1 s-1,        Variance_of_OCFLUXV
+,                             SUEXTTAU,           1,                            SO4 Extinction AOT [550 nm] 
+,                             SSFLUXV,            kg m-1 s-1,                   Sea Salt column v-wind mass flux
+,                             Var_BCEXTTAU,       1 1,                          Variance_of_BCEXTTAU
+,                             Var_DUCMASS25,      kg m-2 kg m-2,                Variance_of_DUCMASS25
+,                             Var_DUFLUXV,        kg m-1 s-1 kg m-1 s-1,        Variance_of_DUFLUXV
+,                             DUCMASS25,          kg m-2,                       Dust Column Mass Density - PM 2.5
+,                             Var_SUFLUXV,        kg m-1 s-1 kg m-1 s-1,        Variance_of_SUFLUXV
+,                             Var_DUEXTT25,       1 1,                          Variance_of_DUEXTT25
+,                             Var_SSCMASS25,      kg m-2 kg m-2,                Variance_of_SSCMASS25
+,                             Var_SSSCATAU,       1 1,                          Variance_of_SSSCATAU
+,                             OCEXTTAU,           1,                            Organic Carbon Extinction AOT [550 nm] 
+,                             Var_SSCMASS,        kg m-2 kg m-2,                Variance_of_SSCMASS
+,                             SUANGSTR,           1,                            SO4 Angstrom parameter [470-870 nm] 
+,                             SSSCAT25,           1,                            Sea Salt Scattering AOT [550 nm] - PM 2.5
+,                             Var_BCSCATAU,       1 1,                          Variance_of_BCSCATAU
+,                             SSCMASS25,          kg m-2,                       Sea Salt Column Mass Density - PM 2.5
+,                             SO4SMASS,           kg m-3,                       SO4 Surface Mass Concentration 
+,                             DUSMASS,            kg m-3,                       Dust Surface Mass Concentration
+,                             Var_DUCMASS,        kg m-2 kg m-2,                Variance_of_DUCMASS
+,                             Var_DMSCMASS,       kg m-2 kg m-2,                Variance_of_DMSCMASS
+,                             SUFLUXU,            kg m-1 s-1,                   SO4 column u-wind mass flux 
+,                             Var_SSEXTT25,       1 1,                          Variance_of_SSEXTT25
+,                             Var_OCCMASS,        kg m-2 kg m-2,                Variance_of_OCCMASS
+,                             BCFLUXV,            kg m-1 s-1,                   Black Carbon column v-wind mass flux
+,                             DUSMASS25,          kg m-3,                       Dust Surface Mass Concentration - PM 2.5
+,                             Var_DMSSMASS,       kg m-3 kg m-3,                Variance_of_DMSSMASS
+,                             Var_SSFLUXV,        kg m-1 s-1 kg m-1 s-1,        Variance_of_SSFLUXV
+,                             SSCMASS,            kg m-2,                       Sea Salt Column Mass Density
+,                             Var_SUSCATAU,       1 1,                          Variance_of_SUSCATAU
+,                             Var_SSSMASS25,      kg m-3 kg m-3,                Variance_of_SSSMASS25
+,                             SUSCATAU,           1,                            SO4 Scattering AOT [550 nm] 
+,                             SO2SMASS,           kg m-3,                       SO2 Surface Mass Concentration 
+,                             SSANGSTR,           1,                            Sea Salt Angstrom parameter [470-870 nm]
+,                             DUEXTT25,           1,                            Dust Extinction AOT [550 nm] - PM 2.5
+,                             Var_SUEXTTAU,       1 1,                          Variance_of_SUEXTTAU
+,                             OCFLUXU,            kg m-1 s-1,                   Organic Carbon column u-wind mass flux 
+,                             OCSCATAU,           1,                            Organic Carbon Scattering AOT [550 nm] 
+,                             TOTSCATAU,          1,                            Total Aerosol Scattering AOT [550 nm]

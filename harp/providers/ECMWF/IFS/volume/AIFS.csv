@@ -1,0 +1,8 @@
+
+Name,   Description,                    HarpName,
+w,      Vertical velocity,              ,    
+z,      Geopotential,                   ,
+q,      Specific humidity,              specific_humidity,    
+v,      V component of wind,            wind_10v,        
+u,      U component of wind,            wind_10u,        
+t,      Temperature,                    temperature,

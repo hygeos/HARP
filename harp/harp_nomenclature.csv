@@ -1,0 +1,32 @@
+harp_name,                  description
+temp_10m,                   temperature at 10m
+wind_10u,                   u wind at 10m
+wind_10v,                   v wind at 10m
+wind_speed,                 surface wind speed
+planetary_bound,            planetary boundary layer height
+surface_pressure,           surface pressure
+sea_level_pressure,         sea level pressure
+ozone,                      total column ozone
+water_vapor,                total column water_vapor
+aod_469,                    total aerosol optical depth 469nm
+aod_550,                    total aerosol optical depth 550nm
+aod_670,                    total aerosol optical depth 670nm
+angstr_coef_550,            total aerosol angstrom coefficient 550nm
+dust_aod_550,               dust aerosol optical depth 550nm
+organic_carbon_aod_550,     organic carbon aerosol optical depth 550nm
+black_carbon_aod_550,       black carbon aerosol optical depth 550nm
+sea_salt_aod_550,           sea salt aerosol optical depth 550nm
+sulfate_aod_550,            sulfate aerosol optical depth 550nm
+cloud_cov,                  total cloud cover
+low_cloud_cov,              low cloud cover
+mid_cloud_cov,              mid cloud cover
+hig_cloud_cov,              high cloud cover
+cloud_od,                   total cloud optical depth
+low_cloud_od,               low cloud optical depth
+mid_cloud_od,               mid cloud optical depth
+high_cloud_od,              high cloud optical depth
+cloud_ice_wat,              total column cloud ice water
+cloud_liq_wat,              total column cloud liquid water
+ozone_mass_mixing_ratio,    ozone mass mixing ratio
+specific_humidity,          specific humidity
+temperature,                temperature
