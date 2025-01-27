@@ -1,7 +1,7 @@
 
 [tool.poetry]
 name = "harp"
-version = "2.0.0"
+version = "2.0.1"
 description = "Harmonized Ancillary Resource Provider"
 authors = [
       "Joackim Orcière",

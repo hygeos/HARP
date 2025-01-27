@@ -1,5 +1,6 @@
 from datetime import date, datetime
 from pathlib import Path
+from typing import Callable
 
 import xarray as xr
 from core.static import interface, abstract, constraint
@@ -36,6 +37,18 @@ class BaseDatasetProvider:
         
         # check vars to compute and vars to query
         # TODO
+        operands = []
+        computed = []
+        
+        for var in variables:
+            if var in self.computables:
+                variables.remove(var)
+                c = self.computables[var]
+                log.debug(f"Using computable bind: {var} = {c['func'].__name__} + {c['operands']}")
+                computed += [var]
+                operands += c["operands"]
+        
+        operands = list(set(operands)) # get unique list 
         
         # translate harp_name to raw_names
         if raw_query:
@@ -45,6 +58,8 @@ class BaseDatasetProvider:
             raw_vars = list(self._get_var_map_raw_to_std(variables).keys())
             # std_vars = variables
         
+        raw_vars += operands # append computable operands
+        
         # TODO: download
         files = self.download(variables=raw_vars, time=time, offline=self.config.get("offline"))
         ds = xr.open_mfdataset(files, concat_dim='time', combine='nested',)
@@ -52,6 +67,10 @@ class BaseDatasetProvider:
         # harmonize if not disabled
         if self.config.get("harmonize"): 
             ds = self._standardize(ds)
+        
+        for var in computed:
+            fn = self.computables[var]["func"]
+            ds[var] = fn(ds)
         
         if not raw_query:
             std_name_map = self._get_var_map_raw_to_std(variables)
@@ -70,8 +89,8 @@ class BaseDatasetProvider:
         self.config = self._compute_final_config(self.config_subsection, kwargs)
         
         self._check_config()
-        self.binds = {} # map of runtime defined std_names -> raw_names
-        
+        self.binds = {}         # map of runtime defined std_names -> raw_names
+        self.computables = {}    # map of computable variables
         
     @interface
     def _get_meta_table(self):
@@ -86,12 +105,27 @@ class BaseDatasetProvider:
         return self.nomenclature.table
         
     @interface
-    def bind_computable(self, name, func, operands):
+    def bind_computable(self, name: str, func: Callable, operands: list[str]):
+        """Binds a virtual variable via a function and the input variables required
+
+        Args:
+            name (str): name of the outputed variable
+            func (Callable): function of the form lambda xr.Dataset: xr.Dataarray None
+            operands (list[str]): list of the inputs variables (raw names)
+            
+        Note:
+            func uses ds[raw_name] to get operands and return the computed dataarray which Harp will insert
         """
-        Binds a virtual variable via a function and the input variables required
         
-        func must be of the form lambda ds: ds
-        """
+        if name in self.computables:
+            log.error(f"{self.__name__}: Computable variable {name} already defined", e=KeyError)
+        
+        for op in operands:
+            self.nomenclature.check_has_raw_name(op)
+        
+        self.computables[name] = {"func": func, "operands": operands}
+        
+        return
         
     @interface
     def bind(self, variables: dict):
@@ -136,6 +170,7 @@ class BaseDatasetProvider:
         c = constraint.path(context=f"{context} object config", exists=True, mode="dir")
         c.check(self.config.get("dir_storage"))
         # log.warning(log.rgb.red, self.config.get("dir_storage"))
+                
     
     def _get_var_map_raw_to_std(self, std_variables) -> dict[str]:
         """
