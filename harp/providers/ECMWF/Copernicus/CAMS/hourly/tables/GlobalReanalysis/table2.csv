@@ -1,0 +1,30 @@
+﻿harp_name,                      name,units,cds_name,short_name,id
+,                               Carbon monoxide*,kg kg-1,carbon_monoxide,co,123.21
+,                               Dust aerosol (0.03 - 0.55 µm) mixing ratio*,kg kg-1,dust_aerosol_0.03-0.55um_mixing_ratio,aermr04,4.21
+,                               Dust aerosol (0.55 - 0.9 µm) mixing ratio*,kg kg-1,dust_aerosol_0.55-0.9um_mixing_ratio,aermr05,5.21
+,                               Dust aerosol (0.9 - 20 µm) mixing ratio*,kg kg-1,dust_aerosol_0.9-20um_mixing_ratio,aermr06,6.21
+,                               Ethane*,kg kg-1,ethane,c2h6,45.22
+,                               Formaldehyde*,kg kg-1, formaldehyde,hcho,124.21
+,                               Hydrogen peroxide*,kg kg-1,hydrogen_peroxide,h2o2,3.22
+,                               Hydrophilic black carbon aerosol mixing ratio*,kg kg-1,hydrophilic_black_carbon_aerosol_mixing_ratio,aermr09,9.21
+,                               Hydrophilic organic matter aerosol mixing ratio*,kg kg-1,hydrophilic_organic_matter_aerosol_mixing_ratio,aermr07,7.21
+,                               Hydrophobic black carbon aerosol mixing ratio*,kg kg-1,hydrophobic_black_carbon_aerosol_mixing_ratio,aermr10,10.21
+,                               Hydrophobic organic matter aerosol mixing ratio*,kg kg-1,hydrophobic_organic_matter_aerosol_mixing_ratio,aermr08,8.21
+,                               Hydroxyl radical*,kg kg-1,hydroxyl_radical,oh,30.22
+,                               Isoprene*,kg kg-1,isoprene,c5h8,16.22
+,                               Nitric acid*,kg kg-1,nitric_acid,hno3,6.22
+,                               Nitrogen dioxide*,kg kg-1,nitrogen_dioxide,no2,121.21
+,                               Nitrogen monoxide*,kg kg-1,nitrogen_monoxide,no,27.22
+,                               Ozone*,kg kg-1,ozone,o3,203.00
+,                               Peroxyacetyl nitrate*,kg kg-1,peroxyacetyl_nitrate,pan,13.22
+,                               Propane*,kg kg-1,propane,c3h8,47.22
+,                               Sea salt aerosol (0.03 - 0.5 µm) mixing ratio*,kg kg-1,sea_salt_aerosol_0.03-0.5um_mixing_ratio,aermr01,1.21
+,                               Sea salt aerosol (0.5 - 5 µm) mixing ratio*,kg kg-1,sea_salt_aerosol_0.5-5um_mixing_ratio,aermr02,2.21
+,                               Sea salt aerosol (5 - 20 µm) mixing ratio*,kg kg-1,sea_salt_aerosol_5-20um_mixing_ratio,aermr03,3.21
+,                               Specific humidity*,kg kg-1,specific_humidity,q,133.00
+,                               Sulphate aerosol mixing ratio*,kg kg-1,sulphate_aerosol_mixing_ratio,aermr11,11.21
+,                               Sulphur dioxide*,kg kg-1,sulphur_dioxide,so2,122.21
+,                               Temperature,K,temperature,t,130.00
+,                               U-component of wind,m s-1,u_component_of_wind,u,131.00
+,                               V-component of wind,m s-1,v_component_of_wind,v,132.00
+

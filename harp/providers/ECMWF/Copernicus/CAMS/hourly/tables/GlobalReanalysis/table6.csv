@@ -1,0 +1,15 @@
+﻿harp_name,                      name,units,cds_name,short_name,id
+,                               Acetone*,kg kg-1,acetone,ch3coch3,52.22
+,                               Aldehydes*,kg kg-1,aldehydes,ald2,12.22
+,                               Amine*,kg kg-1,amine,nh2,40.22
+,                               Ethanol*,kg kg-1,ethanol,c2h5oh,46.22
+,                               Ethene*,kg kg-1,ethene,c2h4,10.22
+,                               Formic acid*,kg kg-1,formic_acid,hcooh,43.22
+,                               Methane (chemistry)*,kg kg-1,methane_chemistry,ch4_c,4.22
+,                               Methanol*,kg kg-1,methanol,ch3oh,42.22
+,                               Methyl peroxide*,kg kg-1,methyl_peroxide,ch3ooh,7.22
+,                               Nitrate*,kg kg-1,nitrate,no3_a,51.22
+,                               Olefins*,kg kg-1,olefins,ole,11.22
+,                               Organic nitrates*,kg kg-1,organic_nitrates,onit,15.22
+,                               Paraffins*,kg kg-1,paraffins,par,9.22
+

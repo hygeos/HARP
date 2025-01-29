@@ -14,7 +14,7 @@ from core.save import to_netcdf
 from core import auth
 import xarray as xr
 
-from harp.backend.timespecs import RegularTimesteps
+from harp.backend.timespec import RegularTimespec
 from harp.backend.baseprovider import BaseDatasetProvider
 from harp.backend.nomenclature import Nomenclature
 from harp.backend import harp_std
@@ -32,7 +32,7 @@ class CdsDatasetProvider(BaseDatasetProvider):
     name = "dataset-query-name"
     product_type = "product type"
     
-    timespecs = RegularTimesteps(timedelta(seconds=0), 24) # default specs to hourly from 00:00 to 23:00
+    timespecs = RegularTimespec(timedelta(seconds=0), 24) # default specs to hourly from 00:00 to 23:00
     
     def __init__(self, *, config_subsection: str, csv_files: list[Path], **kwargs):
     
@@ -58,7 +58,7 @@ class CdsDatasetProvider(BaseDatasetProvider):
                 tmpfile = Path(tmpdir) / f"tmp_{uuid.uuid4().hex}_.nc"
                 self._execute_cds_request(tmpfile, query, area=area)
                 
-                ds = xr.open_dataset(tmpfile)
+                ds = xr.open_dataset(tmpfile, engine='netcdf4')
                 
                 # rename valid_time dimension to time
                 # rename shortnames to cds_names for consistency
@@ -122,6 +122,7 @@ class CdsDatasetProvider(BaseDatasetProvider):
     def _decompose_query(self, variables: list[str], time: datetime|list[datetime, datetime], *, area: dict=None):
         """
         Decompose the query as a (series of) CDS query for the missing data,
+        One query per day,
         Can choose to download more to avoid doing several queries
         
         e.g: 23h45 -> 00T23:00 + 01T00:00 -> should be two requests

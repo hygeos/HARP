@@ -4,21 +4,21 @@ from pathlib import Path
 from core import log
 from core.static import interface
 
-from harp.backend.timespecs import RegularTimesteps
+from harp.backend.timespec import RegularTimespec
 from harp.backend import cds
 
 
 class GlobalReanalysis(cds.CdsDatasetProvider): 
     
     # url = "https://cds.climate.copernicus.eu/api"
-    keywords = ["ECMWF", "Copernicus", "C3S"]
+    keywords = ["ECMWF", "Copernicus", "climate"]
     institution = "ECMWF"
-    collection = "C3S"
+    collection = "ERA5"
     
     name = "reanalysis-era5-single-levels"
     product_type = "reanalysis"
     
-    timespecs = RegularTimesteps(timedelta(seconds=0), 24)
+    timespecs = RegularTimespec(timedelta(seconds=0), 24)
     
     def __init__(self, **kwargs):
         folder = Path(__file__).parent / "tables"
@@ -37,7 +37,8 @@ class GlobalReanalysis(cds.CdsDatasetProvider):
     @interface
     def _execute_cds_request(self, target_filepath: Path, query, area: dict=None):
         
-        # TODO area
+        if area is not None:
+            log.error("Not implemented yet", e=RuntimeError)
         
         dataset = self.name
         request = {

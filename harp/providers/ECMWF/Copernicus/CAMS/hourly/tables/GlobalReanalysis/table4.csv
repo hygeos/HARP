@@ -1,0 +1,24 @@
+﻿harp_name,                      name,units,cds_name,short_name,id
+,                               Total column acetone*,kg m-2,total_column_acetone,tc_ch3coch3,52.13
+,                               Total column aldehydes*,kg m-2,total_column_aldehydes,tc_ald2,12.13
+,                               Total column ethanol*,kg m-2,total_column_ethanol,tc_c2h5oh,46.22
+,                               Total column ethene*,kg m-2,total_column_ethene,tc_c2h4,10.13
+,                               Total column formic acid*,kg m-2,total_column_formic_acid,tc_hcooh,43.22
+,                               Total column methane*,kg m-2,total_column_methane,tc_ch4,4.22
+,                               Total column methanol*,kg m-2,total_column_methanol,tc_ch3oh,42.13
+,                               Total column methyl peroxide*,kg m-2,total_column_methyl_peroxide,tc_ch3ooh,7.22
+,                               Total column olefins*,kg m-2,total_column_olefins,tc_ole,11.22
+,                               Total column organic nitrates*,kg m-2,total_column_organic_nitrates,tc_onit,15.22
+,                               Total column paraffins*,kg m-2,total_column_paraffins,tc_par,9.22
+,                               Vertically integrated mass of dust aerosol (0.03 - 0.55 µm),kg m-2,vertically_integrated_mass_of_dust_aerosol_0.03-0.55um,aermssdus,43.22
+,                               Vertically integrated mass of dust aerosol (0.55 - 9 µm),kg m-2,vertically_integrated_mass_of_dust_aerosol_0.55-9um,aermssdum,44.22
+,                               Vertically integrated mass of dust aerosol (9 - 20 µm),kg m-2,vertically_integrated_mass_of_dust_aerosol_9-20um,aermssdul,45.22
+,                               Vertically integrated mass of hydrophilic black carbon aerosol,kg m-2,vertically_integrated_mass_of_hydrophilic_black_carbon_aerosol,aermssbchphil,78.22
+,                               Vertically integrated mass of hydrophilic organic matter aerosol,kg m-2,vertically_integrated_mass_of_hydrophilic_organic_matter_aerosol,aermssomhphil,62.22
+,                               Vertically integrated mass of hydrophobic black carbon aerosol,kg m-2,vertically_integrated_mass_of_hydrophobic_black_carbon_aerosol,aermssbchphob,77.22
+,                               Vertically integrated mass of hydrophobic organic matter aerosol,kg m-2,vertically_integrated_mass_of_hydrophobic_organic_matter_aerosol,aermssomhphob,61.22
+,                               Vertically integrated mass of sea salt aerosol (0.03 - 0.5 µm),kg m-2,vertically_integrated_mass_of_sea_salt_aerosol_0.03-0.5um,aermsssss,19.21
+,                               Vertically integrated mass of sea salt aerosol (0.5 - 5 µm),kg m-2,vertically_integrated_mass_of_sea_salt_aerosol_0.5-5um,aermssssm,20.21
+,                               Vertically integrated mass of sea salt aerosol (5 - 20 µm),kg m-2,vertically_integrated_mass_of_sea_salt_aerosol_5-20um,aermssssl,21.21
+,                               Vertically integrated mass of sulphate aerosol,kg m-2,vertically_integrated_mass_of_sulphate_aerosol,aermsssu,87.22
+

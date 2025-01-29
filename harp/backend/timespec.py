@@ -6,7 +6,7 @@ import numpy as np
 from core.static import interface
 from core import log
 
-class RegularTimesteps:
+class RegularTimespec:
     """
     Generic helper class to describe timesteps of a dataset which contains intra-day timesteps
     Allow to get the encompassing timesteps of any queries
@@ -68,21 +68,21 @@ class RegularTimesteps:
         day = datetime(day.year, day.month, day.day)
         return np.array(self.intraday_timesteps) + day
     
-    def aggregate_per_day(self, timesteps: list[datetime], complete_days=False):
+    # def aggregate_per_day(self, timesteps: list[datetime], complete_days=False):
         
-        days = {}
+    #     days = {}
         
-        for ts in timesteps:
-            day = ts.date()
+    #     for ts in timesteps:
+    #         day = ts.date()
             
-            if day not in days: 
-                days[day] = []
+    #         if day not in days: 
+    #             days[day] = []
             
-            if ts not in days[day]:
-                days[day].append(ts)
+    #         if ts not in days[day]:
+    #             days[day].append(ts)
         
-        if complete_days:
-            for day in days:
-                days[day] = self.get_complete_day(day)
+    #     if complete_days:
+    #         for day in days:
+    #             days[day] = self.get_complete_day(day)
                 
-        return days
+    #     return days

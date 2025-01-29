@@ -35,8 +35,7 @@ class BaseDatasetProvider:
         if area is not None:
             log.error("Not implemented yet", e=RuntimeError)
         
-        # check vars to compute and vars to query
-        # TODO
+        # Computables variables management
         operands = []
         computed = []
         
@@ -50,19 +49,19 @@ class BaseDatasetProvider:
         
         operands = list(set(operands)) # get unique list 
         
-        # translate harp_name to raw_names
-        if raw_query:
-            raw_vars = variables
-            # std_vars = cls._get_std_variables(variables)
-        else:
+        # Translation to raw names 
+        raw_vars = variables
+        if not raw_query:
             raw_vars = list(self._get_var_map_raw_to_std(variables).keys())
-            # std_vars = variables
         
-        raw_vars += operands # append computable operands
+        for var in raw_vars:
+            self.nomenclature.check_has_raw_name(var)
+            
+        # append computable operands
+        raw_vars += operands 
         
-        # TODO: download
         files = self.download(variables=raw_vars, time=time, offline=self.config.get("offline"))
-        ds = xr.open_mfdataset(files, concat_dim='time', combine='nested',)
+        ds = xr.open_mfdataset(files, concat_dim='time', combine='nested', engine='netcdf4')
                 
         # harmonize if not disabled
         if self.config.get("harmonize"): 

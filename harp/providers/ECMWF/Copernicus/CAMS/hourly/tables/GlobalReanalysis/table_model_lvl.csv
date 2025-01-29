@@ -1,0 +1,29 @@
+﻿harp_name,                      name,units,cds_name,short_name,id
+,                               Acetone product*,kg kg-1,acetone_product,aco2,53.22
+,                               Ammonia*,kg kg-1,ammonia,nh3,19.22
+,                               Ammonium*,kg kg-1,ammonium,nh4,21.22
+,                               Dimethyl sulfide*,kg kg-1,dimethyl_sulfide,dms,18.22
+,                               Dinitrogen pentoxide*,kg kg-1,dinitrogen_pentoxide,n2o5,33.22
+,                               Hydroperoxy radical*,kg kg-1,hydroperoxy_radical,ho2,28.22
+,                               Lead*,kg kg-1,lead,pb,26.22
+,                               Methacrolein MVK*,kg kg-1,methacrolein_mvk,ispd,50.22
+,                               Methacrylic acid*,kg kg-1,methacrylic_acid,mcooh,44.22
+,                               Methane sulfonic acid*,kg kg-1,methane_sulfonic_acid,msa,22.22
+,                               Methyl glyoxal*,kg kg-1,methyl_glyoxal,ch3cocho,23.22
+,                               Methylperoxy radical*,kg kg-1,methylperoxy_radical,ch3o2,29.22
+,                               Nitrate*,kg kg-1,nitrate,no3_a,51.22
+,                               Nitrate radical*,kg kg-1,nitrate_radical,no3,32.22
+,                               Organic ethers*,kg kg-1,organic_ethers,ror,36.22
+,                               Pernitric acid*,kg kg-1,pernitric_acid,ho2no2,34.22
+,                               Peroxides*,kg kg-1,peroxides,rooh,14.22
+,                               Peroxy acetyl radical*,kg kg-1,peroxy_acetyl_radical,c2o3,35.22
+,                               Propene*,kg kg-1,propene,c3h6,48.22
+,                               Radon*,kg kg-1,radon,ra,181.21
+,                               Stratospheric ozone tracer*,kg kg-1,stratospheric_ozone_tracer,o3s,24.22
+,                               Terpenes*,kg kg-1,terpenes,c10h16,49.22
+,                               Fraction of cloud cover,(0 - 1),fraction_of_cloud_cover,cc,248.00
+,                               Geopotential,m2 s-2,geopotential,z,129.00
+,                               Specific cloud ice water content,kg kg-1,specific_cloud_ice_water_content,ciwc,247.00
+,                               Specific cloud liquid water content,kg kg-1,specific_cloud_liquid_water_content,clwc,246.00
+,                               Specific rain water content,kg kg-1,specific_rain_water_content,crwc,75.00
+,                               Specific snow water content,kg kg-1,specific_snow_water_content,cswc,76.00

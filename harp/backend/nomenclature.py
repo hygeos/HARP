@@ -51,7 +51,8 @@ class Nomenclature:
         self.table = _load_csv_table(csv_list.pop(0))
         for csv_file in csv_list:
             _table = _load_csv_table(csv_file)
-            pd.concat([self.table, _table], axis=0, ignore_index=False)
+            self.table = pd.concat([self.table, _table], axis=0, ignore_index=False)
+            self.table.reset_index()
         
         self.context = context
         self.raw_col = raw_col
