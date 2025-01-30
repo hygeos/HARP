@@ -1,5 +1,4 @@
 from pathlib import Path
-from typing import Literal
 
 from core.config import Config
 from core.static import constraint
@@ -18,12 +17,13 @@ harp_config = Config(config_dict)                           # all data from toml
 general_config = Config(harp_config.get_subsection("General")) # just the 'general' subsection
 
 try:
-    path_from_env = env.getdir("DIR_DATA", create=False)
-except NotADirectoryError as e:
+    path_from_env = env.getdir("DIR_ANCILLARY")
+except NotADirectoryError:
     path_from_env = None
     
 
-if path_from_env == "None": path_from_env = None
+if path_from_env == "None":
+    path_from_env = None
 
 default_config = dict(
     dir_storage = path_from_env,
