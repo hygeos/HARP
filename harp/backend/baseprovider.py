@@ -4,6 +4,7 @@ from typing import Callable
 
 import xarray as xr
 from core.static import interface, abstract, constraint
+from core.save import to_netcdf
 from core import log
 from core.config import Config
 
@@ -61,7 +62,7 @@ class BaseDatasetProvider:
         raw_vars += operands 
         
         files = self.download(variables=raw_vars, time=time, offline=self.config.get("offline"))
-        ds = xr.open_mfdataset(files, concat_dim='time', combine='nested', engine='netcdf4')
+        ds = xr.open_mfdataset(files, engine='netcdf4')
                 
         # harmonize if not disabled
         if self.config.get("harmonize"): 
@@ -169,7 +170,63 @@ class BaseDatasetProvider:
         c = constraint.path(context=f"{context} object config", exists=True, mode="dir")
         c.check(self.config.get("dir_storage"))
         # log.warning(log.rgb.red, self.config.get("dir_storage"))
+    
+    
+    def _split_and_store_atomic(self, ds):
+        """
+        Split and store dataset per variable and per timestep
+        assumes self._get_target_file_path is implemented in subclass
+        """
+    
+        for var in ds.data_vars:
+            for i in range(ds[var].time.size):
                 
+                atomic_slice = ds[[var]].isel(time=[i], drop=False)
+                timestep = datetime.fromisoformat(str(atomic_slice.time.values[0]))
+                atomic_slice_path: Path = self._get_target_file_path(var, timestep) 
+                atomic_slice_path.parent.mkdir(exist_ok=True, parents=True)
+                
+                # store atomic slice
+                to_netcdf(ds = atomic_slice, 
+                            filename = atomic_slice_path,
+                            if_exists="error"
+                )
+        return
+    
+    def _exists_locally(self, variable: str, time: datetime) -> bool:
+        filepath = self._get_target_file_path(variable, time)
+        return filepath.is_file()
+    
+    
+    def _get_target_file_path(self, variable: str, time: datetime) -> Path:
+        return self.config.get("dir_storage") / self._get_target_subfolder(time) / self._get_target_filename(variable, time)
+    
+    
+    def _get_target_subfolder(self, time: datetime):
+        return Path() / self.institution / self.collection / self.name / time.strftime("%Y/%m/%d")
+    
+    
+    def _get_target_filename(self, variable, time: datetime, region=False):
+        
+        filestr = f"{self.collection}_{self.name}_"
+        filestr += "region_" if region else "global_"
+        filestr += time.strftime("%Y-%m-%dT%H:%MZ_")
+        filestr += f"_{variable}_"
+        filestr += f"{self._get_storage_version()}.nc"
+        
+        return filestr    
+    
+    
+    def _get_storage_version(self):
+        """
+        Allow to invalidate cached Harp dataset by incrementing this version number
+        Shoud increment only if needed, doesn't need to be phased with package version
+        """
+        
+        version = "2.0.2"
+        
+        return "hsv" + version
+    
     
     def _get_var_map_raw_to_std(self, std_variables) -> dict[str]:
         """

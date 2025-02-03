@@ -70,20 +70,8 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
             ds = self._access_day_file(query["date"], area)
             ds = ds[query["variables"]].sel(time=query["times"]).compute()
             
-            # post process
-            for var in ds.data_vars:
-                for i in range(ds[var].time.size):
-                    
-                    atomic_slice = ds[[var]].isel(time=i)
-                    timestep = datetime.fromisoformat(str(atomic_slice.time.values))
-                    atomic_slice_path: Path = self._get_target_file_path(var, timestep) # TODO region
-                    atomic_slice_path.parent.mkdir(exist_ok=True, parents=True)
-                    
-                    # store atomic slic
-                    to_netcdf(ds = atomic_slice, 
-                                filename = atomic_slice_path,
-                                if_exists="error"
-                    )
+            # split and store per variable, per timestep
+            self._split_and_store_atomic(ds)
             
         files = self._get_query_files(variables, time)
         return files
@@ -189,28 +177,6 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
         
         return missing_variables
     
-    
-    def _exists_locally(self, variable: str, time: datetime) -> bool:
-        filepath = self._get_target_file_path(variable, time)
-        return filepath.is_file()
-    
-    
-    def _get_target_file_path(self, variable: str, time: datetime) -> Path:
-        return self.config.get("dir_storage") / self._get_target_subfolder(time) / self._get_target_filename(variable, time)
-    
-    
-    def _get_target_subfolder(self, time: datetime):
-        return Path() / self.institution / self.collection / self.name / time.strftime("%Y/%m/%d")
-    
-    
-    def _get_target_filename(self, variable, time: datetime, region=False):
-        
-        filestr = f"{self.collection}_{self.name}_"
-        filestr += "region_" if region else "global_"
-        filestr += time.strftime("%Y-%m-%dT%H:%MZ_")
-        filestr += f"_{variable}.nc"
-        
-        return filestr
     
     def _get_url(self, day: date):
         
