@@ -38,7 +38,7 @@ class CdsDatasetProvider(BaseDatasetProvider):
     
         super().__init__(config_subsection=config_subsection, **kwargs)
         self.internal_table = cds.cds_table(csv_files)
-        self.nomenclature = Nomenclature(self.internal_table.files, cols=["harp_name", "short_name", "cds_name"], raw_col="cds_name", context=self.name)
+        self.nomenclature = Nomenclature(self.internal_table.table, cols=["short_name", "cds_name"], raw_col="cds_name", context=self.name)
     
     def download(self, variables: list[str], time: datetime|list[datetime, datetime], *, offline=False, area: dict=None) -> list[Path]:
         

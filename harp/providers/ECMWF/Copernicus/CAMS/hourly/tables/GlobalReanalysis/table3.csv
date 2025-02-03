@@ -1,6 +1,6 @@
-﻿harp_name,                      name,units,cds_name,short_name,id
-,                               Near IR albedo for diffuse radiation,(0 - 1),near_ir_albedo_for_diffuse_radiation,alnid,18.128
-,                               Near IR albedo for direct radiation,(0 - 1),near_ir_albedo_for_direct_radiation,alnip,17.128
-,                               Snow albedo,(0 - 1),snow_albedo,asn,32.128
-,                               UV visible albedo for diffuse radiation,(0 - 1),uv_visible_albedo_for_diffuse_radiation,aluvd,16.128
-,                               UV visible albedo for direct radiation,(0 - 1),uv_visible_albedo_for_direct_radiation,aluvp,15.128
+﻿name,units,cds_name,short_name,id
+Near IR albedo for diffuse radiation,(0 - 1),near_ir_albedo_for_diffuse_radiation,alnid,18.128
+Near IR albedo for direct radiation,(0 - 1),near_ir_albedo_for_direct_radiation,alnip,17.128
+Snow albedo,(0 - 1),snow_albedo,asn,32.128
+UV visible albedo for diffuse radiation,(0 - 1),uv_visible_albedo_for_diffuse_radiation,aluvd,16.128
+UV visible albedo for direct radiation,(0 - 1),uv_visible_albedo_for_direct_radiation,aluvp,15.128

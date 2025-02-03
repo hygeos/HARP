@@ -35,6 +35,12 @@ class cds_table:
             
             # concatenate all the dataframes
             self.table = t if self.table is None else pd.concat([self.table, t], axis=0, ignore_index=False)
+        self.table = self.table.drop_duplicates(subset=['short_name', 'id'])
+        
+        doubles = list(self.table[self.table.duplicated('cds_name')].dropna()["cds_name"].values)
+        log.debug(f"Nomenclature: droping variables {doubles} because of ambigous definition (duplicate)")
+        self.table = self.table.drop_duplicates(subset=['cds_name'])
+        
     
     def get_files(self):
         return self.files.copy()

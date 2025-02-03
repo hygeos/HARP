@@ -12,19 +12,24 @@ from harp.backend.nomenclature import Nomenclature
 import harp.config
 from copy import copy, deepcopy
 
+class Computable: pass # TODO
+
 @abstract
 class BaseDatasetProvider:
     
     @interface
     def get(self,
-            variables: list[str], 
+            variables: dict[str: str], 
             time: datetime, # type dictates if dt or range
             *,
             area: dict=None, 
-            raw_query = False,
             ) -> xr.Dataset:
         """
         Download and apply post-process to the downloaded data for the given date
+        variables is a dict of the form:
+            new_name: provider_specific_nane
+            
+            ex: {"temp": "2m_temperature"}
         Standardize the dataset:
             - names
             - longitude uses [-180; 180] convention 
@@ -36,32 +41,30 @@ class BaseDatasetProvider:
         if area is not None:
             log.error("Not implemented yet", e=RuntimeError)
         
-        # Computables variables management
-        operands = []
-        computed = []
+        query       = [] # variables to query
+        operands    = [] # operands for computable variables
+        computed    = [] # variables to compute from operands
         
         for var in variables:
-            if var in self.computables:
-                variables.remove(var)
-                c = self.computables[var]
-                log.debug(f"Using computable bind: {var} = {c['func'].__name__} + {c['operands']}")
-                computed += [var]
-                operands += c["operands"]
+            raw_var = variables[var]
+            if isinstance(raw_var, Computable):
+                pass
+                # TODO # TODO # TODO # TODO # TODO # TODO # TODO # TODO # TODO # TODO
+                # c = self.computables[var]
+                # log.debug(f"Using computable bind: {var} = {c['func'].__name__} + {c['operands']}")
+                # computed += [var]
+                # operands += c["operands"]
+            else:
+                query.append(variables[var]) # append raw var
         
-        operands = list(set(operands)) # get unique list 
+        reversed_aliases = {v: k for k, v in variables.items()} # convert aliases from std: raw to raw: std for renaming queried vars 
+        operands = list(set(operands))  # get unique list 
+        query += operands           # append operands to the list of variables to download
         
-        # Translation to raw names 
-        raw_vars = variables
-        if not raw_query:
-            raw_vars = list(self._get_var_map_raw_to_std(variables).keys())
-        
-        for var in raw_vars:
+        for var in query: # check that every raw variable exist in the dataset provider nomenclature 
             self.nomenclature.check_has_raw_name(var)
             
-        # append computable operands
-        raw_vars += operands 
-        
-        files = self.download(variables=raw_vars, time=time, offline=self.config.get("offline"))
+        files = self.download(variables=query, time=time, offline=self.config.get("offline"))
         ds = xr.open_mfdataset(files, engine='netcdf4')
                 
         # harmonize if not disabled
@@ -72,9 +75,8 @@ class BaseDatasetProvider:
             fn = self.computables[var]["func"]
             ds[var] = fn(ds)
         
-        if not raw_query:
-            std_name_map = self._get_var_map_raw_to_std(variables)
-            ds = ds.rename_vars(std_name_map)
+        if reversed_aliases:
+            ds = ds.rename_vars(reversed_aliases)
         
         return ds
     
@@ -227,35 +229,6 @@ class BaseDatasetProvider:
         
         return "hsv" + version
     
-    
-    def _get_var_map_raw_to_std(self, std_variables) -> dict[str]:
-        """
-        Returns a dict of raw_name: std_name, includes the variables binded at runtime 
-        """
-        vmap = self._get_var_map_std_to_raw(std_variables)
-        
-        vmap = {v: k for k, v in vmap.items()}
-        return vmap
-    
-    def _get_var_map_std_to_raw(self, std_variables) -> dict[str]:
-        """
-        Returns a dict of std_name: raw_name, includes the variables binded at runtime 
-        """
-        
-        if not hasattr(self, "nomenclature"): 
-            log.error(f"DatasetProvider {self.__name__} does not contain a nomenclature attribute", e=KeyError)
-        
-        vmap = {}
-        
-        for var in std_variables:
-            if var in self.binds:
-                raw = self.binds[var]
-                # log.debug(f"Using runtime variable binding {var} -> {raw}")
-            else:
-                raw = self.nomenclature.get_raw_name(var)
-            vmap[var] = raw
-        
-        return vmap
     
     @abstract # to be defined by subclasses
     def download() -> Path: # TODO add get params or smt
