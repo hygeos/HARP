@@ -1,51 +1,51 @@
-harp_name,                    raw_name,           units,                        long_name
-,                             SSSMASS25,          kg m-3,                       Sea Salt Surface Mass Concentration - PM 2.5
-,                             DUSCATAU,           1,                            Dust Scattering AOT [550 nm]
-,                             BCSCATAU,           1,                            Black Carbon Scattering AOT [550 nm]
-,                             DUEXTTAU,           1,                            Dust Extinction AOT [550 nm]
-,                             BCFLUXU,            kg m-1 s-1,                   Black Carbon column u-wind mass flux
-,                             OCFLUXV,            kg m-1 s-1,                   Organic Carbon column v-wind mass flux 
-,                             BCANGSTR,           1,                            Black Carbon Angstrom parameter [470-870 nm]
-,                             SUFLUXV,            kg m-1 s-1,                   SO4 column v-wind mass flux 
-,                             SSSMASS,            kg m-3,                       Sea Salt Surface Mass Concentration
-,                             OCSMASS,            kg m-3,                       Organic Carbon Surface Mass Concentration 
-,                             BCCMASS,            kg m-2,                       Black Carbon Column Mass Density
-,                             BCSMASS,            kg m-3,                       Black Carbon Surface Mass Concentration
-,                             SO4CMASS,           kg m-2,                       SO4 Column Mass Density 
-,                             SSFLUXU,            kg m-1 s-1,                   Sea Salt column u-wind mass flux
-,                             DUCMASS,            kg m-2,                       Dust Column Mass Density
-,                             SSEXTTAU,           1,                            Sea Salt Extinction AOT [550 nm]
-,                             SO2CMASS,           kg m-2,                       SO2 Column Mass Density 
-,                             OCANGSTR,           1,                            Organic Carbon Angstrom parameter [470-870 nm] 
-,                             OCCMASS,            kg m-2,                       Organic Carbon Column Mass Density 
-,                             TOTEXTTAU,          1,                            Total Aerosol Extinction AOT [550 nm]
-,                             DUSCAT25,           1,                            Dust Scattering AOT [550 nm] - PM 2.5
-,                             TOTANGSTR,          1,                            Total Aerosol Angstrom parameter [470-870 nm]
-,                             DMSCMASS,           kg m-2,                       DMS Column Mass Density 
-,                             SSEXTT25,           1,                            Sea Salt Extinction AOT [550 nm] - PM 2.5
-,                             DUANGSTR,           1,                            Dust Angstrom parameter [470-870 nm]
-,                             DMSSMASS,           kg m-3,                       DMS Surface Mass Concentration 
-,                             BCEXTTAU,           1,                            Black Carbon Extinction AOT [550 nm]
-,                             SSSCATAU,           1,                            Sea Salt Scattering AOT [550 nm]
-,                             DUFLUXV,            kg m-1 s-1,                   Dust column v-wind mass flux
-,                             DUFLUXU,            kg m-1 s-1,                   Dust column u-wind mass flux
-,                             SUEXTTAU,           1,                            SO4 Extinction AOT [550 nm] 
-,                             SSFLUXV,            kg m-1 s-1,                   Sea Salt column v-wind mass flux
-,                             DUCMASS25,          kg m-2,                       Dust Column Mass Density - PM 2.5
-,                             OCEXTTAU,           1,                            Organic Carbon Extinction AOT [550 nm] 
-,                             SUANGSTR,           1,                            SO4 Angstrom parameter [470-870 nm] 
-,                             SSSCAT25,           1,                            Sea Salt Scattering AOT [550 nm] - PM 2.5
-,                             SSCMASS25,          kg m-2,                       Sea Salt Column Mass Density - PM 2.5
-,                             SO4SMASS,           kg m-3,                       SO4 Surface Mass Concentration 
-,                             DUSMASS,            kg m-3,                       Dust Surface Mass Concentration
-,                             SUFLUXU,            kg m-1 s-1,                   SO4 column u-wind mass flux 
-,                             BCFLUXV,            kg m-1 s-1,                   Black Carbon column v-wind mass flux
-,                             DUSMASS25,          kg m-3,                       Dust Surface Mass Concentration - PM 2.5
-,                             SSCMASS,            kg m-2,                       Sea Salt Column Mass Density
-,                             SUSCATAU,           1,                            SO4 Scattering AOT [550 nm] 
-,                             SO2SMASS,           kg m-3,                       SO2 Surface Mass Concentration 
-,                             SSANGSTR,           1,                            Sea Salt Angstrom parameter [470-870 nm]
-,                             DUEXTT25,           1,                            Dust Extinction AOT [550 nm] - PM 2.5
-,                             OCFLUXU,            kg m-1 s-1,                   Organic Carbon column u-wind mass flux 
-,                             OCSCATAU,           1,                            Organic Carbon Scattering AOT [550 nm] 
-,                             TOTSCATAU,          1,                            Total Aerosol Scattering AOT [550 nm]
+raw_name,           units,                        long_name
+SSSMASS25,          kg m-3,                       Sea Salt Surface Mass Concentration - PM 2.5
+DUSCATAU,           1,                            Dust Scattering AOT [550 nm]
+BCSCATAU,           1,                            Black Carbon Scattering AOT [550 nm]
+DUEXTTAU,           1,                            Dust Extinction AOT [550 nm]
+BCFLUXU,            kg m-1 s-1,                   Black Carbon column u-wind mass flux
+OCFLUXV,            kg m-1 s-1,                   Organic Carbon column v-wind mass flux 
+BCANGSTR,           1,                            Black Carbon Angstrom parameter [470-870 nm]
+SUFLUXV,            kg m-1 s-1,                   SO4 column v-wind mass flux 
+SSSMASS,            kg m-3,                       Sea Salt Surface Mass Concentration
+OCSMASS,            kg m-3,                       Organic Carbon Surface Mass Concentration 
+BCCMASS,            kg m-2,                       Black Carbon Column Mass Density
+BCSMASS,            kg m-3,                       Black Carbon Surface Mass Concentration
+SO4CMASS,           kg m-2,                       SO4 Column Mass Density 
+SSFLUXU,            kg m-1 s-1,                   Sea Salt column u-wind mass flux
+DUCMASS,            kg m-2,                       Dust Column Mass Density
+SSEXTTAU,           1,                            Sea Salt Extinction AOT [550 nm]
+SO2CMASS,           kg m-2,                       SO2 Column Mass Density 
+OCANGSTR,           1,                            Organic Carbon Angstrom parameter [470-870 nm] 
+OCCMASS,            kg m-2,                       Organic Carbon Column Mass Density 
+TOTEXTTAU,          1,                            Total Aerosol Extinction AOT [550 nm]
+DUSCAT25,           1,                            Dust Scattering AOT [550 nm] - PM 2.5
+TOTANGSTR,          1,                            Total Aerosol Angstrom parameter [470-870 nm]
+DMSCMASS,           kg m-2,                       DMS Column Mass Density 
+SSEXTT25,           1,                            Sea Salt Extinction AOT [550 nm] - PM 2.5
+DUANGSTR,           1,                            Dust Angstrom parameter [470-870 nm]
+DMSSMASS,           kg m-3,                       DMS Surface Mass Concentration 
+BCEXTTAU,           1,                            Black Carbon Extinction AOT [550 nm]
+SSSCATAU,           1,                            Sea Salt Scattering AOT [550 nm]
+DUFLUXV,            kg m-1 s-1,                   Dust column v-wind mass flux
+DUFLUXU,            kg m-1 s-1,                   Dust column u-wind mass flux
+SUEXTTAU,           1,                            SO4 Extinction AOT [550 nm] 
+SSFLUXV,            kg m-1 s-1,                   Sea Salt column v-wind mass flux
+DUCMASS25,          kg m-2,                       Dust Column Mass Density - PM 2.5
+OCEXTTAU,           1,                            Organic Carbon Extinction AOT [550 nm] 
+SUANGSTR,           1,                            SO4 Angstrom parameter [470-870 nm] 
+SSSCAT25,           1,                            Sea Salt Scattering AOT [550 nm] - PM 2.5
+SSCMASS25,          kg m-2,                       Sea Salt Column Mass Density - PM 2.5
+SO4SMASS,           kg m-3,                       SO4 Surface Mass Concentration 
+DUSMASS,            kg m-3,                       Dust Surface Mass Concentration
+SUFLUXU,            kg m-1 s-1,                   SO4 column u-wind mass flux 
+BCFLUXV,            kg m-1 s-1,                   Black Carbon column v-wind mass flux
+DUSMASS25,          kg m-3,                       Dust Surface Mass Concentration - PM 2.5
+SSCMASS,            kg m-2,                       Sea Salt Column Mass Density
+SUSCATAU,           1,                            SO4 Scattering AOT [550 nm] 
+SO2SMASS,           kg m-3,                       SO2 Surface Mass Concentration 
+SSANGSTR,           1,                            Sea Salt Angstrom parameter [470-870 nm]
+DUEXTT25,           1,                            Dust Extinction AOT [550 nm] - PM 2.5
+OCFLUXU,            kg m-1 s-1,                   Organic Carbon column u-wind mass flux 
+OCSCATAU,           1,                            Organic Carbon Scattering AOT [550 nm] 
+TOTSCATAU,          1,                            Total Aerosol Scattering AOT [550 nm]

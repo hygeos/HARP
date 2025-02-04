@@ -1,8 +1,8 @@
-harp_name,                    raw_name,           units,                        long_name
-,                             COSC,               1e-9,                         CO Surface Concentration in ppbv 
-,                             COPD,               kg m-2 s-1,                   CO Chemical Production 
-,                             TO3,                Dobsons,                      total_column_ozone
-,                             COEM,               kg m-2 s-1,                   CO Emission 
-,                             COLS,               kg m-2 s-1,                   CO Chemical Loss 
-,                             COCL,               kg m-2,                       CO Column Burden 
-,                             LWI,                1,                            land(1)_water(0)_ice(2)_flag
+raw_name,           units,                        long_name
+COSC,               1e-9,                         CO Surface Concentration in ppbv 
+COPD,               kg m-2 s-1,                   CO Chemical Production 
+TO3,                Dobsons,                      total_column_ozone
+COEM,               kg m-2 s-1,                   CO Emission 
+COLS,               kg m-2 s-1,                   CO Chemical Loss 
+COCL,               kg m-2,                       CO Column Burden 
+LWI,                1,                            land(1)_water(0)_ice(2)_flag

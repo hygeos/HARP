@@ -142,10 +142,10 @@ def extract_dataset_infos(url, model, name, generic_name, skip_present=False):
     
     # Write contained variables as csv file
     pad = 30
-    data = "harp_name, ".ljust(pad) + "raw_name,".ljust(20) + "units, ".ljust(pad) + "long_name\n"
+    data = "raw_name,".ljust(20) + "units, ".ljust(pad) + "long_name\n"
     for v in variables:
         vi = variables[v]
-        data += ", ".ljust(pad) + f"{v},".ljust(20) + f"{vi['units']},".ljust(pad) + f"{vi['long_name']}\n"
+        data += f"{v},".ljust(20) + f"{vi['units']},".ljust(pad) + f"{vi['long_name']}\n"
         
     with open(csv_target, 'w') as f:
         log.info(f"Writing {csv_target}")

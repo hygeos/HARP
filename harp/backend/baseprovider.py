@@ -12,14 +12,13 @@ from harp.backend.nomenclature import Nomenclature
 import harp.config
 from copy import copy, deepcopy
 
-class Computable: pass # TODO
+from harp.backend.computable import Computable
 
 @abstract
 class BaseDatasetProvider:
     
     @interface
     def get(self,
-            variables: dict[str: str], 
             time: datetime, # type dictates if dt or range
             *,
             area: dict=None, 
@@ -45,24 +44,21 @@ class BaseDatasetProvider:
         operands    = [] # operands for computable variables
         computed    = [] # variables to compute from operands
         
-        for var in variables:
-            raw_var = variables[var]
-            if isinstance(raw_var, Computable):
-                pass
-                # TODO # TODO # TODO # TODO # TODO # TODO # TODO # TODO # TODO # TODO
-                # c = self.computables[var]
-                # log.debug(f"Using computable bind: {var} = {c['func'].__name__} + {c['operands']}")
-                # computed += [var]
-                # operands += c["operands"]
+        for dst_var in self.variables:
+            src_var = self.variables[dst_var]
+            if isinstance(src_var, Computable):
+                computed += [dst_var]
+                log.debug(f"Using computable bind: {dst_var} = {src_var.func.__name__} + {src_var.operands}")
+                operands += src_var.operands
             else:
-                query.append(variables[var]) # append raw var
+                query.append(self.variables[dst_var]) # append raw var
         
-        reversed_aliases = {v: k for k, v in variables.items()} # convert aliases from std: raw to raw: std for renaming queried vars 
+        reversed_aliases = {v: k for k, v in self.variables.items() if type(v) is str} # convert aliases from std: raw to raw: std for renaming queried vars 
         operands = list(set(operands))  # get unique list 
         query += operands           # append operands to the list of variables to download
         
-        for var in query: # check that every raw variable exist in the dataset provider nomenclature 
-            self.nomenclature.check_has_raw_name(var)
+        for dst_var in query: # check that every raw variable exist in the dataset provider nomenclature 
+            self.nomenclature.check_has_raw_name(dst_var)
             
         files = self.download(variables=query, time=time, offline=self.config.get("offline"))
         ds = xr.open_mfdataset(files, engine='netcdf4')
@@ -71,27 +67,26 @@ class BaseDatasetProvider:
         if self.config.get("harmonize"): 
             ds = self._standardize(ds)
         
-        for var in computed:
-            fn = self.computables[var]["func"]
-            ds[var] = fn(ds)
+        for dst_var in computed:
+            func = self.variables[dst_var].func
+            ds[dst_var] = func(ds)
         
         if reversed_aliases:
             ds = ds.rename_vars(reversed_aliases)
         
         return ds
     
+    
+    @interface    
+    def __init__(self, variables: dict[str: str], config: dict={}):
         
-    def __init__(self, **kwargs):
+        self.variables = variables
         
-        self.config_subsection = None
-        if "config_subsection" in kwargs:
-            self.config_subsection = kwargs["config_subsection"]
-            
-        self.config = harp.config.Config
-        self.config = self._compute_final_config(self.config_subsection, kwargs)
+        # Load default config and override keys passed through the config dict parameter
+        self.config = harp.config.default_config.copy()
+        self.config.ingest(config, override=True)
         
         self._check_config()
-        self.binds = {}         # map of runtime defined std_names -> raw_names
         self.computables = {}    # map of computable variables
         
     @interface
@@ -128,39 +123,7 @@ class BaseDatasetProvider:
         self.computables[name] = {"func": func, "operands": operands}
         
         return
-        
-    @interface
-    def bind(self, variables: dict):
-        
-        self.nomenclature: Nomenclature
-        
-        for std, raw in variables.items():
-            
-            assert type(std) == str
-            assert type(raw) == str
-            
-            self.nomenclature.check_has_raw_name(raw)
-            self.binds[std] = raw
-    
-    @interface
-    def _compute_final_config(self, subsection: str|None, explicitly_passed_config: dict):
-        """
-        Steps:
-        1: Loads the Harp defaults config
-        2: Overrides the keys presents in the provided subsection (if exists) (from toml)
-        3: Overrides the keys directly provided by constructor 
-        """
-        
-        config_obj = harp.config.general_config.copy() # init configuration with harp default general config
-        
-        if subsection: # if provided ingest subsection as override
-            config_obj.ingest(
-                harp.config.harp_config.get_subsection(subsection, default={}),
-                override=True
-            )
-        
-        config_obj.ingest(explicitly_passed_config, override=True)
-        return config_obj
+
         
     
     def _check_config(self):

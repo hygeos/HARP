@@ -34,11 +34,14 @@ class CdsDatasetProvider(BaseDatasetProvider):
     
     timespecs = RegularTimespec(timedelta(seconds=0), 24) # default specs to hourly from 00:00 to 23:00
     
-    def __init__(self, *, config_subsection: str, csv_files: list[Path], **kwargs):
     
-        super().__init__(config_subsection=config_subsection, **kwargs)
+    @interface
+    def __init__(self, *, csv_files: list[Path], variables: dict[str: str], config: dict={}):
+    
+        super().__init__(variables=variables, config=config)
         self.internal_table = cds.cds_table(csv_files)
         self.nomenclature = Nomenclature(self.internal_table.table, cols=["short_name", "cds_name"], raw_col="cds_name", context=self.name)
+        
     
     def download(self, variables: list[str], time: datetime|list[datetime, datetime], *, offline=False, area: dict=None) -> list[Path]:
         

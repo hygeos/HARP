@@ -1,47 +1,47 @@
-harp_name,                    raw_name,           units,                        long_name
-,                             FRCAN,              1,                            areal_fraction_of_anvil_showers
-,                             CN,                 1,                            surface_neutral_drag_coefficient
-,                             BSTAR,              m s-2,                        surface_bouyancy_scale
-,                             QSTAR,              kg kg-1,                      surface_moisture_scale
-,                             PRECANV,            kg m-2 s-1,                   anvil_precipitation
-,                             ULML,               m s-1,                        surface_eastward_wind
-,                             NIRDR,              W m-2,                        surface_downwelling_nearinfrared_beam_flux
-,                             RHOA,               kg m-3,                       air_density_at_surface
-,                             TCZPBL,             m,                            transcom_planetary_boundary_layer_height
-,                             TLML,               K,                            surface_air_temperature
-,                             PRECTOT,            kg m-2 s-1,                   total_precipitation
-,                             FRCCN,              1,                            areal_fraction_of_convective_showers
-,                             USTAR,              m s-1,                        surface_velocity_scale
-,                             SPEED,              m s-1,                        surface_wind_speed
-,                             EVAP,               kg m-2 s-1,                   evaporation_from_turbulence
-,                             QLML,               1,                            surface_specific_humidity
-,                             DISPH,              m,                            zero_plane_displacement_height
-,                             TAUX,               N m-2,                        eastward_surface_stress
-,                             PRECTOTCORR,        kg m-2 s-1,                   total_precipitation
-,                             HLML,               m,                            surface_layer_height
-,                             PRECLSC,            kg m-2 s-1,                   nonanvil_large_scale_precipitation
-,                             TAUGWX,             N m-2,                        surface_eastward_gravity_wave_stress
-,                             QSH,                kg kg-1,                      effective_surface_specific_humidity
-,                             PGENTOT,            kg m-2 s-1,                   Total_column_production_of_precipitation
-,                             GHTSKIN,            W m-2,                        Ground_heating_for_skin_temp
-,                             PRECSNO,            kg m-2 s-1,                   snowfall
-,                             TSH,                K,                            effective_surface_skin_temperature
-,                             FRCLS,              1,                            areal_fraction_of_nonanvil_large_scale_showers
-,                             Z0M,                m,                            surface_roughness
-,                             Z0H,                m,                            surface_roughness_for_heat
-,                             TAUY,               N m-2,                        northward_surface_stress
-,                             TSTAR,              K,                            surface_temperature_scale
-,                             NIRDF,              W m-2,                        surface_downwelling_nearinfrared_diffuse_flux
-,                             CDM,                kg m-2 s-1,                   surface_exchange_coefficient_for_momentum
-,                             PBLH,               m,                            planetary_boundary_layer_height
-,                             SPEEDMAX,           m s-1,                        surface_wind_speed
-,                             TAUGWY,             N m-2,                        surface_northward_gravity_wave_stress
-,                             HFLUX,              W m-2,                        sensible_heat_flux_from_turbulence
-,                             FRSEAICE,           1,                            ice_covered_fraction_of_tile
-,                             PRECCON,            kg m-2 s-1,                   convective_precipitation
-,                             RISFC,              1,                            surface_bulk_richardson_number
-,                             EFLUX,              W m-2,                        total_latent_energy_flux
-,                             PREVTOT,            kg m-2 s-1,                   Total_column_re-evap/subl_of_precipitation
-,                             VLML,               m s-1,                        surface_northward_wind
-,                             CDQ,                kg m-2 s-1,                   surface_exchange_coefficient_for_moisture
-,                             CDH,                kg m-2 s-1,                   surface_exchange_coefficient_for_heat
+raw_name,           units,                        long_name
+FRCAN,              1,                            areal_fraction_of_anvil_showers
+CN,                 1,                            surface_neutral_drag_coefficient
+BSTAR,              m s-2,                        surface_bouyancy_scale
+QSTAR,              kg kg-1,                      surface_moisture_scale
+PRECANV,            kg m-2 s-1,                   anvil_precipitation
+ULML,               m s-1,                        surface_eastward_wind
+NIRDR,              W m-2,                        surface_downwelling_nearinfrared_beam_flux
+RHOA,               kg m-3,                       air_density_at_surface
+TCZPBL,             m,                            transcom_planetary_boundary_layer_height
+TLML,               K,                            surface_air_temperature
+PRECTOT,            kg m-2 s-1,                   total_precipitation
+FRCCN,              1,                            areal_fraction_of_convective_showers
+USTAR,              m s-1,                        surface_velocity_scale
+SPEED,              m s-1,                        surface_wind_speed
+EVAP,               kg m-2 s-1,                   evaporation_from_turbulence
+QLML,               1,                            surface_specific_humidity
+DISPH,              m,                            zero_plane_displacement_height
+TAUX,               N m-2,                        eastward_surface_stress
+PRECTOTCORR,        kg m-2 s-1,                   total_precipitation
+HLML,               m,                            surface_layer_height
+PRECLSC,            kg m-2 s-1,                   nonanvil_large_scale_precipitation
+TAUGWX,             N m-2,                        surface_eastward_gravity_wave_stress
+QSH,                kg kg-1,                      effective_surface_specific_humidity
+PGENTOT,            kg m-2 s-1,                   Total_column_production_of_precipitation
+GHTSKIN,            W m-2,                        Ground_heating_for_skin_temp
+PRECSNO,            kg m-2 s-1,                   snowfall
+TSH,                K,                            effective_surface_skin_temperature
+FRCLS,              1,                            areal_fraction_of_nonanvil_large_scale_showers
+Z0M,                m,                            surface_roughness
+Z0H,                m,                            surface_roughness_for_heat
+TAUY,               N m-2,                        northward_surface_stress
+TSTAR,              K,                            surface_temperature_scale
+NIRDF,              W m-2,                        surface_downwelling_nearinfrared_diffuse_flux
+CDM,                kg m-2 s-1,                   surface_exchange_coefficient_for_momentum
+PBLH,               m,                            planetary_boundary_layer_height
+SPEEDMAX,           m s-1,                        surface_wind_speed
+TAUGWY,             N m-2,                        surface_northward_gravity_wave_stress
+HFLUX,              W m-2,                        sensible_heat_flux_from_turbulence
+FRSEAICE,           1,                            ice_covered_fraction_of_tile
+PRECCON,            kg m-2 s-1,                   convective_precipitation
+RISFC,              1,                            surface_bulk_richardson_number
+EFLUX,              W m-2,                        total_latent_energy_flux
+PREVTOT,            kg m-2 s-1,                   Total_column_re-evap/subl_of_precipitation
+VLML,               m s-1,                        surface_northward_wind
+CDQ,                kg m-2 s-1,                   surface_exchange_coefficient_for_moisture
+CDH,                kg m-2 s-1,                   surface_exchange_coefficient_for_heat

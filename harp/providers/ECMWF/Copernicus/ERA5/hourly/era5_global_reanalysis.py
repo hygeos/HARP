@@ -20,7 +20,7 @@ class GlobalReanalysis(cds.CdsDatasetProvider):
     
     timespecs = RegularTimespec(timedelta(seconds=0), 24)
     
-    def __init__(self, **kwargs):
+    def __init__(self, variables: dict[str: str], config: dict={}):
         folder = Path(__file__).parent / "tables"
         files = [
             folder / "table1.csv",
@@ -32,7 +32,7 @@ class GlobalReanalysis(cds.CdsDatasetProvider):
             folder / "table7.csv",
             folder / "table8.csv",
         ]
-        super().__init__(config_subsection="ERA5_raster", csv_files=files, **kwargs)
+        super().__init__(csv_files=files, variables=variables, config=config)
     
     @interface
     def _execute_cds_request(self, target_filepath: Path, query, area: dict=None):

@@ -1,20 +1,20 @@
-harp_name,                    raw_name,           units,                        long_name
-,                             MDSCLDSZICE,        1,                            modis_cloud_particle_size_ice_mean
-,                             MDSOPTHCKICELG,     1,                            modis_optical_thickness_ice_logmean
-,                             MDSCLDFRCHI,        1,                            modis_cloud_fraction_high_mean
-,                             MDSCLDFRCTTL,       1,                            modis_cloud_fraction_total_mean
-,                             MDSCLDFRCH2O,       1,                            modis_cloud_fraction_water_mean
-,                             MDSOPTHCKICE,       1,                            modis_optical_thickness_ice_mean
-,                             MDSCLDSZH20,        1,                            modis_cloud_particle_size_water_mean
-,                             MDSOPTHCKH2O,       1,                            modis_optical_thickness_water_mean
-,                             MDSOPTHCKH2OLG,     1,                            modis_optical_thickness_water_logmean
-,                             MDSCLDFRCICE,       1,                            modis_cloud_fraction_ice_mean
-,                             MDSICEPATH,         1,                            modis_ice_water_path_mean
-,                             MDSOPTHCKTTL,       1,                            modis_optical_thickness_total_mean
-,                             MDSH2OPATH,         1,                            modis_liquid_water_path_mean
-,                             MDSCLDTOPPS,        1,                            modis_cloud_top_pressure_total_mean
-,                             MDSOPTHCKTTLLG,     1,                            modis_optical_thickness_total_logmean
-,                             ISCCPCLDFRC,        1,                            isccp_total _cloud_area_fraction
-,                             MDSCLDFRCLO,        1,                            modis_cloud_fraction_low_mean
-,                             ISCCPALB,           1,                            isccp_cloud_albedo
-,                             MDSCLDFRCMID,       1,                            modis_cloud_fraction_mid_mean
+raw_name,           units,                        long_name
+MDSCLDSZICE,        1,                            modis_cloud_particle_size_ice_mean
+MDSOPTHCKICELG,     1,                            modis_optical_thickness_ice_logmean
+MDSCLDFRCHI,        1,                            modis_cloud_fraction_high_mean
+MDSCLDFRCTTL,       1,                            modis_cloud_fraction_total_mean
+MDSCLDFRCH2O,       1,                            modis_cloud_fraction_water_mean
+MDSOPTHCKICE,       1,                            modis_optical_thickness_ice_mean
+MDSCLDSZH20,        1,                            modis_cloud_particle_size_water_mean
+MDSOPTHCKH2O,       1,                            modis_optical_thickness_water_mean
+MDSOPTHCKH2OLG,     1,                            modis_optical_thickness_water_logmean
+MDSCLDFRCICE,       1,                            modis_cloud_fraction_ice_mean
+MDSICEPATH,         1,                            modis_ice_water_path_mean
+MDSOPTHCKTTL,       1,                            modis_optical_thickness_total_mean
+MDSH2OPATH,         1,                            modis_liquid_water_path_mean
+MDSCLDTOPPS,        1,                            modis_cloud_top_pressure_total_mean
+MDSOPTHCKTTLLG,     1,                            modis_optical_thickness_total_logmean
+ISCCPCLDFRC,        1,                            isccp_total _cloud_area_fraction
+MDSCLDFRCLO,        1,                            modis_cloud_fraction_low_mean
+ISCCPALB,           1,                            isccp_cloud_albedo
+MDSCLDFRCMID,       1,                            modis_cloud_fraction_mid_mean

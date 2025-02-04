@@ -20,12 +20,12 @@ class GlobalReanalysisVolumetric(cds.CdsDatasetProvider):
     
     timespecs = RegularTimespec(timedelta(seconds=0), 24)
     
-    def __init__(self, **kwargs):
+    def __init__(self, config={}):
         folder = Path(__file__).parent / "tables"
         files = [
             folder / "table9.csv",
         ]
-        super().__init__(config_subsection="ERA5_volume", csv_files=files, **kwargs)
+        super().__init__(csv_files=files, config=config)
     
     @interface
     def _execute_cds_request(self, target_filepath: Path, query, area: dict=None):

@@ -1,73 +1,73 @@
-harp_name,                    raw_name,           units,                        long_name
-,                             Var_ALBNIRDF,       1 1,                          Variance_of_ALBNIRDF
-,                             Var_SWTNTCLN,       W m-2 W m-2,                  Variance_of_SWTNTCLN
-,                             Var_TAUTOT,         1 1,                          Variance_of_TAUTOT
-,                             LWGAB,              W m-2,                        surface_absorbed_longwave_radiation
-,                             CLDTOT,             1,                            total_cloud_area_fraction
-,                             Var_ALBNIRDR,       1 1,                          Variance_of_ALBNIRDR
-,                             Var_LWTUPCLR,       W m-2 W m-2,                  Variance_of_LWTUPCLR
-,                             ALBNIRDF,           1,                            surface_albedo_for_near_infrared_diffuse
-,                             Var_LWGNT,          W m-2 W m-2,                  Variance_of_LWGNT
-,                             SWTDN,              W m-2,                        toa_incoming_shortwave_flux
-,                             EMIS,               1,                            surface_emissivity
-,                             LWTUPCLRCLN,        W m-2,                        upwelling_longwave_flux_at_toa_assuming_clear_sky_and_no_aerosol
-,                             SWTNTCLR,           W m-2,                        toa_net_downward_shortwave_flux_assuming_clear_sky
-,                             CLDHGH,             1,                            cloud_area_fraction_for_high_clouds
-,                             Var_LWTUPCLRCLN,    W m-2 W m-2,                  Variance_of_LWTUPCLRCLN
-,                             Var_SWTNTCLRCLN,    W m-2 W m-2,                  Variance_of_SWTNTCLRCLN
-,                             Var_LWGNTCLRCLN,    W m-2 W m-2,                  Variance_of_LWGNTCLRCLN
-,                             Var_SWGNTCLRCLN,    W m-2 W m-2,                  Variance_of_SWGNTCLRCLN
-,                             Var_TAULOW,         1 1,                          Variance_of_TAULOW
-,                             LWGABCLR,           W m-2,                        surface_absorbed_longwave_radiation_assuming_clear_sky
-,                             Var_ALBVISDF,       1 1,                          Variance_of_ALBVISDF
-,                             LWGABCLRCLN,        W m-2,                        surface_absorbed_longwave_radiation_assuming_clear_sky_and_no_aerosol
-,                             Var_ALBVISDR,       1 1,                          Variance_of_ALBVISDR
-,                             Var_TAUHGH,         1 1,                          Variance_of_TAUHGH
-,                             Var_SWGDNCLR,       W m-2 W m-2,                  Variance_of_SWGDNCLR
-,                             Var_SWTDN,          W m-2 W m-2,                  Variance_of_SWTDN
-,                             LWGNTCLRCLN,        W m-2,                        surface_net_downward_longwave_flux_assuming_clear_sky_and_no_aerosol
-,                             Var_CLDLOW,         1 1,                          Variance_of_CLDLOW
-,                             SWGNTCLRCLN,        W m-2,                        surface_net_downward_shortwave_flux_assuming_clear_sky_and_no_aerosol
-,                             Var_LWGABCLR,       W m-2 W m-2,                  Variance_of_LWGABCLR
-,                             Var_CLDTOT,         1 1,                          Variance_of_CLDTOT
-,                             TS,                 K,                            surface_skin_temperature
-,                             SWGNT,              W m-2,                        surface_net_downward_shortwave_flux
-,                             TAUMID,             1,                            in_cloud_optical_thickness_of_middle_clouds
-,                             ALBEDO,             1,                            surface_albedo
-,                             SWGNTCLR,           W m-2,                        surface_net_downward_shortwave_flux_assuming_clear_sky
-,                             SWGNTCLN,           W m-2,                        surface_net_downward_shortwave_flux_assuming_no_aerosol
-,                             LWGNTCLR,           W m-2,                        surface_net_downward_longwave_flux_assuming_clear_sky
-,                             Var_ALBEDO,         1 1,                          Variance_of_ALBEDO
-,                             SWGDNCLR,           W m-2,                        surface_incoming_shortwave_flux_assuming_clear_sky
-,                             ALBVISDF,           1,                            surface_albedo_for_visible_diffuse
-,                             LWTUPCLR,           W m-2,                        upwelling_longwave_flux_at_toa_assuming_clear_sky
-,                             TAUTOT,             1,                            in_cloud_optical_thickness_of_all_clouds
-,                             LWGNT,              W m-2,                        surface_net_downward_longwave_flux
-,                             CLDLOW,             1,                            cloud_area_fraction_for_low_clouds
-,                             ALBVISDR,           1,                            surface_albedo_for_visible_beam
-,                             Var_CLDMID,         1 1,                          Variance_of_CLDMID
-,                             Var_LWGNTCLR,       W m-2 W m-2,                  Variance_of_LWGNTCLR
-,                             SWTNTCLRCLN,        W m-2,                        toa_net_downward_shortwave_flux_assuming_clear_sky_and_no_aerosol
-,                             TAUHGH,             1,                            in_cloud_optical_thickness_of_high_clouds(EXPORT)
-,                             TAULOW,             1,                            in_cloud_optical_thickness_of_low_clouds
-,                             Var_LWGEM,          W m-2 W m-2,                  Variance_of_LWGEM
-,                             Var_SWGNTCLN,       W m-2 W m-2,                  Variance_of_SWGNTCLN
-,                             Var_TAUMID,         1 1,                          Variance_of_TAUMID
-,                             Var_SWTNT,          W m-2 W m-2,                  Variance_of_SWTNT
-,                             Var_SWGNT,          W m-2 W m-2,                  Variance_of_SWGNT
-,                             Var_LWTUP,          W m-2 W m-2,                  Variance_of_LWTUP
-,                             Var_SWTNTCLR,       W m-2 W m-2,                  Variance_of_SWTNTCLR
-,                             Var_SWGNTCLR,       W m-2 W m-2,                  Variance_of_SWGNTCLR
-,                             SWGDN,              W m-2,                        surface_incoming_shortwave_flux
-,                             Var_LWGAB,          W m-2 W m-2,                  Variance_of_LWGAB
-,                             LWGEM,              W m-2,                        longwave_flux_emitted_from_surface
-,                             Var_CLDHGH,         1 1,                          Variance_of_CLDHGH
-,                             CLDMID,             1,                            cloud_area_fraction_for_middle_clouds
-,                             Var_EMIS,           1 1,                          Variance_of_EMIS
-,                             SWTNTCLN,           W m-2,                        toa_net_downward_shortwave_flux_assuming_no_aerosol
-,                             ALBNIRDR,           1,                            surface_albedo_for_near_infrared_beam
-,                             Var_SWGDN,          W m-2 W m-2,                  Variance_of_SWGDN
-,                             SWTNT,              W m-2,                        toa_net_downward_shortwave_flux
-,                             LWTUP,              W m-2,                        upwelling_longwave_flux_at_toa
-,                             Var_LWGABCLRCLN,    W m-2 W m-2,                  Variance_of_LWGABCLRCLN
-,                             Var_TS,             K K,                          Variance_of_TS
+raw_name,           units,                        long_name
+Var_ALBNIRDF,       1 1,                          Variance_of_ALBNIRDF
+Var_SWTNTCLN,       W m-2 W m-2,                  Variance_of_SWTNTCLN
+Var_TAUTOT,         1 1,                          Variance_of_TAUTOT
+LWGAB,              W m-2,                        surface_absorbed_longwave_radiation
+CLDTOT,             1,                            total_cloud_area_fraction
+Var_ALBNIRDR,       1 1,                          Variance_of_ALBNIRDR
+Var_LWTUPCLR,       W m-2 W m-2,                  Variance_of_LWTUPCLR
+ALBNIRDF,           1,                            surface_albedo_for_near_infrared_diffuse
+Var_LWGNT,          W m-2 W m-2,                  Variance_of_LWGNT
+SWTDN,              W m-2,                        toa_incoming_shortwave_flux
+EMIS,               1,                            surface_emissivity
+LWTUPCLRCLN,        W m-2,                        upwelling_longwave_flux_at_toa_assuming_clear_sky_and_no_aerosol
+SWTNTCLR,           W m-2,                        toa_net_downward_shortwave_flux_assuming_clear_sky
+CLDHGH,             1,                            cloud_area_fraction_for_high_clouds
+Var_LWTUPCLRCLN,    W m-2 W m-2,                  Variance_of_LWTUPCLRCLN
+Var_SWTNTCLRCLN,    W m-2 W m-2,                  Variance_of_SWTNTCLRCLN
+Var_LWGNTCLRCLN,    W m-2 W m-2,                  Variance_of_LWGNTCLRCLN
+Var_SWGNTCLRCLN,    W m-2 W m-2,                  Variance_of_SWGNTCLRCLN
+Var_TAULOW,         1 1,                          Variance_of_TAULOW
+LWGABCLR,           W m-2,                        surface_absorbed_longwave_radiation_assuming_clear_sky
+Var_ALBVISDF,       1 1,                          Variance_of_ALBVISDF
+LWGABCLRCLN,        W m-2,                        surface_absorbed_longwave_radiation_assuming_clear_sky_and_no_aerosol
+Var_ALBVISDR,       1 1,                          Variance_of_ALBVISDR
+Var_TAUHGH,         1 1,                          Variance_of_TAUHGH
+Var_SWGDNCLR,       W m-2 W m-2,                  Variance_of_SWGDNCLR
+Var_SWTDN,          W m-2 W m-2,                  Variance_of_SWTDN
+LWGNTCLRCLN,        W m-2,                        surface_net_downward_longwave_flux_assuming_clear_sky_and_no_aerosol
+Var_CLDLOW,         1 1,                          Variance_of_CLDLOW
+SWGNTCLRCLN,        W m-2,                        surface_net_downward_shortwave_flux_assuming_clear_sky_and_no_aerosol
+Var_LWGABCLR,       W m-2 W m-2,                  Variance_of_LWGABCLR
+Var_CLDTOT,         1 1,                          Variance_of_CLDTOT
+TS,                 K,                            surface_skin_temperature
+SWGNT,              W m-2,                        surface_net_downward_shortwave_flux
+TAUMID,             1,                            in_cloud_optical_thickness_of_middle_clouds
+ALBEDO,             1,                            surface_albedo
+SWGNTCLR,           W m-2,                        surface_net_downward_shortwave_flux_assuming_clear_sky
+SWGNTCLN,           W m-2,                        surface_net_downward_shortwave_flux_assuming_no_aerosol
+LWGNTCLR,           W m-2,                        surface_net_downward_longwave_flux_assuming_clear_sky
+Var_ALBEDO,         1 1,                          Variance_of_ALBEDO
+SWGDNCLR,           W m-2,                        surface_incoming_shortwave_flux_assuming_clear_sky
+ALBVISDF,           1,                            surface_albedo_for_visible_diffuse
+LWTUPCLR,           W m-2,                        upwelling_longwave_flux_at_toa_assuming_clear_sky
+TAUTOT,             1,                            in_cloud_optical_thickness_of_all_clouds
+LWGNT,              W m-2,                        surface_net_downward_longwave_flux
+CLDLOW,             1,                            cloud_area_fraction_for_low_clouds
+ALBVISDR,           1,                            surface_albedo_for_visible_beam
+Var_CLDMID,         1 1,                          Variance_of_CLDMID
+Var_LWGNTCLR,       W m-2 W m-2,                  Variance_of_LWGNTCLR
+SWTNTCLRCLN,        W m-2,                        toa_net_downward_shortwave_flux_assuming_clear_sky_and_no_aerosol
+TAUHGH,             1,                            in_cloud_optical_thickness_of_high_clouds(EXPORT)
+TAULOW,             1,                            in_cloud_optical_thickness_of_low_clouds
+Var_LWGEM,          W m-2 W m-2,                  Variance_of_LWGEM
+Var_SWGNTCLN,       W m-2 W m-2,                  Variance_of_SWGNTCLN
+Var_TAUMID,         1 1,                          Variance_of_TAUMID
+Var_SWTNT,          W m-2 W m-2,                  Variance_of_SWTNT
+Var_SWGNT,          W m-2 W m-2,                  Variance_of_SWGNT
+Var_LWTUP,          W m-2 W m-2,                  Variance_of_LWTUP
+Var_SWTNTCLR,       W m-2 W m-2,                  Variance_of_SWTNTCLR
+Var_SWGNTCLR,       W m-2 W m-2,                  Variance_of_SWGNTCLR
+SWGDN,              W m-2,                        surface_incoming_shortwave_flux
+Var_LWGAB,          W m-2 W m-2,                  Variance_of_LWGAB
+LWGEM,              W m-2,                        longwave_flux_emitted_from_surface
+Var_CLDHGH,         1 1,                          Variance_of_CLDHGH
+CLDMID,             1,                            cloud_area_fraction_for_middle_clouds
+Var_EMIS,           1 1,                          Variance_of_EMIS
+SWTNTCLN,           W m-2,                        toa_net_downward_shortwave_flux_assuming_no_aerosol
+ALBNIRDR,           1,                            surface_albedo_for_near_infrared_beam
+Var_SWGDN,          W m-2 W m-2,                  Variance_of_SWGDN
+SWTNT,              W m-2,                        toa_net_downward_shortwave_flux
+LWTUP,              W m-2,                        upwelling_longwave_flux_at_toa
+Var_LWGABCLRCLN,    W m-2 W m-2,                  Variance_of_LWGABCLRCLN
+Var_TS,             K K,                          Variance_of_TS

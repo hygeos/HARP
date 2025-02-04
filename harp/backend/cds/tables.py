@@ -51,10 +51,7 @@ class cds_table:
     def cdsname_to_shortname(self, cdsname) -> str:
         return table.select_cell(self.table, where=("cds_name", "=", cdsname), col="short_name")
         
-    def has_harpname(self, harp_name) -> bool:
-        df = table.select(self.table, where=("harp_name", "=", harp_name), cols=None)
-        return df.shape[0] > 0
-        
+
     def has_cdsname(self, cds_name) -> bool:
         df = table.select(self.table, where=("cds_name", "=", cds_name), cols=None)
         return df.shape[0] > 0
@@ -62,16 +59,11 @@ class cds_table:
     def has_shortname(self, short_name) -> bool:
         df = table.select(self.table, where=("short_name", "=", short_name), cols=None)
         return df.shape[0] > 0
-        
-    # Pipeline:
-    # harp_name -> short_name -> cds_name -> QUERY -> short_name -> harp_name
-    def get_harpname(self, short_name) -> bool:
-        df = table.select(self.table, where=("short_name", "=", short_name), cols="harp_name")
-        return df.shape[0] > 0
+
         
     def get_cdsname(self, short_name) -> bool:
         return table.select_cell(self.table, where=("short_name", "=", short_name), col="cds_name")
         
-    def get_shortname(self, harp_name) -> bool:
-        df = table.select(self.table, where=("harp_name", "=", harp_name), col="short_name")
+    def get_shortname(self, cds_name) -> bool:
+        df = table.select(self.table, where=("cds_name", "=", cds_name), col="short_name")
         return df.shape[0] > 0
