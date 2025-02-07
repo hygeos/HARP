@@ -11,21 +11,21 @@ from harp.backend import cds
 class GlobalReanalysisVolumetric(cds.CdsDatasetProvider): 
     
     # url = "https://cds.climate.copernicus.eu/api"
-    keywords = ["ECMWF", "Copernicus", "C3S"]
+    keywords = ["ECMWF", "Copernicus", "climate"]
     institution = "ECMWF"
-    collection = "C3S"
+    collection = "ERA5"
     
     name = "reanalysis-era5-pressure-levels"
     product_type = "reanalysis"
     
     timespecs = RegularTimespec(timedelta(seconds=0), 24)
     
-    def __init__(self, config={}):
+    def __init__(self, variables: dict[str: str], config: dict={}):
         folder = Path(__file__).parent / "tables"
         files = [
             folder / "table9.csv",
         ]
-        super().__init__(csv_files=files, config=config)
+        super().__init__(csv_files=files, variables=variables, config=config)
     
     @interface
     def _execute_cds_request(self, target_filepath: Path, query, area: dict=None):
