@@ -55,7 +55,10 @@ class BaseDatasetProvider:
         
         reversed_aliases = {v: k for k, v in self.variables.items() if type(v) is str} # convert aliases from std: raw to raw: std for renaming queried vars 
         operands = list(set(operands))  # get unique list 
+        
+        direct_query = query.copy()
         query += operands           # append operands to the list of variables to download
+        query = list(set(query))
         
         for dst_var in query: # check that every raw variable exist in the dataset provider nomenclature 
             self.nomenclature.check_has_raw_name(dst_var)
@@ -67,9 +70,23 @@ class BaseDatasetProvider:
         if self.config.get("harmonize"): 
             ds = self._standardize(ds)
         
+        keep = direct_query.copy()
+        
         for dst_var in computed:
-            func = self.variables[dst_var].func
-            ds[dst_var] = func(ds)
+            comp: Computable = self.variables[dst_var]
+            ds[dst_var] = comp.func(ds)
+            
+            if comp.keep_operands:
+                for op in comp.operands:
+                    log.debug(f"Keeping operand {op}")
+                    keep.append(op)
+        
+        keep = list(set(keep))
+        drop = [op for op in operands if op not in keep]
+                
+        if drop:
+            log.debug(f"Droping operangs: {drop}")
+            ds = ds.drop_vars(drop)
         
         if reversed_aliases:
             ds = ds.rename_vars(reversed_aliases)
