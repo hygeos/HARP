@@ -32,14 +32,14 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
     auth = auth.get_auth(host)  # credentials from netrc file
     
     
-    def __init__(self, collection: str, name: str, **kwargs):
+    def __init__(self, collection: str, name: str, variables: dict[str: str], config: dict={}):
         
         layout_folder = Path(_layout.__file__).parent
         
         self.name = name
         self.collection = collection
         
-        super().__init__(config_subsection="MERRA2", **kwargs)
+        super().__init__(variables=variables, config=config)
         
         self.infos_json_path    = layout_folder / self.collection / "infos"     / f"{self.name}.json"
         self.variables_csv_path = layout_folder / self.collection / "variables" / f"{self.name}.csv"

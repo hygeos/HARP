@@ -35,7 +35,7 @@ You will need an ECMWF account, furthermore you will need to accept the EULAs fo
 
 Afterward you will need to set the url + key for each product, in the file .cdsapi in your home folder.
 
-### Nasa
+### NASA
 You will need an earthdata account to query MERRA2 data, which needs to be set in the .netrc file from your home folder.
 
 ## Installation
