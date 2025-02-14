@@ -171,7 +171,7 @@ class BaseDatasetProvider:
                 # store atomic slice
                 to_netcdf(ds = atomic_slice, 
                             filename = atomic_slice_path,
-                            if_exists="error"
+                            if_exists="skip"
                 )
         return
     
