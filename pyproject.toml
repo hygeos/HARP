@@ -31,12 +31,17 @@ core = {git = "https://github.com/hygeos/core.git"}
 
 pydap  = "3.5"
 pandas = "*"
-cdsapi = ">=0.7.0"
+cdsapi = ">=0.7.5"
 scipy  = "*"
 lxml   = "*"
 
 [tool.poetry.scripts]
 harp = "harp.cli:entry"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+pytest-html = "*"
+pytest-xdist = "*"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
