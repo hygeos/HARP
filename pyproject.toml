@@ -1,48 +1,56 @@
 
-[tool.poetry]
+[project]
 name = "harp"
-version = "2.0.3"
 description = "Harmonized Ancillary Resource Provider"
-authors = [
-      "Joackim Orcière",
+authors = [{name = "Joackim Orcière", email = "joackim.orciere@hygeos.com"}]
+requires-python = ">= 3.10"
+version = "1.1.0"
+dependencies = [
+    "numpy<2.0",
+    "netcdf4",
+    "h5netcdf",
+    "xarray",
+    "h5py",
+    "core @ git+https://github.com/hygeos/core",
+    "pandas",
+    "pydap>=3.5",
+    "cdsapi>=0.7.5",
+    # "scipy",
+    # "lxml",
 ]
 
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "Operating System :: POSIX :: Linux",
-]
-
-exclude = [
-    "misc",
-    "__pycache__",
-    "*__pycache__*",
-]
-
-[tool.poetry.dependencies]
-python = "^3.10"
-numpy = "^1.18.0"
-netcdf4 = "*"
-h5netcdf = "*"
-xarray = "*"
-# dask = "*"
-h5py = "*"
-
-core = {git = "https://github.com/hygeos/core.git"}
-
-pydap  = "3.5"
-pandas = "*"
-cdsapi = ">=0.7.5"
-scipy  = "*"
-lxml   = "*"
-
-[tool.poetry.scripts]
+[project.scripts]
 harp = "harp.cli:entry"
 
-[tool.poetry.group.dev.dependencies]
+[build-system]
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"
+
+[tool.pixi.dependencies]
 pytest = "*"
 pytest-html = "*"
 pytest-xdist = "*"
+numpy = "<2"
+scipy = "*"
+xarray = "*"
+h5py = "*"
+pandas = "*"
+h5netcdf = "*"
+netcdf4 = "*"
 
-[build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+[tool.setuptools]
+packages = ["harp"]  # Explicitly specify your package
+
+[tool.pixi.project]
+channels = ["conda-forge"]
+platforms = ["linux-64"]
+
+[tool.pixi.pypi-dependencies]
+harp = { path = ".", editable = true }
+
+[tool.pixi.environments]
+default = { features = ["hyp", "sys"], solve-group = "default" }
+[tool.pixi.feature.sys.dependencies]
+[tool.pixi.feature.hyp.dependencies]
+
+[tool.pixi.tasks]
