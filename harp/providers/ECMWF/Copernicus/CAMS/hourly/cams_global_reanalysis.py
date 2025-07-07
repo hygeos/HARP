@@ -4,8 +4,8 @@ from pathlib import Path
 from core import log
 from core.static import interface
 
-from harp.backend.timespec import RegularTimespec
-from harp.backend import cds
+from harp._backend.timespec import RegularTimespec
+from harp._backend import cds
 
 
 class GlobalReanalysis(cds.CdsDatasetProvider): 
@@ -20,7 +20,7 @@ class GlobalReanalysis(cds.CdsDatasetProvider):
     
     timespecs = RegularTimespec(timedelta(seconds=0), 8) # Trihourly
     
-    def __init__(self, allow_slow_access=False, **kwargs):
+    def __init__(self, variables: dict[str: str], config: dict={}, allow_slow_access=False):
         folder = Path(__file__).parent / "tables" / "GlobalReanalysis"
         files = [
             folder / "table1.csv",
@@ -34,11 +34,14 @@ class GlobalReanalysis(cds.CdsDatasetProvider):
             # folder / "table7.csv",
         ]
         
+        # TODO: Review specific config passing, maybe use kwargs instead ?
+        # NOTE: should disable constructor override
+        
         if allow_slow_access:
             log.warning(log.rgb.orange, self.name, ": Enabled slow access variable query")
             files += slow_access_files
         
-        super().__init__(config_subsection="CAMS", csv_files=files, **kwargs)
+        super().__init__(csv_files=files, variables=variables, config=config)
     
     @interface
     def _execute_cds_request(self, target_filepath: Path, query: dict, area: dict=None):

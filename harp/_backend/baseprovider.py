@@ -8,11 +8,11 @@ from core.save import to_netcdf
 from core import log
 from core.config import Config
 
-from harp.backend.nomenclature import Nomenclature
+from harp._backend.nomenclature import Nomenclature
 import harp.config
 from copy import copy, deepcopy
 
-from harp.backend.computable import Computable
+from harp._backend.computable import Computable
 
 @abstract
 class BaseDatasetProvider:

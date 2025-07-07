@@ -4,8 +4,8 @@ from pathlib import Path
 from core import log
 from core.static import interface
 
-from harp.backend.timespec import RegularTimespec
-from harp.backend import cds
+from harp._backend.timespec import RegularTimespec
+from harp._backend import cds
 
 
 class GlobalReanalysisVolumetric(cds.CdsDatasetProvider): 

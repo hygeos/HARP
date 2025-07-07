@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 
-from harp.backend.merra2.merra2_hourly_dataset_provider import Merra2HourlyDatasetProvider
-from harp.backend.timespec import RegularTimespec
+from harp._backend.merra2.merra2_hourly_dataset_provider import Merra2HourlyDatasetProvider
+from harp._backend.timespec import RegularTimespec
 
 model = "MERRA2"
 

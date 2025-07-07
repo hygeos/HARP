@@ -6,7 +6,7 @@ from core.static import interface
 from core import log
 from core import table
 
-from harp.backend import harp_std
+from harp._backend import harp_std
 import pandas as pd
 
 
@@ -30,8 +30,9 @@ class Nomenclature:
     contains helpful function for harp
     """
     
-    harp_nomenclature_path = Path(Path(__file__).parent.parent / "harp_nomenclature.csv")
-    harp_ref_table = _load_csv_table(harp_nomenclature_path)
+    # NOTE: legacy
+    # harp_nomenclature_path = Path(Path(__file__).parent.parent / "harp_nomenclature.csv")
+    # harp_ref_table = _load_csv_table(harp_nomenclature_path)
     
     # @interface
     def __init__(self, csv: Path|list[Path]|pd.DataFrame, cols:list[str], raw_col: str, context: str):

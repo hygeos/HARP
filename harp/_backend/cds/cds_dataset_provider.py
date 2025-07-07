@@ -14,12 +14,12 @@ from core.save import to_netcdf
 from core import auth
 import xarray as xr
 
-from harp.backend.timespec import RegularTimespec
-from harp.backend.baseprovider import BaseDatasetProvider
-from harp.backend.nomenclature import Nomenclature
-from harp.backend import harp_std
+from harp._backend.timespec import RegularTimespec
+from harp._backend.baseprovider import BaseDatasetProvider
+from harp._backend.nomenclature import Nomenclature
+from harp._backend import harp_std
 
-from harp.backend import cds
+from harp._backend import cds
 
 @abstract
 class CdsDatasetProvider(BaseDatasetProvider): 

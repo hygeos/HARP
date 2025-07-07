@@ -2,7 +2,7 @@ import pytest
 
 from datetime import timedelta, datetime, date
 
-from harp.backend.timespec import RegularTimespec
+from harp._backend.timespec import RegularTimespec
 
 from core.monitor import Chrono
 

@@ -3,7 +3,9 @@ from harp.providers.NASA import MERRA2
 from harp.providers.ECMWF.Copernicus import ERA5
 
 class store:
-    
+    """
+    TODO: store for fuzzy searching
+    """
     providers = [
         MERRA2.hourly.M2I1NXASM,
         MERRA2.hourly.M2I1NXINT,

@@ -16,9 +16,9 @@ import requests
 
 from harp.providers.NASA.MERRA2 import _layout
 
-from harp.backend.baseprovider import BaseDatasetProvider
-from harp.backend.nomenclature import Nomenclature
-from harp.backend import harp_std
+from harp._backend.baseprovider import BaseDatasetProvider
+from harp._backend.nomenclature import Nomenclature
+from harp._backend import harp_std
 
 warnings.filterwarnings('ignore', message='PyDAP was unable to determine the DAP protocol*')
 
