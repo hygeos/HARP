@@ -13,7 +13,7 @@ dependencies = [
     "h5py",
     "core @ git+https://github.com/hygeos/core",
     "pandas",
-    "pydap==3.5.5",
+    "pydap==3.5.0",
     "cdsapi>=0.7.5",
     # "scipy",
     # "lxml",
@@ -39,8 +39,13 @@ h5netcdf = "*"
 netcdf4 = "*"
 pydap = "==3.5.0"
 
+
 [tool.setuptools]
-packages = ["harp"]  # Explicitly specify your package
+packages = {find = {}}
+
+# [tool.setuptools.packages.find]
+# where = ["."]           # Look in current directory
+# include = ["harp*"]     # Include harp and all subpackages -> overkill
 
 [tool.pixi.project]
 channels = ["conda-forge"]
@@ -57,3 +62,4 @@ default = { features = ['sys', 'sub', 'dev'], solve-group = "default" }
 [tool.pixi.feature.dev.dependencies]
 ipykernel = "*"
 [tool.pixi.feature.sub.dependencies]
+
