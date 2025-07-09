@@ -26,9 +26,6 @@ class RegularTimespec:
 
         Args:
             time (datetime): _description_
-            duplicate_timesteps_when_overflowing (bool, optional): 
-                Used for Copernicus, to reduce the number of queries. if querying 23:55. 
-                We need +00T23:00 and +01T00:00
 
         Returns:
             _type_: _description_

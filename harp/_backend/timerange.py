@@ -9,28 +9,31 @@ from core.static import interface
 from core import log
 
 
-class Timerange:
+class timerange:
     """
     Generic helper class which encapsulate small logic to determine wheter the datetime
     is present in the Timerange defined in the constructor
+    
+    [TODO] used as a possible parameter for the get method of providers
     """
     
-    def __init__(self, start: datetime|timedelta|Callable, end: datetime|timedelta|Callable):
+    def __init__(self, start: datetime|timedelta, end: datetime|timedelta):
         
         now = datetime.now()
         
-        # apply delta if provided time is relative (ex: end = -5days)
-        if isinstance(start, timedelta):
+        # consider time relative to now if both are timedelta (ex: end = -5days)
+        if isinstance(start, timedelta) and isinstance(end, timedelta):
             s = now + start
-        if isinstance(end, timedelta):
             e = now + end
+        # consider end relative to start
+        if isinstance(start, datetime) and isinstance(end, timedelta):
+            s = start
+            e = start + end
+        # consider start relative to end
+        if isinstance(start, timedelta) and isinstance(end, datetime):
+            s = end + start
+            e = end
         
-        # apply functions to compute start and end if provided
-        if isinstance(start, Callable):
-            s = start(now)
-        if isinstance(end, Callable):
-            e = end(now)
-
         if s > e:
             log.error("Invalid Timerange parameters: Start cannot be >= End", e=ValueError)
 
@@ -38,6 +41,6 @@ class Timerange:
         self.end = e
         
     
-    def is_available(self, time: datetime):
+    def contains(self, time: datetime):
         
         return self.start <= time <= self.end  
