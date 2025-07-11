@@ -1,4 +1,4 @@
-name, units, cds_name, short_name, paramid, fc, an, note
+name, units, query_name, short_name, paramid, fc, an, note
 
 # Data specification for ERA5 global reanalysis
 # source: https://confluence.ecmwf.int/display/CKB/ERA5%3A+data+documentation

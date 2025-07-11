@@ -1,4 +1,4 @@
-﻿name,units,cds_name,short_name,id
+﻿name,units,query_name,short_name,id
 Carbon monoxide*,kg kg-1,carbon_monoxide,co,123.21
 Dust aerosol (0.03 - 0.55 µm) mixing ratio*,kg kg-1,dust_aerosol_0.03-0.55um_mixing_ratio,aermr04,4.21
 Dust aerosol (0.55 - 0.9 µm) mixing ratio*,kg kg-1,dust_aerosol_0.55-0.9um_mixing_ratio,aermr05,5.21

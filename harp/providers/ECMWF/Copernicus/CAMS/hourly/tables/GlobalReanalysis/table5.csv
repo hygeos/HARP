@@ -1,4 +1,4 @@
-﻿name,units,cds_name,short_name,id
+﻿name,units,query_name,short_name,id
 High cloud cover,(0 - 1),high_cloud_cover,hcc,188.13,
 High vegetation cover,(0 - 1),high_vegetation_cover,cvh,28.13,
 Lake cover,(0 - 1),lake_cover,cl,26.13,

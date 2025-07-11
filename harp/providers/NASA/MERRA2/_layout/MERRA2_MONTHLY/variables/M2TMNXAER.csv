@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 Var_SSSMASS,        kg m-3 kg m-3,                Variance_of_SSSMASS
 SSSMASS25,          kg m-3,                       Sea Salt Surface Mass Concentration - PM 2.5
 DUSCATAU,           1,                            Dust Scattering AOT [550 nm]

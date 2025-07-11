@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 HLML,               m,                            surface_layer_height
 QLML,               1,                            surface_specific_humidity
 SPEEDLML,           m s-1,                        surface_wind_speed

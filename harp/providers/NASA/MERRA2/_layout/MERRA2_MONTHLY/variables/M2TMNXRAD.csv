@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 Var_ALBNIRDF,       1 1,                          Variance_of_ALBNIRDF
 Var_SWTNTCLN,       W m-2 W m-2,                  Variance_of_SWTNTCLN
 Var_TAUTOT,         1 1,                          Variance_of_TAUTOT

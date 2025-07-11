@@ -35,7 +35,7 @@ class Nomenclature:
     # harp_ref_table = _load_csv_table(harp_nomenclature_path)
     
     # @interface
-    def __init__(self, csv: Path|list[Path]|pd.DataFrame, cols:list[str], raw_col: str, context: str):
+    def __init__(self, csv: Path|list[Path]|pd.DataFrame, cols:list[str], query_column: str, context: str):
         """
 
         Args:
@@ -58,7 +58,7 @@ class Nomenclature:
                 self.table.reset_index()
         
         self.context = context
-        self.raw_col = raw_col
+        self.raw_col = query_column
         self.cols = cols
         cols_list = self.table.columns.tolist()
         
@@ -70,11 +70,11 @@ class Nomenclature:
 
         
     @interface
-    def check_has_raw_name(self, raw_name: str):
-        lines = table.select(self.table, where=(self.raw_col, "=", raw_name))
+    def check_has_query_name(self, query_name: str):
+        lines = table.select(self.table, where=(self.raw_col, "=", query_name))
         if not lines.values.size > 0:
-            log.error(f"Could not find any match for raw name ",
-                      raw_name,
+            log.error(f"Could not find any match for query_name ",
+                      query_name,
                       " in harp internal layout files", 
                       e=KeyError
             )

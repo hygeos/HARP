@@ -1,4 +1,4 @@
-﻿name,units,cds_name,short_name,id,an,fc
+﻿name,units,query_name,short_name,id,an,fc
 Significant wave height of first swell partition,m,significant_wave_height_of_first_swell_partition,swh1,140121,x,x
 Mean wave direction of first swell partition,degrees,mean_wave_direction_of_first_swell_partition,mwd1,140122,x,x
 Mean wave period of first swell partition,s,mean_wave_period_of_first_swell_partition,mwp1,140123,x,x

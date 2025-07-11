@@ -1,4 +1,4 @@
-﻿name,units,cds_name,short_name,id,an,fc
+﻿name,units,query_name,short_name,id,an,fc
 Lake cover,(0 - 1),lake_cover,cl,26,x,x
 Lake depth,m,lake_depth,dl,228007,x,x
 Low vegetation cover,(0 - 1),low_vegetation_cover,cvl,27,x,

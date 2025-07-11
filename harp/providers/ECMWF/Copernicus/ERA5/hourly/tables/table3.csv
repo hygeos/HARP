@@ -1,4 +1,4 @@
-﻿name,units,cds_name,short_name,id,an,fc
+﻿name,units,query_name,short_name,id,an,fc
 Large-scale precipitation fraction,s,large_scale_precipitation_fraction,lspf,50,,x
 Downward UV radiation at the surface,J m**-2,downward_uv_radiation_at_the_surface,uvb,57,,x
 Boundary layer dissipation,J m**-2,boundary_layer_dissipation,bld,145,,x

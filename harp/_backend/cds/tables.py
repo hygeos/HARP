@@ -37,23 +37,23 @@ class cds_table:
             self.table = t if self.table is None else pd.concat([self.table, t], axis=0, ignore_index=False)
         self.table = self.table.drop_duplicates(subset=['short_name', 'id'])
         
-        doubles = list(self.table[self.table.duplicated('cds_name')].dropna()["cds_name"].values)
+        doubles = list(self.table[self.table.duplicated('query_name')].dropna()["query_name"].values)
         log.debug(f"Nomenclature: droping variables {doubles} because of ambigous definition (duplicate)")
-        self.table = self.table.drop_duplicates(subset=['cds_name'])
+        self.table = self.table.drop_duplicates(subset=['query_name'])
         
     
     def get_files(self):
         return self.files.copy()
     
     def shortname_to_cdsname(self, shortname) -> str:
-        return table.select_cell(self.table, where=("short_name", "=", shortname), col="cds_name")
+        return table.select_cell(self.table, where=("short_name", "=", shortname), col="query_name")
     
     def cdsname_to_shortname(self, cdsname) -> str:
-        return table.select_cell(self.table, where=("cds_name", "=", cdsname), col="short_name")
+        return table.select_cell(self.table, where=("query_name", "=", cdsname), col="short_name")
         
 
-    def has_cdsname(self, cds_name) -> bool:
-        df = table.select(self.table, where=("cds_name", "=", cds_name), cols=None)
+    def has_cdsname(self, query_name) -> bool:
+        df = table.select(self.table, where=("query_name", "=", query_name), cols=None)
         return df.shape[0] > 0
         
     def has_shortname(self, short_name) -> bool:
@@ -62,8 +62,8 @@ class cds_table:
 
         
     def get_cdsname(self, short_name) -> bool:
-        return table.select_cell(self.table, where=("short_name", "=", short_name), col="cds_name")
+        return table.select_cell(self.table, where=("short_name", "=", short_name), col="query_name")
         
-    def get_shortname(self, cds_name) -> bool:
-        df = table.select(self.table, where=("cds_name", "=", cds_name), col="short_name")
+    def get_shortname(self, query_name) -> bool:
+        df = table.select(self.table, where=("query_name", "=", query_name), col="short_name")
         return df.shape[0] > 0

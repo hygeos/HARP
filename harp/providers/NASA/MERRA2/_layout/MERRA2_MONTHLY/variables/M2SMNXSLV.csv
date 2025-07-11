@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 T2MMEAN,            K,                            2-meter_air_temperature
 T2MMAX,             K,                            2-meter_air_temperature
 Var_HOURNORAIN,     s s,                          Variance_of_HOURNORAIN

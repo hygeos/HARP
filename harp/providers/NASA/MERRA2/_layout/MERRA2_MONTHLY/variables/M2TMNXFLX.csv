@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 Var_GHTSKIN,        W m-2 W m-2,                  Variance_of_GHTSKIN
 Var_PRECTOTCORR,    kg m-2 s-1 kg m-2 s-1,        Variance_of_PRECTOTCORR
 Var_USTAR,          m s-1 m s-1,                  Variance_of_USTAR

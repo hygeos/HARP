@@ -95,10 +95,10 @@
 #         if self.no_std:
 #             for var in variables: # verify var nomenclature has been defined in csv, beforehand
 #                 self.names.assert_shortname_is_defined(var)
-#             self.cds_variables = [self.get_cds_name(var) for var in variables] # get ads name equivalent from short name
+#             self.cds_variables = [self.get_query_name(var) for var in variables] # get ads name equivalent from short name
 #         else:
 #             shortnames = [self.names.get_shortname(var) for var in variables]
-#             self.cds_variables = [self.get_cds_name(var) for var in shortnames] 
+#             self.cds_variables = [self.get_query_name(var) for var in shortnames] 
             
 #         # transform function name to extract only the acronym
 #         acronym = ''.join([i[0] for i in self.model.__name__.upper().split('_')])
@@ -121,7 +121,7 @@
 #         return file_path
         
 
-#     def get_cds_name(self, short_name):
+#     def get_query_name(self, short_name):
 #         """
 #         Returns the variable's ADS name (used to querry the Atmospheric Data Store)
 #         """
@@ -129,7 +129,7 @@
 #         if short_name not in list(self.model_specs['short_name'].values):
 #             raise KeyError(f'Could not find short_name {short_name} in csv file')
         
-#         return self.model_specs[self.model_specs['short_name'] == short_name]['cds_name'].values[0]
+#         return self.model_specs[self.model_specs['short_name'] == short_name]['query_name'].values[0]
 
     
 #     def _parse_cdsapirc(self):

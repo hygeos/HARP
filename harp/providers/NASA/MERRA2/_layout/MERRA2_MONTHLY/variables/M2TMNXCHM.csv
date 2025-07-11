@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 COSC,               1e-9,                         CO Surface Concentration in ppbv 
 COPD,               kg m-2 s-1,                   CO Chemical Production 
 Var_TO3,            Dobsons Dobsons,              Variance_of_TO3

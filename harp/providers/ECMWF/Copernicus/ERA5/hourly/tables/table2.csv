@@ -1,4 +1,4 @@
-﻿name,units,cds_name,short_name,id,an,fc
+﻿name,units,query_name,short_name,id,an,fc
 Convective inhibition,J kg**-1,convective_inhibition,cin,228001,,x
 Friction velocity,m s**-1,friction_velocity,zust,228003,,x
 Lake mix-layer temperature,K,lake_mix_layer_temperature,lmlt,228008,x,x

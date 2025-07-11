@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 SSSMASS25,          kg m-3,                       Sea Salt Surface Mass Concentration - PM 2.5
 DUSCATAU,           1,                            Dust Scattering AOT [550 nm]
 BCSCATAU,           1,                            Black Carbon Scattering AOT [550 nm]

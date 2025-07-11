@@ -1,4 +1,4 @@
-﻿name,units,cds_name,short_name,id
+﻿name,units,query_name,short_name,id
 Acetone product*,kg kg-1,acetone_product,aco2,53.22
 Ammonia*,kg kg-1,ammonia,nh3,19.22
 Ammonium*,kg kg-1,ammonium,nh4,21.22

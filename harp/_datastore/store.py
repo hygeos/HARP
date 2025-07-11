@@ -42,7 +42,7 @@ def _compile_search_table(ip: BaseDatasetProvider):
         .replace('-', ' ', regex=False) \
         .replace(';', ' ', regex=False) \
         .replace(',', ' ', regex=False) \
-        + "   " + t["raw_name"] + "   " + ip.institution
+        + "   " + t["query_name"] + "   " + ip.institution
         
     t.attrs["dataset"] = str(ip.__class__.__name__)
     t.attrs["import_path"] = str(ip.__class__).split("\'")[1]

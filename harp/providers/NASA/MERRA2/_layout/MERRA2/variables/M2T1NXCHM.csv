@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 COSC,               1e-9,                         CO Surface Concentration in ppbv 
 COPD,               kg m-2 s-1,                   CO Chemical Production 
 TO3,                Dobsons,                      total_column_ozone

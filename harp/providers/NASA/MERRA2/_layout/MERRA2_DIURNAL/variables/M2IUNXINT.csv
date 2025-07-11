@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 TQL,                kg m-2,                       total_precipitable_liquid_water
 THV,                K,                            vertically_integrated_virtual_potential_temperature
 TOX,                kg m-2,                       total_column_odd_oxygen

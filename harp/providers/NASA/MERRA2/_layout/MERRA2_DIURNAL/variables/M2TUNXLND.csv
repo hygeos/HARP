@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 SNOMAS,             kg m-2,                       Total_snow_storage_land
 SFMC,               m-3 m-3,                      water_surface_layer
 TSOIL5,             K,                            soil_temperatures_layer_5

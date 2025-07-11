@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 U2M,                m s-1,                        2-meter_eastward_wind
 TROPT,              K,                            tropopause_temperature_using_blended_TROPP_estimate
 TROPPB,             Pa,                           tropopause_pressure_based_on_blended_estimate

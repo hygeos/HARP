@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 Var_DKDT_DYN,       W m-2 W m-2,                  Variance_of_DKDT_DYN
 DHDT_PHY,           W m-2,                        total_potential_energy_tendency_due_to_physics
 Var_DHDT_ANA,       W m-2 W m-2,                  Variance_of_DHDT_ANA

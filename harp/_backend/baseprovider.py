@@ -61,7 +61,7 @@ class BaseDatasetProvider:
         query = list(set(query))
         
         for dst_var in query: # check that every raw variable exist in the dataset provider nomenclature 
-            self.nomenclature.check_has_raw_name(dst_var)
+            self.nomenclature.check_has_query_name(dst_var)
             
         files = self.download(variables=query, time=time, offline=self.config.get("offline"))
         ds = xr.open_mfdataset(files, engine='netcdf4')
@@ -110,7 +110,7 @@ class BaseDatasetProvider:
     def _get_meta_table(self):
         """
         Returns a dataframe containing all interfaced variables with the columns:
-            harp_name, raw_name, long_name, units
+            harp_name, query_name, long_name, units
             
         This method is meant to be overriden when necessary 
             (ex: Copernicus internal layout doesn't have these columns, conversion needed)
@@ -128,14 +128,14 @@ class BaseDatasetProvider:
             operands (list[str]): list of the inputs variables (raw names)
             
         Note:
-            func uses ds[raw_name] to get operands and return the computed dataarray which Harp will insert
+            func uses ds[query_name] to get operands and return the computed dataarray which Harp will insert
         """
         
         if name in self.computables:
             log.error(f"{self.__name__}: Computable variable {name} already defined", e=KeyError)
         
         for op in operands:
-            self.nomenclature.check_has_raw_name(op)
+            self.nomenclature.check_has_query_name(op)
         
         self.computables[name] = {"func": func, "operands": operands}
         

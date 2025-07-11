@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 SNOMAS,             kg m-2,                       Total_snow_storage_land
 Var_SNOMAS,         kg m-2 kg m-2,                Variance_of_SNOMAS
 Var_SPLAND,         W m-2 W m-2,                  Variance_of_SPLAND

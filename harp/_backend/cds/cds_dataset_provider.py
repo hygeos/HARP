@@ -40,7 +40,7 @@ class CdsDatasetProvider(BaseDatasetProvider):
     
         super().__init__(variables=variables, config=config)
         self.internal_table = cds.cds_table(csv_files)
-        self.nomenclature = Nomenclature(self.internal_table.table, cols=["short_name", "cds_name"], raw_col="cds_name", context=self.name)
+        self.nomenclature = Nomenclature(self.internal_table.table, cols=["short_name", "query_name"], query_column="query_name", context=self.name)
         
     
     def download(self, variables: list[str], time: datetime|list[datetime, datetime], *, offline=False, area: dict=None) -> list[Path]:
@@ -64,7 +64,7 @@ class CdsDatasetProvider(BaseDatasetProvider):
                 ds = xr.open_dataset(tmpfile, engine='netcdf4')
                 
                 # rename valid_time dimension to time
-                # rename shortnames to cds_names for consistency
+                # rename shortnames to query_names for consistency
                 new_names = {"valid_time": "time"} 
                 for v in ds.data_vars:
                     new_names[v] = self.internal_table.get_cdsname(v)

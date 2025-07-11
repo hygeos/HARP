@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 U2M,                m s-1,                        2-meter_eastward_wind
 Var_H250,           m m,                          Variance_of_H250
 V250,               m s-1,                        northward_wind_at_250_hPa

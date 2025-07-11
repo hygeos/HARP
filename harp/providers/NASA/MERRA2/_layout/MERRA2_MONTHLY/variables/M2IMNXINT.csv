@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 Var_KE,             J m-2 J m-2,                  Variance_of_KE
 TQL,                kg m-2,                       total_precipitable_liquid_water
 THV,                K,                            vertically_integrated_virtual_potential_temperature

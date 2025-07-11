@@ -1,4 +1,4 @@
-﻿name,units,cds_name,short_name,id,an,fc
+﻿name,units,query_name,short_name,id,an,fc
 Vertical integral of mass of atmosphere,kg m**-2,vertical_integral_of_mass_of_atmosphere,vima,162053,x,x
 Vertical integral of temperature,K kg m**-2,vertical_integral_of_temperature,vit,162054,x,x
 Vertical integral of kinetic energy,J m**-2,vertical_integral_of_kinetic_energy,vike,162059,x,x

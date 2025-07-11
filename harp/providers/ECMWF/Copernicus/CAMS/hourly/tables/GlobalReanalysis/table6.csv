@@ -1,4 +1,4 @@
-﻿name,units,cds_name,short_name,id
+﻿name,units,query_name,short_name,id
 Acetone*,kg kg-1,acetone,ch3coch3,52.22
 Aldehydes*,kg kg-1,aldehydes,ald2,12.22
 Amine*,kg kg-1,amine,nh2,40.22

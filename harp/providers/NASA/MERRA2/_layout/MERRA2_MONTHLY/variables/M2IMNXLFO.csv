@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 PS,                 Pa,                           surface_pressure
 TLML,               K,                            surface_air_temperature
 Var_HLML,           m m,                          Variance_of_HLML

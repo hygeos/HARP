@@ -1,4 +1,4 @@
-﻿name,units,cds_name,short_name,id,an,fc
+﻿name,units,query_name,short_name,id,an,fc
 10 metre wind gust since previous post-processing,m s**-1,10m_wind_gust_since_previous_post_processing,10fg,49,,x
 Maximum temperature at 2 metres since previous post-processing,K,maximum_2m_temperature_since_previous_post_processing,mx2t,201,,x
 Minimum temperature at 2 metres since previous post-processing,K,minimum_2m_temperature_since_previous_post_processing,mn2t,202,,x

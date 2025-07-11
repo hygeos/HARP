@@ -47,7 +47,7 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
         with open(self.infos_json_path, "r") as f: 
             self.infos = json.load(f)
         
-        self.nomenclature = Nomenclature(self.variables_csv_path, cols=["raw_name"], raw_col="raw_name", context="MERRA2")
+        self.nomenclature = Nomenclature(self.variables_csv_path, cols=["query_name"], query_column="query_name", context="MERRA2")
 
     @interface
     def download(self, variables: list[str], time: datetime, *, area: dict=None, offline=False) -> list[Path]:

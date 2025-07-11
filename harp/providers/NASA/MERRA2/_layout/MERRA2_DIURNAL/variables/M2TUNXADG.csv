@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 DUEM004,            kg m-2 s-1,                   Dust Emission Bin 004
 DUSD003,            kg m-2 s-1,                   Dust Sedimentation Bin 003
 BCEMBB,             kg m-2 s-1,                   Black Carbon Biomass Burning Emissions

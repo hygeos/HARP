@@ -1,4 +1,4 @@
-﻿name,units,cds_name,short_name,id,an,fc
+﻿name,units,query_name,short_name,id,an,fc
 Mean surface runoff rate,kg m**-2 s**-1,mean_surface_runoff_rate,msror,235020,,x
 Mean sub-surface runoff rate,kg m**-2 s**-1,mean_sub_surface_runoff_rate,mssror,235021,,x
 Mean snow evaporation rate,kg m**-2 s**-1,mean_snow_evaporation_rate,mser,235023,,x

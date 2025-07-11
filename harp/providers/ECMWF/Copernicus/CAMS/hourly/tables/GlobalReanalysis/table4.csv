@@ -1,4 +1,4 @@
-﻿name,units,cds_name,short_name,id
+﻿name,units,query_name,short_name,id
 Total column acetone*,kg m-2,total_column_acetone,tc_ch3coch3,52.13
 Total column aldehydes*,kg m-2,total_column_aldehydes,tc_ald2,12.13
 Total column ethanol*,kg m-2,total_column_ethanol,tc_c2h5oh,46.22

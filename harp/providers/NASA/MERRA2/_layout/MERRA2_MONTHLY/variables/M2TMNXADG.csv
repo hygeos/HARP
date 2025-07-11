@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 DUEM004,            kg m-2 s-1,                   Dust Emission Bin 004
 Var_BCSD002,        kg m-2 s-1 kg m-2 s-1,        Variance_of_BCSD002
 Var_DUWT005,        kg m-2 s-1 kg m-2 s-1,        Variance_of_DUWT005

@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 U2M,                m s-1,                        2-meter_eastward_wind
 V250,               m s-1,                        northward_wind_at_250_hPa
 TROPT,              K,                            tropopause_temperature_using_blended_TROPP_estimate

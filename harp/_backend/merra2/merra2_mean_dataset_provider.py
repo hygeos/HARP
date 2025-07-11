@@ -43,7 +43,7 @@ class Merra2MeanDatasetProvider(BaseDatasetProvider):
         with open(self.infos_json_path, "r") as f: 
             self.infos = json.load(f)
         
-        self.nomenclature = Nomenclature(self.variables_csv_path, cols=["harp_name", "raw_name", "units", "long_name"], raw_col="raw_name", context="MERRA2")
+        self.nomenclature = Nomenclature(self.variables_csv_path, cols=["harp_name", "query_name", "units", "long_name"], query_column="query_name", context="MERRA2")
 
 
     def download(self, variables: list[str], time: datetime, *, area: dict=None, offline=False) -> list[Path]:

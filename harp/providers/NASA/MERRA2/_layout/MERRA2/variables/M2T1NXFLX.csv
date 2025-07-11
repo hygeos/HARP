@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 FRCAN,              1,                            areal_fraction_of_anvil_showers
 CN,                 1,                            surface_neutral_drag_coefficient
 BSTAR,              m s-2,                        surface_bouyancy_scale

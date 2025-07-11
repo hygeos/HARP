@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 LWGAB,              W m-2,                        surface_absorbed_longwave_radiation
 Var_PRECLSCORR,     kg m-2 s-1 kg m-2 s-1,        Variance_of_PRECLSCORR
 Var_PARDF,          W m-2 W m-2,                  Variance_of_PARDF

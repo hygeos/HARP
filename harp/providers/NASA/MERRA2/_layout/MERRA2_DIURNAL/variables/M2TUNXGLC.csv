@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 WESNSC,             kg m-2 s-1,                   top_snow_layer_mass_change_due_to_sub_con
 RUNOFF,             kg m-2 s-1,                   runoff_flux
 SNOMAS_GL,          kg m-2,                       snow_mass_over_glaciated_surface

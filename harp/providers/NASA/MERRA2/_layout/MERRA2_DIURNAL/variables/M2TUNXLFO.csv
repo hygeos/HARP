@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 LWGAB,              W m-2,                        surface_absorbed_longwave_radiation
 SWLAND,             W m-2,                        Net_shortwave_land
 PRECLSCORR,         kg m-2 s-1,                   liquid_water_large_scale_precipitation

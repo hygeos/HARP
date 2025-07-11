@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 AODANA,             1,                            Aerosol Optical Depth Analysis
 AODINC,             1,                            Aerosol Optical Depth Analysis Increment
 Var_AODANA,         1 1,                          Variance_of_AODANA

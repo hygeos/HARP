@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 MDSCLDSZICE,        1,                            modis_cloud_particle_size_ice_mean
 MDSOPTHCKICELG,     1,                            modis_optical_thickness_ice_logmean
 MDSCLDFRCHI,        1,                            modis_cloud_fraction_high_mean

@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 EFLUXICE,           W m-2,                        sea_ice_latent_energy_flux
 TAUXWTR,            N m-2,                        eastward_stress_over_water
 SWGNTICE,           W m-2,                        sea_ice_net_downward_shortwave_flux

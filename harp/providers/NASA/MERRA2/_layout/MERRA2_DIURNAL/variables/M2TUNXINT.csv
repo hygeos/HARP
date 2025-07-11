@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 DHDT_PHY,           W m-2,                        total_potential_energy_tendency_due_to_physics
 DHDT_ANA,           W m-2,                        total_potential_energy_tendency_due_to_analysis
 DPDT_PHY,           W m-2,                        mountain_work_tendency_due_to_physics

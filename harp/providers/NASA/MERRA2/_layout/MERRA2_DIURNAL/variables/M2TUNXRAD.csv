@@ -1,4 +1,4 @@
-raw_name,           units,                        long_name
+query_name,           units,                        long_name
 LWGAB,              W m-2,                        surface_absorbed_longwave_radiation
 CLDTOT,             1,                            total_cloud_area_fraction
 ALBNIRDF,           1,                            surface_albedo_for_near_infrared_diffuse

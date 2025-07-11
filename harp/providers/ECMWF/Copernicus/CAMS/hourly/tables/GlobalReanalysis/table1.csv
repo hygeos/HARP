@@ -1,4 +1,4 @@
-﻿name,units,cds_name,short_name,id,note
+﻿name,units,query_name,short_name,id,note
 10m u-component of wind,m s-1,10m_u_component_of_wind,10u,165.13
 10m v-component of wind,m s-1,10m_v_component_of_wind,10v,166.13
 2m dewpoint temperature,K,2m_dewpoint_temperature,2d,167.13

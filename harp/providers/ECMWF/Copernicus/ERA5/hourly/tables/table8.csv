@@ -1,4 +1,4 @@
-﻿name,units,cds_name,short_name,id,an,fc
+﻿name,units,query_name,short_name,id,an,fc
 UV visible albedo for direct radiation,(0 - 1),uv_visible_albedo_for_direct_radiation,aluvp,15,x,no mean
 UV visible albedo for diffuse radiation,(0 - 1),uv_visible_albedo_for_diffuse_radiation,aluvd,16,x,no mean
 Near IR albedo for direct radiation,(0 - 1),near_ir_albedo_for_direct_radiation,alnip,17,x,no mean
