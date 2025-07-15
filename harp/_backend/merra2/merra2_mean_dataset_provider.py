@@ -15,6 +15,7 @@ import requests
 
 
 from harp._backend.baseprovider import BaseDatasetProvider
+from harp._backend.merra2 import merra2_search_preprocess
 from harp._backend.nomenclature import Nomenclature
 from harp._backend import harp_std
 
@@ -43,7 +44,7 @@ class Merra2MeanDatasetProvider(BaseDatasetProvider):
         with open(self.infos_json_path, "r") as f: 
             self.infos = json.load(f)
         
-        self.nomenclature = Nomenclature(self.variables_csv_path, cols=["harp_name", "query_name", "units", "long_name"], query_column="query_name", context="MERRA2")
+        self.nomenclature = Nomenclature(self.variables_csv_path, cols=["harp_name", "query_name", "units", "long_name"], raw_col="query_name", context="MERRA2")
 
 
     def download(self, variables: list[str], time: datetime, *, area: dict=None, offline=False) -> list[Path]:
@@ -61,7 +62,7 @@ class Merra2MeanDatasetProvider(BaseDatasetProvider):
         for v in variables:
             path = self._get_variable_target_path(v, time)
             if path.is_file():
-                log.debug(f"Found locally: {path.name}")
+                log.info(f"Found locally: {path.name}")
                 local.append(path)
             else:
                 query.append(v)
@@ -70,7 +71,7 @@ class Merra2MeanDatasetProvider(BaseDatasetProvider):
             if offline:
                 log.error(f"Offline mode is activated and data is missing locally [{', '.join(query)}] for {time.strftime('%Y-%m-%d')}",
                     e=FileNotFoundError)
-            log.debug(f"Querying {self.name} for variables {', '.join(query)} on {time}")
+            log.info(f"Querying {self.name} for variables {', '.join(query)} on {time}")
             ds = self._retrieve_day(query, time, area)
             retrieved = self._post_process_download(ds, query, time)
             local += retrieved
@@ -164,3 +165,7 @@ class Merra2MeanDatasetProvider(BaseDatasetProvider):
         ds = harp_std.center_longitude(ds, center=harp_std.longitude_center)
         
         return ds
+    
+    
+    # plug the format search table function
+    format_search_table = merra2_search_preprocess.format_search_table

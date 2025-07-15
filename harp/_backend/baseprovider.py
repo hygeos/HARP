@@ -48,7 +48,7 @@ class BaseDatasetProvider:
             src_var = self.variables[dst_var]
             if isinstance(src_var, Computable):
                 computed += [dst_var]
-                log.debug(f"Using computable bind: {dst_var} = {src_var.func.__name__} + {src_var.operands}")
+                log.info(f"Using computable bind: {dst_var} = {src_var.func.__name__} + {src_var.operands}")
                 operands += src_var.operands
             else:
                 query.append(self.variables[dst_var]) # append raw var
@@ -78,14 +78,14 @@ class BaseDatasetProvider:
             
             if comp.keep_operands:
                 for op in comp.operands:
-                    log.debug(f"Keeping operand {op}")
+                    log.info(f"Keeping operand {op}")
                     keep.append(op)
         
         keep = list(set(keep))
         drop = [op for op in operands if op not in keep]
                 
         if drop:
-            log.debug(f"Droping operangs: {drop}")
+            log.info(f"Droping operangs: {drop}")
             ds = ds.drop_vars(drop)
         
         if reversed_aliases:

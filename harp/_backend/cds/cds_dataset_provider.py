@@ -14,6 +14,7 @@ from core.save import to_netcdf
 from core import auth
 import xarray as xr
 
+from harp._backend.cds import cds_search_preprocess
 from harp._backend.timespec import RegularTimespec
 from harp._backend.baseprovider import BaseDatasetProvider
 from harp._backend.nomenclature import Nomenclature
@@ -54,7 +55,7 @@ class CdsDatasetProvider(BaseDatasetProvider):
         queries = self._decompose_query(variables, time, area=area)
         
         for query in queries:
-            log.debug("Querying CDS for variables: ", query["variables"], 
+            log.info("Querying CDS for variables: ", query["variables"], 
                       "\n -> date: ", date(query["years"], query["months"], query["days"]).strftime("%Y%m%d"),
                       "\n -> timesteps: ", query["times"])
             with TemporaryDirectory() as tmpdir:
@@ -187,3 +188,7 @@ class CdsDatasetProvider(BaseDatasetProvider):
         ds = harp_std.center_longitude(ds, center=harp_std.longitude_center)
         
         return ds
+        
+        
+    # plug the format search table function
+    format_search_table = cds_search_preprocess.format_search_table

@@ -19,6 +19,7 @@ from harp.providers.NASA.MERRA2 import _layout
 from harp._backend.baseprovider import BaseDatasetProvider
 from harp._backend.nomenclature import Nomenclature
 from harp._backend import harp_std
+from harp._backend.merra2 import merra2_search_preprocess
 
 warnings.filterwarnings('ignore', message='PyDAP was unable to determine the DAP protocol*')
 
@@ -65,7 +66,7 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
                 log.error(f"Offline mode is activated and data is missing locally [{', '.join(query)}] for {time.strftime('%Y-%m-%d')}",
                     e=FileNotFoundError)
                     
-            log.debug(f"Querying {self.name} for variables {', '.join(query['variables'])} on {query['date']} {query['times']}")
+            log.info(f"Querying {self.name} for variables {', '.join(query['variables'])} on {query['date']} {query['times']}")
 
             ds = self._access_day_file(query["date"], area)
             ds = ds[query["variables"]].sel(time=query["times"]).compute()
@@ -199,3 +200,6 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
         ds = harp_std.center_longitude(ds, center=harp_std.longitude_center)
         
         return ds
+    
+    # plug the format search table function
+    format_search_table = merra2_search_preprocess.format_search_table
