@@ -1,37 +1,37 @@
-query_name,           units,                        long_name
-LWGAB,              W m-2,                        surface_absorbed_longwave_radiation
-CLDTOT,             1,                            total_cloud_area_fraction
-ALBNIRDF,           1,                            surface_albedo_for_near_infrared_diffuse
-SWTDN,              W m-2,                        toa_incoming_shortwave_flux
-EMIS,               1,                            surface_emissivity
-LWTUPCLRCLN,        W m-2,                        upwelling_longwave_flux_at_toa_assuming_clear_sky_and_no_aerosol
-SWTNTCLR,           W m-2,                        toa_net_downward_shortwave_flux_assuming_clear_sky
-CLDHGH,             1,                            cloud_area_fraction_for_high_clouds
-LWGABCLR,           W m-2,                        surface_absorbed_longwave_radiation_assuming_clear_sky
-LWGABCLRCLN,        W m-2,                        surface_absorbed_longwave_radiation_assuming_clear_sky_and_no_aerosol
-LWGNTCLRCLN,        W m-2,                        surface_net_downward_longwave_flux_assuming_clear_sky_and_no_aerosol
-SWGNTCLRCLN,        W m-2,                        surface_net_downward_shortwave_flux_assuming_clear_sky_and_no_aerosol
-TS,                 K,                            surface_skin_temperature
-SWGNT,              W m-2,                        surface_net_downward_shortwave_flux
-TAUMID,             1,                            in_cloud_optical_thickness_of_middle_clouds
-ALBEDO,             1,                            surface_albedo
-SWGNTCLR,           W m-2,                        surface_net_downward_shortwave_flux_assuming_clear_sky
-SWGNTCLN,           W m-2,                        surface_net_downward_shortwave_flux_assuming_no_aerosol
-LWGNTCLR,           W m-2,                        surface_net_downward_longwave_flux_assuming_clear_sky
-SWGDNCLR,           W m-2,                        surface_incoming_shortwave_flux_assuming_clear_sky
-ALBVISDF,           1,                            surface_albedo_for_visible_diffuse
-LWTUPCLR,           W m-2,                        upwelling_longwave_flux_at_toa_assuming_clear_sky
-TAUTOT,             1,                            in_cloud_optical_thickness_of_all_clouds
-LWGNT,              W m-2,                        surface_net_downward_longwave_flux
-CLDLOW,             1,                            cloud_area_fraction_for_low_clouds
-ALBVISDR,           1,                            surface_albedo_for_visible_beam
-SWTNTCLRCLN,        W m-2,                        toa_net_downward_shortwave_flux_assuming_clear_sky_and_no_aerosol
-TAUHGH,             1,                            in_cloud_optical_thickness_of_high_clouds(EXPORT)
-TAULOW,             1,                            in_cloud_optical_thickness_of_low_clouds
-SWGDN,              W m-2,                        surface_incoming_shortwave_flux
-LWGEM,              W m-2,                        longwave_flux_emitted_from_surface
-CLDMID,             1,                            cloud_area_fraction_for_middle_clouds
-SWTNTCLN,           W m-2,                        toa_net_downward_shortwave_flux_assuming_no_aerosol
-ALBNIRDR,           1,                            surface_albedo_for_near_infrared_beam
-SWTNT,              W m-2,                        toa_net_downward_shortwave_flux
-LWTUP,              W m-2,                        upwelling_longwave_flux_at_toa
+query_name,         units,          long_name
+LWGAB,              W m-2,          surface_absorbed_longwave_radiation
+CLDTOT,             1,              total_cloud_area_fraction
+ALBNIRDF,           1,              surface_albedo_for_near_infrared_diffuse
+SWTDN,              W m-2,          toa_incoming_shortwave_flux
+EMIS,               1,              surface_emissivity
+LWTUPCLRCLN,        W m-2,          upwelling_longwave_flux_at_toa_assuming_clear_sky_and_no_aerosol
+SWTNTCLR,           W m-2,          toa_net_downward_shortwave_flux_assuming_clear_sky
+CLDHGH,             1,              cloud_area_fraction_for_high_clouds
+LWGABCLR,           W m-2,          surface_absorbed_longwave_radiation_assuming_clear_sky
+LWGABCLRCLN,        W m-2,          surface_absorbed_longwave_radiation_assuming_clear_sky_and_no_aerosol
+LWGNTCLRCLN,        W m-2,          surface_net_downward_longwave_flux_assuming_clear_sky_and_no_aerosol
+SWGNTCLRCLN,        W m-2,          surface_net_downward_shortwave_flux_assuming_clear_sky_and_no_aerosol
+TS,                 K,              surface_skin_temperature
+SWGNT,              W m-2,          surface_net_downward_shortwave_flux
+TAUMID,             1,              in_cloud_optical_thickness_of_middle_clouds
+ALBEDO,             1,              surface_albedo
+SWGNTCLR,           W m-2,          surface_net_downward_shortwave_flux_assuming_clear_sky
+SWGNTCLN,           W m-2,          surface_net_downward_shortwave_flux_assuming_no_aerosol
+LWGNTCLR,           W m-2,          surface_net_downward_longwave_flux_assuming_clear_sky
+SWGDNCLR,           W m-2,          surface_incoming_shortwave_flux_assuming_clear_sky
+ALBVISDF,           1,              surface_albedo_for_visible_diffuse
+LWTUPCLR,           W m-2,          upwelling_longwave_flux_at_toa_assuming_clear_sky
+TAUTOT,             1,              in_cloud_optical_thickness_of_all_clouds
+LWGNT,              W m-2,          surface_net_downward_longwave_flux
+CLDLOW,             1,              cloud_area_fraction_for_low_clouds
+ALBVISDR,           1,              surface_albedo_for_visible_beam
+SWTNTCLRCLN,        W m-2,          toa_net_downward_shortwave_flux_assuming_clear_sky_and_no_aerosol
+TAUHGH,             1,              in_cloud_optical_thickness_of_high_clouds(EXPORT)
+TAULOW,             1,              in_cloud_optical_thickness_of_low_clouds
+SWGDN,              W m-2,          surface_incoming_shortwave_flux
+LWGEM,              W m-2,          longwave_flux_emitted_from_surface
+CLDMID,             1,              cloud_area_fraction_for_middle_clouds
+SWTNTCLN,           W m-2,          toa_net_downward_shortwave_flux_assuming_no_aerosol
+ALBNIRDR,           1,              surface_albedo_for_near_infrared_beam
+SWTNT,              W m-2,          toa_net_downward_shortwave_flux
+LWTUP,              W m-2,          upwelling_longwave_flux_at_toa

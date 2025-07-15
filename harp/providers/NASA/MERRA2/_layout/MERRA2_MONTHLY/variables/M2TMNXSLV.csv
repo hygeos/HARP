@@ -1,95 +1,95 @@
-query_name,           units,                        long_name
-U2M,                m s-1,                        2-meter_eastward_wind
-Var_H250,           m m,                          Variance_of_H250
-V250,               m s-1,                        northward_wind_at_250_hPa
-Var_Q850,           kg kg-1 kg kg-1,              Variance_of_Q850
-TROPT,              K,                            tropopause_temperature_using_blended_TROPP_estimate
-TROPPB,             Pa,                           tropopause_pressure_based_on_blended_estimate
-Var_V2M,            m s-1 m s-1,                  Variance_of_V2M
-Var_TROPT,          K K,                          Variance_of_TROPT
-T2M,                K,                            2-meter_air_temperature
-Var_U2M,            m s-1 m s-1,                  Variance_of_U2M
-TQL,                kg m-2,                       total_precipitable_liquid_water
-T500,               K,                            air_temperature_at_500_hPa
-TOX,                kg m-2,                       total_column_odd_oxygen
-U850,               m s-1,                        eastward_wind_at_850_hPa
-PS,                 Pa,                           surface_pressure
-V850,               m s-1,                        northward_wind_at_850_hPa
-Var_T250,           K K,                          Variance_of_T250
-Var_QV10M,          kg kg-1 kg kg-1,              Variance_of_QV10M
-Var_U10M,           m s-1 m s-1,                  Variance_of_U10M
-OMEGA500,           Pa s-1,                       omega_at_500_hPa
-H250,               m,                            height_at_250_hPa
-Q250,               kg kg-1,                      specific_humidity_at_250_hPa
-T2MDEW,             K,                            dew_point_temperature_at_2_m
-Var_TO3,            Dobsons Dobsons,              Variance_of_TO3
-PBLTOP,             Pa,                           pbltop_pressure
-Var_V10M,           m s-1 m s-1,                  Variance_of_V10M
-CLDPRS,             Pa,                           cloud_top_pressure
-Var_TOX,            kg m-2 kg m-2,                Variance_of_TOX
-Var_U850,           m s-1 m s-1,                  Variance_of_U850
-V50M,               m s-1,                        northward_wind_at_50_meters
-Q500,               kg kg-1,                      specific_humidity_at_500_hPa
-Var_TQL,            kg m-2 kg m-2,                Variance_of_TQL
-Var_TQV,            kg m-2 kg m-2,                Variance_of_TQV
-DISPH,              m,                            zero_plane_displacement_height
-Var_U50M,           m s-1 m s-1,                  Variance_of_U50M
-Var_V50M,           m s-1 m s-1,                  Variance_of_V50M
-Var_Q250,           kg kg-1 kg kg-1,              Variance_of_Q250
-Var_T2M,            K K,                          Variance_of_T2M
-H1000,              m,                            height_at_1000_mb
-TO3,                Dobsons,                      total_column_ozone
-Var_T850,           K K,                          Variance_of_T850
-Var_QV2M,           kg kg-1 kg kg-1,              Variance_of_QV2M
-Var_PBLTOP,         Pa Pa,                        Variance_of_PBLTOP
-TS,                 K,                            surface_skin_temperature
-T10M,               K,                            10-meter_air_temperature
-TROPPT,             Pa,                           tropopause_pressure_based_on_thermal_estimate
-Var_H500,           m m,                          Variance_of_H500
-TQI,                kg m-2,                       total_precipitable_ice_water
-SLP,                Pa,                           sea_level_pressure
-Var_V850,           m s-1 m s-1,                  Variance_of_V850
-U250,               m s-1,                        eastward_wind_at_250_hPa
-Var_DISPH,          m m,                          Variance_of_DISPH
-Q850,               kg kg-1,                      specific_humidity_at_850_hPa
-Var_SLP,            Pa Pa,                        Variance_of_SLP
-Var_U250,           m s-1 m s-1,                  Variance_of_U250
-ZLCL,               m,                            lifting_condensation_level
-Var_TROPPV,         Pa Pa,                        Variance_of_TROPPV
-TQV,                kg m-2,                       total_precipitable_water_vapor
-Var_TQI,            kg m-2 kg m-2,                Variance_of_TQI
-V2M,                m s-1,                        2-meter_northward_wind
-T250,               K,                            air_temperature_at_250_hPa
-Var_CLDTMP,         K K,                          Variance_of_CLDTMP
-TROPQ,              kg kg-1,                      tropopause_specific_humidity_using_blended_TROPP_estimate
-V10M,               m s-1,                        10-meter_northward_wind
-Var_V500,           m s-1 m s-1,                  Variance_of_V500
-H850,               m,                            height_at_850_hPa
-Var_H850,           m m,                          Variance_of_H850
-T850,               K,                            air_temperature_at_850_hPa
-Var_H1000,          m m,                          Variance_of_H1000
-Var_U500,           m s-1 m s-1,                  Variance_of_U500
-Var_CLDPRS,         Pa Pa,                        Variance_of_CLDPRS
-Var_T10M,           K K,                          Variance_of_T10M
-U50M,               m s-1,                        eastward_wind_at_50_meters
-U10M,               m s-1,                        10-meter_eastward_wind
-Var_Q500,           kg kg-1 kg kg-1,              Variance_of_Q500
-QV2M,               kg kg-1,                      2-meter_specific_humidity
-Var_ZLCL,           m m,                          Variance_of_ZLCL
-Var_T2MWET,         K K,                          Variance_of_T2MWET
-CLDTMP,             K,                            cloud_top_temperature
-Var_TROPPB,         Pa Pa,                        Variance_of_TROPPB
-TROPPV,             Pa,                           tropopause_pressure_based_on_EPV_estimate
-Var_TROPQ,          kg kg-1 kg kg-1,              Variance_of_TROPQ
-Var_TROPPT,         Pa Pa,                        Variance_of_TROPPT
-Var_T500,           K K,                          Variance_of_T500
-H500,               m,                            height_at_500_hPa
-Var_OMEGA500,       Pa s-1 Pa s-1,                Variance_of_OMEGA500
-V500,               m s-1,                        northward_wind_at_500_hPa
-T2MWET,             K,                            wet_bulb_temperature_at_2_m
-U500,               m s-1,                        eastward_wind_at_500_hPa
-Var_PS,             Pa Pa,                        Variance_of_PS
-QV10M,              kg kg-1,                      10-meter_specific_humidity
-Var_V250,           m s-1 m s-1,                  Variance_of_V250
-Var_T2MDEW,         K K,                          Variance_of_T2MDEW
-Var_TS,             K K,                          Variance_of_TS
+query_name,         units,          long_name
+U2M,                m s-1,          2-meter_eastward_wind
+Var_H250,           m m,            Variance_of_H250
+V250,               m s-1,          northward_wind_at_250_hPa
+Var_Q850,           kg kg-1 kg kg-1,Variance_of_Q850
+TROPT,              K,              tropopause_temperature_using_blended_TROPP_estimate
+TROPPB,             Pa,             tropopause_pressure_based_on_blended_estimate
+Var_V2M,            m s-1 m s-1,    Variance_of_V2M
+Var_TROPT,          K K,            Variance_of_TROPT
+T2M,                K,              2-meter_air_temperature
+Var_U2M,            m s-1 m s-1,    Variance_of_U2M
+TQL,                kg m-2,         total_precipitable_liquid_water
+T500,               K,              air_temperature_at_500_hPa
+TOX,                kg m-2,         total_column_odd_oxygen
+U850,               m s-1,          eastward_wind_at_850_hPa
+PS,                 Pa,             surface_pressure
+V850,               m s-1,          northward_wind_at_850_hPa
+Var_T250,           K K,            Variance_of_T250
+Var_QV10M,          kg kg-1 kg kg-1,Variance_of_QV10M
+Var_U10M,           m s-1 m s-1,    Variance_of_U10M
+OMEGA500,           Pa s-1,         omega_at_500_hPa
+H250,               m,              height_at_250_hPa
+Q250,               kg kg-1,        specific_humidity_at_250_hPa
+T2MDEW,             K,              dew_point_temperature_at_2_m
+Var_TO3,            Dobsons Dobsons,Variance_of_TO3
+PBLTOP,             Pa,             pbltop_pressure
+Var_V10M,           m s-1 m s-1,    Variance_of_V10M
+CLDPRS,             Pa,             cloud_top_pressure
+Var_TOX,            kg m-2 kg m-2,  Variance_of_TOX
+Var_U850,           m s-1 m s-1,    Variance_of_U850
+V50M,               m s-1,          northward_wind_at_50_meters
+Q500,               kg kg-1,        specific_humidity_at_500_hPa
+Var_TQL,            kg m-2 kg m-2,  Variance_of_TQL
+Var_TQV,            kg m-2 kg m-2,  Variance_of_TQV
+DISPH,              m,              zero_plane_displacement_height
+Var_U50M,           m s-1 m s-1,    Variance_of_U50M
+Var_V50M,           m s-1 m s-1,    Variance_of_V50M
+Var_Q250,           kg kg-1 kg kg-1,Variance_of_Q250
+Var_T2M,            K K,            Variance_of_T2M
+H1000,              m,              height_at_1000_mb
+TO3,                Dobsons,        total_column_ozone
+Var_T850,           K K,            Variance_of_T850
+Var_QV2M,           kg kg-1 kg kg-1,Variance_of_QV2M
+Var_PBLTOP,         Pa Pa,          Variance_of_PBLTOP
+TS,                 K,              surface_skin_temperature
+T10M,               K,              10-meter_air_temperature
+TROPPT,             Pa,             tropopause_pressure_based_on_thermal_estimate
+Var_H500,           m m,            Variance_of_H500
+TQI,                kg m-2,         total_precipitable_ice_water
+SLP,                Pa,             sea_level_pressure
+Var_V850,           m s-1 m s-1,    Variance_of_V850
+U250,               m s-1,          eastward_wind_at_250_hPa
+Var_DISPH,          m m,            Variance_of_DISPH
+Q850,               kg kg-1,        specific_humidity_at_850_hPa
+Var_SLP,            Pa Pa,          Variance_of_SLP
+Var_U250,           m s-1 m s-1,    Variance_of_U250
+ZLCL,               m,              lifting_condensation_level
+Var_TROPPV,         Pa Pa,          Variance_of_TROPPV
+TQV,                kg m-2,         total_precipitable_water_vapor
+Var_TQI,            kg m-2 kg m-2,  Variance_of_TQI
+V2M,                m s-1,          2-meter_northward_wind
+T250,               K,              air_temperature_at_250_hPa
+Var_CLDTMP,         K K,            Variance_of_CLDTMP
+TROPQ,              kg kg-1,        tropopause_specific_humidity_using_blended_TROPP_estimate
+V10M,               m s-1,          10-meter_northward_wind
+Var_V500,           m s-1 m s-1,    Variance_of_V500
+H850,               m,              height_at_850_hPa
+Var_H850,           m m,            Variance_of_H850
+T850,               K,              air_temperature_at_850_hPa
+Var_H1000,          m m,            Variance_of_H1000
+Var_U500,           m s-1 m s-1,    Variance_of_U500
+Var_CLDPRS,         Pa Pa,          Variance_of_CLDPRS
+Var_T10M,           K K,            Variance_of_T10M
+U50M,               m s-1,          eastward_wind_at_50_meters
+U10M,               m s-1,          10-meter_eastward_wind
+Var_Q500,           kg kg-1 kg kg-1,Variance_of_Q500
+QV2M,               kg kg-1,        2-meter_specific_humidity
+Var_ZLCL,           m m,            Variance_of_ZLCL
+Var_T2MWET,         K K,            Variance_of_T2MWET
+CLDTMP,             K,              cloud_top_temperature
+Var_TROPPB,         Pa Pa,          Variance_of_TROPPB
+TROPPV,             Pa,             tropopause_pressure_based_on_EPV_estimate
+Var_TROPQ,          kg kg-1 kg kg-1,Variance_of_TROPQ
+Var_TROPPT,         Pa Pa,          Variance_of_TROPPT
+Var_T500,           K K,            Variance_of_T500
+H500,               m,              height_at_500_hPa
+Var_OMEGA500,       Pa s-1 Pa s-1,  Variance_of_OMEGA500
+V500,               m s-1,          northward_wind_at_500_hPa
+T2MWET,             K,              wet_bulb_temperature_at_2_m
+U500,               m s-1,          eastward_wind_at_500_hPa
+Var_PS,             Pa Pa,          Variance_of_PS
+QV10M,              kg kg-1,        10-meter_specific_humidity
+Var_V250,           m s-1 m s-1,    Variance_of_V250
+Var_T2MDEW,         K K,            Variance_of_T2MDEW
+Var_TS,             K K,            Variance_of_TS

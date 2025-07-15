@@ -1,49 +1,49 @@
-query_name,           units,                        long_name
-U2M,                m s-1,                        2-meter_eastward_wind
-TROPT,              K,                            tropopause_temperature_using_blended_TROPP_estimate
-TROPPB,             Pa,                           tropopause_pressure_based_on_blended_estimate
-Var_V2M,            m s-1 m s-1,                  Variance_of_V2M
-Var_TROPT,          K K,                          Variance_of_TROPT
-T2M,                K,                            2-meter_air_temperature
-Var_U2M,            m s-1 m s-1,                  Variance_of_U2M
-TQL,                kg m-2,                       total_precipitable_liquid_water
-TOX,                kg m-2,                       total_column_odd_oxygen
-PS,                 Pa,                           surface_pressure
-Var_QV10M,          kg kg-1 kg kg-1,              Variance_of_QV10M
-Var_U10M,           m s-1 m s-1,                  Variance_of_U10M
-Var_TO3,            Dobsons Dobsons,              Variance_of_TO3
-Var_V10M,           m s-1 m s-1,                  Variance_of_V10M
-Var_TOX,            kg m-2 kg m-2,                Variance_of_TOX
-V50M,               m s-1,                        northward_wind_at_50_meters
-Var_TQL,            kg m-2 kg m-2,                Variance_of_TQL
-Var_TQV,            kg m-2 kg m-2,                Variance_of_TQV
-DISPH,              m,                            zero_plane_displacement_height
-Var_U50M,           m s-1 m s-1,                  Variance_of_U50M
-Var_V50M,           m s-1 m s-1,                  Variance_of_V50M
-Var_T2M,            K K,                          Variance_of_T2M
-TO3,                Dobsons,                      total_column_ozone
-Var_QV2M,           kg kg-1 kg kg-1,              Variance_of_QV2M
-TS,                 K,                            surface_skin_temperature
-T10M,               K,                            10-meter_air_temperature
-TROPPT,             Pa,                           tropopause_pressure_based_on_thermal_estimate
-TQI,                kg m-2,                       total_precipitable_ice_water
-SLP,                Pa,                           sea_level_pressure
-Var_DISPH,          m m,                          Variance_of_DISPH
-Var_SLP,            Pa Pa,                        Variance_of_SLP
-Var_TROPPV,         Pa Pa,                        Variance_of_TROPPV
-TQV,                kg m-2,                       total_precipitable_water_vapor
-Var_TQI,            kg m-2 kg m-2,                Variance_of_TQI
-V2M,                m s-1,                        2-meter_northward_wind
-TROPQ,              kg kg-1,                      tropopause_specific_humidity_using_blended_TROPP_estimate
-V10M,               m s-1,                        10-meter_northward_wind
-Var_T10M,           K K,                          Variance_of_T10M
-U50M,               m s-1,                        eastward_wind_at_50_meters
-U10M,               m s-1,                        10-meter_eastward_wind
-QV2M,               kg kg-1,                      2-meter_specific_humidity
-Var_TROPPB,         Pa Pa,                        Variance_of_TROPPB
-TROPPV,             Pa,                           tropopause_pressure_based_on_EPV_estimate
-Var_TROPQ,          kg kg-1 kg kg-1,              Variance_of_TROPQ
-Var_TROPPT,         Pa Pa,                        Variance_of_TROPPT
-Var_PS,             Pa Pa,                        Variance_of_PS
-QV10M,              kg kg-1,                      10-meter_specific_humidity
-Var_TS,             K K,                          Variance_of_TS
+query_name,         units,          long_name
+U2M,                m s-1,          2-meter_eastward_wind
+TROPT,              K,              tropopause_temperature_using_blended_TROPP_estimate
+TROPPB,             Pa,             tropopause_pressure_based_on_blended_estimate
+Var_V2M,            m s-1 m s-1,    Variance_of_V2M
+Var_TROPT,          K K,            Variance_of_TROPT
+T2M,                K,              2-meter_air_temperature
+Var_U2M,            m s-1 m s-1,    Variance_of_U2M
+TQL,                kg m-2,         total_precipitable_liquid_water
+TOX,                kg m-2,         total_column_odd_oxygen
+PS,                 Pa,             surface_pressure
+Var_QV10M,          kg kg-1 kg kg-1,Variance_of_QV10M
+Var_U10M,           m s-1 m s-1,    Variance_of_U10M
+Var_TO3,            Dobsons Dobsons,Variance_of_TO3
+Var_V10M,           m s-1 m s-1,    Variance_of_V10M
+Var_TOX,            kg m-2 kg m-2,  Variance_of_TOX
+V50M,               m s-1,          northward_wind_at_50_meters
+Var_TQL,            kg m-2 kg m-2,  Variance_of_TQL
+Var_TQV,            kg m-2 kg m-2,  Variance_of_TQV
+DISPH,              m,              zero_plane_displacement_height
+Var_U50M,           m s-1 m s-1,    Variance_of_U50M
+Var_V50M,           m s-1 m s-1,    Variance_of_V50M
+Var_T2M,            K K,            Variance_of_T2M
+TO3,                Dobsons,        total_column_ozone
+Var_QV2M,           kg kg-1 kg kg-1,Variance_of_QV2M
+TS,                 K,              surface_skin_temperature
+T10M,               K,              10-meter_air_temperature
+TROPPT,             Pa,             tropopause_pressure_based_on_thermal_estimate
+TQI,                kg m-2,         total_precipitable_ice_water
+SLP,                Pa,             sea_level_pressure
+Var_DISPH,          m m,            Variance_of_DISPH
+Var_SLP,            Pa Pa,          Variance_of_SLP
+Var_TROPPV,         Pa Pa,          Variance_of_TROPPV
+TQV,                kg m-2,         total_precipitable_water_vapor
+Var_TQI,            kg m-2 kg m-2,  Variance_of_TQI
+V2M,                m s-1,          2-meter_northward_wind
+TROPQ,              kg kg-1,        tropopause_specific_humidity_using_blended_TROPP_estimate
+V10M,               m s-1,          10-meter_northward_wind
+Var_T10M,           K K,            Variance_of_T10M
+U50M,               m s-1,          eastward_wind_at_50_meters
+U10M,               m s-1,          10-meter_eastward_wind
+QV2M,               kg kg-1,        2-meter_specific_humidity
+Var_TROPPB,         Pa Pa,          Variance_of_TROPPB
+TROPPV,             Pa,             tropopause_pressure_based_on_EPV_estimate
+Var_TROPQ,          kg kg-1 kg kg-1,Variance_of_TROPQ
+Var_TROPPT,         Pa Pa,          Variance_of_TROPPT
+Var_PS,             Pa Pa,          Variance_of_PS
+QV10M,              kg kg-1,        10-meter_specific_humidity
+Var_TS,             K K,            Variance_of_TS

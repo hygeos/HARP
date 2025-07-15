@@ -1,6 +1,6 @@
-query_name,           units,                        long_name
-HLML,               m,                            surface_layer_height
-PS,                 Pa,                           surface_pressure
-QLML,               1,                            surface_specific_humidity
-SPEEDLML,           m s-1,                        surface_wind_speed
-TLML,               K,                            surface_air_temperature
+query_name,         units,          long_name
+HLML,               m,              surface_layer_height
+PS,                 Pa,             surface_pressure
+QLML,               1,              surface_specific_humidity
+SPEEDLML,           m s-1,          surface_wind_speed
+TLML,               K,              surface_air_temperature

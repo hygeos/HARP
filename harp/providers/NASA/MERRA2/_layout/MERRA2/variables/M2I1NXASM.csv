@@ -1,25 +1,25 @@
-query_name,           units,                        long_name
-U2M,                m s-1,                        2-meter_eastward_wind
-TROPT,              K,                            tropopause_temperature_using_blended_TROPP_estimate
-TROPPB,             Pa,                           tropopause_pressure_based_on_blended_estimate
-T2M,                K,                            2-meter_air_temperature
-TQL,                kg m-2,                       total_precipitable_liquid_water
-TOX,                kg m-2,                       total_column_odd_oxygen
-PS,                 Pa,                           surface_pressure
-V50M,               m s-1,                        northward_wind_at_50_meters
-DISPH,              m,                            zero_plane_displacement_height
-TO3,                Dobsons,                      total_column_ozone
-TS,                 K,                            surface_skin_temperature
-T10M,               K,                            10-meter_air_temperature
-TROPPT,             Pa,                           tropopause_pressure_based_on_thermal_estimate
-TQI,                kg m-2,                       total_precipitable_ice_water
-SLP,                Pa,                           sea_level_pressure
-TQV,                kg m-2,                       total_precipitable_water_vapor
-V2M,                m s-1,                        2-meter_northward_wind
-TROPQ,              kg kg-1,                      tropopause_specific_humidity_using_blended_TROPP_estimate
-V10M,               m s-1,                        10-meter_northward_wind
-U50M,               m s-1,                        eastward_wind_at_50_meters
-U10M,               m s-1,                        10-meter_eastward_wind
-QV2M,               kg kg-1,                      2-meter_specific_humidity
-TROPPV,             Pa,                           tropopause_pressure_based_on_EPV_estimate
-QV10M,              kg kg-1,                      10-meter_specific_humidity
+query_name,         units,          long_name
+U2M,                m s-1,          2-meter_eastward_wind
+TROPT,              K,              tropopause_temperature_using_blended_TROPP_estimate
+TROPPB,             Pa,             tropopause_pressure_based_on_blended_estimate
+T2M,                K,              2-meter_air_temperature
+TQL,                kg m-2,         total_precipitable_liquid_water
+TOX,                kg m-2,         total_column_odd_oxygen
+PS,                 Pa,             surface_pressure
+V50M,               m s-1,          northward_wind_at_50_meters
+DISPH,              m,              zero_plane_displacement_height
+TO3,                Dobsons,        total_column_ozone
+TS,                 K,              surface_skin_temperature
+T10M,               K,              10-meter_air_temperature
+TROPPT,             Pa,             tropopause_pressure_based_on_thermal_estimate
+TQI,                kg m-2,         total_precipitable_ice_water
+SLP,                Pa,             sea_level_pressure
+TQV,                kg m-2,         total_precipitable_water_vapor
+V2M,                m s-1,          2-meter_northward_wind
+TROPQ,              kg kg-1,        tropopause_specific_humidity_using_blended_TROPP_estimate
+V10M,               m s-1,          10-meter_northward_wind
+U50M,               m s-1,          eastward_wind_at_50_meters
+U10M,               m s-1,          10-meter_eastward_wind
+QV2M,               kg kg-1,        2-meter_specific_humidity
+TROPPV,             Pa,             tropopause_pressure_based_on_EPV_estimate
+QV10M,              kg kg-1,        10-meter_specific_humidity

@@ -1,5 +1,7 @@
 # standard library imports
 from datetime import date
+import re
+import string
 import subprocess
 
 # third party imports
@@ -40,9 +42,16 @@ def get_parametrized_url(url):
     Return an URL with full correct path to a dataset, parametrized with date (%s)
     """
     d = date(2012, 12, 12)
+    
+    name = Path(url).name
+    folder = Path(url).parent.name
+    
+    if name.startswith("M2C0N"): # constants datasets only have 1980 as base year
+        d = date(1980, 1, 1)
+    
     if not url.endswith("/"): url += "/"
     
-    param_url = "%Y/" if ("_DIU" in url or "_MON" in url)  else "%Y/%m/"
+    param_url = "%Y/" if ("_DIU" in folder or "_MON" in folder)  else "%Y/%m/"
     
     url = d.strftime(url + param_url)
     
@@ -50,15 +59,18 @@ def get_parametrized_url(url):
     status, output = subprocess.getstatusoutput(cmd)                        # execute request
 
     if status != 0:
+        # log.info(" >  ", url)
         log.error("Invalid request, skipping url")
         return "invalid", ""
 
     file_name = output.strip().split('\n')[0].split(' ')[1].split('\"')[1]  # parsing
     
-    parts = file_name.split(".")                                            # extract the date
-    param = "%Y%m" if ("_DIU" in url or "_MON" in url)  else "%Y%m%d" 
-    parametrized_name = parts[0] + "." + parts[1] + f".{param}." + parts[3]            # replace it by generic '%s'
+    merra, ds, version, ext = file_name.split(".")                                            # extract the date
+    param = "%Y%m" if ("_DIU" in folder or "_MON" in folder)  else "%Y%m%d" 
+    parametrized_name = merra + "." + ds + "." + param + "." + ext            # replace it by generic '%s'
     
+    if name.startswith("M2C0N"): # disable parametrizing
+        parametrized_name = file_name
     return url, parametrized_name
 
 
@@ -74,7 +86,7 @@ def extract_dataset_infos(url, model, name, generic_name, skip_present=False):
     csv_target = csv_folder / f"{name}.csv"
     
     if skip_present and json_target.is_file() and csv_target.is_file():
-        log.debug(rgb.blue, f"skipping {name}: already processed files")
+        log.info(rgb.blue, f"skipping {name}: already processed files")
         return
     
     
@@ -141,11 +153,12 @@ def extract_dataset_infos(url, model, name, generic_name, skip_present=False):
     
     
     # Write contained variables as csv file
-    pad = 30
-    data = "query_name,".ljust(20) + "units, ".ljust(pad) + "long_name\n"
+    pad = 16
+    data = "query_name,".ljust(20) + "units, ".ljust(pad) + "long_name\n" # .ljust(pad*2) + "name\n"
     for v in variables:
         vi = variables[v]
-        data += f"{v},".ljust(20) + f"{vi['units']},".ljust(pad) + f"{vi['long_name']}\n"
+        # name = re.sub(f"[{string.punctuation}]", " ", vi['long_name'])
+        data += f"{v},".ljust(20) + f"{vi['units']},".ljust(pad) + f"{vi['long_name']}\n"# .ljust(pad*2) + name + "\n"
         
     with open(csv_target, 'w') as f:
         log.info(f"Writing {csv_target}")
@@ -161,14 +174,17 @@ for model in models:
     url = burl + model
     datasets = get_datasets(url)
     
-    log.debug(rgb.purple, f"Parsing model {model}")
+    log.info(rgb.purple, f"Parsing model {model}")
     
     for name, version in datasets.items():
+
+        if "C0N" in name: continue
 
         u = url + name + "." + version + "/"
         d = date(2012, 12, 12)
 
         u, g = get_parametrized_url(u)
+        
         u = u + g
         if u == "invalid": continue
         u = d.strftime(u)

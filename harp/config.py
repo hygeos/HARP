@@ -6,6 +6,7 @@ from core.static import constraint
 from core import log
 from core import env
 
+import harp
 import toml
 
 default_config = Config({}) # just the 'general' subsection
@@ -33,3 +34,10 @@ default_config_constraints = dict(
 )
 
 default_config.ingest(default_config_dict)
+
+
+class _internal:
+    debug = False
+
+if not _internal.debug:
+    log.silence(harp, log.lvl.DEBUG)

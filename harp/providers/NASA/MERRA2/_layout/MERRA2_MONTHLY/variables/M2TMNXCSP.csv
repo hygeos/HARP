@@ -1,39 +1,39 @@
-query_name,           units,                        long_name
-Var_MDSCLDSZH20,    1 1,                          Variance_of_MDSCLDSZH20
-Var_MDSCLDFRCMID,   1 1,                          Variance_of_MDSCLDFRCMID
-Var_MDSCLDSZICE,    1 1,                          Variance_of_MDSCLDSZICE
-Var_MDSCLDFRCLO,    1 1,                          Variance_of_MDSCLDFRCLO
-MDSCLDSZICE,        1,                            modis_cloud_particle_size_ice_mean
-MDSOPTHCKICELG,     1,                            modis_optical_thickness_ice_logmean
-MDSCLDFRCHI,        1,                            modis_cloud_fraction_high_mean
-Var_MDSCLDFRCH2O,   1 1,                          Variance_of_MDSCLDFRCH2O
-Var_MDSOPTHCKTTL,   1 1,                          Variance_of_MDSOPTHCKTTL
-Var_ISCCPCLDFRC,    1 1,                          Variance_of_ISCCPCLDFRC
-MDSCLDFRCTTL,       1,                            modis_cloud_fraction_total_mean
-Var_MDSCLDFRCTTL,   1 1,                          Variance_of_MDSCLDFRCTTL
-MDSCLDFRCH2O,       1,                            modis_cloud_fraction_water_mean
-Var_MDSH2OPATH,     1 1,                          Variance_of_MDSH2OPATH
-MDSOPTHCKICE,       1,                            modis_optical_thickness_ice_mean
-Var_MDSOPTHCKTTLLG, 1 1,                          Variance_of_MDSOPTHCKTTLLG
-Var_MDSOPTHCKICELG, 1 1,                          Variance_of_MDSOPTHCKICELG
-MDSCLDSZH20,        1,                            modis_cloud_particle_size_water_mean
-Var_MDSOPTHCKICE,   1 1,                          Variance_of_MDSOPTHCKICE
-MDSOPTHCKH2O,       1,                            modis_optical_thickness_water_mean
-MDSOPTHCKH2OLG,     1,                            modis_optical_thickness_water_logmean
-MDSCLDFRCICE,       1,                            modis_cloud_fraction_ice_mean
-MDSICEPATH,         1,                            modis_ice_water_path_mean
-MDSOPTHCKTTL,       1,                            modis_optical_thickness_total_mean
-Var_MDSCLDTOPPS,    1 1,                          Variance_of_MDSCLDTOPPS
-MDSH2OPATH,         1,                            modis_liquid_water_path_mean
-Var_MDSCLDFRCICE,   1 1,                          Variance_of_MDSCLDFRCICE
-Var_ISCCPALB,       1 1,                          Variance_of_ISCCPALB
-MDSCLDTOPPS,        1,                            modis_cloud_top_pressure_total_mean
-MDSOPTHCKTTLLG,     1,                            modis_optical_thickness_total_logmean
-ISCCPCLDFRC,        1,                            isccp_total _cloud_area_fraction
-MDSCLDFRCLO,        1,                            modis_cloud_fraction_low_mean
-Var_MDSOPTHCKH2O,   1 1,                          Variance_of_MDSOPTHCKH2O
-Var_MDSOPTHCKH2OLG, 1 1,                          Variance_of_MDSOPTHCKH2OLG
-ISCCPALB,           1,                            isccp_cloud_albedo
-Var_MDSCLDFRCHI,    1 1,                          Variance_of_MDSCLDFRCHI
-Var_MDSICEPATH,     1 1,                          Variance_of_MDSICEPATH
-MDSCLDFRCMID,       1,                            modis_cloud_fraction_mid_mean
+query_name,         units,          long_name
+Var_MDSCLDSZH20,    1 1,            Variance_of_MDSCLDSZH20
+Var_MDSCLDFRCMID,   1 1,            Variance_of_MDSCLDFRCMID
+Var_MDSCLDSZICE,    1 1,            Variance_of_MDSCLDSZICE
+Var_MDSCLDFRCLO,    1 1,            Variance_of_MDSCLDFRCLO
+MDSCLDSZICE,        1,              modis_cloud_particle_size_ice_mean
+MDSOPTHCKICELG,     1,              modis_optical_thickness_ice_logmean
+MDSCLDFRCHI,        1,              modis_cloud_fraction_high_mean
+Var_MDSCLDFRCH2O,   1 1,            Variance_of_MDSCLDFRCH2O
+Var_MDSOPTHCKTTL,   1 1,            Variance_of_MDSOPTHCKTTL
+Var_ISCCPCLDFRC,    1 1,            Variance_of_ISCCPCLDFRC
+MDSCLDFRCTTL,       1,              modis_cloud_fraction_total_mean
+Var_MDSCLDFRCTTL,   1 1,            Variance_of_MDSCLDFRCTTL
+MDSCLDFRCH2O,       1,              modis_cloud_fraction_water_mean
+Var_MDSH2OPATH,     1 1,            Variance_of_MDSH2OPATH
+MDSOPTHCKICE,       1,              modis_optical_thickness_ice_mean
+Var_MDSOPTHCKTTLLG, 1 1,            Variance_of_MDSOPTHCKTTLLG
+Var_MDSOPTHCKICELG, 1 1,            Variance_of_MDSOPTHCKICELG
+MDSCLDSZH20,        1,              modis_cloud_particle_size_water_mean
+Var_MDSOPTHCKICE,   1 1,            Variance_of_MDSOPTHCKICE
+MDSOPTHCKH2O,       1,              modis_optical_thickness_water_mean
+MDSOPTHCKH2OLG,     1,              modis_optical_thickness_water_logmean
+MDSCLDFRCICE,       1,              modis_cloud_fraction_ice_mean
+MDSICEPATH,         1,              modis_ice_water_path_mean
+MDSOPTHCKTTL,       1,              modis_optical_thickness_total_mean
+Var_MDSCLDTOPPS,    1 1,            Variance_of_MDSCLDTOPPS
+MDSH2OPATH,         1,              modis_liquid_water_path_mean
+Var_MDSCLDFRCICE,   1 1,            Variance_of_MDSCLDFRCICE
+Var_ISCCPALB,       1 1,            Variance_of_ISCCPALB
+MDSCLDTOPPS,        1,              modis_cloud_top_pressure_total_mean
+MDSOPTHCKTTLLG,     1,              modis_optical_thickness_total_logmean
+ISCCPCLDFRC,        1,              isccp_total _cloud_area_fraction
+MDSCLDFRCLO,        1,              modis_cloud_fraction_low_mean
+Var_MDSOPTHCKH2O,   1 1,            Variance_of_MDSOPTHCKH2O
+Var_MDSOPTHCKH2OLG, 1 1,            Variance_of_MDSOPTHCKH2OLG
+ISCCPALB,           1,              isccp_cloud_albedo
+Var_MDSCLDFRCHI,    1 1,            Variance_of_MDSCLDFRCHI
+Var_MDSICEPATH,     1 1,            Variance_of_MDSICEPATH
+MDSCLDFRCMID,       1,              modis_cloud_fraction_mid_mean
