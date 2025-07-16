@@ -19,7 +19,3 @@ def search(keywords, sources):
 
     
     t.print(search_cfg.live_print)
-
-        
-    
-    
