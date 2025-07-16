@@ -47,7 +47,7 @@ def _fuzzy_score(search_terms: list, string: str):
     # penalize string that have terms which have not been matched
     unmatched_term_penalty = (1-word_threshold) * (1 - (iscore / nrefterms))
     
-    if search_cfg.match_exact: unmatched_term_penalty  *= 0.5
+    if search_cfg.match_exact: unmatched_term_penalty  *= 0.25
     if search_cfg.match_strict: unmatched_term_penalty *= 0.5
     
     
@@ -176,7 +176,7 @@ def compile(
     
     # reordering
     # results = results.drop(["search"], axis=1)
-    results = results[["match", "short_name", "units", "name", "dataset", "query_name", "score", "uscore", "search"]]
+    results = results[["match", "units", "name", "dataset", "query_name", "short_name", "score", "uscore", "search"]]
     
     # togglable queryname display
     if search_cfg.display_query_name == False:

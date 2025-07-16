@@ -17,6 +17,7 @@ live_print = False
 live_print_target_time = 0.200 # in s
 
 ascii_style = styles.squared
-ascii_max_col_chars = 35
+ascii_max_col_chars = None
+ascii_nocolor = False
 
 debug = False

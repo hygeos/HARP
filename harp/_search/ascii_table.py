@@ -6,6 +6,7 @@ from harp._search import search_cfg
 from harp._utils import Record
 from enum import Enum
 
+from core import log
 
 class _style:
     """
@@ -68,6 +69,19 @@ class ascii_table:
         ).tolist()
         self.terminal = shutil.get_terminal_size()
         
+        colors = dict(
+            match       =   log.rgb.gray,
+            units       =   log.rgb.orange,
+            name        =   None,
+            dataset     =   log.rgb.purple,
+            short_name  =   None, # log.rgb.cyan,
+            query_name  =   log.rgb.cyan, # log.rgb.cyan,
+            score       =   None,
+            uscore      =   None,
+            search      =   None,
+        )
+        self.colors = [colors[i] for i in self.columns]
+        
         # limiting column max width
         max_width = search_cfg.ascii_max_col_chars
         if max_width is not None:
@@ -110,12 +124,15 @@ class ascii_table:
         mb  = self.style.mb # mid bottom         
         cr  = self.style.cr # cross
     
+        spaces = self.spaces.copy()
+        colors = self.colors.copy()
+    
         # Precompute common strings
         hhp = h * hp
         shp = ' ' * hp
         h_line = h * (hp * 2 + 1)  # For cases without inner bars
         
-        def _line_separator(pos, spaces):
+        def _line_separator(pos):
             """
             Generates an ascii separator line for the table based on position.
             """
@@ -151,7 +168,7 @@ class ascii_table:
                 return line
             
         
-        def _line_padding(spaces):
+        def _line_padding():
             """
             Generates an ascii padding line for the table.
             """
@@ -165,17 +182,30 @@ class ascii_table:
             return line
         
         
-        def _limit_str(s):
+        def _color_str(s, i):
+            c = colors[i]
+
+            if c is not None:
+                return c(s)
+            return s
+        
+        def _format_str(s):
+            
             l = search_cfg.ascii_max_col_chars
             if len(s) > l:
-                return s[:l-1] + "‥"
+                s = s[:l-1] + "‥"
             return s
+
                 
         # disable for performance reason
         if not search_cfg.ascii_max_col_chars:
-            _limit_str = lambda x: x
+            _format_str = lambda x: x
         
-        def _line_content(line, spaces):
+        # disable colors
+        if search_cfg.ascii_nocolor:
+            _color_str = lambda x, y: x
+        
+        def _line_content(line):
             """
             Generates an ascii content line for the table.
             """
@@ -184,7 +214,7 @@ class ascii_table:
             sep = shp + ivbc + shp
             if not ivb: sep = shp
         
-            mids = [_limit_str(str(w)).ljust(spaces[i]) for i, w in enumerate(line)]
+            mids = [_color_str(_format_str(str(w)).ljust(spaces[i]), i) for i, w in enumerate(line)]
             line = v + shp + sep.join(mids) + shp + v
             return line
     
@@ -198,7 +228,6 @@ class ascii_table:
         lines = []
         
         headers = [s.capitalize() for s in self.columns]
-        spaces = self.spaces.copy()
         
         
         itr = search_cfg.live_print_target_time / len(self.df)
@@ -206,18 +235,18 @@ class ascii_table:
         fn = lines.append if not live_print else lambda x: (time.sleep(itr), print(x, flush=True))
         
         fn("")
-        fn(_line_separator("top",  spaces))
-        fn(_line_content(headers, spaces))
-        fn(_line_separator("mid",  spaces))
+        fn(_line_separator("top" ))
+        fn(_line_content(headers))
+        fn(_line_separator("mid" ))
         for j, e in enumerate(entries):
             
-            for i in range(vp): fn(_line_padding("mid", spaces))
-            fn(_line_content(e, spaces))
-            for i in range(vp): fn(_line_padding("mid", spaces))
+            for i in range(vp): fn(_line_padding("mid"))
+            fn(_line_content(e))
+            for i in range(vp): fn(_line_padding("mid"))
             if ihb:
-                fn(_line_separator("mid",  spaces))
+                fn(_line_separator("mid"))
                 
-        fn(_line_separator("bot", spaces))
+        fn(_line_separator("bot"))
         fn("")
         
         

@@ -22,17 +22,28 @@ def entry(args=None):
         nargs="+",  # Captures ALL remaining arguments
         help="Keywords to search for in the database"
     )
+    
     cmd.add_argument("--debug", action="store_true", help="Debug mode", default=False)
     cmd.add_argument("--Query", "-Q", action="store_true", help="Display query namne column", default=False)
-    cmd.add_argument("--minimum", "--min", action="store", help="Min match value to consider [20-100]", default=None)
-    cmd.add_argument("--From", "--from", "-f", action="store", help="Dataset source selection", default=None, nargs="+")
+    cmd.add_argument("--minimum", "--min", action="store", help="Min match value to consider [20-100]", 
+        default=None, metavar="MATCH_THRESHOLD"
+    )
+    cmd.add_argument("--from", action="store", help="Dataset source selection (Like NASA, ERA5 etc..)", 
+        default=None, nargs="+", metavar="SOURCE"
+    )
     
     # Create a mutually exclusive group
     mode_group = cmd.add_mutually_exclusive_group()
-    mode_group.add_argument("--strict", "-s", action="store_true", help="Trigger stricter matching")
     mode_group.add_argument("--exact", "-e", action="store_true", help="Trigger exact matching")
+    mode_group.add_argument("--strict", "-s", action="store_true", help="Trigger stricter matching")
     mode_group.add_argument("--approximate", "-a", action="store_true", help="Trigger relaxed, more approximate matching")
 
+    width_group = cmd.add_mutually_exclusive_group()
+    width_group.add_argument("--large", "-l", action="store_true", help="Display columns to their max width", default=False)
+    width_group.add_argument("--width", "-w", action="store", help="Display columns max width", default=35)
+    
+    cmd.add_argument("--nocolor", action="store_true", help="Disable colored output", default=False)
+    
     
     args = parser.parse_args()
     
@@ -55,8 +66,14 @@ def entry(args=None):
     if args.strict: search_cfg.match_strict = True
     if args.approximate: search_cfg.match_approx = True
     if args.debug: search_cfg.debug = True
+    if args.nocolor: 
+        search_cfg.ascii_nocolor = True
+        log.config.show_color = False
     
-    sources = args.From
+    if args.width: search_cfg.ascii_max_col_chars = int(args.width)
+    if args.large: search_cfg.ascii_max_col_chars = None
+    
+    sources = getattr(args, "from")
     if sources and not isinstance(sources, list):
         sources = [sources]
         
