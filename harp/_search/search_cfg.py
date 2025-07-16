@@ -14,7 +14,7 @@ match_approx = False
 display_query_name = 0
 
 live_print = False
-live_print_target_time = 0.200 # in s
+live_print_target_time = 0.150 # in s
 
 ascii_style = styles.squared
 ascii_max_col_chars = None
