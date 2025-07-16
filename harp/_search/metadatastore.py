@@ -40,13 +40,16 @@ _search_data_providers = [ # list of providers to participate in fuzzy searching
 
 ]
 
-tables = []
 
-for p in _search_data_providers:
-    # instantiate the provider -> required to retrieve the informations
-    ip = p(
-        config=dict(dir_storage=Path("/tmp"), offline=True), 
-        variables={}
-    )
-    tables.append(ip.format_search_table())
+def get_tables():
+    
+    tables = []
+    for p in _search_data_providers:
+        # instantiate the provider -> required to retrieve the informations
+        ip = p(
+            config=dict(dir_storage=Path("/tmp"), offline=True), 
+            variables={}
+        )
+        tables.append(ip.format_search_table())
 
+    return tables

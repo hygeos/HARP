@@ -1,9 +1,11 @@
 import difflib
 from pathlib import Path
+import string
 
 import numpy as np
 import pandas as pd
 
+from harp._search import search_cfg
 
 def _split_string(s: str):
     # s = s.replace("_", " ")
@@ -14,7 +16,7 @@ def _split_string(s: str):
     return s.split(" ")
     
 
-def _fuzzy_score(search_terms: list, string: str, word_threshold = 0.71):
+def _fuzzy_score(search_terms: list, string: str):
     """
     Args:
         search_terms: A list of terms to search for.
@@ -25,6 +27,8 @@ def _fuzzy_score(search_terms: list, string: str, word_threshold = 0.71):
         A float representing the fuzzy score, adjusted for unmatched terms.
     """
     
+    word_threshold = search_cfg.word_threshold
+    
     iscore = 0
     score  = 0
     
@@ -33,7 +37,7 @@ def _fuzzy_score(search_terms: list, string: str, word_threshold = 0.71):
     nrefterms = len(splitted_string)
     for term in search_terms: #for each term
         for word in splitted_string: # for each word in the line
-            res = difflib.SequenceMatcher(None, term, word).ratio() # check match
+            res = difflib.SequenceMatcher(None, term.strip(), word.strip()).ratio() # check match
             if res >= word_threshold: 
                 score += res # weight by word match -> allow to discriminate perfect matches with low accuracy matches
                 iscore += 1
@@ -41,7 +45,11 @@ def _fuzzy_score(search_terms: list, string: str, word_threshold = 0.71):
                 break # search term has been found.
 
     # penalize string that have terms which have not been matched
-    unmatched_term_penalty =  (1-word_threshold) * (1 - (iscore / nrefterms))
+    unmatched_term_penalty = (1-word_threshold) * (1 - (iscore / nrefterms))
+    
+    if search_cfg.match_exact: unmatched_term_penalty  *= 0.5
+    if search_cfg.match_strict: unmatched_term_penalty *= 0.5
+    
     
     return score - unmatched_term_penalty
     
@@ -89,3 +97,95 @@ def search(
         df = df.head(nmax)
     
     return df
+
+
+
+
+def filter_best(
+    df: pd.DataFrame, 
+):
+    """
+    Filters a DataFrame to retain the best matches from a fuzzy search
+    Assumes a column 'fuzzy_score' is present
+
+    Args:
+        df: DataFrame containing a 'fuzzy_score' column for ranking.
+
+    Returns:
+        DataFrame with filtered rows: 
+        - Removes entries with scores below 0.20
+        - Retains entries within 20% of the best score
+        - Fills with top 5 entries if there are fewer than 5 matches
+
+    Raises:
+        ValueError: If input DataFrame lacks 'fuzzy_score' column.
+    """
+    
+    ntarget = 5
+    
+    # remove really bad matches
+    trash_treshold = search_cfg.trash_treshold
+    df = df[df['score'] > trash_treshold]
+    
+    # remove matches too far from best match
+    # best = df['score'].max()
+    # tolerance = 0.2  # Keep scores within 20% of the best score
+    # bests = df[df['score'] >= (best - tolerance)]
+    
+    # if not enough fill with garbage until target
+    # if len(bests) < ntarget:
+        # bests = df.nlargest(ntarget, 'score')
+    
+    return df.copy()
+    
+
+
+
+def compile(
+    results: list[pd.DataFrame],
+    sources: str
+):
+
+    filtered = []
+    
+    for t in results:
+        
+        dataset_source = t.attrs["institution"] + "." + t.attrs["collection"] + "." + t.attrs["dataset"]
+        t["dataset"] = dataset_source
+        t["uscore"] = t["score"].apply(lambda x: round(x, 2))
+        t["score"] = t["score"].apply(lambda x: min(round(x + 0.0499, 1), 1.0))
+        t["match"] = t["score"].apply(lambda x: f"{x:.0%}".rjust(5))
+
+        # Filtering from the sources provided by flag --from
+        if sources is not None:
+            for src in sources:
+                # print(src.strip().lower(), " in ",  dataset_source, " is ", src.lower() in dataset_source)
+                
+                if src.strip().lower() in dataset_source.lower():
+                    filtered.append(t)
+        else:
+            filtered.append(t)
+
+    # concatenation
+    results = pd.concat(filtered, ignore_index=True)
+    results = results.sort_values("score", ascending=False)
+    
+    # minimum threshold
+    minimum = search_cfg.match_threshold
+    results = results[results['score'] >= (minimum / 100)]
+    
+    # reordering
+    # results = results.drop(["search"], axis=1)
+    results = results[["match", "short_name", "units", "name", "dataset", "query_name", "score", "uscore", "search"]]
+    
+    # togglable queryname display
+    if search_cfg.display_query_name == False:
+        
+        results = results.drop(["query_name"], axis=1)
+        
+    if not search_cfg.debug:
+        results = results.drop(["score", "uscore", "search"], axis=1)
+             
+    
+    return results
+    
