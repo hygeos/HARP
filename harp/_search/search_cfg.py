@@ -13,7 +13,7 @@ match_approx = False
 
 display_query_name = 0
 
-live_print = False
+live_print = True
 live_print_target_time = 0.150 # in s
 
 ascii_style = styles.squared
