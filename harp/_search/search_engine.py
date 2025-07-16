@@ -36,6 +36,13 @@ def _fuzzy_score(search_terms: list, string: str):
     splitted_string = _split_string(string)
     nrefterms = len(splitted_string)
     for term in search_terms: #for each term
+        
+        if " " in term: # trigger quote matching
+            if term in string:
+                score += 1 # weight by word match -> allow to discriminate perfect matches with low accuracy matches
+                iscore += 1
+                continue
+        
         for word in splitted_string: # for each word in the line
             res = difflib.SequenceMatcher(None, term.strip(), word.strip()).ratio() # check match
             if res >= word_threshold: 
