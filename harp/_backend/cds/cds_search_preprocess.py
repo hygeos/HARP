@@ -13,7 +13,7 @@ def format_search_table(self: BaseDatasetProvider):
     
     # table["short_name"] = table["query_name"]
     
-    table['name'] = table['query_name'].str.replace(f"[{string.punctuation}]", " ", regex=True)
+    table['name'] = table['name'].str.replace(f"[{string.punctuation}]", " ", regex=True)
     table["search"] = table["name"] + "   " + table["short_name"] # + "   " + self.institution + "   " + self.collection
     
     table.attrs["dataset"]      = str(self.__class__.__name__)

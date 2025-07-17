@@ -130,9 +130,12 @@ def filter_best(
     
     ntarget = 5
     
-    # remove really bad matches
+    # Remove really bad matches
     trash_treshold = search_cfg.trash_treshold
     df = df[df['score'] > trash_treshold]
+    
+    # NOTE: below removed in favor of all results filters
+    #       removes bias
     
     # remove matches too far from best match
     # best = df['score'].max()
@@ -172,6 +175,9 @@ def compile(
                     filtered.append(t)
         else:
             filtered.append(t)
+    
+    if len(filtered) == 0:
+        return []
 
     # concatenation
     results = pd.concat(filtered, ignore_index=True)

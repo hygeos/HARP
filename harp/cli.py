@@ -27,7 +27,7 @@ def entry(args=None):
     
     cmd.add_argument("--debug", action="store_true", help="Debug mode (developper)", default=False)
     cmd.add_argument("--show-query-name", "-q", action="store_true", help="Show the query namne column", default=False)
-    cmd.add_argument("--minimum", "--min", action="store", help="Minimum match score to consider [20%-100%]", 
+    cmd.add_argument("--minimum", "--min", action="store", help="Minimum match score to consider [20-100]", 
         default=None, metavar="match_threshold"
     )
     
