@@ -1,6 +1,6 @@
 import time
 from harp._search import metadatastore, search_cfg, search_engine
-from harp._search.ascii_table import ui_styles, ascii_table
+from harp._search.ascii_table import ascii_table
 from core import log
 from core.monitor import Chrono
 
@@ -17,7 +17,19 @@ def search(keywords, sources):
         if len(res) ==0:
             log.disp("> No match found.")
             exit()
-        t = ascii_table(res, style=search_cfg.ascii_style)
-
-        
-        t.print(search_cfg.live_print)
+            
+            
+        colors = dict(
+            match       = log.rgb.gray,
+            dims        = log.rgb.red,
+            spatial     = log.rgb.orange,
+            units       = log.rgb.purple,
+            name        = None,
+            dataset     = log.rgb.blue,
+            timerange   = log.rgb.orange,
+            short_name  = None, # log.rgb.green, # log.rgb.cyan,
+            query_name  = log.rgb.cyan, # log.rgb.cyan,
+        )            
+            
+        t = ascii_table(res, style=ascii_table.style(style=search_cfg.ascii_style), colors=colors, max_width=search_cfg.ascii_max_col_chars)
+        t.print(search_cfg.live_print, search_cfg.ascii_nocolor)

@@ -1,55 +1,7 @@
 import time
-import shutil
-import pandas as pd
-
-from harp._search import search_cfg
-from harp._utils import Record
-from enum import Enum
-
-from core import log
-
-class _style:
-    """
-    A class to define the style of a table using specific characters.
-    """
-    class ui_cfg:
-        """
-        Configuration for UI elements like bars and padding.
-        """
-
-        def __init__(self):
-            self.outer_vbar = True
-            self.outer_hbar = True  
-            self.inner_vbar = True
-            self.inner_hbar = False
-            self.hpadding = 1
-            self.vpadding = 0
-    
-    def __init__(self, style:str):
-        self.h      = style[0]   # horizontal char
-        self.v      = style[1]   # vertical char
-        self.tl     = style[2]   # corner top left
-        self.tr     = style[3]   # corner top right
-        self.bl     = style[4]   # corner bot left
-        self.br     = style[5]   # corner bot right
-        self.ml     = style[6]   # mid left 
-        self.mr     = style[7]   # mid right
-        self.mt     = style[8]   # mid top
-        self.mb     = style[9]   # mid bot
-        self.cr     = style[10]  # cross
-        
-        self.cfg = _style.ui_cfg()
-
-
-class ui_styles(Enum): 
-    """
-    Enum class for building different table styles.
-    """
-
-    squared = _style("─│┌┐└┘├┤┬┴┼")
-    rounded = _style("─│╭╮╰╯├┤┬┴┼")
-    simple  = _style("-|+++++++++")
-    double  = _style("═║╔╗╚╝╠╣╦╩╬")
+# import shutil
+from typing import Literal
+# import pandas as pd
 
 
 class ascii_table:
@@ -58,35 +10,77 @@ class ascii_table:
     A class to represent a table for displaying data in a formatted way.
     """
     
-    def __init__(self, df: pd.DataFrame, style=ui_styles.simple):
+    class style:
+        """
+        A class to define the style of a table using specific characters.
+        """
+        def __init__(self, 
+            inner_vbar = True,
+            inner_hbar = False,
+            h_padding = 1,
+            v_padding = 0,
+            style: Literal["squared", "rounded", "simple", "double"] = "squared",
+        ):
+        
+            styles = dict(
+                squared = "─│┌┐└┘├┤┬┴┼",
+                rounded = "─│╭╮╰╯├┤┬┴┼",
+                simple  = "-|+++++++++",
+                double  = "═║╔╗╚╝╠╣╦╩╬",
+            )
+            
+            self.style = styles[style]
+        
+            self.inner_vbar = inner_vbar
+            self.inner_hbar = inner_hbar
+            self.h_padding = h_padding
+            self.v_padding = v_padding
+        
+            # internal config
+            self.h      = self.style[0]   # horizontal char
+            self.v      = self.style[1]   # vertical char
+            self.tl     = self.style[2]   # corner top left
+            self.tr     = self.style[3]   # corner top right
+            self.bl     = self.style[4]   # corner bot left
+            self.br     = self.style[5]   # corner bot right
+            self.ml     = self.style[6]   # mid left 
+            self.mr     = self.style[7]   # mid right
+            self.mt     = self.style[8]   # mid top
+            self.mb     = self.style[9]   # mid bot
+            self.cr     = self.style[10]  # cross
+        
+            self.live_print_target_time = 0.100 # s
+    
+    def __init__(self, df, style=style(), colors={}, max_width: int|None=35):
+        """
+        Ascii table constructor
+        df: source table, pd.DataFrame
+        style: allows to override the styling of the table
+        colors: is a dictionnary of core.log.rgb colors like {column: rgb.green}
+        
+        Basic usage:
+                ascii_table(res).print()
+        """
         self.df = df
-        self.style = style.value
+        self._style = style
         
         df_str = df.astype(str)
         self.columns: list[str] = df_str.columns
         self.spaces: list[int] = df_str[self.columns].apply(
             lambda col: max(len(col.name), col.str.len().max())
         ).tolist()
-        self.terminal = shutil.get_terminal_size()
         
-        colors = dict(
-            match       =   log.rgb.gray,
-            dims        =   log.rgb.red,
-            spatial     =   log.rgb.orange,
-            units       =   log.rgb.purple,
-            name        =   None,
-            dataset     =   log.rgb.blue,
-            timerange   =   log.rgb.orange,
-            short_name  =   None, # log.rgb.green, # log.rgb.cyan,
-            query_name  =   log.rgb.cyan, # log.rgb.cyan,
-            score       =   None,
-            uscore      =   None,
-            search      =   None,
-        )
+        # NOTE: could use interactive / dynamic ranges, more complex tough
+        # self.terminal = shutil.get_terminal_size()
+        
+        for c in self.columns:
+            if c not in colors:
+                colors[c] = None
+        
         self.colors = [colors[i] for i in self.columns]
         
         # limiting column max width
-        max_width = search_cfg.ascii_max_col_chars
+        self.max_width = max_width
         if max_width is not None:
             for i, v in enumerate(self.spaces):
                 if v > max_width:
@@ -94,11 +88,12 @@ class ascii_table:
         
         
         
-    def print(self, live_print=False):
-        self.to_string(live_print)
+    def print(self, live_print=False, no_color=False):
+        s = self.to_string(live_print, no_color)
+        print(s)
         
     
-    def to_string(self, live_print=False):
+    def to_string(self, live_print=False, no_color=True):
         """
         Generates an ascii representation of the dataset provided in the constructor.
         """
@@ -109,23 +104,25 @@ class ascii_table:
             # width_overshoot = width_footprint - self.terminal.columns
     
         # config
-        ivb = self.style.cfg.inner_vbar
-        ihb = self.style.cfg.inner_hbar
-        hp  = self.style.cfg.hpadding
-        vp  = self.style.cfg.vpadding
+        ivb = self._style.inner_vbar
+        ihb = self._style.inner_hbar
+        hp  = self._style.h_padding
+        vp  = self._style.v_padding
         
         # style characters
-        h   = self.style.h  # horizontal
-        v   = self.style.v  # vertical 
-        tl  = self.style.tl # top left corner            
-        tr  = self.style.tr # top right corner
-        bl  = self.style.bl # bottom left
-        br  = self.style.br # bottom right
-        mr  = self.style.mr # mid right              
-        mt  = self.style.mt # mid top         
-        ml  = self.style.ml # mid left           
-        mb  = self.style.mb # mid bottom         
-        cr  = self.style.cr # cross
+        h   = self._style.h  # horizontal
+        v   = self._style.v  # vertical 
+        tl  = self._style.tl # top left corner            
+        tr  = self._style.tr # top right corner
+        bl  = self._style.bl # bottom left
+        br  = self._style.br # bottom right
+        mr  = self._style.mr # mid right              
+        mt  = self._style.mt # mid top         
+        ml  = self._style.ml # mid left           
+        mb  = self._style.mb # mid bottom         
+        cr  = self._style.cr # cross
+    
+        max_width = self.max_width
     
         spaces = self.spaces.copy()
         colors = self.colors.copy()
@@ -194,18 +191,18 @@ class ascii_table:
         
         def _format_str(s):
             
-            l = search_cfg.ascii_max_col_chars
+            l = max_width
             if len(s) > l:
                 s = s[:l-1] + "‥"
             return s
 
                 
         # disable for performance reason
-        if not search_cfg.ascii_max_col_chars:
+        if not max_width:
             _format_str = lambda x: x
         
         # disable colors
-        if search_cfg.ascii_nocolor:
+        if no_color:
             _color_str = lambda x, y: x
         
         def _line_content(line):
@@ -233,7 +230,7 @@ class ascii_table:
         headers = [s.capitalize() for s in self.columns]
         
         
-        itr = search_cfg.live_print_target_time / len(self.df)
+        itr = self._style.live_print_target_time / len(self.df)
         itr = min(itr, 0.015) 
         fn = lines.append if not live_print else lambda x: (time.sleep(itr), print(x, flush=True))
         
@@ -252,7 +249,6 @@ class ascii_table:
         fn(_line_separator("bot"))
         fn("")
         
-        
         if not live_print: 
             message = "\n".join(lines)
-            print(message)
+            return message

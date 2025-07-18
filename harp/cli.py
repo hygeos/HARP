@@ -4,7 +4,8 @@ from core import log
 from harp._search import search_cfg
 from harp._search.search import search
     
-    
+import harp
+
 import argparse
 from sys import exit
 
@@ -55,7 +56,6 @@ def entry(args=None):
     )
     
     
-    
     args = parser.parse_args()
     
     if args.minimum is not None: 
@@ -88,8 +88,11 @@ def entry(args=None):
     if sources and not isinstance(sources, list):
         sources = [sources]
         
-    st = args.style
-    search_cfg.ascii_style = getattr(search_cfg.styles, st)
+    search_cfg.ascii_style = args.style
+        
+    if not args.debug:
+        log.silence(harp, log.lvl.DEBUG)
+        
         
     apply_user_search_config()
     

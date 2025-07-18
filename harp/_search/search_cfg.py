@@ -1,5 +1,3 @@
-from harp._search.ascii_table import ui_styles as styles
-
 strict = False
 
 word_threshold = 0.76
@@ -16,7 +14,7 @@ display_query_name = 0
 live_print = True
 live_print_target_time = 0.100 # in s
 
-ascii_style = styles.squared
+ascii_style = "squared"
 ascii_max_col_chars = None
 ascii_nocolor = False
 
