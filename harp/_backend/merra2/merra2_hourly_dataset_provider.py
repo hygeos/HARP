@@ -52,7 +52,7 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
         self.timerange_str = "1980 … -45days"
         
 
-    @interface
+    # @interface
     def download(self, variables: list[str], time: datetime, *, area: dict=None, offline=False) -> list[Path]:
         """
         variables are expected to be raw

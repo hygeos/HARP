@@ -79,7 +79,7 @@
 #         return ds
 #     # ------------------------------
 
-#     @interface
+#     # @interface
 #     def download(self, variables: list[str], d: date, area: None|list=None) -> Path:
 #         """
 #         Download ERA5 model for the given date

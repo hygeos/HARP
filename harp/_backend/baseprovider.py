@@ -17,7 +17,7 @@ from harp._backend.computable import Computable
 @abstract
 class BaseDatasetProvider:
     
-    @interface
+    # # @interface
     def get(self,
             time: datetime, # type dictates if dt or range
             *,
@@ -94,7 +94,7 @@ class BaseDatasetProvider:
         return ds
     
     
-    @interface    
+    # @interface    
     def __init__(self, variables: dict[str: str], config: dict={}):
         
         self.variables = variables
@@ -106,7 +106,7 @@ class BaseDatasetProvider:
         self._check_config()
         self.computables = {}    # map of computable variables
         
-    @interface
+    # @interface
     def _get_meta_table(self):
         """
         Returns a dataframe containing all interfaced variables with the columns:
@@ -118,7 +118,7 @@ class BaseDatasetProvider:
         
         return self.nomenclature.table
         
-    @interface
+    # @interface
     def bind_computable(self, name: str, func: Callable, operands: list[str]):
         """Binds a virtual variable via a function and the input variables required
 

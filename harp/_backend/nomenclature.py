@@ -11,7 +11,7 @@ import pandas as pd
 
 
     
-@interface
+# @interface
 def _load_csv_table(path: Path):
     
     if not path.is_file():
@@ -34,7 +34,7 @@ class Nomenclature:
     # harp_nomenclature_path = Path(Path(__file__).parent.parent / "harp_nomenclature.csv")
     # harp_ref_table = _load_csv_table(harp_nomenclature_path)
     
-    # @interface
+    # # @interface
     def __init__(self, csv: Path|list[Path]|pd.DataFrame, cols:list[str], query_column: str, context: str):
         """
 
@@ -69,7 +69,7 @@ class Nomenclature:
             self._assert_col_has_no_doubles(col)
 
         
-    @interface
+    # @interface
     def check_has_query_name(self, query_name: str):
         lines = table.select(self.table, where=(self.raw_col, "=", query_name))
         if not lines.values.size > 0:
@@ -79,7 +79,7 @@ class Nomenclature:
                       e=KeyError
             )
     
-    @interface
+    # @interface
     def _assert_col_has_no_doubles(self, col: str):
         """Asserts that the provided column in table has no double values
         Args:

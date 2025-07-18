@@ -9,7 +9,7 @@ from core.static import constraint
 
 from harp._backend.cds import cds_tables_meta_infos
 
-@interface
+# @interface
 def _read_csv_as_df(path: Path):
     table = pd.read_csv(path, sep=",", skipinitialspace=True, keep_default_na=True)
     # table = table.dropna()
@@ -19,7 +19,7 @@ def _read_csv_as_df(path: Path):
 
 class cds_table:
 
-    @interface
+    # @interface
     def __init__(self, files: list):        
         self.files: list = files
         c = constraint.path(exists=True, mode="file", context="HARP internal CDS tables")

@@ -47,6 +47,14 @@ def entry(args=None):
     
     cmd.add_argument("--nocolor", "-c", action="store_true", help="Disable colored output", default=False)
     
+    cmd.add_argument(
+        "--style", type=str,
+        choices=["simple", "rounded", "square", "double"],
+        help="Select table style (simple, rounded, square)",
+        default="squared"  # Or whatever default you prefer
+    )
+    
+    
     
     args = parser.parse_args()
     
@@ -79,6 +87,9 @@ def entry(args=None):
     sources = getattr(args, "from")
     if sources and not isinstance(sources, list):
         sources = [sources]
+        
+    st = args.style
+    search_cfg.ascii_style = getattr(search_cfg.styles, st)
         
     apply_user_search_config()
     

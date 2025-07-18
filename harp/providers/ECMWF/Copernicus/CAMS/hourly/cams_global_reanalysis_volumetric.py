@@ -44,7 +44,7 @@ class GlobalReanalysisVolumetric(cds.CdsDatasetProvider):
         super().__init__(csv_files=files, variables=variables, config=config)
         
     
-    @interface
+    # @interface
     def _execute_cds_request(self, target_filepath: Path, query: dict, area: dict=None):
         
         if area is not None:

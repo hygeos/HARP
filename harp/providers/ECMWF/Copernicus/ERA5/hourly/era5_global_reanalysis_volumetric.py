@@ -20,7 +20,7 @@ class GlobalReanalysisVolumetric(cds.CdsDatasetProvider):
     
     timespecs = RegularTimespec(timedelta(seconds=0), 24)
     
-    def __init__(self, variables: dict[str: str], config: dict={}):
+    def __init__(self, *, variables: dict[str: str], config: dict={}):
         folder = Path(__file__).parent / "tables"
         files = [
             folder / "era5_table9.csv",
@@ -30,7 +30,7 @@ class GlobalReanalysisVolumetric(cds.CdsDatasetProvider):
         self.timerange_str = "1940 … -5day"
         
     
-    @interface
+    # @interface
     def _execute_cds_request(self, target_filepath: Path, query, area: dict=None):
         
         # TODO area

@@ -218,6 +218,7 @@ def _apply_specific_format(t):
     # Format spatial column
     def _format_deg_zero_padded(s):
         x, y = s.split(" x ")
+        x, y = x.strip(), y.strip()
         x = x + '0' * max((5 - len(x)), 0)
         y = y + '0' * max((5 - len(y)), 0)
         return f"{x}° x {y}°"
@@ -238,7 +239,8 @@ def _apply_specific_format(t):
         # Format and standardize Units column
         t["units"] = t["units"].apply(lambda x: str(x).replace(".", " ").replace("**", ""))
         
-        _datafram_cols_diff(t, "units_", "units", "short_name", output_file=".harp_unit_formatter_diagnosis.txt")
+        # DEBUG:
+        #  _datafram_cols_diff(t, "units_", "units", "short_name", output_file=".harp_unit_formatter_diagnosis.txt")
         
         # t.drop([["units_"]], axis=1)
 

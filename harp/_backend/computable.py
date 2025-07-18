@@ -10,7 +10,7 @@ class Computable:
     existing datasets using provided functions and operands (variables).
     """    
     
-    @interface
+    # @interface
     def __init__(self, func: Callable, operands: list[str], keep_operands=False):
         self.func = func
         self.operands = operands

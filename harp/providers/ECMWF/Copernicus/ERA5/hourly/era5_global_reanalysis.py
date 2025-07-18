@@ -21,7 +21,7 @@ class GlobalReanalysis(cds.CdsDatasetProvider):
     
     timespecs = RegularTimespec(timedelta(seconds=0), 24)
     
-    def __init__(self, variables: dict[str: str], config: dict={}):
+    def __init__(self, *, variables: dict[str: str], config: dict={}):
         folder = Path(__file__).parent / "tables"
         files = [
             folder / "era5_table1.csv",
@@ -39,7 +39,7 @@ class GlobalReanalysis(cds.CdsDatasetProvider):
         # self.timerange = Timerange(start=datetime(1940, 1 ,1), end=latest)
         self.timerange_str = "1940 … -5days"
     
-    @interface
+    # @interface
     def _execute_cds_request(self, target_filepath: Path, query, area: dict=None):
         
         if area is not None:

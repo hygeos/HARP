@@ -3,11 +3,18 @@ import logging
 from pathlib import Path
 import os
 
+from core import log
+
 import cdsapi
 
 def get_client(url):
     
-    dotrc = os.environ.get("CDSAPI_RC", os.path.expanduser("~/.cdsapirc"))
+    dotrc = Path(os.environ.get("CDSAPI_RC", os.path.expanduser("~/.cdsapirc")))
+    if not dotrc.is_file():
+        log.error("Cannot find file ~/.cdsapirc", e=None)
+        log.disp(log.rgb.orange, "(?) Instructions to set up Harp for Copernicus: \n -> www.github.com/hygeos/harp/") # TODO proper doc
+        raise RuntimeError("Missing CDS credential file")
+    
     config = _read_config(dotrc) 
 
     key = config['key']

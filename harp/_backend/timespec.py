@@ -60,7 +60,7 @@ class RegularTimespec:
         if not len(times) == 2:
             log.error("Expected Collection of at least 2 datetimes", e=RuntimeError)
             
-    @interface
+    # @interface
     def get_complete_day(self, day: date):
         day = datetime(day.year, day.month, day.day)
         return np.array(self.intraday_timesteps) + day

@@ -36,7 +36,7 @@ class CdsDatasetProvider(BaseDatasetProvider):
     timespecs = RegularTimespec(timedelta(seconds=0), 24) # default specs to hourly from 00:00 to 23:00
     
     
-    @interface
+    # @interface
     def __init__(self, *, csv_files: list[Path], variables: dict[str: str], config: dict={}):
     
         super().__init__(variables=variables, config=config)
