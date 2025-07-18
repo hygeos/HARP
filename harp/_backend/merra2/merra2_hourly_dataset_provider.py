@@ -49,6 +49,8 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
             self.infos = json.load(f)
         
         self.nomenclature = Nomenclature(self.variables_csv_path, cols=["query_name"], query_column="query_name", context="MERRA2")
+        self.timerange_str = "1980 … -45days"
+        
 
     @interface
     def download(self, variables: list[str], time: datetime, *, area: dict=None, offline=False) -> list[Path]:

@@ -6,8 +6,8 @@ from core.monitor import Chrono
 
 def search(keywords, sources):
 
-    with Chrono("Exuction time", unit="s"):
-        log.disp("> Searching Metadatabase..", flush=True)
+    with Chrono("Execution time", unit="s"):
+        log.info("Searching Metadatabase..", flush=True)
         
         res = []
         for df in metadatastore.get_tables():

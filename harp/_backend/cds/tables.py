@@ -7,6 +7,8 @@ from core import table
 from core.static import interface
 from core.static import constraint
 
+from harp._backend.cds import cds_tables_meta_infos
+
 @interface
 def _read_csv_as_df(path: Path):
     table = pd.read_csv(path, sep=",", skipinitialspace=True, keep_default_na=True)
@@ -28,10 +30,12 @@ class cds_table:
         f = other_files.pop(0)
         c.check(f)          # check filepath is valid
         self.table = _read_csv_as_df(f)
-        
+        cds_table._append_meta_infos(self.table, f)
+                
         for f in other_files:    # ingest all provided csv files
             c.check(f)          # check filepath is valid
             t = _read_csv_as_df(f)
+            cds_table._append_meta_infos(t, f)
             
             # concatenate all the dataframes
             self.table = t if self.table is None else pd.concat([self.table, t], axis=0, ignore_index=False)
@@ -42,6 +46,16 @@ class cds_table:
         log.debug(f"Nomenclature: droping variables {doubles} because of ambigous definition (duplicate)")
         self.table = self.table.drop_duplicates(subset=['query_name'])
         
+    
+    def _append_meta_infos(t: pd.DataFrame, f: Path):
+        if "era5" in f.name:
+            mtable = cds_tables_meta_infos.era5[f.name]
+        else: # TODO: plug CAMS
+            pass
+            
+        # t["src"] = f
+        t["dims"] = mtable["dimensions"]
+        t["spatial"] = mtable["spatial_degrees"]
     
     def get_files(self):
         return self.files.copy()

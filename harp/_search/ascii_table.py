@@ -71,10 +71,13 @@ class ascii_table:
         
         colors = dict(
             match       =   log.rgb.gray,
-            units       =   log.rgb.orange,
+            dims        =   log.rgb.red,
+            spatial     =   log.rgb.orange,
+            units       =   log.rgb.purple,
             name        =   None,
-            dataset     =   log.rgb.purple,
-            short_name  =   None, # log.rgb.cyan,
+            dataset     =   log.rgb.blue,
+            timerange   =   log.rgb.orange,
+            short_name  =   None, # log.rgb.green, # log.rgb.cyan,
             query_name  =   log.rgb.cyan, # log.rgb.cyan,
             score       =   None,
             uscore      =   None,

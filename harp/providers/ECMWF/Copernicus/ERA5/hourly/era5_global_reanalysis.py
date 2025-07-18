@@ -4,6 +4,7 @@ from pathlib import Path
 from core import log
 from core.static import interface
 
+from harp._backend.timerange import Timerange
 from harp._backend.timespec import RegularTimespec
 from harp._backend import cds
 
@@ -23,16 +24,20 @@ class GlobalReanalysis(cds.CdsDatasetProvider):
     def __init__(self, variables: dict[str: str], config: dict={}):
         folder = Path(__file__).parent / "tables"
         files = [
-            folder / "table1.csv",
-            folder / "table2.csv",
-            folder / "table3.csv",
-            folder / "table4.csv",
-            folder / "table5.csv",
-            folder / "table6.csv",
-            folder / "table7.csv",
-            folder / "table8.csv",
+            folder / "era5_table1.csv",
+            folder / "era5_table2.csv",
+            folder / "era5_table3.csv",
+            folder / "era5_table4.csv",
+            folder / "era5_table5.csv",
+            folder / "era5_table6.csv",
+            folder / "era5_table7.csv",
+            folder / "era5_table8.csv",
         ]
         super().__init__(csv_files=files, variables=variables, config=config)
+        
+        # latest = datetime.now() - timedelta(days=6)
+        # self.timerange = Timerange(start=datetime(1940, 1 ,1), end=latest)
+        self.timerange_str = "1940 … -5days"
     
     @interface
     def _execute_cds_request(self, target_filepath: Path, query, area: dict=None):

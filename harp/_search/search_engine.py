@@ -5,6 +5,8 @@ import string
 import numpy as np
 import pandas as pd
 
+from core import log
+
 from harp._search import search_cfg
 
 def _split_string(s: str):
@@ -162,6 +164,7 @@ def compile(
         
         dataset_source = t.attrs["institution"] + "." + t.attrs["collection"] + "." + t.attrs["dataset"]
         t["dataset"] = dataset_source
+        t["timerange"] = t.attrs["timerange"]
         t["uscore"] = t["score"].apply(lambda x: round(x, 2))
         t["score"] = t["score"].apply(lambda x: min(round(x + 0.0499, 1), 1.0))
         t["match"] = t["score"].apply(lambda x: f"{x:.0%}".rjust(5))
@@ -187,9 +190,12 @@ def compile(
     minimum = search_cfg.match_threshold
     results = results[results['score'] >= (minimum / 100)]
     
+    
+    _apply_specific_format(results)
+    
     # reordering
     # results = results.drop(["search"], axis=1)
-    results = results[["match", "units", "name", "dataset", "query_name", "short_name", "score", "uscore", "search"]]
+    results = results[["match",  "dims", "spatial", "units", "name", "dataset", "timerange", "query_name", "short_name", "score", "uscore", "search"]]
     
     # togglable queryname display
     if search_cfg.display_query_name == False:
@@ -198,7 +204,87 @@ def compile(
         
     if not search_cfg.debug:
         results = results.drop(["score", "uscore", "search"], axis=1)
-             
+    
+    n = len(results)
+    log.info(f"{n} entries found.", flush=True)
+    
     
     return results
     
+    
+
+def _apply_specific_format(t):
+    
+    # Format spatial column
+    def _format_deg_zero_padded(s):
+        x, y = s.split(" x ")
+        x = x + '0' * max((5 - len(x)), 0)
+        y = y + '0' * max((5 - len(y)), 0)
+        return f"{x}° x {y}°"
+        
+    def _format_deg_align(s):
+        nchar = 5
+        x, y = s.split(" x ")
+        return f"{(x+'°').ljust(nchar)} x {y}°"
+    
+    t["spatial"] = t["spatial"].apply(_format_deg_zero_padded)
+    
+    
+    
+    def _format_units(t):
+    
+        t["units_"] = t["units"]
+        
+        # Format and standardize Units column
+        t["units"] = t["units"].apply(lambda x: str(x).replace(".", " ").replace("**", ""))
+        
+        _datafram_cols_diff(t, "units_", "units", "short_name", output_file=".harp_unit_formatter_diagnosis.txt")
+        
+        # t.drop([["units_"]], axis=1)
+
+    _format_units(t)
+
+def _datafram_cols_diff(df, c1, c2, ref=None, output_file=None):
+    """
+    Tracks changes in a DataFrame column and outputs them in a text format.
+    
+    Parameters:
+    - df: pandas DataFrame
+    - column_name: str, name of the column to track
+    - output_file: str (optional), path to save the output text file
+    
+    Returns:
+    - changes_df: DataFrame containing only rows where changes occurred
+    - output_text: formatted text showing the changes
+    """
+    
+    # Find rows where the value changed (excluding first row which has no previous value)
+    diff_rows = df[df[c1] != df[c2]]
+    # diff_rows = diff_rows.iloc[1:]  # Skip first row which is NaN comparison
+    
+    # Prepare the output text
+    output_lines = []
+    output_lines.append(f"Diff between columns: {c1} and {c2}")
+    output_lines.append(f"Rows with differences: {len(diff_rows)}")
+    output_lines.append(f"Percent of rows: {int((len(diff_rows) / len(df)) * 100)}%")
+    output_lines.append("Diffs:")
+    
+    for idx, row in diff_rows.iterrows():
+        c1_val = row[c1]
+        c2_val = row[c2]
+        
+        if ref is not None:
+            idx = row[ref] + ": "
+        else:
+            idx = ""
+        output_lines.append(f"{idx.ljust(20)}{str(c1_val).ljust(30)} >> {str(c2_val).rjust(30)}")
+    
+    # Combine all lines into a single text
+    output_text = "\n".join(output_lines)
+    
+    # Save to file if output path is provided
+    if output_file:
+        with open(output_file, 'w') as f:
+            f.write(output_text)
+    else:
+        print(output_text)

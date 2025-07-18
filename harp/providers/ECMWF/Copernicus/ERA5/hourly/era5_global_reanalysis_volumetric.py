@@ -23,9 +23,12 @@ class GlobalReanalysisVolumetric(cds.CdsDatasetProvider):
     def __init__(self, variables: dict[str: str], config: dict={}):
         folder = Path(__file__).parent / "tables"
         files = [
-            folder / "table9.csv",
+            folder / "era5_table9.csv",
         ]
         super().__init__(csv_files=files, variables=variables, config=config)
+        
+        self.timerange_str = "1940 … -5day"
+        
     
     @interface
     def _execute_cds_request(self, target_filepath: Path, query, area: dict=None):

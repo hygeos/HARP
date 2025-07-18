@@ -9,7 +9,7 @@ from core.static import interface
 from core import log
 
 
-class timerange:
+class Timerange:
     """
     Generic helper class which encapsulate small logic to determine wheter the datetime
     is present in the Timerange defined in the constructor
@@ -18,6 +18,8 @@ class timerange:
     """
     
     def __init__(self, start: datetime|timedelta, end: datetime|timedelta):
+        
+        s, e = start, end
         
         now = datetime.now()
         
