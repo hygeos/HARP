@@ -52,16 +52,25 @@ class cds_table:
         
         t = self.table.copy()
         
+        # remove lines where query_name contains space (unqueryable)
+        result = t[t["query_name"].str.contains('Not available', na=False)]
+        if len(result) > 0:
+            log.debug(log.rgb.orange, 
+                "Unqueryable parameter (from the CDS):  ", 
+                ", ".join(list(result["short_name"].values))
+        )
+        self.table = t[~t["query_name"].astype(str).str.contains('Not available', na=False)].copy()
+        
+        # remove lines where query_name contains space (unqueryable)
         result = t[t["query_name"].str.contains(' ', na=False)]
         if len(result) > 0:
             log.debug(log.rgb.orange, 
                 "Invalid char ' ' in query name (ECMWF doc error): ", 
                 ", ".join(list(result["query_name"].values))
         )
-        # self.table = t[~t["query_name"].str.contains(' ', na=False)].copy() # remove lines with spaces in query_name
         self.table = t[~t["query_name"].astype(str).str.contains(' ', na=False)].copy()
         
-        
+        # warn where query_name contains '-' (should be '_')
         result = t[t["query_name"].str.contains('-', na=False)]
         if len(result) > 0:
             log.debug(log.rgb.orange, 
@@ -69,7 +78,7 @@ class cds_table:
                 ", ".join(list(result["query_name"].values))
             )
             
-            
+        # warn where short_name starts with a number (shouldn't)
         result = t[t["short_name"].str.contains(r'^[0-9]', na=False, regex=True)]
         if len(result) > 0:
             log.debug(log.rgb.orange, 
