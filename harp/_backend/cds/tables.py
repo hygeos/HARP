@@ -49,6 +49,37 @@ class cds_table:
         log.debug(f"Nomenclature: droping variables {doubles} because of ambigous definition (duplicate)")
         self.table = self.table.drop_duplicates(subset=['query_name'])
         
+        
+        t = self.table.copy()
+        
+        result = t[t["query_name"].str.contains(' ', na=False)]
+        if len(result) > 0:
+            log.debug(log.rgb.orange, 
+                "Invalid char ' ' in query name (ECMWF doc error): ", 
+                ", ".join(list(result["query_name"].values))
+        )
+        # self.table = t[~t["query_name"].str.contains(' ', na=False)].copy() # remove lines with spaces in query_name
+        self.table = t[~t["query_name"].astype(str).str.contains(' ', na=False)].copy()
+        
+        
+        result = t[t["query_name"].str.contains('-', na=False)]
+        if len(result) > 0:
+            log.debug(log.rgb.orange, 
+                "Invalid char '-' in query name (ECMWF doc error): ", 
+                ", ".join(list(result["query_name"].values))
+            )
+            
+            
+        result = t[t["short_name"].str.contains(r'^[0-9]', na=False, regex=True)]
+        if len(result) > 0:
+            log.debug(log.rgb.orange, 
+                "Invalid char (starting with number) in query name (ECMWF doc error): ", 
+                ", ".join(list(result["short_name"].values))
+            )
+        
+        self.table["query_name"] = self.table["query_name"].str.replace("-", "_") # NOTE: ECMWF doc contains errors, with cds_name containing "-" instead of "_" 
+        
+    
     
     def _append_meta_infos(t: pd.DataFrame, f: Path):
         if "era5" in f.name:

@@ -91,13 +91,15 @@ class CdsDatasetProvider(BaseDatasetProvider):
         
         dataset = self.name
         request = {
-                'product_type': [self.product_type],
-                'variable':     query["variables"],
-                'year':         query["years"],
-                'month':        query["months"],
-                'day':          query["days"],
-                'time':         query["times"],
-                'data_format':'netcdf',
+                "product_type":     [self.product_type],
+                "variable":         query["variables"],
+                "year":             query["years"],
+                "month":            query["months"],
+                "day":              query["days"],
+                "time":             query["times"],
+                "data_format":      "netcdf",
+                "download_format":  "unarchived"
+                
         }
         
         # if area is not None: 
@@ -199,3 +201,5 @@ class CdsDatasetProvider(BaseDatasetProvider):
         
     # plug the format search table function
     format_search_table = cds_search_preprocess.format_search_table
+    
+

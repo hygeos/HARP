@@ -35,7 +35,7 @@ default_config_dict = dict(
 default_config.ingest(default_config_dict)
 
 
-_debug = env.getvar("HARP_DEBUG", False)
+_debug = bool(env.getvar("HARP_DEBUG", False))
 
 if not _debug:
     log.silence(harp, log.lvl.DEBUG)

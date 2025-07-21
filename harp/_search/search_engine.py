@@ -183,33 +183,36 @@ def compile(
         return []
 
     # concatenation
-    results = pd.concat(filtered, ignore_index=True)
-    results = results.sort_values("score", ascending=False)
+    table = pd.concat(filtered, ignore_index=True)
+    table = table.sort_values("score", ascending=False)
     
     # minimum threshold
     minimum = search_cfg.match_threshold
-    results = results[results['score'] >= (minimum / 100)]
+    table = table[table['score'] >= (minimum / 100)]
     
     
-    _apply_specific_format(results)
+    _apply_specific_format(table)
     
     # reordering
     # results = results.drop(["search"], axis=1)
-    results = results[["match",  "dims", "spatial", "units", "name", "dataset", "timerange", "query_name", "short_name", "score", "uscore", "search"]]
+    table = table.rename(columns={"short_name": "param"})
+    table = table[["match",  "dims", "spatial", "units", "name", "param", "dataset", "timerange", "query_name", "score", "uscore", "search"]]
+    
+    
     
     # togglable queryname display
     if search_cfg.display_query_name == False:
         
-        results = results.drop(["query_name"], axis=1)
+        table = table.drop(["query_name"], axis=1)
         
     if not search_cfg.debug:
-        results = results.drop(["score", "uscore", "search"], axis=1)
+        table = table.drop(["score", "uscore", "search"], axis=1)
     
-    n = len(results)
+    n = len(table)
     log.info(f"{n} entries found.", flush=True)
     
     
-    return results
+    return table
     
     
 

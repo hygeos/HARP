@@ -46,8 +46,8 @@ Boundary layer height,m,boundary_layer_height,blh,159,x,x
 Total cloud cover,(0 - 1),total_cloud_cover,tcc,164,x,x
 10 metre U wind component,m s**-1,10m_u_component_of_wind,u10,165,x,x
 10 metre V wind component,m s**-1,10m_v_component_of_wind,v10,166,x,x
-2 metre temperature,K,2m_temperature,2t,167,x,x
-2 metre dewpoint temperature,K,2m_dewpoint_temperature,2d,168,x,x
+2 metre temperature,K,2m_temperature,t2m,167,x,x
+2 metre dewpoint temperature,K,2m_dewpoint_temperature,d2m,168,x,x
 Soil temperature level 21,K,soil_temperature_level_2,stl2,170,x,x
 Soil temperature level 31,K,soil_temperature_level_3,stl3,183,x,x
 Low cloud cover,(0 - 1),low_cloud_cover,lcc,186,x,x
@@ -69,8 +69,8 @@ Temperature of snow layer,K,temperature_of_snow_layer,tsn,238,x,x
 Forecast albedo,(0 - 1),forecast_albedo,fal,243,x,x
 Forecast surface roughness,m,forecast_surface_roughness,fsr,244,x,x
 Forecast logarithm of surface roughness for heat,~,forecast_logarithm_of_surface_roughness_for_heat,flsr,245,x,x
-100 metre U wind component,m s**-1,100m_u-component_of_wind,100u,228246,x,x
-100 metre V wind component,m s**-1,100m_v-component_of_wind,100v,228247,x,x
+100 metre U wind component,m s**-1,100m_u-component_of_wind,u100,228246,x,x
+100 metre V wind component,m s**-1,100m_v-component_of_wind,v100,228247,x,x
 Precipitation type2,code table (4.201),precipitation_type,ptype,260015,,x
 K index2,K,k_index,kx,260121,,x
 Total totals index2,K,total_totals_index,totalx,260123,,x

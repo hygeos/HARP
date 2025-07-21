@@ -47,13 +47,14 @@ class GlobalReanalysis(cds.CdsDatasetProvider):
         
         dataset = self.name
         request = {
-                'product_type': [self.product_type],
-                'variable':     query["variables"],
-                'year':         query["years"],
-                'month':        query["months"],
-                'day':          query["days"],
-                'time':         query["times"],
-                'data_format':'netcdf',
+                "product_type":     [self.product_type],
+                "variable":         query["variables"],
+                "year":             query["years"],
+                "month":            query["months"],
+                "day":              query["days"],
+                "time":             query["times"],
+                "data_format":      "netcdf",
+                "download_format":  "unarchived"
         }
         
         # if area is not None: 
@@ -62,4 +63,3 @@ class GlobalReanalysis(cds.CdsDatasetProvider):
         client.retrieve(dataset, request, target_filepath)
         
         return
-   
