@@ -1,5 +1,6 @@
 from datetime import date, datetime, timedelta
 from pathlib import Path
+import pprint
 from tempfile import TemporaryDirectory
 from typing import Collection
 import uuid
@@ -58,10 +59,12 @@ class CdsDatasetProvider(BaseDatasetProvider):
         if isinstance(time, Collection): 
             log.error("Time range query not implemented yet", e=ValueError)
             
-        queries = self._decompose_query(variables, time, area=area)
+        queries = self._decompose_query_per_day(variables, time, area=area)
+        queries = self._remove_locally_present_variables(queries, area=area)
         
         for query in queries:
             
+            # log.debug("QUERY:\n", query)
             log.info(f"Querying {self.name} for variables {', '.join(query['variables'])} on {query['years']}-{query['months']}-{query['days']} {query['times']}")
                       
             with TemporaryDirectory() as tmpdir:
@@ -121,7 +124,7 @@ class CdsDatasetProvider(BaseDatasetProvider):
                 
         return files
                 
-    def _decompose_query(self, variables: list[str], time: datetime|list[datetime, datetime], *, area: dict=None):
+    def _decompose_query_per_day(self, variables: list[str], time: datetime|list[datetime, datetime], *, area: dict=None):
         """
         Decompose the query as a (series of) CDS query for the missing data,
         One query per day,
@@ -137,10 +140,12 @@ class CdsDatasetProvider(BaseDatasetProvider):
             log.error("Time range query not implemented yet", e=ValueError)
         
         timesteps = self.timespecs.get_encompassing_timesteps(time)
-        missing_variables = self._find_missing_variables(variables, timesteps, area=area)
         
-        if len(missing_variables) == 0:
-            return [] 
+        # NOTE: moving logic out of decomposition routine
+        # missing_variables = self._find_missing_variables(variables, timesteps, area=area)
+        
+        # if len(missing_variables) == 0:
+        #     return [] 
         
         dates = {}
         
@@ -149,7 +154,7 @@ class CdsDatasetProvider(BaseDatasetProvider):
             if day not in dates: 
                 dates[day] = []
             
-            dates[day].append(timestep.strftime("%H:%M"))
+            dates[day].append(timestep)
         
         
         queries = []
@@ -160,33 +165,44 @@ class CdsDatasetProvider(BaseDatasetProvider):
                 years   = d.year,
                 months  = d.month,
                 days    = d.day,
-                times   = dates[d],
-                variables = missing_variables,
+                times   = [t.strftime("%H:%M") for t in dates[d]],
+                _timesteps = dates[d],
+                variables = variables.copy(),
             )
             queries.append(query)
         
         return queries
         
     
-    def _find_missing_variables(self, variables, timesteps, area=None):
+    def _remove_locally_present_variables(self, queries, area=None):
+        """
+        Modifies inplace queries to remove variables which are present locally (harp cache)
+        """
         
         if area is not None:
             log.error("Not implemented yet", e=RuntimeError)
-        
-        missing_variables = []
-        
-        for variable in variables:
-            data_fully_present_locally = True
             
-            for timestep in timesteps:
-                if not self._exists_locally(variable, timestep):
-                    data_fully_present_locally = False
-                    break 
+        for query in queries:
+            stored_variables = {self.nomenclature.untranslate_query_name(v): v for v in query["variables"]}
+            
+            for variable in stored_variables.keys():                    # For each variable (stored != cds_name but short_name)
+                all_timesteps_stored_locally = True                     
+            
+                for timestep in query["_timesteps"]:                    # Check that all timesteps are present
+                    if not self._exists_locally(variable, timestep):    # already missing one, need to query anyway
+                        all_timesteps_stored_locally = False
+                        break
                 
-            if not data_fully_present_locally: 
-                missing_variables.append(variable)
+                if all_timesteps_stored_locally:
+                    log.debug(log.rgb.green, "Found locally: ", variable, " for ", query["_timesteps"], flush=True)
+                    
+                    query_name = stored_variables[variable]
+                    query["variables"].remove(query_name)
         
-        return missing_variables
+        # remove emptied queries
+        queries = [q for q in queries if q["variables"]]
+            
+        return queries
 
         
     def _standardize(self, ds):
