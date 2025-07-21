@@ -26,18 +26,16 @@ default_config_dict = dict(
     offline = False,
 )
 
-default_config_constraints = dict(
-    dir_storage     = constraint.path(exists=True, mode="dir"),
-    harmonize       = constraint.bool(),
-    offline         = constraint.bool(),
-    verbose_lvl     = constraint.literal(["error","warning","info","debug"])
-)
+# default_config_constraints = dict(
+#     dir_storage     = constraint.path(exists=True, mode="dir"),
+#     harmonize       = constraint.bool(),
+#     offline         = constraint.bool(),
+# )
 
 default_config.ingest(default_config_dict)
 
 
-class _internal:
-    debug = False
+_debug = env.getvar("HARP_DEBUG", False)
 
-if not _internal.debug:
+if not _debug:
     log.silence(harp, log.lvl.DEBUG)

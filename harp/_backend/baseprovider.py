@@ -17,6 +17,18 @@ from harp._backend.computable import Computable
 @abstract
 class BaseDatasetProvider:
     
+    # @interface    
+    def __init__(self, variables: dict[str: str], config: dict={}):
+        
+        self.variables = variables
+        
+        # Load default config and override keys passed through the config dict parameter
+        self.config = harp.config.default_config.copy()
+        self.config.ingest(config, override=True)
+        
+        self._check_config()
+        self.computables = {}    # map of computable variables
+    
     # # @interface
     def get(self,
             time: datetime, # type dictates if dt or range
@@ -44,6 +56,9 @@ class BaseDatasetProvider:
         operands    = [] # operands for computable variables
         computed    = [] # variables to compute from operands
         
+        # dst_var is the user given name, bound to an exisiting query_name
+        # Computable variable decomposition in operands, which are then inserted
+        # construct the query array (of query_names)
         for dst_var in self.variables:
             src_var = self.variables[dst_var]
             if isinstance(src_var, Computable):
@@ -56,12 +71,17 @@ class BaseDatasetProvider:
         reversed_aliases = {v: k for k, v in self.variables.items() if type(v) is str} # convert aliases from std: raw to raw: std for renaming queried vars 
         operands = list(set(operands))  # get unique list 
         
+        # translate query aliases
+        # translate operands aliases
+        operands    = [self.nomenclature.translate_to_query_name(op) for op in operands]
+        query       = [self.nomenclature.translate_to_query_name(qu) for qu in query]
+        
         direct_query = query.copy()
         query += operands           # append operands to the list of variables to download
         query = list(set(query))
         
         for dst_var in query: # check that every raw variable exist in the dataset provider nomenclature 
-            self.nomenclature.check_has_query_name(dst_var)
+            self.nomenclature.assert_has_query_param(dst_var)
             
         files = self.download(variables=query, time=time, offline=self.config.get("offline"))
         ds = xr.open_mfdataset(files, engine='netcdf4')
@@ -69,6 +89,10 @@ class BaseDatasetProvider:
         # harmonize if not disabled
         if self.config.get("harmonize"): 
             ds = self._standardize(ds)
+        
+        # unstranslate 
+        operands    = [self.nomenclature.untranslate_query_name(op) for op in operands]
+        query       = [self.nomenclature.untranslate_query_name(qu) for qu in query]
         
         keep = direct_query.copy()
         
@@ -94,17 +118,9 @@ class BaseDatasetProvider:
         return ds
     
     
-    # @interface    
-    def __init__(self, variables: dict[str: str], config: dict={}):
+    def get_config(self):
         
-        self.variables = variables
-        
-        # Load default config and override keys passed through the config dict parameter
-        self.config = harp.config.default_config.copy()
-        self.config.ingest(config, override=True)
-        
-        self._check_config()
-        self.computables = {}    # map of computable variables
+        return self.config.config_dict
         
     # @interface
     def _get_meta_table(self):
@@ -147,19 +163,22 @@ class BaseDatasetProvider:
         context = self.__class__.__name__
         path = self.config.get("dir_storage")
         if path is None:
+            log.warning("Environment variable 'DIR_ANCILLARY' not set")
+            log.disp(log.rgb.orange, "(?) Instructions to set up Harp: www.github.com/hygeos/harp/todo") # TODO proper doc
             log.error(f"Key \'dir_storage\' not provided in config for {context} object", e=RuntimeError)
-            
-        c = constraint.path(context=f"{context} object config", exists=True, mode="dir")
-        c.check(self.config.get("dir_storage"))
-        # log.warning(log.rgb.red, self.config.get("dir_storage"))
     
+        # Abandonned the idea of checking config values with constraints: makes heavy uses of core.static.interfaces        
+        # for k, c in harp.config.default_config_constraints.items():
+            # print(k, c)
+            # c.check(self.config.get(k))
+        
     
     def _split_and_store_atomic(self, ds):
         """
         Split and store dataset per variable and per timestep
         assumes self._get_target_file_path is implemented in subclass
         """
-    
+        
         for var in ds.data_vars:
             for i in range(ds[var].time.size):
                 
@@ -193,7 +212,7 @@ class BaseDatasetProvider:
         filestr = f"{self.collection}_{self.name}_"
         filestr += "region_" if region else "global_"
         filestr += time.strftime("%Y-%m-%dT%H:%MZ_")
-        filestr += f"_{variable}_"
+        filestr += f"_{variable}__"
         filestr += f"{self._get_storage_version()}.nc"
         
         return filestr    
@@ -205,9 +224,9 @@ class BaseDatasetProvider:
         Shoud increment only if needed, doesn't need to be phased with package version
         """
         
-        version = "2.0.2"
+        version = "3"
         
-        return "hsv" + version
+        return "v" + version
     
     
     @abstract # to be defined by subclasses

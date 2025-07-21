@@ -48,7 +48,7 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
         with open(self.infos_json_path, "r") as f: 
             self.infos = json.load(f)
         
-        self.nomenclature = Nomenclature(self.variables_csv_path, cols=["query_name"], query_column="query_name", context="MERRA2")
+        self.nomenclature = Nomenclature(self.variables_csv_path, context="MERRA2", query_col="query_name")
         self.timerange_str = "1980 … -45days"
         
 

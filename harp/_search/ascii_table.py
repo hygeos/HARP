@@ -90,7 +90,8 @@ class ascii_table:
         
     def print(self, live_print=False, no_color=False):
         s = self.to_string(live_print, no_color)
-        print(s)
+        if not live_print:
+            print(s)
         
     
     def to_string(self, live_print=False, no_color=True):

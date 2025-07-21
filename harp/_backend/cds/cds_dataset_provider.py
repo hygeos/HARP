@@ -40,8 +40,14 @@ class CdsDatasetProvider(BaseDatasetProvider):
     def __init__(self, *, csv_files: list[Path], variables: dict[str: str], config: dict={}):
     
         super().__init__(variables=variables, config=config)
-        self.internal_table = cds.cds_table(csv_files)
-        self.nomenclature = Nomenclature(self.internal_table.table, cols=["short_name", "query_name"], query_column="query_name", context=self.name)
+        table = cds.cds_table(csv_files).table
+        self.nomenclature = Nomenclature(
+            table, 
+            context=self.name, 
+            query_col="query_name", 
+            harp_col="short_name", 
+        )
+        
         
     
     def download(self, variables: list[str], time: datetime|list[datetime, datetime], *, offline=False, area: dict=None) -> list[Path]:
@@ -55,9 +61,9 @@ class CdsDatasetProvider(BaseDatasetProvider):
         queries = self._decompose_query(variables, time, area=area)
         
         for query in queries:
-            log.info("Querying CDS for variables: ", query["variables"], 
-                      "\n -> date: ", date(query["years"], query["months"], query["days"]).strftime("%Y%m%d"),
-                      "\n -> timesteps: ", query["times"])
+            
+            log.info(f"Querying {self.name} for variables {', '.join(query['variables'])} on {query['years']}-{query['months']}-{query['days']} {query['times']}")
+                      
             with TemporaryDirectory() as tmpdir:
                 tmpfile = Path(tmpdir) / f"tmp_{uuid.uuid4().hex}_.nc"
                 self._execute_cds_request(tmpfile, query, area=area)
@@ -67,15 +73,15 @@ class CdsDatasetProvider(BaseDatasetProvider):
                 # rename valid_time dimension to time
                 # rename shortnames to query_names for consistency
                 new_names = {"valid_time": "time"} 
-                for v in ds.data_vars:
-                    new_names[v] = self.internal_table.get_cdsname(v)
                 
                 ds = ds.rename(new_names)
                     
                 # split and store per variable, per timestep
                 self._split_and_store_atomic(ds)
         
-        files = self._get_query_files(variables, time)
+        returned_params = [self.nomenclature.untranslate_query_name(p) for p in variables]
+        
+        files = self._get_query_files(returned_params, time)
         return files
     
     @abstract
@@ -100,6 +106,7 @@ class CdsDatasetProvider(BaseDatasetProvider):
         client.retrieve(dataset, request, target_filepath)
         
         return
+        
     
     def _get_query_files(self, variables: list[str], time: datetime|list[datetime, datetime], *, area: dict=None):
         timesteps = self.timespecs.get_encompassing_timesteps(time)

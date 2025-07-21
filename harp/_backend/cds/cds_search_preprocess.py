@@ -9,7 +9,7 @@ def format_search_table(self: BaseDatasetProvider):
     columns: "short_name", "dims", "spatial", "units", "name", "query_name", "search"
     attrs: "dataset", "import_path", "collection", "institution", "timerange"
     """
-    table = self.internal_table.table.copy()
+    table = self.nomenclature.table.copy()
     
     # table["short_name"] = table["query_name"]
     

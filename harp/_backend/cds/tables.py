@@ -18,6 +18,9 @@ def _read_csv_as_df(path: Path):
 
 
 class cds_table:
+    """
+    Legacy, now kept to inject metadata before feeding the internal table to the Nomenclature object
+    """
 
     # @interface
     def __init__(self, files: list):        
@@ -57,28 +60,3 @@ class cds_table:
         t["dims"] = mtable["dimensions"]
         t["spatial"] = mtable["spatial_degrees"]
     
-    def get_files(self):
-        return self.files.copy()
-    
-    def shortname_to_cdsname(self, shortname) -> str:
-        return table.select_cell(self.table, where=("short_name", "=", shortname), col="query_name")
-    
-    def cdsname_to_shortname(self, cdsname) -> str:
-        return table.select_cell(self.table, where=("query_name", "=", cdsname), col="short_name")
-        
-
-    def has_cdsname(self, query_name) -> bool:
-        df = table.select(self.table, where=("query_name", "=", query_name), cols=None)
-        return df.shape[0] > 0
-        
-    def has_shortname(self, short_name) -> bool:
-        df = table.select(self.table, where=("short_name", "=", short_name), cols=None)
-        return df.shape[0] > 0
-
-        
-    def get_cdsname(self, short_name) -> bool:
-        return table.select_cell(self.table, where=("short_name", "=", short_name), col="query_name")
-        
-    def get_shortname(self, query_name) -> bool:
-        df = table.select(self.table, where=("query_name", "=", query_name), col="short_name")
-        return df.shape[0] > 0

@@ -35,7 +35,14 @@ class Nomenclature:
     # harp_ref_table = _load_csv_table(harp_nomenclature_path)
     
     # # @interface
-    def __init__(self, csv: Path|list[Path]|pd.DataFrame, cols:list[str], query_column: str, context: str):
+    def __init__(self, 
+        csv: Path|list[Path]|pd.DataFrame, 
+        context: str,
+        # cols:list[str], 
+        query_col: str,
+        harp_col: str = None,
+        # alias_column=None
+    ):
         """
 
         Args:
@@ -58,29 +65,80 @@ class Nomenclature:
                 self.table.reset_index()
         
         self.context = context
-        self.raw_col = query_column
-        self.cols = cols
-        cols_list = self.table.columns.tolist()
+        
+        self.query_col  = query_col
+        self.harp_col   = harp_col
+        
+        cols = [query_col] 
+        if harp_col != None: cols += [harp_col]
         
         # assert cols exist and verify them 
         for col in cols:
-            if col not in cols_list: # check that the column is valid
-                log.error(f"Invalid column \'{col}\', not found in nomenclature tables for {context}", e=KeyError)
-            self._assert_col_has_no_doubles(col)
-
+            self._warn_if_col_has_doubles(col)
+            
+            
+    def untranslate_query_name(self, param: str):
+        """
+        If necessary translate param from self.harp_col to self.query_col
+        """
         
-    # @interface
-    def check_has_query_name(self, query_name: str):
-        lines = table.select(self.table, where=(self.raw_col, "=", query_name))
-        if not lines.values.size > 0:
-            log.error(f"Could not find any match for query_name ",
-                      query_name,
+        if self.harp_col is None: # no translation
+            return param
+            
+        else:
+            self.assert_has_query_param(param)
+            lines = table.select(self.table, where=(self.query_col, "=", param), cols=self.harp_col)
+            return lines.values[0]
+        
+        
+    def translate_to_query_name(self, param: str):
+        """
+        If necessary translate param from self.harp_col to self.query_col
+        """
+        
+        if self.harp_col is None: # no translation
+            self.assert_has_query_param(param)
+            return param
+            
+        else:
+            # if self.has_query_param(param): # NOTE: could be removed to force harp_col as interface
+                # return param
+            self.assert_has_harp_param(param)
+            lines = table.select(self.table, where=(self.harp_col, "=", param), cols=self.query_col)
+            return lines.values[0]
+    
+    
+    def has_harp_param(self, harp_param: str):
+        """
+        Asserts that harp_param exists in self.harp_col
+        """
+        lines = table.select(self.table, where=(self.harp_col, "=", harp_param))
+        return lines.values.size > 0
+    
+    def assert_has_harp_param(self, harp_param: str):
+        if not self.has_harp_param(harp_param):
+            log.error(f"Could not find any match for parameter ",
+                      harp_param,
                       " in harp internal layout files", 
-                      e=KeyError
-            )
+                      e=KeyError)
     
     # @interface
-    def _assert_col_has_no_doubles(self, col: str):
+    def has_query_param(self, query_param: str):
+        """
+        Asserts that query_param exists in self.query_col
+        """
+        lines = table.select(self.table, where=(self.query_col, "=", query_param))
+        return lines.values.size > 0
+    
+    def assert_has_query_param(self, query_param: str):
+        if not self.has_query_param(query_param):
+            log.error(f"Could not find any match for parameter ",
+                      query_param,
+                      " in harp internal layout files", 
+                      e=KeyError)
+    
+    # @interface
+    def _warn_if_col_has_doubles(self, col: str):
         """Asserts that the provided column in table has no double values
         Args:
             table (pd.DataFrame): dataframe
@@ -90,7 +148,7 @@ class Nomenclature:
         
         doubles = self.table[self.table.duplicated(col)].dropna()
         if doubles.shape[0] > 0:
-            mess = f"Error: two identitcal values in column \"{col}\" for {self.context} internal nomenclature"  
-            mess += "\n    concerned values:\n        "
-            mess += "\n        ".join(list(doubles[col]))
-            log.error(mess, e=KeyError)
+            mess = f"Warning: two identitcal values in column \"{col}\" for {self.context} internal nomenclature"  
+            mess += "\nConcerned values:\n  - "
+            mess += "\n  - ".join(list(doubles[col]))
+            log.debug(log.rgb.orange, mess)
