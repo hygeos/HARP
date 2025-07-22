@@ -11,26 +11,20 @@ import toml
 
 default_config = Config({}) # just the 'general' subsection
 
-try:
-    path_from_env = env.getdir("DIR_ANCILLARY")
-except NotADirectoryError:
-    path_from_env = None
-    
+# cascading source for value
+path_from_env = env.getvar("HARP_CACHE_DIR", False) or env.getvar("DIR_ANCILLARY", False)
 
-if path_from_env == "None":
+if not path_from_env:
     path_from_env = None
 
 default_config_dict = dict(
     dir_storage = path_from_env,
     harmonize = True,
     offline = False,
+    lock_timeout = -1, # in seconds
+    lock_lifetime = timedelta(days=1),
 )
 
-# default_config_constraints = dict(
-#     dir_storage     = constraint.path(exists=True, mode="dir"),
-#     harmonize       = constraint.bool(),
-#     offline         = constraint.bool(),
-# )
 
 default_config.ingest(default_config_dict)
 

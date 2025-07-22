@@ -162,10 +162,18 @@ class BaseDatasetProvider:
     def _check_config(self):
         context = self.__class__.__name__
         path = self.config.get("dir_storage")
+        if type(path) == str:
+            path = Path(path)
+        
+        if not path.is_dir():
+            log.disp(log.rgb.orange, "(?) Instructions to set up Harp: www.github.com/hygeos/harp/todo") # TODO proper doc link
+            log.error(f"Provided storage path {path} does not exist. Please create the folder beforehand.", e=RuntimeError)
+        
         if path is None:
-            log.warning("Environment variable 'DIR_ANCILLARY' not set")
-            log.disp(log.rgb.orange, "(?) Instructions to set up Harp: www.github.com/hygeos/harp/todo") # TODO proper doc
-            log.error(f"Key \'dir_storage\' not provided in config for {context} object", e=RuntimeError)
+            log.warning("Environment variable 'HARP_CACHE_DIR' and 'DIR_ANCILLARY' not set")
+            log.disp(log.rgb.orange, "(?) Instructions to set up Harp: www.github.com/hygeos/harp/todo") # TODO proper doc link
+            log.error(f"Storage path (Key \'dir_storage\') not provided in config for {context} object", e=RuntimeError)
+    
     
         # Abandonned the idea of checking config values with constraints: makes heavy uses of core.static.interfaces        
         # for k, c in harp.config.default_config_constraints.items():

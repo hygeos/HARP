@@ -1,18 +1,16 @@
+import copy
 from datetime import date, datetime, timedelta
+import hashlib
 from pathlib import Path
 import pprint
 from tempfile import TemporaryDirectory
+import time
 from typing import Collection
 import uuid
 
 import cdsapi
 from core import log
-from core import table
-from core.save import to_netcdf
 from core.static import abstract, interface
-from core.fileutils import filegen
-from core.save import to_netcdf
-from core import auth
 import xarray as xr
 
 from harp._backend.cds import cds_search_preprocess
@@ -22,6 +20,7 @@ from harp._backend.nomenclature import Nomenclature
 from harp._backend import harp_std
 
 from harp._backend import cds
+from harp._backend._utils import ComputeLock
 
 @abstract
 class CdsDatasetProvider(BaseDatasetProvider): 
@@ -49,7 +48,6 @@ class CdsDatasetProvider(BaseDatasetProvider):
             harp_col="short_name", 
         )
         
-        
     
     def download(self, variables: list[str], time: datetime|list[datetime, datetime], *, offline=False, area: dict=None) -> list[Path]:
         
@@ -60,32 +58,73 @@ class CdsDatasetProvider(BaseDatasetProvider):
             log.error("Time range query not implemented yet", e=ValueError)
             
         queries = self._decompose_query_per_day(variables, time, area=area)
-        queries = self._remove_locally_present_variables(queries, area=area)
+        queries = self._remove_locally_present_variables_from_queries(queries, area=area)
         
         for query in queries:
             
-            # log.debug("QUERY:\n", query)
-            log.info(f"Querying {self.name} for variables {', '.join(query['variables'])} on {query['years']}-{query['months']}-{query['days']} {query['times']}")
-                      
-            with TemporaryDirectory() as tmpdir:
-                tmpfile = Path(tmpdir) / f"tmp_{uuid.uuid4().hex}_.nc"
-                self._execute_cds_request(tmpfile, query, area=area)
+            lockfile: Path = self._get_lockfile_from_query(query)
+            
+            lock = ComputeLock(
+                filepath = lockfile, 
+                timeout  = self.config.get("lock_timeout"),
+                lifetime = self.config.get("lock_lifetime"),
+                interval = 1,
+            )
+            
+            
+            if lock.is_locked():
+                lock.wait()
                 
-                ds = xr.open_dataset(tmpfile, engine='netcdf4')
+                query = self._remove_locally_present_variables_from_query(query)
+                if query == None: continue # all files present locally
                 
-                # rename valid_time dimension to time
-                # rename shortnames to query_names for consistency
-                new_names = {"valid_time": "time"} 
-                
-                ds = ds.rename(new_names)
+            with lock.locked(): # lock query
+            
+                # log.debug("QUERY:\n", query)
+                log.info(f"Querying {self.name} for variables {', '.join(query['variables'])} on {query['years']}-{query['months']}-{query['days']} {query['times']}")
+                        
+                with TemporaryDirectory() as tmpdir:
+                    tmpfile = Path(tmpdir) / f"tmp_{uuid.uuid4().hex}_.nc"
+                    self._execute_cds_request(tmpfile, query, area=area)
                     
-                # split and store per variable, per timestep
-                self._split_and_store_atomic(ds)
+                    ds = xr.open_dataset(tmpfile, engine='netcdf4')
+                    
+                    # rename valid_time dimension to time
+                    # rename shortnames to query_names for consistency
+                    new_names = {"valid_time": "time"} 
+                    
+                    ds = ds.rename(new_names)
+                        
+                    # split and store per variable, per timestep
+                    self._split_and_store_atomic(ds)
+                    
         
         returned_params = [self.nomenclature.untranslate_query_name(p) for p in variables]
         
         files = self._get_query_files(returned_params, time)
         return files
+    
+    
+            
+    
+    def _get_lockfile_from_query(self, query) -> Path:
+        """
+        Returns a path for a unique lockfile
+        TODO: consider moving to BaseProvider
+        """
+        
+        _query = copy.deepcopy(query)
+        del _query["_timesteps"]
+        
+        h = hashlib.blake2b(digest_size=16)  # 16 bytes = 128-bit digest
+        h.update(str(_query).encode('utf-8'))
+        h = h.hexdigest()
+        
+        lockfile = f"{self.collection}_{self.name}__" + h + ".lock"
+        lockfile = self.config.get("dir_storage") / "locks" / lockfile
+        
+        return lockfile
+    
     
     @abstract
     def _execute_cds_request(self, target_filepath: Path, query, area: dict=None):
@@ -102,7 +141,6 @@ class CdsDatasetProvider(BaseDatasetProvider):
                 "time":             query["times"],
                 "data_format":      "netcdf",
                 "download_format":  "unarchived"
-                
         }
         
         # if area is not None: 
@@ -123,6 +161,7 @@ class CdsDatasetProvider(BaseDatasetProvider):
                 files.append(self._get_target_file_path(var, timestep))
                 
         return files
+        
                 
     def _decompose_query_per_day(self, variables: list[str], time: datetime|list[datetime, datetime], *, area: dict=None):
         """
@@ -174,35 +213,47 @@ class CdsDatasetProvider(BaseDatasetProvider):
         return queries
         
     
-    def _remove_locally_present_variables(self, queries, area=None):
+    def _remove_locally_present_variables_from_queries(self, queries, area=None):
         """
         Modifies inplace queries to remove variables which are present locally (harp cache)
         """
         
+        _queries = copy.deepcopy(queries)
+        
         if area is not None:
             log.error("Not implemented yet", e=RuntimeError)
             
-        for query in queries:
-            stored_variables = {self.nomenclature.untranslate_query_name(v): v for v in query["variables"]}
-            
-            for variable in stored_variables.keys():                    # For each variable (stored != cds_name but short_name)
-                all_timesteps_stored_locally = True                     
-            
-                for timestep in query["_timesteps"]:                    # Check that all timesteps are present
-                    if not self._exists_locally(variable, timestep):    # already missing one, need to query anyway
-                        all_timesteps_stored_locally = False
-                        break
-                
-                if all_timesteps_stored_locally:
-                    log.debug(log.rgb.green, "Found locally: ", variable, " for ", query["_timesteps"], flush=True)
-                    
-                    query_name = stored_variables[variable]
-                    query["variables"].remove(query_name)
-        
         # remove emptied queries
-        queries = [q for q in queries if q["variables"]]
+        _queries = [self._remove_locally_present_variables_from_query(q) for q in _queries]
+        _queries = [q for q in _queries if q != None]
+        
+        return _queries
+        
+        
+    def _remove_locally_present_variables_from_query(self, query, area=None):
+        
+        _query = copy.deepcopy(query)
+        
+        stored_variables = {self.nomenclature.untranslate_query_name(v): v for v in _query["variables"]}
+        
+        for variable in stored_variables.keys():                    # For each variable (stored != cds_name but short_name)
+            all_timesteps_stored_locally = True                     
+        
+            for timestep in _query["_timesteps"]:                    # Check that all timesteps are present
+                if not self._exists_locally(variable, timestep):    # already missing one, need to query anyway
+                    all_timesteps_stored_locally = False
+                    break
             
-        return queries
+            if all_timesteps_stored_locally:
+                log.debug(log.rgb.green, "Found locally: ", variable, " for ", _query["_timesteps"], flush=True)
+                
+                _query_name = stored_variables[variable]
+                _query["variables"].remove(_query_name)
+        
+        if len(_query["variables"]) == 0:
+            _query = None
+        
+        return _query
 
         
     def _standardize(self, ds):
