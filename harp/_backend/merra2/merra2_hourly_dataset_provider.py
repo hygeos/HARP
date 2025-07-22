@@ -1,25 +1,24 @@
+import copy
+import json
+import warnings
 from datetime import date, datetime
 from pathlib import Path
-import json
 from typing import Collection
-import warnings
-
-from pydap.cas.urs import setup_session
-import xarray as xr
-from core import log
-from core.static import interface
-from core.fileutils import filegen
-from core.save import to_netcdf
-from core import auth
 
 import requests
+import xarray as xr
+from core import auth, log
+from core.fileutils import filegen
+from core.save import to_netcdf
+from core.static import interface
+from pydap.cas.urs import setup_session
 
-from harp.providers.NASA.MERRA2 import _layout
-
-from harp._backend.baseprovider import BaseDatasetProvider
-from harp._backend.nomenclature import Nomenclature
 from harp._backend import harp_std
+from harp._backend._utils import ComputeLock
+from harp._backend.baseprovider import BaseDatasetProvider
 from harp._backend.merra2 import merra2_search_preprocess
+from harp._backend.nomenclature import Nomenclature
+from harp.providers.NASA.MERRA2 import _layout
 
 warnings.filterwarnings('ignore', message='PyDAP was unable to determine the DAP protocol*')
 
@@ -62,19 +61,31 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
             log.error("Not implemented yet", e=RuntimeError)
         
         queries = self._decompose_query(variables, time, area=area)
+        queries = self._filter_cached_variables_from_queries(queries, area=area)
         
         for query in queries:
-            if offline:
-                log.error(f"Offline mode is activated and data is missing locally [{', '.join(query)}] for {time.strftime('%Y-%m-%d')}",
-                    e=FileNotFoundError)
-                    
-            log.info(f"Querying {self.name} for variables {', '.join(query['variables'])} on {query['date']} {query['times']}")
-
-            ds = self._access_day_file(query["date"], area)
-            ds = ds[query["variables"]].sel(time=query["times"]).compute()
             
-            # split and store per variable, per timestep
-            self._split_and_store_atomic(ds)
+            lock: ComputeLock = self._get_hashed_query_lock(query)
+            
+            if lock.is_locked(): # query is currently already being executed by someone in the same HARP CACHE DIR tree
+                lock.wait()
+            
+                query = self._filter_cached_variables_from_query(query) # Check to see if all necessary files are now present
+                if query == None: continue # all files present locally
+            
+            with lock.locked(): # lock query and make query download
+                if offline:
+                    log.error(f"Offline mode is activated and data is missing locally [\
+                        {', '.join(query['variables'])}] for {time.strftime('%Y-%m-%d')}",
+                        e=FileNotFoundError)
+                
+                log.info(f"Querying {self.name} for variables {', '.join(query['variables'])} on {query['date']} {query['times']}")
+
+                ds = self._access_day_file(query["date"], area)
+                ds = ds[query["variables"]].sel(time=query["times"]).compute()
+                
+                # split and store per variable, per timestep
+                self._split_and_store_atomic(ds)
             
         files = self._get_query_files(variables, time)
         return files
@@ -148,37 +159,15 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
             dates[d] = list(set(dates[d]))
             compiled_times = dates[d]
             
-            missing_variables = self._find_missing_variables(variables, compiled_times, area=area)
-            
             query = dict(
                 date      = d,
                 times     = compiled_times,
-                variables = missing_variables,
+                variables = variables,
             )
             queries.append(query)
             
         return queries
-        
     
-    def _find_missing_variables(self, variables, timesteps, area=None):
-        
-        if area is not None:
-            log.error("Not implemented yet", e=RuntimeError)
-        
-        missing_variables = []
-        
-        for variable in variables:
-            data_fully_present_locally = True
-            
-            for timestep in timesteps:
-                if not self._exists_locally(variable, timestep):
-                    data_fully_present_locally = False
-                    break 
-                
-            if not data_fully_present_locally: 
-                missing_variables.append(variable)
-        
-        return missing_variables
     
     
     def _get_url(self, day: date):

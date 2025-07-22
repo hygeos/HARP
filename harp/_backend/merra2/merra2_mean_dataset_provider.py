@@ -21,6 +21,9 @@ from harp._backend import harp_std
 
 warnings.filterwarnings('ignore', message='PyDAP was unable to determine the DAP protocol*')
 
+# TODO: derive Merra2HourlyDatasetProvider instead
+# TODO: (?) propagates changes in Merra2HourlyDatasetProvider
+
 
 class Merra2MeanDatasetProvider(BaseDatasetProvider):
     

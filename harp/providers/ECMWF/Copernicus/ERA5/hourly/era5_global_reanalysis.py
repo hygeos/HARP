@@ -52,7 +52,7 @@ class GlobalReanalysis(cds.CdsDatasetProvider):
                 "year":             query["years"],
                 "month":            query["months"],
                 "day":              query["days"],
-                "time":             query["times"],
+                "time":             query["cds_times"],
                 "data_format":      "netcdf",
                 "download_format":  "unarchived"
         }

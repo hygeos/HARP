@@ -58,27 +58,23 @@ class CdsDatasetProvider(BaseDatasetProvider):
             log.error("Time range query not implemented yet", e=ValueError)
             
         queries = self._decompose_query_per_day(variables, time, area=area)
-        queries = self._remove_locally_present_variables_from_queries(queries, area=area)
+        queries = self._filter_cached_variables_from_queries(queries, area=area)
         
         for query in queries:
             
-            lockfile: Path = self._get_hashed_query_lockfile(query)
+            lock: ComputeLock = self._get_hashed_query_lock(query)
             
-            lock = ComputeLock(
-                filepath = lockfile, 
-                timeout  = self.config.get("lock_timeout"),
-                lifetime = self.config.get("lock_lifetime"),
-                interval = 1,
-            )
-            
-            
-            if lock.is_locked():
+            if lock.is_locked(): # query is currently already being executed by someone in the same HARP CACHE DIR tree
                 lock.wait()
                 
-                query = self._remove_locally_present_variables_from_query(query)
+                query = self._filter_cached_variables_from_query(query) # Check to see if all necessary files are now present
                 if query == None: continue # all files present locally
                 
-            with lock.locked(): # lock query
+            with lock.locked(): # lock query and make query download
+                if offline:
+                    log.error(f"Offline mode is activated and data is missing locally [\
+                        {', '.join(query['variables'])}] for {time.strftime('%Y-%m-%d')}",
+                        e=FileNotFoundError)
             
                 # log.debug("QUERY:\n", query)
                 log.info(f"Querying {self.name} for variables {', '.join(query['variables'])} on {query['years']}-{query['months']}-{query['days']} {query['times']}")
@@ -183,57 +179,13 @@ class CdsDatasetProvider(BaseDatasetProvider):
                 years   = d.year,
                 months  = d.month,
                 days    = d.day,
-                times   = [t.strftime("%H:%M") for t in dates[d]], # CDS preformat
-                _timesteps = dates[d],
+                cds_times = [t.strftime("%H:%M") for t in dates[d]], # CDS preformat
+                times = dates[d],
                 variables = variables.copy(),
             )
             queries.append(query)
         
         return queries
-        
-    
-    def _remove_locally_present_variables_from_queries(self, queries, area=None):
-        """
-        Modifies inplace queries to remove variables which are present locally (harp cache)
-        """
-        
-        _queries = copy.deepcopy(queries)
-        
-        if area is not None:
-            log.error("Not implemented yet", e=RuntimeError)
-            
-        # remove emptied queries
-        _queries = [self._remove_locally_present_variables_from_query(q) for q in _queries]
-        _queries = [q for q in _queries if q != None]
-        
-        return _queries
-        
-        
-    def _remove_locally_present_variables_from_query(self, query, area=None):
-        
-        _query = copy.deepcopy(query)
-        
-        stored_variables = {self.nomenclature.untranslate_query_name(v): v for v in _query["variables"]}
-        
-        for variable in stored_variables.keys():                    # For each variable (stored != cds_name but short_name)
-            all_timesteps_stored_locally = True                     
-        
-            for timestep in _query["_timesteps"]:                    # Check that all timesteps are present
-                if not self._exists_locally(variable, timestep):    # already missing one, need to query anyway
-                    all_timesteps_stored_locally = False
-                    break
-            
-            if all_timesteps_stored_locally:
-                log.debug(log.rgb.green, "Found locally: ", variable, " for ", _query["_timesteps"], flush=True)
-                
-                _query_name = stored_variables[variable]
-                _query["variables"].remove(_query_name)
-        
-        if len(_query["variables"]) == 0:
-            _query = None
-        
-        return _query
-
         
     def _standardize(self, ds):
         

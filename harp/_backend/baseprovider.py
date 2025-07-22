@@ -10,6 +10,7 @@ from core.config import Config
 from core.save import to_netcdf
 from core.static import abstract, constraint, interface
 
+from harp._backend._utils import ComputeLock
 import harp.config
 from harp._backend.computable import Computable
 
@@ -246,8 +247,26 @@ class BaseDatasetProvider:
         raise RuntimeError('Should not be executed here, but through subclasses')
     
     
+    
+    def _get_hashed_query_lock(self, query) -> ComputeLock:
+        """
+        Returns a ComputeLock object pointing to a unique lockfile for a provided query (nest dicts)
+        query must contains unique IDs (self.collection + self.name are added for uniqueness)
+        """
         
-    def _get_hashed_query_lockfile(self, query) -> Path:
+        lockfile: Path = self._get_hashed_query_lockfile_path(query)
+        
+        lock = ComputeLock(
+            filepath = lockfile, 
+            timeout  = self.config.get("lock_timeout"),
+            lifetime = self.config.get("lock_lifetime"),
+            interval = 1,
+        )
+        
+        return lock
+    
+        
+    def _get_hashed_query_lockfile_path(self, query) -> Path:
         """
         Returns a path for a unique lockfile for a provided query (nest dicts)
         query must contains unique IDs (self.collection + self.name are added for uniqueness)
@@ -261,7 +280,7 @@ class BaseDatasetProvider:
         
         lockfile = f"{self.collection}_{self.name}__" + h + ".lock"
         
-        return lockfile
+        return self._get_query_hash_folder() / lockfile
     
         
     def _get_query_hash_folder(self) -> Path:
@@ -273,8 +292,61 @@ class BaseDatasetProvider:
         return folder
         
         
-    def _get_query_lockfile(self, query) -> Path:
+    
+    def _filter_cached_variables_from_queries(self, queries, area=None):
         """
-        Returns the path of the unique lockfile for the query
+        For each query removes the variables which are present locally (harp cache)
+        Returns a list of queries
         """
-        return self._get_query_hash_folder() / self._get_hashed_query_lockfile(query)
+                
+        if area is not None:
+            log.error("Not implemented yet", e=RuntimeError)
+        
+        # TODO: consider moving to BaseProvider
+        
+        _queries = copy.deepcopy(queries)
+        
+        if area is not None:
+            log.error("Not implemented yet", e=RuntimeError)
+            
+        # remove emptied queries
+        _queries = [self._filter_cached_variables_from_query(q) for q in _queries]
+        _queries = [q for q in _queries if q != None]
+        
+        return _queries
+        
+        
+    
+    def _filter_cached_variables_from_query(self, query, area=None):
+        """
+        Requires a "times" section in query which is a list of datetimes
+        """
+        
+        if area is not None:
+            log.error("Not implemented yet", e=RuntimeError)
+        
+        _query = copy.deepcopy(query)
+        
+        assert "times" in query
+        
+        stored_variables = {self.nomenclature.untranslate_query_name(v): v for v in _query["variables"]}
+        
+        for variable in stored_variables.keys():                    # For each variable (stored != cds_name but short_name)
+            all_timesteps_stored_locally = True                     
+        
+            for timestep in _query["times"]:                    # Check that all timesteps are present
+                if not self._exists_locally(variable, timestep):    # already missing one, need to query anyway
+                    all_timesteps_stored_locally = False
+                    break
+            
+            if all_timesteps_stored_locally:
+                log.debug(log.rgb.green, "Found locally: ", variable, " for ", _query["times"], flush=True)
+                
+                _query_name = stored_variables[variable]
+                _query["variables"].remove(_query_name)
+        
+        if len(_query["variables"]) == 0:
+            _query = None
+        
+        return _query
+    
