@@ -62,7 +62,7 @@ class CdsDatasetProvider(BaseDatasetProvider):
         
         for query in queries:
             
-            lockfile: Path = self._get_lockfile_from_query(query)
+            lockfile: Path = self._get_hashed_query_lockfile(query)
             
             lock = ComputeLock(
                 filepath = lockfile, 
@@ -103,27 +103,6 @@ class CdsDatasetProvider(BaseDatasetProvider):
         
         files = self._get_query_files(returned_params, time)
         return files
-    
-    
-            
-    
-    def _get_lockfile_from_query(self, query) -> Path:
-        """
-        Returns a path for a unique lockfile
-        TODO: consider moving to BaseProvider
-        """
-        
-        _query = copy.deepcopy(query)
-        del _query["_timesteps"]
-        
-        h = hashlib.blake2b(digest_size=16)  # 16 bytes = 128-bit digest
-        h.update(str(_query).encode('utf-8'))
-        h = h.hexdigest()
-        
-        lockfile = f"{self.collection}_{self.name}__" + h + ".lock"
-        lockfile = self.config.get("dir_storage") / "locks" / lockfile
-        
-        return lockfile
     
     
     @abstract
@@ -204,7 +183,7 @@ class CdsDatasetProvider(BaseDatasetProvider):
                 years   = d.year,
                 months  = d.month,
                 days    = d.day,
-                times   = [t.strftime("%H:%M") for t in dates[d]],
+                times   = [t.strftime("%H:%M") for t in dates[d]], # CDS preformat
                 _timesteps = dates[d],
                 variables = variables.copy(),
             )

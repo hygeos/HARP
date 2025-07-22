@@ -1,18 +1,18 @@
+import hashlib
+import copy
 from datetime import date, datetime
 from pathlib import Path
 from typing import Callable
 
 import xarray as xr
-from core.static import interface, abstract, constraint
-from core.save import to_netcdf
 from core import log
 from core.config import Config
+from core.save import to_netcdf
+from core.static import abstract, constraint, interface
 
-from harp._backend.nomenclature import Nomenclature
 import harp.config
-from copy import copy, deepcopy
-
 from harp._backend.computable import Computable
+
 
 @abstract
 class BaseDatasetProvider:
@@ -245,3 +245,36 @@ class BaseDatasetProvider:
     def _standardize(ds: xr.Dataset) -> xr.Dataset:
         raise RuntimeError('Should not be executed here, but through subclasses')
     
+    
+        
+    def _get_hashed_query_lockfile(self, query) -> Path:
+        """
+        Returns a path for a unique lockfile for a provided query (nest dicts)
+        query must contains unique IDs (self.collection + self.name are added for uniqueness)
+        """
+        
+        _query = copy.deepcopy(query)
+        
+        h = hashlib.blake2b(digest_size=16)  # 16 bytes = 128-bit digest
+        h.update(str(_query).encode('utf-8'))
+        h = h.hexdigest()
+        
+        lockfile = f"{self.collection}_{self.name}__" + h + ".lock"
+        
+        return lockfile
+    
+        
+    def _get_query_hash_folder(self) -> Path:
+        """
+        Returns HARP locks folder
+        """
+        folder = self.config.get("dir_storage") / "locks"
+        
+        return folder
+        
+        
+    def _get_query_lockfile(self, query) -> Path:
+        """
+        Returns the path of the unique lockfile for the query
+        """
+        return self._get_query_hash_folder() / self._get_hashed_query_lockfile(query)
