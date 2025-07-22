@@ -29,7 +29,6 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
     institution = "NASA"
     
     host = 'urs.earthdata.nasa.gov' # server to download from
-    auth = auth.get_auth(host)  # credentials from netrc file
     
     
     def __init__(self, collection: str, name: str, variables: dict[str: str], config: dict={}):
@@ -78,6 +77,8 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
                     log.error(f"Offline mode is activated and data is missing locally [\
                         {', '.join(query['variables'])}] for {time.strftime('%Y-%m-%d')}",
                         e=FileNotFoundError)
+                
+                self.auth = auth.get_auth(self.host)  # credentials from netrc file
                 
                 log.info(f"Querying {self.name} for variables {', '.join(query['variables'])} on {query['date']} {query['times']}")
 
