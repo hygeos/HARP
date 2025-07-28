@@ -1,8 +1,8 @@
 ﻿name,units,query_name,short_name,id,note
-10m u-component of wind,m s-1,10m_u_component_of_wind,10u,165.13
-10m v-component of wind,m s-1,10m_v_component_of_wind,10v,166.13
-2m dewpoint temperature,K,2m_dewpoint_temperature,2d,167.13
-2m temperature,K,2m_temperature,2t,168.13
+10m u-component of wind,m s-1,10m_u_component_of_wind,u10,165.13
+10m v-component of wind,m s-1,10m_v_component_of_wind,v10,166.13
+2m dewpoint temperature,K,2m_dewpoint_temperature,d2m,167.13
+2m temperature,K,2m_temperature,t2m,168.13
 Black carbon aerosol optical depth at 550 nm,~,black_carbon_aerosol_optical_depth_550nm,bcaod550,211.21
 Dust aerosol optical depth at 550 nm,~,dust_aerosol_optical_depth_550nm,duaod550,209.21
 Land-sea mask,(0 - 1),land_sea_mask,lsm,172.13

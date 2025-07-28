@@ -13,7 +13,7 @@ from core import log
 from core.static import abstract, interface
 import xarray as xr
 
-from harp._backend.cds import cds_search_preprocess
+from harp._backend.cds import cds_search_provider
 from harp._backend.timespec import RegularTimespec
 from harp._backend.baseprovider import BaseDatasetProvider
 from harp._backend.nomenclature import Nomenclature
@@ -198,6 +198,6 @@ class CdsDatasetProvider(BaseDatasetProvider):
         
         
     # plug the format search table function
-    format_search_table = cds_search_preprocess.format_search_table
+    format_search_table = cds_search_provider.format_search_table
     
 

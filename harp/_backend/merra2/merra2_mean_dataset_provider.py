@@ -15,7 +15,7 @@ import requests
 
 
 from harp._backend.baseprovider import BaseDatasetProvider
-from harp._backend.merra2 import merra2_search_preprocess
+from harp._backend.merra2 import merra2_search_provider
 from harp._backend.nomenclature import Nomenclature
 from harp._backend import harp_std
 
@@ -171,4 +171,4 @@ class Merra2MeanDatasetProvider(BaseDatasetProvider):
     
     
     # plug the format search table function
-    format_search_table = merra2_search_preprocess.format_search_table
+    format_search_table = merra2_search_provider.format_search_table

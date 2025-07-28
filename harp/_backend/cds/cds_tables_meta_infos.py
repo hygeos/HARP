@@ -9,3 +9,13 @@ era5 = {
     "era5_table8.csv" : dict(dimensions="xyt",   spatial_degrees="????? x ?????",           ),
     "era5_table9.csv" : dict(dimensions="xyzt",  spatial_degrees="0.25 x 0.25",             ),
 }
+
+cams_ra = {
+    "cams_ra_table1.csv" : dict(dimensions="xyt",   spatial_degrees="0.75 x 0.75",             ),
+    "cams_ra_table2.csv" : dict(dimensions="xyzt",  spatial_degrees="0.75 x 0.75",             ),
+    "cams_ra_table3.csv" : dict(dimensions="xyt",   spatial_degrees="0.75 x 0.75",             ),
+    "cams_ra_table4.csv" : dict(dimensions="xyt",   spatial_degrees="0.75 x 0.75",             ),
+    "cams_ra_table5.csv" : dict(dimensions="xyt",   spatial_degrees="0.75 x 0.75",             ),
+    "cams_ra_table6.csv" : dict(dimensions="xyzt",  spatial_degrees="0.75 x 0.75",             ),
+    "cams_ra_table7.csv" : dict(dimensions="xyzt",  spatial_degrees="0.75 x 0.75",             ),
+}

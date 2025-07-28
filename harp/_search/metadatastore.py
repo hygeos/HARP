@@ -6,7 +6,7 @@ Indexes Variables per dataset
 from pathlib import Path
 from harp._backend.baseprovider import BaseDatasetProvider
 from harp.providers.NASA import MERRA2
-from harp.providers.ECMWF.Copernicus import ERA5
+from harp.providers.ECMWF.Copernicus import ERA5, CAMS
 
 
 _search_data_providers = [ # list of providers to participate in fuzzy searching
@@ -37,6 +37,7 @@ _search_data_providers = [ # list of providers to participate in fuzzy searching
     # ---
     # TODO: plug CAMS
     # ---
+    CAMS.hourly.GlobalReanalysis,
 
 ]
 

@@ -93,7 +93,9 @@ class cds_table:
     def _append_meta_infos(t: pd.DataFrame, f: Path):
         if "era5" in f.name:
             mtable = cds_tables_meta_infos.era5[f.name]
-        else: # TODO: plug CAMS
+        elif "cams_ra" in f.name: 
+            mtable = cds_tables_meta_infos.cams_ra[f.name]
+            # TODO: plug CAMS
             pass
             
         # t["src"] = f

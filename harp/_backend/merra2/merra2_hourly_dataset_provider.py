@@ -16,7 +16,7 @@ from pydap.cas.urs import setup_session
 from harp._backend import harp_std
 from harp._backend._utils import ComputeLock
 from harp._backend.baseprovider import BaseDatasetProvider
-from harp._backend.merra2 import merra2_search_preprocess
+from harp._backend.merra2 import merra2_search_provider
 from harp._backend.nomenclature import Nomenclature
 from harp.providers.NASA.MERRA2 import _layout
 
@@ -194,4 +194,4 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
         return ds
     
     # plug the format search table function
-    format_search_table = merra2_search_preprocess.format_search_table
+    format_search_table = merra2_search_provider.format_search_table
