@@ -33,8 +33,7 @@ class BaseDatasetProvider:
     # # @interface
     def get(self,
             time: datetime, # type dictates if dt or range
-            *,
-            area: dict=None, 
+            **kwargs,  # catch-all for additional keyword arguments
             ) -> xr.Dataset:
         """
         Download and apply post-process to the downloaded data for the given date
@@ -49,9 +48,6 @@ class BaseDatasetProvider:
         Return data interpolated on time=dt
      
         """
-                
-        if area is not None:
-            log.error("Not implemented yet", e=RuntimeError)
         
         query       = [] # variables to query
         operands    = [] # operands for computable variables
@@ -83,8 +79,13 @@ class BaseDatasetProvider:
         
         for dst_var in query: # check that every raw variable exist in the dataset provider nomenclature 
             self.nomenclature.assert_has_query_param(dst_var)
-            
-        files = self.download(variables=query, time=time, offline=self.config.get("offline"))
+        
+        offline = kwargs.pop('offline', None)  # Extract & remove (if present)
+        offline = offline if offline is not None else self.config.get("offline")
+        
+        print("OFFLINE", offline)
+        
+        files = self.download(variables=query, time=time, offline=offline, **kwargs)
         ds = xr.open_mfdataset(files, engine='netcdf4')
                 
         # harmonize if not disabled
