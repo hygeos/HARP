@@ -187,6 +187,8 @@ class BaseDatasetProvider:
         """
         Split and store dataset per variable and per timestep
         assumes self._get_target_file_path is implemented in subclass
+        
+        HarpQuery only used to essentially hash the area and levels parameters
         """
         
         for var in ds.data_vars:
@@ -317,3 +319,64 @@ class BaseDatasetProvider:
         
         return hq
     
+    
+    def _get_query_files(self, hq: HarpQuery):
+        """
+        From the query object, returns all expected atomic slices paths
+        """
+        timesteps = self.timespecs.get_encompassing_timesteps(hq.times)
+        # TODO manage multiple times
+        
+        times_tmp = hq.times
+        hq.times  = timesteps
+        
+        files = []
+        units = hq.get_atomic_storage_units()
+        # for t in hq.times:
+            # for var in variables:
+        for u in units:
+            files.append(self._get_target_file_path(u))
+        
+        hq.times = times_tmp
+        
+        return files
+        
+    
+    def _decompose_into_subqueries_per_day(self, hq: HarpQuery) -> list[HarpQuery]:
+        """
+        Decompose the query as a (series of) CDS query for the missing data,
+        One query per day,
+        Can choose to download more to avoid doing several queries
+        
+        e.g: 23h45 -> 00T23:00 + 01T00:00 -> should be two requests
+        compiled to:
+                00:00, 23:00 for 00T and 01T 
+        
+        """
+        
+        if len(hq.times) > 1: # TODO: should be easy to add with current functionning
+            log.error("Time range query not implemented yet", e=ValueError)
+        
+        timesteps = self.timespecs.get_encompassing_timesteps(hq.times) # TODO
+        
+        dates = {}
+        
+        for timestep in timesteps:
+            day = date(timestep.year, timestep.month, timestep.day)
+            if day not in dates: 
+                dates[day] = []
+            
+            dates[day].append(timestep)
+        
+        
+        queries = []
+        for d in dates: # format one query per date required
+            dates[d] = list(set(dates[d]))
+            timesteps = dates[d]
+            
+            hqs = HarpQuery(variables=hq.variables, times=timesteps, area=hq.area, levels=hq.levels)
+            hqs.extra["day"] = d
+            
+            queries.append(hqs)
+        
+        return queries

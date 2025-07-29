@@ -71,7 +71,7 @@ def test_intrasteps_extraday_24steps_start30min():
     assert datetime(2012, 12, 13, 0, 30) in times
 
 
-def test_exactstep_intraday_24steps():
+def test_exactstep_intraday_24step():
     
     spec = RegularTimespec(timedelta(minutes=30), 24)
     time = datetime(2012, 12, 12, 23, 30, 0)
@@ -82,7 +82,7 @@ def test_exactstep_intraday_24steps():
     assert len(times) == 1
     
 
-def test_exactstep_intraday_8steps():
+def test_exactstep_intraday_8step():
     
     spec = RegularTimespec(timedelta(hours=3), 8)
     time = datetime(2012, 12, 12, 9, 0, 0)

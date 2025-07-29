@@ -72,12 +72,10 @@ class CdsDatasetProvider(BaseDatasetProvider):
             with lock.locked(): # lock query and make query download
                 if hqs.offline:
                     log.error(f"Offline mode is activated and data is missing locally [\
-                        {', '.join(hqs['variables'])}] for {time.strftime('%Y-%m-%d')}",
+                        {', '.join(hqs.variables)}] for {hq.times}",
                         e=FileNotFoundError)
             
-                # log.debug("QUERY:\n", query)
-                d = hqs.extra["day"]
-                log.info(f"Querying {self.name} for variables {', '.join(hqs.variables)} on {d.year}-{d.month}-{d.day} {hqs.times}")
+                log.info(f"Querying {self.name} for variables {', '.join(hqs.variables)} on {hqs.times}")
                         
                 with TemporaryDirectory() as tmpdir:
                     tmpfile = Path(tmpdir) / f"tmp_{uuid.uuid4().hex}_.nc"
@@ -108,64 +106,6 @@ class CdsDatasetProvider(BaseDatasetProvider):
         return
         
     
-    def _get_query_files(self, hq: HarpQuery):
-        timesteps = self.timespecs.get_encompassing_timesteps(hq.times)
-        # TODO manage multiple times
-        
-        times_tmp = hq.times
-        hq.times  = timesteps
-        
-        files = []
-        units = hq.get_atomic_storage_units()
-        # for t in hq.times:
-            # for var in variables:
-        for u in units:
-            files.append(self._get_target_file_path(u))
-        
-        hq.times = times_tmp
-        
-        return files
-        
-                
-    def _decompose_into_subqueries_per_day(self, hq: HarpQuery) -> list[HarpQuery]:
-        """
-        Decompose the query as a (series of) CDS query for the missing data,
-        One query per day,
-        Can choose to download more to avoid doing several queries
-        
-        e.g: 23h45 -> 00T23:00 + 01T00:00 -> should be two requests
-        compiled to:
-                00:00, 23:00 for 00T and 01T 
-        
-        """
-        
-        if len(hq.times) > 1: # TODO: should be easy to add with current functionning
-            log.error("Time range query not implemented yet", e=ValueError)
-        
-        timesteps = self.timespecs.get_encompassing_timesteps(hq.times) # TODO
-        
-        dates = {}
-        
-        for timestep in timesteps:
-            day = date(timestep.year, timestep.month, timestep.day)
-            if day not in dates: 
-                dates[day] = []
-            
-            dates[day].append(timestep)
-        
-        
-        queries = []
-        for d in dates: # format one query per date required
-            dates[d] = list(set(dates[d]))
-            timesteps = dates[d]
-            
-            hqs = HarpQuery(variables=hq.variables, times=timesteps, area=hq.area, levels=hq.levels)
-            hqs.extra["CDS"] = True
-            hqs.extra["day"] = d
-            
-            queries.append(hqs)
-        
-        return queries
         
     def _standardize(self, ds):
         

@@ -15,6 +15,7 @@ from pydap.cas.urs import setup_session
 
 from harp._backend import harp_std
 from harp._backend._utils import ComputeLock
+from harp._backend._utils.harp_query import HarpQuery
 from harp._backend.baseprovider import BaseDatasetProvider
 from harp._backend.merra2 import merra2_search_provider
 from harp._backend.nomenclature import Nomenclature
@@ -51,62 +52,56 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
         
 
     # @interface
-    def download(self, variables: list[str], time: datetime, *, area: dict=None, offline=False) -> list[Path]:
+    def download(self, hq: HarpQuery) -> list[Path]:
         """
         variables are expected to be raw
         """
         
-        if area is not None:
-            log.error("Not implemented yet", e=RuntimeError)
-        
-        queries = self._decompose_query(variables, time, area=area)
-        queries = self._filter_cached_variables_from_queries(queries, area=area)
-        
-        for query in queries:
+        if hq.area is not None:
+            log.error("Regionalized query not implemented yet (area parameter)", e=ValueError)
             
-            lock: ComputeLock = self._get_hashed_query_lock(query)
+        subqueries: list[HarpQuery] = self._decompose_into_subqueries_per_day(hq)
+        subqueries: list[HarpQuery] = self._filter_cached_variables_from_queries(subqueries)
+        
+        for hqs in subqueries:
+
+            lock: ComputeLock = self._get_hashed_query_lock(hqs)
             
             if lock.is_locked(): # query is currently already being executed by someone in the same HARP CACHE DIR tree
                 lock.wait()
             
-                query = self._filter_cached_variables_from_query(query) # Check to see if all necessary files are now present
-                if query == None: continue # all files present locally
+                hqs = self._filter_cached_variables_from_query(hqs) # Check to see if all necessary files are now present
+                if hqs == None: continue # all files present locally
             
             with lock.locked(): # lock query and make query download
-                if offline:
+                if hqs.offline:
                     log.error(f"Offline mode is activated and data is missing locally [\
-                        {', '.join(query['variables'])}] for {time.strftime('%Y-%m-%d')}",
+                        {', '.join(hqs.variables)}] for {hq.times}",
                         e=FileNotFoundError)
                 
                 self.auth = auth.get_auth(self.host)  # credentials from netrc file
                 
-                log.info(f"Querying {self.name} for variables {', '.join(query['variables'])} on {query['date']} {query['times']}")
+                log.info(f"Querying {self.name} for variables {', '.join(hqs.variables)} on {hqs.times}")
 
-                ds = self._access_day_file(query["date"], area)
-                ds = ds[query["variables"]].sel(time=query["times"]).compute()
+                ds = self._access_day_file(hqs)
+                ds = ds[hqs.variables].sel(time=hqs.times).compute()
+                
+                # TODO area selection
                 
                 # split and store per variable, per timestep
-                self._split_and_store_atomic(ds)
+                self._split_and_store_atomic(ds, hqs)
             
-        files = self._get_query_files(variables, time)
+        files = self._get_query_files(hq)
         return files
     
     
-    def _get_query_files(self, variables: list[str], time: datetime|list[datetime, datetime], *, area: dict=None):
-        timesteps = self.timespecs.get_encompassing_timesteps(time)
-        
-        files = []
-        
-        for timestep in timesteps:
-            for var in variables:
-                files.append(self._get_target_file_path(var, timestep))
-                
-        return files
     
-    def _access_day_file(self, day: date,  area: dict=None) -> xr.Dataset:
+    def _access_day_file(self, hq: HarpQuery) -> xr.Dataset:
         """
         Download to a temporary dir the whole day, returns the dataset trimmed with OPeNDAP 
         """
+        
+        day = hq.extra["day"]
         
         url = self._get_url(day)
     
@@ -127,48 +122,6 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
         ds = xr.open_dataset(store)
         
         return ds
-    
-    def _decompose_query(self, variables: list[str], time: datetime|list[datetime, datetime], *, area: dict=None):
-        """
-        Decompose the query as a (series of) Pydap query for the missing data,
-        Can choose to download more to avoid doing several queries
-        
-        e.g: 23h45 -> 00T23:00 + 01T00:00 -> should be two requests
-        compiled to:
-                00:00, 23:00 for 00T and 01T 
-        
-        """
-        if area is not None:
-            log.error("Not implemented yet", e=RuntimeError)
-        
-        if isinstance(time, Collection): # TODO: should be easy to add with current functionning
-            log.error("Time range query not implemented yet", e=ValueError)
-        
-        timesteps = self.timespecs.get_encompassing_timesteps(time)
-        dates = {}
-        
-        for timestep in timesteps:
-            day = date(timestep.year, timestep.month, timestep.day)
-            if day not in dates: 
-                dates[day] = []
-            
-            dates[day].append(timestep)
-        
-        
-        queries = []
-        for d in dates: # format one query per date required
-            dates[d] = list(set(dates[d]))
-            compiled_times = dates[d]
-            
-            query = dict(
-                date      = d,
-                times     = compiled_times,
-                variables = variables,
-            )
-            queries.append(query)
-            
-        return queries
-    
     
     
     def _get_url(self, day: date):
