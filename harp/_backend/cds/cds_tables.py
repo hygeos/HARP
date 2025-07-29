@@ -2,10 +2,6 @@ from pathlib import Path
 import pandas as pd
 
 from core import log
-from core import table
-
-from core.static import interface
-from core.static import constraint
 
 from harp._backend.cds import cds_tables_meta_infos
 
@@ -25,18 +21,19 @@ class cds_table:
     # @interface
     def __init__(self, files: list):        
         self.files: list = files
-        c = constraint.path(exists=True, mode="file", context="HARP internal CDS tables")
+        # c = constraint.path(exists=True, mode="file", context="HARP internal CDS tables")
         self.table = None
         
         other_files = self.files.copy()
         
         f = other_files.pop(0)
-        c.check(f)          # check filepath is valid
+        if not f.is_file(): log.error("Expected existing file")
         self.table = _read_csv_as_df(f)
         cds_table._append_meta_infos(self.table, f)
                 
         for f in other_files:    # ingest all provided csv files
-            c.check(f)          # check filepath is valid
+            if not f.is_file(): log.error("Expected existing file")
+            # c.check(f)          # check filepath is valid
             t = _read_csv_as_df(f)
             cds_table._append_meta_infos(t, f)
             

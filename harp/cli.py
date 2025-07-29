@@ -1,5 +1,3 @@
-from typing import Iterable
-
 from core import log
 from harp._search import search_cfg
 from harp._search.search import search

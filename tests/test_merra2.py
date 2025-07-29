@@ -5,7 +5,7 @@ from pathlib import Path
 from datetime import datetime
 
 from core import log
-from harp.providers.NASA import MERRA2
+from harp.datasets import MERRA2
 
 
 def test_get():

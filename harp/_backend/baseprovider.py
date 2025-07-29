@@ -8,10 +8,10 @@ import xarray as xr
 from core import log
 from core.config import Config
 from core.save import to_netcdf
-from core.static import abstract, constraint, interface
+from core.static import abstract
 
 from harp._backend._utils import ComputeLock
-from harp._backend._utils.harp_query import HarpAtomicStorageUnit, HarpQuery
+from harp._backend.harp_query import HarpAtomicStorageUnit, HarpQuery
 
 import harp.config
 from harp._backend.computable import Computable
@@ -56,9 +56,9 @@ class BaseDatasetProvider:
         levels = kwargs.get("levels")
         
         
-        query       = [] # variables to query
-        operands    = [] # operands for computable variables
-        computed    = [] # variables to compute from operands
+        query    = [] # variables to query
+        operands = [] # operands for computable variables
+        computed = [] # variables to compute from operands
         
         # dst_var is the user given name, bound to an exisiting query_name
         # Computable variable decomposition in operands, which are then inserted

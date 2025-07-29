@@ -1,9 +1,7 @@
 from datetime import date, datetime, timedelta
-from typing import Collection, Iterable, Literal
 
 import numpy as np
 
-from core.static import interface
 from core import log
 
 class RegularTimespec:
@@ -31,7 +29,7 @@ class RegularTimespec:
             _type_: _description_
         """
         
-        if not isinstance(times, Iterable):     t = times
+        if not isinstance(times, list):     t = times
         elif len(times) == 1:                   t = times[0]
         else: log.error("Not implemented yet")
         

@@ -4,7 +4,7 @@ from pathlib import Path
 from core import log
 from core.static import interface
 
-from harp._backend._utils.harp_query import HarpQuery
+from harp._backend.harp_query import HarpQuery
 from harp._backend.timespec import RegularTimespec
 from harp._backend import cds
 

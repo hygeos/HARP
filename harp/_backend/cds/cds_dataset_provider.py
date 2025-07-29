@@ -1,11 +1,6 @@
-import copy
 from datetime import date, datetime, timedelta
-import hashlib
 from pathlib import Path
-import pprint
 from tempfile import TemporaryDirectory
-import time
-from typing import Collection
 import uuid
 
 import cdsapi
@@ -13,9 +8,8 @@ from core import log
 from core.static import abstract, interface
 import xarray as xr
 
-from harp._backend._utils.harp_query import HarpQuery
+from harp._backend.harp_query import HarpQuery
 from harp._backend.cds import cds_search_provider
-from harp._backend.cds.cds_query import CdsAtomicQuery
 from harp._backend.timespec import RegularTimespec
 from harp._backend.baseprovider import BaseDatasetProvider
 from harp._backend.nomenclature import Nomenclature

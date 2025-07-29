@@ -1,6 +1,5 @@
 from datetime import datetime
 from pathlib import Path
-from typing import Iterable
 from core import log
 import hashlib
 
@@ -70,7 +69,7 @@ class HarpQuery:
         self.area       = area
         self.levels     = None if levels is None else sorted(levels)
         
-        if isinstance(times, Iterable): self.times = times.copy()
+        if isinstance(times, list): self.times = times.copy()
         elif isinstance(times, datetime): self.times = [times]
         
         self.extra = {} # extra data (mostly formating)

@@ -1,6 +1,5 @@
 from typing import Callable
 
-from core.static import interface
 
 class Computable:
     """

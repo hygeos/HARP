@@ -4,52 +4,41 @@ from pathlib import Path
 from core import log
 from core.static import interface
 
-from harp._backend._utils.harp_query import HarpQuery
-from harp._backend.baseprovider import BaseDatasetProvider
+from harp._backend.harp_query import HarpQuery
+from harp._backend.timerange import Timerange
 from harp._backend.timespec import RegularTimespec
 from harp._backend import cds
 
-import xarray as xr
 
-class GlobalReanalysisVolumetric(cds.CdsDatasetProvider): 
+class GlobalReanalysis(cds.CdsDatasetProvider): 
     
     # url = "https://cds.climate.copernicus.eu/api"
     keywords = ["ECMWF", "Copernicus", "climate"]
     institution = "ECMWF"
     collection = "ERA5"
     
-    name = "reanalysis-era5-pressure-levels"
+    name = "reanalysis-era5-single-levels"
     product_type = "reanalysis"
     
     timespecs = RegularTimespec(timedelta(seconds=0), 24)
     
-    pressure_levels = [ # all pressure levels 
-            1,   2,   3,   5,   7,  10,  20,  30,  50,  70, 100, 125, 150, 
-            175, 200, 225, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 
-            750, 775, 800, 825, 850, 875, 900, 925, 950, 975, 1000
-        ]
-        
-    
     def __init__(self, *, variables: dict[str: str], config: dict={}):
         folder = Path(__file__).parent / "tables"
         files = [
-            folder / "era5_table9.csv",
+            folder / "era5_table1.csv",
+            folder / "era5_table2.csv",
+            folder / "era5_table3.csv",
+            folder / "era5_table4.csv",
+            folder / "era5_table5.csv",
+            folder / "era5_table6.csv",
+            folder / "era5_table7.csv",
+            folder / "era5_table8.csv",
         ]
         super().__init__(csv_files=files, variables=variables, config=config)
         
-        self.timerange_str = "1940 … -5day"
-    
-    
-    # overload baseprovider definition to add parameters
-    def get(self,
-            time: datetime, # type dictates if dt or range
-            levels: list[int] = pressure_levels,
-            ) -> xr.Dataset:
-        
-        levels = [str(i) for i in levels]
-            
-        BaseDatasetProvider.get(self, time=time, levels=levels)
-        
+        # latest = datetime.now() - timedelta(days=6)
+        # self.timerange = Timerange(start=datetime(1940, 1 ,1), end=latest)
+        self.timerange_str = "1940 … -5days"
     
     # @interface
     def _execute_cds_request(self, target_filepath: Path, hq: HarpQuery):
@@ -59,16 +48,15 @@ class GlobalReanalysisVolumetric(cds.CdsDatasetProvider):
         
         dataset = self.name
         request = {
-                "product_type": [self.product_type],
+                "product_type":     [self.product_type],
                 
                 "variable":     hq.variables,
                 "year":         hq.extra["day"].year,
                 "month":        hq.extra["day"].month,
                 "day":          hq.extra["day"].day,
                 "time":         times,
-                "pressure_level": hq.levels,
                 
-                "data_format":"netcdf",
+                "data_format":      "netcdf",
                 "download_format":  "unarchived"
         }
         
@@ -78,4 +66,3 @@ class GlobalReanalysisVolumetric(cds.CdsDatasetProvider):
         client.retrieve(dataset, request, target_filepath)
         
         return
-   

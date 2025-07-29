@@ -158,13 +158,11 @@ def compile(
     sources: str
 ):
 
-    print(" >>>> ", sources)
-
     filtered = []
     
     for t in results:
         
-        dataset_source = t.attrs["institution"] + "." + t.attrs["collection"] + "." + t.attrs["dataset"]
+        dataset_source = t.attrs["collection"] + "." + t.attrs["dataset"] # removed: t.attrs["institution"] + "." + 
         t["dataset"] = dataset_source
         t["timerange"] = t.attrs["timerange"]
         t["uscore"] = t["score"].apply(lambda x: round(x, 2))

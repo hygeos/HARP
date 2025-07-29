@@ -1,8 +1,5 @@
 import time
-# import shutil
 from typing import Literal
-# import pandas as pd
-
 
 class ascii_table:
     

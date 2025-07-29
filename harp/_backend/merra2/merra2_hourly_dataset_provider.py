@@ -3,23 +3,19 @@ import json
 import warnings
 from datetime import date, datetime
 from pathlib import Path
-from typing import Collection
 
 import requests
 import xarray as xr
 from core import auth, log
-from core.fileutils import filegen
-from core.save import to_netcdf
-from core.static import interface
 from pydap.cas.urs import setup_session
 
 from harp._backend import harp_std
 from harp._backend._utils import ComputeLock
-from harp._backend._utils.harp_query import HarpQuery
+from harp._backend.harp_query import HarpQuery
 from harp._backend.baseprovider import BaseDatasetProvider
 from harp._backend.merra2 import merra2_search_provider
 from harp._backend.nomenclature import Nomenclature
-from harp.providers.NASA.MERRA2 import _layout
+from harp.datasets.MERRA2 import _layout
 
 warnings.filterwarnings('ignore', message='PyDAP was unable to determine the DAP protocol*')
 
