@@ -27,17 +27,15 @@ _search_data_providers = [ # list of providers to participate in fuzzy searching
     MERRA2.hourly.M2T1NXRAD,
     MERRA2.hourly.M2T1NXSLV,
     MERRA2.hourly.M2T3NXGLC,
-    # ---
     # TODO: plug MERRA2 DIURNAL
     # TODO: plug MERRA2 MONTHLY
     # TODO: plug MERRA2 CONSTANT
-    # ---
     ERA5.hourly.GlobalReanalysis,
     ERA5.hourly.GlobalReanalysisVolumetric,
-    # ---
-    # TODO: plug CAMS
-    # ---
+    # TODO plug ERA5 monthly
     CAMS.hourly.GlobalReanalysis,
+    CAMS.hourly.GlobalReanalysisVolumetric,
+    # TODO plug CAMS monthly (if exists)
 
 ]
 

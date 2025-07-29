@@ -158,6 +158,8 @@ def compile(
     sources: str
 ):
 
+    print(" >>>> ", sources)
+
     filtered = []
     
     for t in results:
@@ -171,11 +173,16 @@ def compile(
 
         # Filtering from the sources provided by flag --from
         if sources is not None:
+            matched_all = True
             for src in sources:
                 # print(src.strip().lower(), " in ",  dataset_source, " is ", src.lower() in dataset_source)
                 
-                if src.strip().lower() in dataset_source.lower():
-                    filtered.append(t)
+                if not src.strip().lower() in dataset_source.lower():
+                    matched_all = False
+                    break
+                
+            if matched_all: 
+                filtered.append(t)
         else:
             filtered.append(t)
     
