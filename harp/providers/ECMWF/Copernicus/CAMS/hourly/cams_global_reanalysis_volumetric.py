@@ -4,9 +4,12 @@ from pathlib import Path
 from core import log
 from core.static import interface
 
+from harp._backend._utils.harp_query import HarpQuery
+from harp._backend.baseprovider import BaseDatasetProvider
 from harp._backend.timespec import RegularTimespec
 from harp._backend import cds
 
+import xarray as xr
 
 class GlobalReanalysisVolumetric(cds.CdsDatasetProvider): 
     
@@ -20,18 +23,24 @@ class GlobalReanalysisVolumetric(cds.CdsDatasetProvider):
     
     timespecs = RegularTimespec(timedelta(seconds=0), 8) # Trihourly
     
+    # cf: https://ads.atmosphere.copernicus.eu/datasets/cams-global-reanalysis-eac4?tab=download
+    pressure_levels = [1, 2, 3, 5, 7, 10, 20, 30, 50, 70, 100, 150, 200, 250, 
+                      300, 400, 500, 600, 700, 800, 850, 900, 925, 950, 1000]
+                      
+    model_levels = [i for i in range(1, 61)] # 60 model levels starting at 1
+    
     def __init__(self, variables: dict[str: str], config: dict={}, allow_slow_access=False):
         folder = Path(__file__).parent / "tables" / "GlobalReanalysis"
         files = [
-            # folder / "table1.csv",
-            folder / "table2.csv",
+            # folder / "table1.csv",            # single level
+            folder / "cams_ra_table2.csv",
         ]
         slow_access_files = [
-            # folder / "table3.csv",
-            # folder / "table4.csv",
-            # folder / "table5.csv",
-            folder / "table6.csv",
-            folder / "table7.csv",
+            # folder / "table3.csv",            # single level
+            # folder / "table4.csv",            # single level
+            # folder / "table5.csv",            # single level
+            folder / "cams_ra_table6.csv",
+            folder / "cams_ra_table7.csv",
         ]
         
         # TODO: Review specific config passing, maybe use kwargs instead ?
@@ -42,28 +51,35 @@ class GlobalReanalysisVolumetric(cds.CdsDatasetProvider):
             files += slow_access_files
         
         super().__init__(csv_files=files, variables=variables, config=config)
+
+        self.timerange_str = "2003 … -1year"
+
+
+        # overload baseprovider definition to add parameters
+    def get(self,
+            time: datetime, # type dictates if dt or range
+            levels: list[int] = pressure_levels,
+            ) -> xr.Dataset:
         
+        levels = [str(i) for i in levels]
+            
+        BaseDatasetProvider.get(self, time=time, levels=levels)
+
     
     # @interface
-    def _execute_cds_request(self, target_filepath: Path, query: dict, area: dict=None):
+    def _execute_cds_request(self, target_filepath: Path, hq: HarpQuery):
         
-        if area is not None:
-            log.error("Not implemented yet", e=RuntimeError)
-        
-        d = date(query["years"], query["months"], query["days"])
+        # TODO area
+        times = [t.strftime("%H:%M") for t in hq.times]
+        d = hq.extra["day"]
         
         dataset = self.name
         request = {
-                'variable':     query["variables"],
+                "variable":     hq.variables,
                 'date':         [d.strftime("%Y-%m-%d")],       # "date": ["2023-12-01/2023-12-01"],
-                'time':         query["times"],
+                "time":         times,
                 
-                "pressure_level": [
-                    "1", "2", "3","5", "7", "10",
-                    "20", "30", "50","70", "100", "150",
-                    "200", "250", "300","400", "500", "600",
-                    "700", "800", "850","900", "925", "950", "1000"
-                ],
+                "pressure_level": hq.levels,
                 
                 'data_format':'netcdf',
         }

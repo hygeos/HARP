@@ -1,5 +1,5 @@
 from datetime import date, datetime, timedelta
-from typing import Collection, Literal
+from typing import Collection, Iterable, Literal
 
 import numpy as np
 
@@ -21,7 +21,7 @@ class RegularTimespec:
         self.midnight_start = (start == timedelta(seconds=0)) # True if first timestep is 00:00 False otherwise
             
     
-    def get_encompassing_timesteps(self, time: datetime) -> list[datetime, datetime]:
+    def get_encompassing_timesteps(self, times: list[datetime]) -> list[datetime, datetime]: # TODO support multi times
         """Returns the datetimes bound of the specs, around the provided time
 
         Args:
@@ -29,9 +29,15 @@ class RegularTimespec:
 
         Returns:
             _type_: _description_
-        """        
-        day = datetime(time.year, time.month, time.day)
-        intra_day_time = time - day
+        """
+        
+        if not isinstance(times, Iterable):     t = times
+        elif len(times) == 1:                   t = times[0]
+        else: log.error("Not implemented yet")
+        
+        
+        day = datetime(t.year, t.month, t.day)
+        intra_day_time = t - day
         
         timesteps = np.array(self.intraday_timesteps)
        

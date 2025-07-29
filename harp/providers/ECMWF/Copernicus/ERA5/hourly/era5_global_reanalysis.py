@@ -4,6 +4,7 @@ from pathlib import Path
 from core import log
 from core.static import interface
 
+from harp._backend._utils.harp_query import HarpQuery
 from harp._backend.timerange import Timerange
 from harp._backend.timespec import RegularTimespec
 from harp._backend import cds
@@ -40,19 +41,21 @@ class GlobalReanalysis(cds.CdsDatasetProvider):
         self.timerange_str = "1940 … -5days"
     
     # @interface
-    def _execute_cds_request(self, target_filepath: Path, query, area: dict=None):
+    def _execute_cds_request(self, target_filepath: Path, hq: HarpQuery):
         
-        if area is not None:
-            log.error("Not implemented yet", e=RuntimeError)
+        # TODO area
+        times = [t.strftime("%H:%M") for t in hq.times]
         
         dataset = self.name
         request = {
                 "product_type":     [self.product_type],
-                "variable":         query["variables"],
-                "year":             query["years"],
-                "month":            query["months"],
-                "day":              query["days"],
-                "time":             query["cds_times"],
+                
+                "variable":     hq.variables,
+                "year":         hq.extra["day"].year,
+                "month":        hq.extra["day"].month,
+                "day":          hq.extra["day"].day,
+                "time":         times,
+                
                 "data_format":      "netcdf",
                 "download_format":  "unarchived"
         }

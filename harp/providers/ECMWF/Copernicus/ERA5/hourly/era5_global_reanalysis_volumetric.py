@@ -4,9 +4,12 @@ from pathlib import Path
 from core import log
 from core.static import interface
 
+from harp._backend._utils.harp_query import HarpQuery
+from harp._backend.baseprovider import BaseDatasetProvider
 from harp._backend.timespec import RegularTimespec
 from harp._backend import cds
 
+import xarray as xr
 
 class GlobalReanalysisVolumetric(cds.CdsDatasetProvider): 
     
@@ -20,6 +23,13 @@ class GlobalReanalysisVolumetric(cds.CdsDatasetProvider):
     
     timespecs = RegularTimespec(timedelta(seconds=0), 24)
     
+    pressure_levels = [ # all pressure levels 
+            1,   2,   3,   5,   7,  10,  20,  30,  50,  70, 100, 125, 150, 
+            175, 200, 225, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 
+            750, 775, 800, 825, 850, 875, 900, 925, 950, 975, 1000
+        ]
+        
+    
     def __init__(self, *, variables: dict[str: str], config: dict={}):
         folder = Path(__file__).parent / "tables"
         files = [
@@ -28,26 +38,36 @@ class GlobalReanalysisVolumetric(cds.CdsDatasetProvider):
         super().__init__(csv_files=files, variables=variables, config=config)
         
         self.timerange_str = "1940 … -5day"
+    
+    
+    # overload baseprovider definition to add parameters
+    def get(self,
+            time: datetime, # type dictates if dt or range
+            levels: list[int] = pressure_levels,
+            ) -> xr.Dataset:
+        
+        levels = [str(i) for i in levels]
+            
+        BaseDatasetProvider.get(self, time=time, levels=levels)
         
     
     # @interface
-    def _execute_cds_request(self, target_filepath: Path, query, area: dict=None):
+    def _execute_cds_request(self, target_filepath: Path, hq: HarpQuery):
         
         # TODO area
+        times = [t.strftime("%H:%M") for t in hq.times]
         
         dataset = self.name
         request = {
                 "product_type": [self.product_type],
-                "variable":     query["variables"],
-                "year":         query["years"],
-                "month":        query["months"],
-                "day":          query["days"],
-                "time":         query["cds_times"],
-                "pressure_level": [ # query all pressure levels 
-                      "1",   "2",   "3",   "5",   "7",  "10",  "20",  "30",  "50",  "70", "100", "125", "150", 
-                    "175", "200", "225", "250", "300", "350", "400", "450", "500", "550", "600", "650", "700", 
-                    "750", "775", "800", "825", "850", "875", "900", "925", "950", "975", "1000"
-                ],
+                
+                "variable":     hq.variables,
+                "year":         hq.extra["day"].year,
+                "month":        hq.extra["day"].month,
+                "day":          hq.extra["day"].day,
+                "time":         times,
+                "pressure_level": hq.levels,
+                
                 "data_format":"netcdf",
                 "download_format":  "unarchived"
         }

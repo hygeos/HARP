@@ -13,7 +13,9 @@ from core import log
 from core.static import abstract, interface
 import xarray as xr
 
+from harp._backend._utils.harp_query import HarpQuery
 from harp._backend.cds import cds_search_provider
+from harp._backend.cds.cds_query import CdsAtomicQuery
 from harp._backend.timespec import RegularTimespec
 from harp._backend.baseprovider import BaseDatasetProvider
 from harp._backend.nomenclature import Nomenclature
@@ -49,39 +51,38 @@ class CdsDatasetProvider(BaseDatasetProvider):
         )
         
     
-    def download(self, variables: list[str], time: datetime|list[datetime, datetime], *, offline=False, area: dict=None) -> list[Path]:
+    def download(self, hq: HarpQuery) -> list[Path]:
         
-        if area is not None:
+        if hq.area is not None:
             log.error("Regionalized query not implemented yet (area parameter)", e=ValueError)
-        
-        if isinstance(time, Collection): 
-            log.error("Time range query not implemented yet", e=ValueError)
             
-        queries = self._decompose_query_per_day(variables, time, area=area)
-        queries = self._filter_cached_variables_from_queries(queries, area=area)
+        subqueries: list[HarpQuery] = self._decompose_into_subqueries_per_day(hq)
+        subqueries: list[HarpQuery] = self._filter_cached_variables_from_queries(subqueries)
         
-        for query in queries:
+        for hqs in subqueries:
             
-            lock: ComputeLock = self._get_hashed_query_lock(query)
+            lock: ComputeLock = self._get_hashed_query_lock(hqs)
             
             if lock.is_locked(): # query is currently already being executed by someone in the same HARP CACHE DIR tree
                 lock.wait()
                 
-                query = self._filter_cached_variables_from_query(query) # Check to see if all necessary files are now present
-                if query == None: continue # all files present locally
+                hqs = self._filter_cached_variables_from_query(hqs) # Check to see if all necessary files are now present
+                if hqs == None: continue # all files present locally
                 
             with lock.locked(): # lock query and make query download
-                if offline:
+                if hqs.offline:
                     log.error(f"Offline mode is activated and data is missing locally [\
-                        {', '.join(query['variables'])}] for {time.strftime('%Y-%m-%d')}",
+                        {', '.join(hqs['variables'])}] for {time.strftime('%Y-%m-%d')}",
                         e=FileNotFoundError)
             
                 # log.debug("QUERY:\n", query)
-                log.info(f"Querying {self.name} for variables {', '.join(query['variables'])} on {query['years']}-{query['months']}-{query['days']} {query['times']}")
+                d = hqs.extra["day"]
+                log.info(f"Querying {self.name} for variables {', '.join(hqs.variables)} on {d.year}-{d.month}-{d.day} {hqs.times}")
                         
                 with TemporaryDirectory() as tmpdir:
                     tmpfile = Path(tmpdir) / f"tmp_{uuid.uuid4().hex}_.nc"
-                    self._execute_cds_request(tmpfile, query, area=area)
+                    
+                    self._execute_cds_request(tmpfile, hqs)
                     
                     ds = xr.open_dataset(tmpfile, engine='netcdf4')
                     
@@ -92,53 +93,41 @@ class CdsDatasetProvider(BaseDatasetProvider):
                     ds = ds.rename(new_names)
                         
                     # split and store per variable, per timestep
-                    self._split_and_store_atomic(ds)
+                    self._split_and_store_atomic(ds, hqs)
                     
         
-        returned_params = [self.nomenclature.untranslate_query_name(p) for p in variables]
+        returned_params = [self.nomenclature.untranslate_query_name(p) for p in hq.variables]
+        hq.variables = returned_params
         
-        files = self._get_query_files(returned_params, time)
+        files = self._get_query_files(hq)
         return files
     
     
     @abstract
-    def _execute_cds_request(self, target_filepath: Path, query, area: dict=None):
-        
-        # TODO area
-        
-        dataset = self.name
-        request = {
-                "product_type":     [self.product_type],
-                "variable":         query["variables"],
-                "year":             query["years"],
-                "month":            query["months"],
-                "day":              query["days"],
-                "time":             query["times"],
-                "data_format":      "netcdf",
-                "download_format":  "unarchived"
-        }
-        
-        # if area is not None: 
-            # request['area'] = area
-        client = cds.auth.get_client(self.url)
-        client.retrieve(dataset, request, target_filepath)
-        
+    def _execute_cds_request(self, target_filepath: Path, hq: HarpQuery, ):
         return
         
     
-    def _get_query_files(self, variables: list[str], time: datetime|list[datetime, datetime], *, area: dict=None):
-        timesteps = self.timespecs.get_encompassing_timesteps(time)
+    def _get_query_files(self, hq: HarpQuery):
+        timesteps = self.timespecs.get_encompassing_timesteps(hq.times)
+        # TODO manage multiple times
+        
+        times_tmp = hq.times
+        hq.times  = timesteps
         
         files = []
+        units = hq.get_atomic_storage_units()
+        # for t in hq.times:
+            # for var in variables:
+        for u in units:
+            files.append(self._get_target_file_path(u))
         
-        for timestep in timesteps:
-            for var in variables:
-                files.append(self._get_target_file_path(var, timestep))
-                
+        hq.times = times_tmp
+        
         return files
         
                 
-    def _decompose_query_per_day(self, variables: list[str], time: datetime|list[datetime, datetime], *, area: dict=None):
+    def _decompose_into_subqueries_per_day(self, hq: HarpQuery) -> list[HarpQuery]:
         """
         Decompose the query as a (series of) CDS query for the missing data,
         One query per day,
@@ -150,16 +139,10 @@ class CdsDatasetProvider(BaseDatasetProvider):
         
         """
         
-        if isinstance(time, Collection): # TODO: should be easy to add with current functionning
+        if len(hq.times) > 1: # TODO: should be easy to add with current functionning
             log.error("Time range query not implemented yet", e=ValueError)
         
-        timesteps = self.timespecs.get_encompassing_timesteps(time)
-        
-        # NOTE: moving logic out of decomposition routine
-        # missing_variables = self._find_missing_variables(variables, timesteps, area=area)
-        
-        # if len(missing_variables) == 0:
-        #     return [] 
+        timesteps = self.timespecs.get_encompassing_timesteps(hq.times) # TODO
         
         dates = {}
         
@@ -174,16 +157,13 @@ class CdsDatasetProvider(BaseDatasetProvider):
         queries = []
         for d in dates: # format one query per date required
             dates[d] = list(set(dates[d]))
+            timesteps = dates[d]
             
-            query = dict(
-                years   = d.year,
-                months  = d.month,
-                days    = d.day,
-                cds_times = [t.strftime("%H:%M") for t in dates[d]], # CDS preformat
-                times = dates[d],
-                variables = variables.copy(),
-            )
-            queries.append(query)
+            hqs = HarpQuery(variables=hq.variables, times=timesteps, area=hq.area, levels=hq.levels)
+            hqs.extra["CDS"] = True
+            hqs.extra["day"] = d
+            
+            queries.append(hqs)
         
         return queries
         

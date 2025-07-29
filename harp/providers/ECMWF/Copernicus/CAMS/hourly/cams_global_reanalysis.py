@@ -4,6 +4,7 @@ from pathlib import Path
 from core import log
 from core.static import interface
 
+from harp._backend._utils.harp_query import HarpQuery
 from harp._backend.timespec import RegularTimespec
 from harp._backend import cds
 
@@ -47,18 +48,17 @@ class GlobalReanalysis(cds.CdsDatasetProvider):
         
     
     # @interface
-    def _execute_cds_request(self, target_filepath: Path, query: dict, area: dict=None):
+    def _execute_cds_request(self, target_filepath: Path, hq: HarpQuery):
         
-        if area is not None:
-            log.error("Not implemented yet", e=RuntimeError)
-        
-        d = date(query["years"], query["months"], query["days"])
+        # TODO area
+        times = [t.strftime("%H:%M") for t in hq.times]
+        d = hq.extra["day"]
         
         dataset = self.name
         request = {
-                'variable':     query["variables"],
+                "variable":     hq.variables,
                 'date':         [d.strftime("%Y-%m-%d")],       # "date": ["2023-12-01/2023-12-01"],
-                'time':         query["cds_times"],
+                "time":         times,
                 "data_format":      "netcdf",
                 "download_format":  "unarchived"
         }

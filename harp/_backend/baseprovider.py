@@ -11,6 +11,8 @@ from core.save import to_netcdf
 from core.static import abstract, constraint, interface
 
 from harp._backend._utils import ComputeLock
+from harp._backend._utils.harp_query import HarpAtomicStorageUnit, HarpQuery
+
 import harp.config
 from harp._backend.computable import Computable
 
@@ -49,6 +51,11 @@ class BaseDatasetProvider:
      
         """
         
+        # optional internal parameters, specific providers are free to overload their interface with theses
+        area = kwargs.get("area")
+        levels = kwargs.get("levels")
+        
+        
         query       = [] # variables to query
         operands    = [] # operands for computable variables
         computed    = [] # variables to compute from operands
@@ -83,9 +90,8 @@ class BaseDatasetProvider:
         offline = kwargs.pop('offline', None)  # Extract & remove (if present)
         offline = offline if offline is not None else self.config.get("offline")
         
-        print("OFFLINE", offline)
-        
-        files = self.download(variables=query, time=time, offline=offline, **kwargs)
+        hq = HarpQuery(variables=query, times=time, offline=offline, area=area, levels=levels)
+        files = self.download(hq)
         ds = xr.open_mfdataset(files, engine='netcdf4')
                 
         # harmonize if not disabled
@@ -177,13 +183,7 @@ class BaseDatasetProvider:
             log.error(f"Storage path (Key \'dir_storage\') not provided in config for {context} object", e=RuntimeError)
     
     
-        # Abandonned the idea of checking config values with constraints: makes heavy uses of core.static.interfaces        
-        # for k, c in harp.config.default_config_constraints.items():
-            # print(k, c)
-            # c.check(self.config.get(k))
-        
-    
-    def _split_and_store_atomic(self, ds):
+    def _split_and_store_atomic(self, ds, hq: HarpQuery):
         """
         Split and store dataset per variable and per timestep
         assumes self._get_target_file_path is implemented in subclass
@@ -194,7 +194,10 @@ class BaseDatasetProvider:
                 
                 atomic_slice = ds[[var]].isel(time=[i], drop=False)
                 timestep = datetime.fromisoformat(str(atomic_slice.time.values[0]))
-                atomic_slice_path: Path = self._get_target_file_path(var, timestep) 
+                
+                hast = HarpAtomicStorageUnit(variable=var, time=timestep, area=hq.area, levels=hq.levels)
+                
+                atomic_slice_path: Path = self._get_target_file_path(hast) 
                 atomic_slice_path.parent.mkdir(exist_ok=True, parents=True)
                 
                 # store atomic slice
@@ -204,39 +207,18 @@ class BaseDatasetProvider:
                 )
         return
     
-    def _exists_locally(self, variable: str, time: datetime) -> bool:
-        filepath = self._get_target_file_path(variable, time)
+    
+    def _exists_locally(self, hast: HarpAtomicStorageUnit) -> bool:
+        filepath = self._get_target_file_path(hast)
         return filepath.is_file()
     
     
-    def _get_target_file_path(self, variable: str, time: datetime) -> Path:
-        return self.config.get("dir_storage") / self._get_target_subfolder(time) / self._get_target_filename(variable, time)
+    def _get_target_file_path(self, hast: HarpAtomicStorageUnit) -> Path:
+        return self._get_dataset_folder() / hast.get_subpath(self.collection)
     
     
-    def _get_target_subfolder(self, time: datetime):
-        return Path() / self.institution / self.collection / self.name / time.strftime("%Y/%m/%d")
-    
-    
-    def _get_target_filename(self, variable, time: datetime, region=False):
-        
-        filestr = f"{self.collection}_{self.name}_"
-        filestr += "region_" if region else "global_"
-        filestr += time.strftime("%Y-%m-%dT%H:%MZ_")
-        filestr += f"_{variable}__"
-        filestr += f"{self._get_storage_version()}.nc"
-        
-        return filestr    
-    
-    
-    def _get_storage_version(self):
-        """
-        Allow to invalidate cached Harp dataset by incrementing this version number
-        Shoud increment only if needed, doesn't need to be phased with package version
-        """
-        
-        version = "3"
-        
-        return "v" + version
+    def _get_dataset_folder(self):
+        return self.config.get("dir_storage") / self.collection / self.name
     
     
     @abstract # to be defined by subclasses
@@ -249,13 +231,13 @@ class BaseDatasetProvider:
     
     
     
-    def _get_hashed_query_lock(self, query) -> ComputeLock:
+    def _get_hashed_query_lock(self, hq: HarpQuery) -> ComputeLock:
         """
         Returns a ComputeLock object pointing to a unique lockfile for a provided query (nest dicts)
         query must contains unique IDs (self.collection + self.name are added for uniqueness)
         """
         
-        lockfile: Path = self._get_hashed_query_lockfile_path(query)
+        lockfile: Path = self._get_hashed_query_lockfile_path(hq)
         
         lock = ComputeLock(
             filepath = lockfile, 
@@ -267,16 +249,14 @@ class BaseDatasetProvider:
         return lock
     
         
-    def _get_hashed_query_lockfile_path(self, query) -> Path:
+    def _get_hashed_query_lockfile_path(self, hq: HarpQuery) -> Path:
         """
         Returns a path for a unique lockfile for a provided query (nest dicts)
         query must contains unique IDs (self.collection + self.name are added for uniqueness)
         """
         
-        _query = copy.deepcopy(query)
-        
         h = hashlib.blake2b(digest_size=16)  # 16 bytes = 128-bit digest
-        h.update(str(_query).encode('utf-8'))
+        h.update(str(hq).encode('utf-8'))
         h = h.hexdigest()
         
         lockfile = f"{self.collection}_{self.name}__" + h + ".lock"
@@ -292,62 +272,48 @@ class BaseDatasetProvider:
         
         return folder
         
-        
     
-    def _filter_cached_variables_from_queries(self, queries, area=None):
+    def _filter_cached_variables_from_queries(self, queries: list[HarpQuery]):
         """
         For each query removes the variables which are present locally (harp cache)
         Returns a list of queries
         """
                 
-        if area is not None:
-            log.error("Not implemented yet", e=RuntimeError)
+        _queries = queries.copy()
         
-        # TODO: consider moving to BaseProvider
-        
-        _queries = copy.deepcopy(queries)
-        
-        if area is not None:
-            log.error("Not implemented yet", e=RuntimeError)
-            
         # remove emptied queries
         _queries = [self._filter_cached_variables_from_query(q) for q in _queries]
         _queries = [q for q in _queries if q != None]
         
         return _queries
         
-        
     
-    def _filter_cached_variables_from_query(self, query, area=None):
+    def _filter_cached_variables_from_query(self, hq: HarpQuery):
         """
         Requires a "times" section in query which is a list of datetimes
         """
         
-        if area is not None:
-            log.error("Not implemented yet", e=RuntimeError)
+        # translate query names to storage names (CDS query via cds_name but returns short_name)
+        stored_variables = {self.nomenclature.untranslate_query_name(v): v for v in hq.variables}
         
-        _query = copy.deepcopy(query)
-        
-        assert "times" in query
-        
-        stored_variables = {self.nomenclature.untranslate_query_name(v): v for v in _query["variables"]}
-        
-        for variable in stored_variables.keys():                    # For each variable (stored != cds_name but short_name)
+        for v in stored_variables.keys(): # For each variable (stored != cds_name but short_name)
             all_timesteps_stored_locally = True                     
         
-            for timestep in _query["times"]:                    # Check that all timesteps are present
-                if not self._exists_locally(variable, timestep):    # already missing one, need to query anyway
+            for t in hq.times: # Check that all timesteps are present
+                
+                hast = HarpAtomicStorageUnit(variable=v, time=t, area=hq.area, levels=hq.levels)
+                if not self._exists_locally(hast): # already missing one, need to query anyway
                     all_timesteps_stored_locally = False
                     break
             
             if all_timesteps_stored_locally:
-                log.debug(log.rgb.green, "Found locally: ", variable, " for ", _query["times"], flush=True)
+                log.debug(log.rgb.green, "Found locally: ", v, " for ", hq.times, flush=True)
                 
-                _query_name = stored_variables[variable]
-                _query["variables"].remove(_query_name)
+                _query_name = stored_variables[v]
+                hq.variables.remove(_query_name)
         
-        if len(_query["variables"]) == 0:
-            _query = None
+        if len(hq.variables) == 0:
+            hq = None
         
-        return _query
+        return hq
     
