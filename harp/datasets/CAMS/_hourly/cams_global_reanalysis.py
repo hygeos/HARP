@@ -5,6 +5,7 @@ from core import log
 from core.static import interface
 
 from harp._backend.harp_query import HarpQuery
+from harp._backend.timerange import Timerange
 from harp._backend.timespec import RegularTimespec
 from harp._backend import cds
 
@@ -45,6 +46,7 @@ class GlobalReanalysis(cds.CdsDatasetProvider):
         super().__init__(csv_files=files, variables=variables, config=config)
         
         self.timerange_str = "2003 … -1year"
+        self.timerange = Timerange(start=datetime(1940, 1, 1), end=datetime.now()-timedelta(days=430))
         
     
     # @interface

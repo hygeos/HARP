@@ -9,7 +9,7 @@ from core import log
 from core.config import Config
 from core.save import to_netcdf
 from core.static import abstract
-
+            
 from harp._backend._utils import ComputeLock
 from harp._backend.harp_query import HarpAtomicStorageUnit, HarpQuery
 
@@ -87,8 +87,9 @@ class BaseDatasetProvider:
         for dst_var in query: # check that every raw variable exist in the dataset provider nomenclature 
             self.nomenclature.assert_has_query_param(dst_var)
         
-        offline = kwargs.pop('offline', None)  # Extract & remove (if present)
-        offline = offline if offline is not None else self.config.get("offline")
+        koffline = kwargs.pop('offline', None)
+        offline = koffline if koffline is not None else self.config.get("offline")
+        
         
         hq = HarpQuery(variables=query, times=time, offline=offline, area=area, levels=levels)
         files = self.download(hq)
@@ -99,8 +100,8 @@ class BaseDatasetProvider:
             ds = self._standardize(ds)
         
         # unstranslate 
-        operands    = [self.nomenclature.untranslate_query_name(op) for op in operands]
-        query       = [self.nomenclature.untranslate_query_name(qu) for qu in query]
+        operands = [self.nomenclature.untranslate_query_name(op) for op in operands]
+        query    = [self.nomenclature.untranslate_query_name(qu) for qu in query]
         
         keep = direct_query.copy()
         
@@ -110,7 +111,7 @@ class BaseDatasetProvider:
             
             if comp.keep_operands:
                 for op in comp.operands:
-                    log.info(f"Keeping operand {op}")
+                    log.debug(f"Keeping operand {op}")
                     keep.append(op)
         
         keep = list(set(keep))
@@ -374,7 +375,7 @@ class BaseDatasetProvider:
             dates[d] = list(set(dates[d]))
             timesteps = dates[d]
             
-            hqs = HarpQuery(variables=hq.variables, times=timesteps, area=hq.area, levels=hq.levels)
+            hqs = HarpQuery(variables=hq.variables, times=timesteps, area=hq.area, levels=hq.levels, offline=hq.offline)
             hqs.extra["day"] = d
             
             queries.append(hqs)

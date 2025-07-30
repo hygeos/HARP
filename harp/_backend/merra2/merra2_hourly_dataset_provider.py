@@ -1,21 +1,22 @@
 import copy
 import json
 import warnings
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from pathlib import Path
 
-import requests
-import xarray as xr
-from core import auth, log
 from pydap.cas.urs import setup_session
+from core import auth, log
+import xarray as xr
+import requests
 
-from harp._backend import harp_std
-from harp._backend._utils import ComputeLock
-from harp._backend.harp_query import HarpQuery
 from harp._backend.baseprovider import BaseDatasetProvider
 from harp._backend.merra2 import merra2_search_provider
 from harp._backend.nomenclature import Nomenclature
-from harp.datasets.MERRA2 import _layout
+from harp.datasets.MERRA2._inner import _layout
+from harp._backend.harp_query import HarpQuery
+from harp._backend.timerange import Timerange
+from harp._backend._utils import ComputeLock
+from harp._backend import harp_std
 
 warnings.filterwarnings('ignore', message='PyDAP was unable to determine the DAP protocol*')
 
@@ -45,6 +46,8 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
         
         self.nomenclature = Nomenclature(self.variables_csv_path, context="MERRA2", query_col="query_name")
         self.timerange_str = "1980 … -45days"
+        self.timerange = Timerange(start=datetime(1940, 1, 1), end=datetime.now()-timedelta(days=60))
+        
         
 
     # @interface
@@ -70,7 +73,7 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
                 if hqs == None: continue # all files present locally
             
             with lock.locked(): # lock query and make query download
-                if hqs.offline:
+                if hq.offline or self.config.get("offline"):
                     log.error(f"Offline mode is activated and data is missing locally [\
                         {', '.join(hqs.variables)}] for {hq.times}",
                         e=FileNotFoundError)
@@ -115,6 +118,7 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
         session = setup_session(self.auth['user'], self.auth['password'], check_url=url)
 
         store = xr.backends.PydapDataStore.open(url, session=session)
+        
         ds = xr.open_dataset(store)
         
         return ds

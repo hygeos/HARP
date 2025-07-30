@@ -13,6 +13,7 @@ dependencies = [
     "h5py",
     "core @ git+https://github.com/hygeos/core",
     "pandas",
+    # "pydap",
     "pydap==3.5.0",
     "cdsapi>=0.7.5",
     # "scipy",
@@ -37,6 +38,7 @@ h5py = "*"
 pandas = "*"
 h5netcdf = "*"
 netcdf4 = "*"
+# pydap = "*"
 pydap = "==3.5.0"
 
 

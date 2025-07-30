@@ -6,6 +6,7 @@ from core.static import interface
 
 from harp._backend.harp_query import HarpQuery
 from harp._backend.baseprovider import BaseDatasetProvider
+from harp._backend.timerange import Timerange
 from harp._backend.timespec import RegularTimespec
 from harp._backend import cds
 
@@ -38,17 +39,19 @@ class GlobalReanalysisVolumetric(cds.CdsDatasetProvider):
         super().__init__(csv_files=files, variables=variables, config=config)
         
         self.timerange_str = "1940 … -5day"
+        self.timerange = Timerange(start=datetime(1940, 1, 1), end=datetime.now()-timedelta(days=6))
     
     
     # overload baseprovider definition to add parameters
     def get(self,
             time: datetime, # type dictates if dt or range
             levels: list[int] = pressure_levels,
+            **kwargs,  # catch-all for additional keyword arguments
             ) -> xr.Dataset:
         
         levels = [str(i) for i in levels]
             
-        BaseDatasetProvider.get(self, time=time, levels=levels)
+        return BaseDatasetProvider.get(self, time=time, levels=levels, **kwargs)
         
     
     # @interface

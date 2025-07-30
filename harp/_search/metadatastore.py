@@ -10,31 +10,31 @@ from harp.datasets import ERA5, CAMS
 
 
 _search_data_providers = [ # list of providers to participate in fuzzy searching
-    MERRA2.hourly.M2I1NXASM,
-    MERRA2.hourly.M2I1NXINT,
-    MERRA2.hourly.M2I1NXLFO,
-    MERRA2.hourly.M2I3NXGAS,
-    MERRA2.hourly.M2SDNXSLV,
-    MERRA2.hourly.M2T1NXADG,
-    MERRA2.hourly.M2T1NXAER,
-    MERRA2.hourly.M2T1NXCHM,
-    MERRA2.hourly.M2T1NXCSP,
-    MERRA2.hourly.M2T1NXFLX,
-    MERRA2.hourly.M2T1NXINT,
-    MERRA2.hourly.M2T1NXLFO,
-    MERRA2.hourly.M2T1NXLND,
-    MERRA2.hourly.M2T1NXOCN,
-    MERRA2.hourly.M2T1NXRAD,
-    MERRA2.hourly.M2T1NXSLV,
-    MERRA2.hourly.M2T3NXGLC,
+    MERRA2.M2I1NXASM,
+    MERRA2.M2I1NXINT,
+    MERRA2.M2I1NXLFO,
+    MERRA2.M2I3NXGAS,
+    MERRA2.M2SDNXSLV,
+    MERRA2.M2T1NXADG,
+    MERRA2.M2T1NXAER,
+    MERRA2.M2T1NXCHM,
+    MERRA2.M2T1NXCSP,
+    MERRA2.M2T1NXFLX,
+    MERRA2.M2T1NXINT,
+    MERRA2.M2T1NXLFO,
+    MERRA2.M2T1NXLND,
+    MERRA2.M2T1NXOCN,
+    MERRA2.M2T1NXRAD,
+    MERRA2.M2T1NXSLV,
+    MERRA2.M2T3NXGLC,
     # TODO: plug MERRA2 DIURNAL
     # TODO: plug MERRA2 MONTHLY
     # TODO: plug MERRA2 CONSTANT
-    ERA5._inner.GlobalReanalysis,
-    ERA5._inner.GlobalReanalysisVolumetric,
+    ERA5.GlobalReanalysis,
+    ERA5.GlobalReanalysisVolumetric,
     # TODO plug ERA5 monthly
-    CAMS._inner.GlobalReanalysis,
-    CAMS._inner.GlobalReanalysisVolumetric,
+    CAMS.GlobalReanalysis,
+    CAMS.GlobalReanalysisVolumetric,
     # TODO plug CAMS monthly (if exists)
 
 ]

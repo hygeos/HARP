@@ -162,7 +162,7 @@ def compile(
     
     for t in results:
         
-        dataset_source = t.attrs["collection"] + "." + t.attrs["dataset"] # removed: t.attrs["institution"] + "." + 
+        dataset_source = t.attrs["collection"] + "." + t.attrs["dataset"] + " " # removed: t.attrs["institution"] + "." + 
         t["dataset"] = dataset_source
         t["timerange"] = t.attrs["timerange"]
         t["uscore"] = t["score"].apply(lambda x: round(x, 2))
@@ -175,7 +175,7 @@ def compile(
             for src in sources:
                 # print(src.strip().lower(), " in ",  dataset_source, " is ", src.lower() in dataset_source)
                 
-                if not src.strip().lower() in dataset_source.lower():
+                if not src.lower() in dataset_source.lower():
                     matched_all = False
                     break
                 

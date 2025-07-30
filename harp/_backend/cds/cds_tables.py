@@ -43,8 +43,9 @@ class cds_table:
         
         doubles = list(self.table[self.table.duplicated('query_name')].dropna()["query_name"].values)
         
-        log.debug(f"Nomenclature: droping variables {doubles} because of ambigous definition (duplicate)")
-        self.table = self.table.drop_duplicates(subset=['query_name'])
+        if len(doubles) > 0:
+            log.debug(f"Nomenclature: droping variables {doubles} because of ambigous definition (duplicate)")
+            self.table = self.table.drop_duplicates(subset=['query_name'])
         
         
         t = self.table.copy()

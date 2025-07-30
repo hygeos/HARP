@@ -1,1 +1,1 @@
-from ._inner import GlobalReanalysis, GlobalReanalysisVolumetric
+from ._hourly import GlobalReanalysis, GlobalReanalysisVolumetric
