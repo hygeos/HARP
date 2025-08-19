@@ -1,0 +1,48 @@
+﻿name,units,query_name,short_name,id,access_type,fc,an,note
+10 metre U wind component,m s-1,10m_u_component_of_wind,10u,165,Fast access,X,X,
+10 metre V wind component,m s-1,10m_v_component_of_wind,10v,166,Fast access,X,X,
+2 metre dewpoint temperature,K,2m_dewpoint_temperature,2d,168,Fast access,X,X,
+2 metre temperature,K,2m_temperature,2t,167,Fast access,X,X,
+Ammonium aerosol optical depth at 550 nm,dimensionless,ammonium_aerosol_optical_depth_550nm,amaod550,210251,Fast access,,X,Only available from 9 July 2019 00UTC
+Black Carbon Aerosol Optical Depth at 550nm,dimensionless,black_carbon_aerosol_optical_depth_550nm,bcaod550,210211,Fast access,X,X,
+Dust Aerosol Optical Depth at 550nm,dimensionless,dust_aerosol_optical_depth_550nm,duaod550,210209,Fast access,X,X,
+Land-sea mask,(0 - 1),land_sea_mask,lsm,172,Fast access,X,X,
+Mean sea level pressure,Pa,mean_sea_level_pressure,msl,151,Fast access,X,X,
+Nitrate aerosol optical depth at 550 nm,dimensionless,nitrate_aerosol_optical_depth_550nm,niaod550,210250,Fast access,X,X,Only available from 9 July 2019 00UTC
+Organic Matter Aerosol Optical Depth at 550nm,dimensionless,organic_matter_aerosol_optical_depth_550nm,omaod550,210210,Fast access,X,X,
+Particulate matter d inf 10 um,kg m-3,particulate_matter_10um,pm10,210074,Fast access,X,X,PM10 and PM25 global products
+Particulate matter d inf 2.5 um,kg m-3,particulate_matter_2.5um,pm2p5,210073,Fast access,X,X,PM10 and PM25 global products
+Particulate matter d inf 1 um,kg m-3,particulate_matter_1um,pm1,210072,Fast access,X,X,
+Sea Salt Aerosol Optical Depth at 550nm,dimensionless,sea_salt_aerosol_optical_depth_550nm,ssaod550,210208,Fast access,,X,Only available from 26 June 2018 12UTC
+Sulphate aerosol optical depth at 550 nm,dimensionless,sulphate_aerosol_optical_depth_550nm,suaod550,210212,Fast access,,X,
+Surface geopotential,m2 s-2,surface_geopotential,z,129,Fast access,,X,
+Surface pressure,Pa,surface_pressure,sp,134,Fast access,X,X,Only available from 21 June 2016 00UTC
+Total aerosol optical depth at 1240nm,dimensionless,total_aerosol_optical_depth_1240nm,aod1240,210216,Fast access,X,X,Only available from 26 June 2018 12UTC
+Total aerosol optical depth at 469nm,dimensionless,total_aerosol_optical_depth_469nm,aod469,210213,Fast access,X,X,Only available from 26 June 2018 12UTC
+Total aerosol optical depth at 550nm,dimensionless,total_aerosol_optical_depth_550nm,aod550,210207,Fast access,X,X,Only available from 26 June 2018 12UTC
+Total aerosol optical depth at 670nm,dimensionless,total_aerosol_optical_depth_670nm,aod670,210214,Fast access,X,X,Only available from 26 June 2018 12UTC
+Total aerosol optical depth at 865nm,dimensionless,total_aerosol_optical_depth_865nm,aod865,210215,Fast access,X,X,Only available from 26 June 2018 12UTC
+Total column Carbon monoxide,kg m-2,total_column_carbon_monoxide,tcco,210127,Fast access,X,X,
+Total column of chlorine monoxide,kg m-2,total_column_chlorine_monoxide,tc_clo,218174,Fast access,X,X,Available from 28 June 2023
+Total column of chlorine nitrate,kg m-2,total_column_chlorine_nitrate,tc_clono2,218064,Fast access,X,X,Available from 28 June 2023
+Total column ethane,kg m-2,total_column_ethane,tc_c2h6,218045,Fast access,X,X,
+Total column Formaldehyde,kg m-2,total_column_formaldehyde,tchcho,210128,Fast access,X,X,
+Total column hydrogen chloride,kg m-2,total_column_hydrogen_chloride,tc_hcl,218200,Fast access,X,X,Available from 28 June 2023
+Total column hydrogen cyanide,kg m-2,total_column_hydrogen_cyanide,tc_HCN,218226,Fast access,X,X,Available from 28 June 2023
+Total column hydrogen peroxide,kg m-2,total_column_hydrogen_peroxide,tc_h2o2,218003,Fast access,X,X,Only available from 26 June 2018 12UTC
+Total column hydroxyl radical,kg m-2,total_column_hydroxyl_radical,tc_oh,218030,Fast access,X,X,
+Total column isoprene,kg m-2,total_column_isoprene,tc_c5h8,218016,Fast access,X,X,
+Total column methane,kg m-2,total_column_methane,tc_ch4,218004,Fast access,X,X,
+Total column nitric acid,kg m-2,total_column_nitric_acid,tc_hno3,218006,Fast access,X,X,
+Total column Nitrogen dioxide,kg m-2,total_column_nitrogen_dioxide,tcno2,210125,Fast access,X,X,
+Total column nitrogen monoxide,kg m-2,total_column_nitrogen_monoxide,tc_no,218027,Fast access,X,X,
+GEMS Total column ozone,kg m-2,total_column_ozone,gtco3,210206,Fast access,X,X,
+Total column peroxyacetyl nitrate,kg m-2,total_column_peroxyacetyl_nitrate,tc_pan,218013,Fast access,X,X,
+Total column propane,kg m-2,total_column_propane,tc_c3h8,218047,Fast access,X,X,
+Total column Sulphur dioxide,kg m-2,total_column_sulphur_dioxide,tcso2,210126,Fast access,X,X,
+Total column water vapour,kg m-2,total_column_water_vapour,tcwv,137,Fast access,X,X,
+Total column volcanic sulphur dioxide,kg m-2,total_column_volcanic_sulphur_dioxide,tc_VSO2,218221,Fast access,X,X,Only available from 12 November 2024
+UV biologically effective dose,dimensionless,uv_biologically_effective_dose,uvbed,214002,Fast access,X,X,Only available from 03 September 2015 00UTC
+UV biologically effective dose clear-sky,dimensionless,uv_biologically_effective_dose_clear_sky,uvbedcs,214003,Fast access,X,X,Only available from 03 September 2015 00UTC
+
+

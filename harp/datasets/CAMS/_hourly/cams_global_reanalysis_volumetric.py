@@ -33,13 +33,13 @@ class GlobalReanalysisVolumetric(cds.CdsDatasetProvider):
     def __init__(self, variables: dict[str: str], config: dict={}, allow_slow_access=False):
         folder = Path(__file__).parent / "tables" / "GlobalReanalysis"
         files = [
-            # folder / "table1.csv",            # single level
+            # folder / "cams_ra_table1.csv",            # single level
             folder / "cams_ra_table2.csv",
         ]
         slow_access_files = [
-            # folder / "table3.csv",            # single level
-            # folder / "table4.csv",            # single level
-            # folder / "table5.csv",            # single level
+            # folder / "cams_ra_table3.csv",            # single level
+            # folder / "cams_ra_table4.csv",            # single level
+            # folder / "cams_ra_table5.csv",            # single level
             folder / "cams_ra_table6.csv",
             folder / "cams_ra_table7.csv",
         ]

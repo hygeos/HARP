@@ -200,8 +200,8 @@ def compile(
     
     # reordering
     # results = results.drop(["search"], axis=1)
-    table = table.rename(columns={"short_name": "param"})
-    table = table[["match",  "dims", "spatial", "units", "name", "param", "dataset", "timerange", "query_name", "score", "uscore", "search"]]
+    table = table.rename(columns={"short_name": "param", "spatial": "resolution"})
+    table = table[["match",  "dims", "resolution", "units", "name", "param", "dataset", "timerange", "query_name", "score", "uscore", "search"]]
     
     
     
@@ -227,8 +227,8 @@ def _apply_specific_format(t):
     def _format_deg_zero_padded(s):
         x, y = s.split(" x ")
         x, y = x.strip(), y.strip()
-        x = x + '0' * max((5 - len(x)), 0)
-        y = y + '0' * max((5 - len(y)), 0)
+        x = x + '0' * max((3 - len(x)), 0)
+        y = y + '0' * max((3 - len(y)), 0)
         return f"{x}° x {y}°"
         
     def _format_deg_align(s):
@@ -246,7 +246,7 @@ def _apply_specific_format(t):
         
         # Format and standardize Units column
         t["units"] = t["units"].apply(lambda x: str(x).replace(".", " ").replace("**", ""))
-        
+        t['units'] = t['units'].replace(['~', '1', 'dimensionless'], "~")
         # DEBUG:
         #  _datafram_cols_diff(t, "units_", "units", "short_name", output_file=".harp_unit_formatter_diagnosis.txt")
         

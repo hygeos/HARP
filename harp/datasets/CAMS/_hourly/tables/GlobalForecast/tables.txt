@@ -1,0 +1,5 @@
+ref: https://confluence.ecmwf.int/display/CKB/CAMS%3A+Global+atmospheric+composition+forecast+data+documentation
+table 1: sl - fast  
+table 2: sl - slow
+table 3: ml - fast
+table 4: ml - slow

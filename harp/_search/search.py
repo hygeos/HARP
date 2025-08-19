@@ -22,9 +22,10 @@ def search(keywords, sources):
         colors = dict(
             match       = log.rgb.gray,
             dims        = log.rgb.red,
-            spatial     = log.rgb.orange,
+            resolution  = log.rgb.orange,
             units       = log.rgb.purple,
             name        = None,
+            param       = log.rgb.cyan,
             dataset     = log.rgb.blue,
             timerange   = log.rgb.orange,
             short_name  = None, # log.rgb.green, # log.rgb.cyan,

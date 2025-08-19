@@ -1,1 +1,1 @@
-from ._hourly import GlobalReanalysis, GlobalReanalysisVolumetric
+from ._hourly import GlobalReanalysis, GlobalReanalysisVolumetric, GlobalForecast

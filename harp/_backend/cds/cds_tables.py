@@ -93,7 +93,8 @@ class cds_table:
             mtable = cds_tables_meta_infos.era5[f.name]
         elif "cams_ra" in f.name: 
             mtable = cds_tables_meta_infos.cams_ra[f.name]
-            # TODO: plug CAMS
+        elif "cams_fo" in f.name: 
+            mtable = cds_tables_meta_infos.cams_fo[f.name]
             pass
             
         # t["src"] = f

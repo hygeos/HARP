@@ -19,3 +19,10 @@ cams_ra = {
     "cams_ra_table6.csv" : dict(dimensions="xyzt",  spatial_degrees="0.75 x 0.75",             ),
     "cams_ra_table7.csv" : dict(dimensions="xyzt",  spatial_degrees="0.75 x 0.75",             ),
 }
+
+cams_fo = {
+    "cams_fo_table1.csv" : dict(dimensions="xyt",    spatial_degrees="0.4 x 0.4",             ),
+    "cams_fo_table2.csv" : dict(dimensions="xyt",    spatial_degrees="0.4 x 0.4",             ),
+    "cams_fo_table3.csv" : dict(dimensions="xyzt",   spatial_degrees="0.4 x 0.4",             ),
+    "cams_fo_table4.csv" : dict(dimensions="xyzt",   spatial_degrees="0.4 x 0.4",             ),
+}

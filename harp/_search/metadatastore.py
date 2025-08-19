@@ -35,6 +35,7 @@ _search_data_providers = [ # list of providers to participate in fuzzy searching
     # TODO plug ERA5 monthly
     CAMS.GlobalReanalysis,
     CAMS.GlobalReanalysisVolumetric,
+    CAMS.GlobalForecast,
     # TODO plug CAMS monthly (if exists)
 
 ]
