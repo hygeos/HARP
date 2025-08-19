@@ -25,7 +25,7 @@ def entry(args=None):
     )
     
     cmd.add_argument("--debug", action="store_true", help="Debug mode (developper)", default=False)
-    cmd.add_argument("--show-query-name", "-q", action="store_true", help="Show the query namne column", default=False)
+    # cmd.add_argument("--show-query-name", "-q", action="store_true", help="Show the query namne column", default=False)
     cmd.add_argument("--minimum", "--min", action="store", help="Minimum match score to consider [20-100]", 
         default=None, metavar="match_threshold"
     )
@@ -69,7 +69,7 @@ def entry(args=None):
         search_cfg.user_match_treshold = True
     
     
-    search_cfg.display_query_name = args.show_query_name
+    search_cfg.display_query_name = False # args.show_query_name
     
     if args.exact: search_cfg.match_exact = True
     if args.strict: search_cfg.match_strict = True
