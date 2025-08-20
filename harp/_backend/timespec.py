@@ -29,8 +29,10 @@ class RegularTimespec:
             _type_: _description_
         """
         
-        if not isinstance(times, list):     t = times
-        elif len(times) == 1:                   t = times[0]
+        if not isinstance(times, list):     
+            t = times
+        elif len(times) == 1:                   
+            t = times[0]
         else: log.error("Not implemented yet")
         
         

@@ -20,7 +20,9 @@ class GlobalForecast(cds.CdsDatasetProvider):
     name = "cams-global-forecast"
     product_type = "cams-global-atmospheric-composition-forecasts"
     
-    timespecs = RegularTimespec(timedelta(seconds=0), 24)
+    timespecs           = RegularTimespec(timedelta(seconds=0), 24)
+    timespecs_reference = RegularTimespec(timedelta(seconds=0), 2)
+    
     
     def __init__(self, variables: dict[str: str], config: dict={}):
         folder = Path(__file__).parent / "tables" / "GlobalForecast"
@@ -48,8 +50,7 @@ class GlobalForecast(cds.CdsDatasetProvider):
     # @interface
     def _execute_cds_request(self, target_filepath: Path, hq: HarpQuery):
         
-        # TODO area
-        times = [t.strftime("%H:%M") for t in hq.times]
+        times = [t.strftime("%H:%M") for t in hq.times] # TODO plug
         d = hq.extra["day"]
         
         dataset = self.product_type
@@ -70,4 +71,17 @@ class GlobalForecast(cds.CdsDatasetProvider):
         client.retrieve(dataset, request, target_filepath)
         
         return
-   
+
+    
+    def _extract_forecast_times(self, hq: HarpQuery):
+        """
+        Split the times by their ref times (00:00 or 12:00 per days)
+        Rationnale:
+            We need to make one query per reference timestamp, instead of per day
+        """
+        ref_times = {}
+        
+        for t in hq.times:
+            lower, upper = self.timespecs_reference.get_encompassing_timesteps([hq.times])
+            if not lower in ref_times: ref_times[lower] = []
+            ref_times[lower] += [t] 

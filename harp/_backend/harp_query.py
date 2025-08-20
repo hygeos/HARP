@@ -56,11 +56,11 @@ class HarpAtomicStorageUnit:
 class HarpQuery:
     
     def __init__(self, *,
-        variables: list[str], 
-        times: datetime|list[datetime, datetime],
-        offline: bool=False,
-        area: dict = None,
-        levels: list[int] = None,
+        variables:  list[str], 
+        times:      datetime | list[datetime, datetime],
+        offline:    bool = False,
+        area:       dict = None,
+        levels:     list[int] = None,
     ):
     
         self.variables  = variables.copy()
