@@ -1,4 +1,4 @@
-﻿name,units,query_name,shortname,id,access_type,fc,an,note
+﻿name,units,query_name,short_name,id,access_type,fc,an,note
 Acetone,kg kg-1,acetone,ch3coch3,217052,,X,X,
 Acetone product,kg kg-1,acetone_product,aco2,217053,,X,X,
 Acetonitrile,kg kg-1,,CH3CN,217224,,X,X,Available from 28 June 2023

@@ -50,7 +50,7 @@ class CdsDatasetProvider(BaseDatasetProvider):
         if hq.area is not None:
             log.error("Regionalized query not implemented yet (area parameter)", e=ValueError)
             
-        subqueries: list[HarpQuery] = self._decompose_into_subqueries_per_day(hq)
+        subqueries: list[HarpQuery] = self._decompose_into_subqueries(hq)
         subqueries: list[HarpQuery] = self._filter_cached_variables_from_queries(subqueries)
         
         for hqs in subqueries:
@@ -80,9 +80,9 @@ class CdsDatasetProvider(BaseDatasetProvider):
                     # rename valid_time dimension to time
                     # rename shortnames to query_names for consistency
                     new_names = {"valid_time": "time"} 
-                    
                     ds = ds.rename(new_names)
-                        
+                    ds = self._standardize_time(ds)
+                    
                     # split and store per variable, per timestep
                     self._split_and_store_atomic(ds, hqs)
                     
@@ -97,15 +97,22 @@ class CdsDatasetProvider(BaseDatasetProvider):
     @abstract
     def _execute_cds_request(self, target_filepath: Path, hq: HarpQuery, ):
         return
-        
     
-        
+    
+    def _standardize_time(self, ds: xr.Dataset):
+        """
+        To be overriden by forecast providers
+        """
+        return ds
+    
     def _standardize(self, ds):
         
         # ds = ds.rename_dims({'latitude': harp_std.lat_name, 'longitude': harp_std.lon_name}) # rename merra2 names to ECMWF convention
         # ds = ds.rename_vars({'latitude': harp_std.lat_name, 'longitude': harp_std.lon_name})
         
         ds = harp_std.center_longitude(ds, center=harp_std.longitude_center)
+        
+        print(ds)
         
         return ds
         

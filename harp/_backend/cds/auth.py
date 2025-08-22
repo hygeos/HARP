@@ -20,7 +20,7 @@ def get_client(url):
     key = config['key']
 
     client = cdsapi.Client(url=url, key=key, quiet=True)
-    client.logger.setLevel(logging.WARNING)
+    # client.logger.setLevel(logging.WARNING)
     
     return client
 

@@ -45,7 +45,7 @@ class GlobalReanalysis(cds.CdsDatasetProvider):
         
         super().__init__(csv_files=files, variables=variables, config=config)
         
-        self.timerange_str = "2003 … -1year"
+        self.timerange_str = "2003 ‥ T-1years"
         self.timerange = Timerange(start=datetime(1940, 1, 1), end=datetime.now()-timedelta(days=430))
         
     

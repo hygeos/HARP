@@ -19,7 +19,7 @@ class AIFS_common:
         """
         Check if leadtime if available for IFS opendata
         """
-        if leadtime > 360: return False # goes up to T+360h
+        if leadtime > 360: return False # goes up ‥ T+360h
         return (leadtime % 6) == 0      # AIFS leadtimes are 6h based
     
     def _time_is_available(time: datetime) -> bool:

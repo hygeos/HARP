@@ -22,6 +22,8 @@ def format_search_table(self: BaseDatasetProvider):
     table.attrs["institution"] = self.institution
     table.attrs["timerange"] = self.timerange_str
     
+    table.attrs["timeres"] = self.timespecs.count
+    
     
     table["spatial"] = self.infos["spatial_degrees"]
     

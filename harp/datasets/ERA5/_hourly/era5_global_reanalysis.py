@@ -38,7 +38,7 @@ class GlobalReanalysis(cds.CdsDatasetProvider):
         
         # latest = datetime.now() - timedelta(days=6)
         # self.timerange = Timerange(start=datetime(1940, 1 ,1), end=latest)
-        self.timerange_str = "1940 … -5days"
+        self.timerange_str = "1940 ‥ T-5days"
         self.timerange = Timerange(start=datetime(1940, 1, 1), end=datetime.now()-timedelta(days=6))
     
     # @interface

@@ -1,4 +1,4 @@
-﻿name,units,query_name,shortname,id,access_type,fc,an,note
+﻿name,units,query_name,short_name,id,access_type,fc,an,note
 Ammonium aerosol mass mixing ratio,kg kg-1,ammonium_aerosol_mass_mixing_ratio,aermr18,210249,Fast access,X,X,
 Anthropogenic secondary organic aerosol mass mixing ratio,kg kg-1,anthropogenic_secondary_organic_aerosol_mixing_ratio,aermr20,210253,Fast access,,,Available from 28 June 2023
 Biogenic secondary organic aerosol mass mixing ratio,kg kg-1,biogenic_secondary_organic_aerosol_mixing_ratio,aermr19,210252,Fast access,,,Available from 28 June 2023

@@ -1,8 +1,8 @@
 ﻿name,units,query_name,short_name,id,access_type,fc,an,note
-10 metre U wind component,m s-1,10m_u_component_of_wind,10u,165,Fast access,X,X,
-10 metre V wind component,m s-1,10m_v_component_of_wind,10v,166,Fast access,X,X,
-2 metre dewpoint temperature,K,2m_dewpoint_temperature,2d,168,Fast access,X,X,
-2 metre temperature,K,2m_temperature,2t,167,Fast access,X,X,
+10 metre U wind component,m s-1,10m_u_component_of_wind,u10,165,Fast access,X,X,
+10 metre V wind component,m s-1,10m_v_component_of_wind,v10,166,Fast access,X,X,
+2 metre dewpoint temperature,K,2m_dewpoint_temperature,d2m,168,Fast access,X,X,
+2 metre temperature,K,2m_temperature,t2m,167,Fast access,X,X,
 Ammonium aerosol optical depth at 550 nm,dimensionless,ammonium_aerosol_optical_depth_550nm,amaod550,210251,Fast access,,X,Only available from 9 July 2019 00UTC
 Black Carbon Aerosol Optical Depth at 550nm,dimensionless,black_carbon_aerosol_optical_depth_550nm,bcaod550,210211,Fast access,X,X,
 Dust Aerosol Optical Depth at 550nm,dimensionless,dust_aerosol_optical_depth_550nm,duaod550,210209,Fast access,X,X,

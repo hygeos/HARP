@@ -23,12 +23,16 @@ class GlobalReanalysisVolumetric(cds.CdsDatasetProvider):
     product_type = "reanalysis"
     
     timespecs = RegularTimespec(timedelta(seconds=0), 8) # Trihourly
+    timerange_str = "2003 ‥ T-1years"
+    timerange = Timerange(start=datetime(1940, 1, 1), end=datetime.now()-timedelta(days=430))
     
+
     # cf: https://ads.atmosphere.copernicus.eu/datasets/cams-global-reanalysis-eac4?tab=download
     pressure_levels = [1, 2, 3, 5, 7, 10, 20, 30, 50, 70, 100, 150, 200, 250, 
                       300, 400, 500, 600, 700, 800, 850, 900, 925, 950, 1000]
                       
     model_levels = [i for i in range(1, 61)] # 60 model levels starting at 1
+    
     
     def __init__(self, variables: dict[str: str], config: dict={}, allow_slow_access=False):
         folder = Path(__file__).parent / "tables" / "GlobalReanalysis"
@@ -52,10 +56,6 @@ class GlobalReanalysisVolumetric(cds.CdsDatasetProvider):
             files += slow_access_files
         
         super().__init__(csv_files=files, variables=variables, config=config)
-
-        self.timerange_str = "2003 … -1year"
-        self.timerange = Timerange(start=datetime(1940, 1, 1), end=datetime.now()-timedelta(days=430))
-
 
         # overload baseprovider definition to add parameters
     def get(self,

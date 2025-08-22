@@ -51,9 +51,15 @@ class BaseDatasetProvider:
      
         """
         
+        # KWARGS management
         # optional internal parameters, specific providers are free to overload their interface with theses
         area = kwargs.get("area")
         levels = kwargs.get("levels")
+        # ------------------------------------------
+        
+        koffline = kwargs.pop('offline', None)
+        offline = koffline if koffline is not None else self.config.get("offline")
+        
         
         
         query    = [] # variables to query
@@ -87,17 +93,20 @@ class BaseDatasetProvider:
         for dst_var in query: # check that every raw variable exist in the dataset provider nomenclature 
             self.nomenclature.assert_has_query_param(dst_var)
         
-        koffline = kwargs.pop('offline', None)
-        offline = koffline if koffline is not None else self.config.get("offline")
         
-        
-        hq = HarpQuery(variables=query, times=time, offline=offline, area=area, levels=levels)
+        hq = HarpQuery(
+            variables   = query, 
+            times       = time, 
+            offline     = offline, 
+            area        = area, 
+            levels      = levels, 
+        )
         files = self.download(hq)
         ds = xr.open_mfdataset(files, engine='netcdf4')
                 
         # harmonize if not disabled
-        if self.config.get("harmonize"): 
-            ds = self._standardize(ds)
+        # if self.config.get("harmonize"): 
+        ds = self._standardize(ds)
         
         # unstranslate 
         operands = [self.nomenclature.untranslate_query_name(op) for op in operands]
@@ -343,11 +352,10 @@ class BaseDatasetProvider:
         return files
         
     
-    def _decompose_into_subqueries_per_day(self, hq: HarpQuery) -> list[HarpQuery]:
+    def _decompose_into_subqueries(self, hq: HarpQuery, **kwargs) -> list[HarpQuery]:
         """
         Decompose the query as a (series of) CDS query for the missing data,
         One query per day,
-        Can choose to download more to avoid doing several queries
         
         e.g: 23h45 -> 00T23:00 + 01T00:00 -> should be two requests
         compiled to:

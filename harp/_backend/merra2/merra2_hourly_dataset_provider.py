@@ -45,7 +45,7 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
             self.infos = json.load(f)
         
         self.nomenclature = Nomenclature(self.variables_csv_path, context="MERRA2", query_col="query_name")
-        self.timerange_str = "1980 … -45days"
+        self.timerange_str = "1980 ‥ T-45days"
         self.timerange = Timerange(start=datetime(1940, 1, 1), end=datetime.now()-timedelta(days=60))
         
         
@@ -59,7 +59,7 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
         if hq.area is not None:
             log.error("Regionalized query not implemented yet (area parameter)", e=ValueError)
             
-        subqueries: list[HarpQuery] = self._decompose_into_subqueries_per_day(hq)
+        subqueries: list[HarpQuery] = self._decompose_into_subqueries(hq)
         subqueries: list[HarpQuery] = self._filter_cached_variables_from_queries(subqueries)
         
         for hqs in subqueries:

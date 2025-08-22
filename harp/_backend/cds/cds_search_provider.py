@@ -16,11 +16,13 @@ def format_search_table(self: BaseDatasetProvider):
     table['name'] = table['name'].str.replace(f"[{string.punctuation}]", " ", regex=True)
     table["search"] = table["name"] + "   " + table["short_name"] # + "   " + self.institution + "   " + self.collection
     
-    table.attrs["dataset"]      = str(self.__class__.__name__)
-    table.attrs["import_path"]  = str(self.__class__).split("\'")[1]
-    table.attrs["collection"] = self.collection
+    table.attrs["dataset"]     = str(self.__class__.__name__)
+    table.attrs["import_path"] = str(self.__class__).split("\'")[1]
+    table.attrs["collection"]  = self.collection
     table.attrs["institution"] = self.institution
-    table.attrs["timerange"] = self.timerange_str
+    table.attrs["timerange"]   = self.timerange_str
+    
+    table.attrs["timeres"] = self.timespecs.count
     
     # reorder columns
     table = table[["short_name", "dims", "spatial", "units", "name", "query_name", "search"]]

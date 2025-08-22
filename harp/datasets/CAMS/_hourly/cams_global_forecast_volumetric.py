@@ -1,5 +1,6 @@
 from datetime import date, datetime, timedelta
 from pathlib import Path
+from typing import Literal
 
 import xarray as xr
 
@@ -14,7 +15,7 @@ from harp._backend.timespec import RegularTimespec
 from harp._backend import cds
 
 
-class GlobalForecast(cds.CdsDatasetProvider): 
+class GlobalForecastVolumetric(cds.CdsDatasetProvider): 
     
     url = "https://ads.atmosphere.copernicus.eu/api"
     keywords = ["ECMWF", "Copernicus", "atmosphere"]
@@ -24,7 +25,9 @@ class GlobalForecast(cds.CdsDatasetProvider):
     name = "cams-global-forecast"
     product_type = "cams-global-atmospheric-composition-forecasts"
     
-    timespecs     = RegularTimespec(timedelta(seconds=0), 24)
+    # """PLEASE NOTE: Multi levels data are only available at 3-hourly intervals."""
+    # ref: https://confluence.ecmwf.int/display/CKB/CAMS%3A+Global+atmospheric+composition+forecast+data+documentation
+    timespecs     = RegularTimespec(timedelta(seconds=0), 8)
     timespecs_ref = RegularTimespec(timedelta(seconds=0), 2)
     latency_ref   = timedelta(hours=7) # latency for time_ref publishing (00:00 is published around 06:00)
     max_leadtime  = 120 # maximum leadtime 
@@ -33,20 +36,34 @@ class GlobalForecast(cds.CdsDatasetProvider):
     timerange = Timerange(start=datetime(1940, 1, 1), end=datetime.now() + timedelta(days=5))
 
     
-    def __init__(self, variables: dict[str: str], config: dict={}, *, allow_extended_forecast: bool = False):
+    pressure_levels = [ # all pressure levels 
+        1,   2,   3,   5,   7,  10,  20,  30,  50,  70, 100, 125, 150, 
+        175, 200, 225, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 
+        750, 775, 800, 825, 850, 875, 900, 925, 950, 975, 1000
+    ]
+    
+    model_levels = [i for i in range(1, 61)] # 60 model levels starting at 1
+    
+    
+    def __init__(self, variables: dict[str: str], config: dict={}, 
+        *, 
+        allow_extended_forecast: bool = False,
+        mode: Literal["pressure", "model"] = "pressure"
+    ):
         
         self.allow_extended_forecast = allow_extended_forecast
+        self.mode = mode
         
+        assert mode in ["pressure", "model"]
         
         folder = Path(__file__).parent / "tables" / "GlobalForecast"
         files = [
-            folder / "cams_fo_table1.csv",
+            folder / "cams_fo_table3.csv",
         ]
         
         slow_access_files = [
-            folder / "cams_fo_table2.csv",
+            folder / "cams_fo_table4.csv",
         ]
-        
         
         # TODO: Review slow access capacities; currently disabled
         allow_slow_access = False
@@ -62,10 +79,13 @@ class GlobalForecast(cds.CdsDatasetProvider):
     # overload baseprovider definition to add parameters
     def get(self,
             time: datetime, # type dictates if dt or range
+            levels: list[int] = pressure_levels,
             **kwargs,  # catch-all for additional keyword arguments
             ) -> xr.Dataset:
         
-        return BaseDatasetProvider.get(self, time=time, **kwargs)
+        levels = [str(i) for i in levels]
+            
+        return BaseDatasetProvider.get(self, time=time, levels=levels, **kwargs)
     
     # @interface
     def _execute_cds_request(self, target_filepath: Path, hq: HarpQuery):
@@ -77,10 +97,15 @@ class GlobalForecast(cds.CdsDatasetProvider):
         time = hq.ref_time.strftime("%H:%M")
         leadtimes = [str(round((t - hq.ref_time).total_seconds() / 3600)) for t in hq.times]
         
+        level_key = self.mode + "_level"
+        
         request = {
             "variable":         hq.variables,
             "date":             [f"{date}/{date}"],
             "time":             [time],
+            
+            level_key:          hq.levels,
+            
             "leadtime_hour":    leadtimes, 
             "type":             ["forecast"],
             "data_format":      "netcdf",

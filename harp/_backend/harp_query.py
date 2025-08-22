@@ -13,12 +13,14 @@ class HarpAtomicStorageUnit:
         time: datetime,
         area: dict = None,
         levels: list[int] = None,
+        ref_time: datetime = None,
     ):
     
         self.variable = variable
         self.time     = time
         self.area     = area
         self.levels   = None if levels is None else sorted(levels)
+        self.ref_time = None if ref_time is None else ref_time
         
         
     def get_subpath(self, prefix: str) -> Path:
@@ -30,9 +32,12 @@ class HarpAtomicStorageUnit:
             log.error("Missing prefix")
         
         hs = ""
-        if self.levels is not None or self.area is not None:
+        if self.levels or self.area or self.ref_time:
             hs = "area:" + str(self.area) + "; levels:" + str(self.levels)
-            h = hashlib.blake2b(digest_size=24)  # 24 bytes = 192-bit digest, less probable collision that 128-bit (collision virtually impossible)
+            
+            if self.ref_time: hs += "; ref:" + str(self.ref_time) # add ref time management without breaking already stored filenames
+            
+            h = hashlib.blake2b(digest_size=24)  # 24 bytes = 192-bit digest, less probable collision than 128-bit (collision virtually impossible)
             h.update(str(hs).encode('utf-8'))
             hs = h.hexdigest() + "_"
         
@@ -56,11 +61,12 @@ class HarpAtomicStorageUnit:
 class HarpQuery:
     
     def __init__(self, *,
-        variables:  list[str], 
-        times:      datetime | list[datetime, datetime],
-        offline:    bool = False,
-        area:       dict = None,
-        levels:     list[int] = None,
+        variables: list[str], 
+        times: datetime | list[datetime, datetime],
+        offline: bool = False,
+        area: dict = None,
+        levels: list[int] = None,
+        ref_time: datetime = None,
     ):
     
         self.variables  = variables.copy()
@@ -68,6 +74,7 @@ class HarpQuery:
         self.offline    = offline
         self.area       = area
         self.levels     = None if levels is None else sorted(levels)
+        self.ref_time   = ref_time 
         
         if isinstance(times, list): self.times = times.copy()
         elif isinstance(times, datetime): self.times = [times]
@@ -82,6 +89,7 @@ class HarpQuery:
             offline     = self.offline,
             area        = self.area,
             levels      = self.levels,
+            ref_time    = self.ref_time,
         )
     
     def get_atomic_storage_units(self) -> list[HarpAtomicStorageUnit]:
@@ -92,7 +100,7 @@ class HarpQuery:
         units = []
         for v in self.variables:
             for t in self.times:
-                hast = HarpAtomicStorageUnit(variable=v, time=t, area=self.area, levels=self.levels)
+                hast = HarpAtomicStorageUnit(variable=v, time=t, area=self.area, levels=self.levels, ref_time=self.ref_time)
                 units += [hast]
                 
         return units
@@ -100,10 +108,11 @@ class HarpQuery:
     def __str__(self) -> str:
         
         s  = "QUERY{"
-        s += "variables: " + str(self.variables) + ";"
-        s += "timesteps: " + str(self.times) + ";"
-        s += "area: " + str(self.area) + ";"
-        s += "levels: " + str(self.levels) + ";"
+        s += "variables: " + str(self.variables) + "; "
+        s += "timesteps: " + str(self.times) + "; "
+        s += "area: " + str(self.area) + "; "
+        s += "levels: " + str(self.levels) + "; "
+        s += "ref_time: " +  str(self.ref_time) + "; "
         s += "}END"
         
         return s
