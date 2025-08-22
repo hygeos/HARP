@@ -30,7 +30,27 @@ def search(keywords, sources):
             timerange   = log.rgb.orange,
             short_name  = None, # log.rgb.green, # log.rgb.cyan,
             query_name  = log.rgb.cyan, # log.rgb.cyan,
-        )            
-            
-        t = ascii_table(res, style=ascii_table.style(style=search_cfg.ascii_style), colors=colors, max_width=search_cfg.ascii_max_col_chars)
+        )
+        
+        ovrd = 32 if search_cfg.large else 0
+        default = 999
+        
+        widths = dict(
+            match       = ovrd or default,
+            dims        = ovrd or default,
+            resolution  = ovrd or default,
+            units       = ovrd or      10,
+            name        = ovrd or      60,
+            param       = ovrd or default,
+            dataset     = ovrd or      25,
+            timerange   = ovrd or default,
+            short_name  = ovrd or default,
+            query_name  = ovrd or default,
+        )
+        
+        # modify padding depending on compact param
+        s = ascii_table.style(style=search_cfg.ascii_style)
+        s.h_padding = int(not search_cfg.compact)
+        
+        t = ascii_table(res, style=s, colors=colors, widths=widths)
         t.print(search_cfg.live_print, search_cfg.ascii_nocolor)

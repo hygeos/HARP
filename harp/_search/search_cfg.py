@@ -15,7 +15,8 @@ live_print = True
 live_print_target_time = 0.100 # in s
 
 ascii_style = "squared"
-ascii_max_col_chars = None
 ascii_nocolor = False
 
 debug = False
+compact = None
+large = False

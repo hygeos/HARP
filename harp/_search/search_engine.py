@@ -162,7 +162,7 @@ def compile(
     
     for t in results:
         
-        dataset_source = t.attrs["collection"] + "." + t.attrs["dataset"] + " " # removed: t.attrs["institution"] + "." + 
+        dataset_source = t.attrs["collection"] + "." + t.attrs["dataset"] # + " " # removed: t.attrs["institution"] + "." + 
         t["dataset"] = dataset_source
         t["timerange"] = t.attrs["timerange"]
         t["uscore"] = t["score"].apply(lambda x: round(x, 2))
@@ -203,11 +203,10 @@ def compile(
     table = table.rename(columns={"short_name": "param", "spatial": "resolution"})
     table = table[["match",  "dims", "resolution", "units", "name", "param", "dataset", "timerange", "query_name", "score", "uscore", "search"]]
     
-    
+    table = table.drop(["match"], axis=1)
     
     # togglable queryname display
     if search_cfg.display_query_name == False:
-        
         table = table.drop(["query_name"], axis=1)
         
     if not search_cfg.debug:
@@ -235,8 +234,32 @@ def _apply_specific_format(t):
         nchar = 5
         x, y = s.split(" x ")
         return f"{(x+'°').ljust(nchar)} x {y}°"
+        
+    def _format_deg_align_and_pad(s):
+        nchar = 5
+        x, y = s.split(" x ")
+        
+        x = x + '0' * max((5 - len(x)), 0)
+        y = y + '0' * max((5 - len(y)), 0)
+        
+        return f"{(x+'°').ljust(nchar)} x {y}°"
+        
+    def _format_compact(s):
+        nchar = 3
+        x, y = s.split(" x ")
+        
+        x = x.replace("0.", ".")
+        y = y.replace("0.", ".")
+        
+        x = x.strip()
+        y = y.strip()
+        
+        x = x + '0' * max((nchar - len(x)), 0)
+        y = y + '0' * max((nchar - len(y)), 0)
+        
+        return f"{(x+'').ljust(nchar)}° × {y}°"
     
-    t["spatial"] = t["spatial"].apply(_format_deg_zero_padded)
+    t["spatial"] = t["spatial"].apply(_format_compact)
     
     
     

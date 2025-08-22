@@ -38,13 +38,14 @@ def entry(args=None):
     mode_group = cmd.add_mutually_exclusive_group()
     mode_group.add_argument("--exact", "-e",        action="store_true", help="Exact matching")
     mode_group.add_argument("--strict", "-s",       action="store_true", help="Strict matching")
-    mode_group.add_argument("--approximate", "-a",  action="store_true", help="Approximate matching")
+    # mode_group.add_argument("--approximate", "-a",  action="store_true", help="Approximate matching")
 
     width_group = cmd.add_mutually_exclusive_group()
     width_group.add_argument("--large", "-l", action="store_true", help="Display columns to their max width", default=False)
-    width_group.add_argument("--width", "-w", action="store", help="Specify columns max width (defaults to 35)", default=35)
     
-    cmd.add_argument("--nocolor", "-c", action="store_true", help="Disable colored output", default=False)
+    cmd.add_argument("--nocolor", "-n", action="store_true", help="Disable color output", default=False)
+    cmd.add_argument("--compact", "-c", action="store_true", help="Compact layout", default=False)
+    
     
     cmd.add_argument(
         "--style", type=str,
@@ -73,14 +74,15 @@ def entry(args=None):
     
     if args.exact: search_cfg.match_exact = True
     if args.strict: search_cfg.match_strict = True
-    if args.approximate: search_cfg.match_approx = True
+    # if args.approximate: search_cfg.match_approx = True
     if args.debug: search_cfg.debug = True
     if args.nocolor: 
         search_cfg.ascii_nocolor = True
         log.config.show_color = False
     
-    if args.width: search_cfg.ascii_max_col_chars = int(args.width)
-    if args.large: search_cfg.ascii_max_col_chars = None
+    search_cfg.compact = args.compact
+    search_cfg.large = args.large
+    
     
     sources = getattr(args, "from")
     if sources and not isinstance(sources, list):

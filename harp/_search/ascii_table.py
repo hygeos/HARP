@@ -14,7 +14,7 @@ class ascii_table:
         def __init__(self, 
             inner_vbar = True,
             inner_hbar = False,
-            h_padding = 1,
+            h_padding = 0,
             v_padding = 0,
             style: Literal["squared", "rounded", "simple", "double"] = "squared",
         ):
@@ -48,12 +48,14 @@ class ascii_table:
         
             self.live_print_target_time = 0.100 # s
     
-    def __init__(self, df, style=style(), colors={}, max_width: int|None=35):
+    def __init__(self, df, style=style(), colors={}, widths={}):
         """
         Ascii table constructor
         df: source table, pd.DataFrame
         style: allows to override the styling of the table
         colors: is a dictionnary of core.log.rgb colors like {column: rgb.green}
+        widths: is a dictionnary of max width size, one per column
+        
         
         Basic usage:
                 ascii_table(res).print()
@@ -73,15 +75,15 @@ class ascii_table:
         for c in self.columns:
             if c not in colors:
                 colors[c] = None
+                widths[c] = 999
         
         self.colors = [colors[i] for i in self.columns]
+        self.widths = [widths[i] for i in self.columns]
         
-        # limiting column max width
-        self.max_width = max_width
-        if max_width is not None:
-            for i, v in enumerate(self.spaces):
-                if v > max_width:
-                    self.spaces[i] = max_width
+        # constrains available horizontal space per column
+        for i, v in enumerate(self.spaces):
+            if v > self.widths[i]:
+                self.spaces[i] = self.widths[i]
         
         
         
@@ -97,7 +99,7 @@ class ascii_table:
         """
         
         # NOTE: does not (yet) handle line reduction with ellipsis
-            # ellipsis_char = "‥" # "…" # two dots variants seems more readable 
+            # ellipsis_char = "‥" # "to" # two dots variants seems more readable 
             # width_footprint = sum(self.widths) + 3*len(self.widths) + 1
             # width_overshoot = width_footprint - self.terminal.columns
     
@@ -120,7 +122,7 @@ class ascii_table:
         mb  = self._style.mb # mid bottom         
         cr  = self._style.cr # cross
     
-        max_width = self.max_width
+        widths = self.widths.copy()
     
         spaces = self.spaces.copy()
         colors = self.colors.copy()
@@ -187,17 +189,17 @@ class ascii_table:
                 return c(s)
             return s
         
-        def _format_str(s):
+        def _format_str(i, s):
             
-            l = max_width
+            l = widths[i]
             if len(s) > l:
                 s = s[:l-1] + "‥"
             return s
 
                 
         # disable for performance reason
-        if not max_width:
-            _format_str = lambda x: x
+        # if not max_width:
+            # _format_str = lambda y, x: x
         
         # disable colors
         if no_color:
@@ -212,7 +214,7 @@ class ascii_table:
             sep = shp + ivbc + shp
             if not ivb: sep = shp
         
-            mids = [_color_str(_format_str(str(w)).ljust(spaces[i]), i) for i, w in enumerate(line)]
+            mids = [_color_str(_format_str(i, str(w)).ljust(spaces[i]), i) for i, w in enumerate(line)]
             line = v + shp + sep.join(mids) + shp + v
             return line
     
@@ -250,3 +252,4 @@ class ascii_table:
         if not live_print: 
             message = "\n".join(lines)
             return message
+            
