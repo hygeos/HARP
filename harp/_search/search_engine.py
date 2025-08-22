@@ -162,9 +162,12 @@ def compile(
     
     for t in results:
         
+        timerange = t.attrs["timerange"]
+        timerange = timerange.replace("days", "d").replace("years", "Y")
+        
         dataset_source = t.attrs["collection"] + "." + t.attrs["dataset"] # + " " # removed: t.attrs["institution"] + "." + 
         t["dataset"] = dataset_source
-        t["timerange"] = t.attrs["timerange"]
+        t["timerange"] = timerange
         t["uscore"] = t["score"].apply(lambda x: round(x, 2))
         t["score"] = t["score"].apply(lambda x: min(round(x + 0.0499, 1), 1.0))
         t["match"] = t["score"].apply(lambda x: f"{x:.0%}".rjust(5))

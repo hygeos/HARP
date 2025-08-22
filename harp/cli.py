@@ -2,7 +2,7 @@ from core import log
 from harp._search import search_cfg
 from harp._search.search import search
     
-import harp
+from harp import _backend
 
 import argparse
 from sys import exit
@@ -91,7 +91,7 @@ def entry(args=None):
     search_cfg.ascii_style = args.style
         
     if not args.debug:
-        log.silence(harp, log.lvl.DEBUG)
+        log.silence(_backend, log.lvl.DEBUG)
         
         
     apply_user_search_config()

@@ -1,13 +1,13 @@
-import time
-from harp._search import metadatastore, search_cfg, search_engine
-from harp._search.ascii_table import ascii_table
-from core import log
 from core.monitor import Chrono
+from core import log
 
 def search(keywords, sources):
 
     with Chrono("Execution time", unit="s"):
         log.info("Searching Metadatabase..", flush=True)
+        
+        from harp._search import metadatastore, search_cfg, search_engine
+        from harp._search.ascii_table import ascii_table
         
         res = []
         for df in metadatastore.get_tables():
@@ -17,8 +17,8 @@ def search(keywords, sources):
         if len(res) ==0:
             log.disp("> No match found.")
             exit()
-            
-            
+        
+        
         colors = dict(
             match       = log.rgb.gray,
             dims        = log.rgb.red,
