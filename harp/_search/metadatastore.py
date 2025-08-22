@@ -36,6 +36,8 @@ _search_data_providers = [ # list of providers to participate in fuzzy searching
     CAMS.GlobalReanalysis,
     CAMS.GlobalReanalysisVolumetric,
     CAMS.GlobalForecast,
+    CAMS.GlobalForecastVolumetric,
+    
     # TODO plug CAMS monthly (if exists)
 
 ]
@@ -45,7 +47,7 @@ def get_tables():
     
     tables = []
     for p in _search_data_providers:
-        # instantiate the provider -> required to retrieve the informations
+        # instantiate a dummy provider -> required to retrieve the informations
         ip = p(
             config=dict(dir_storage=Path("/tmp"), offline=True), 
             variables={}

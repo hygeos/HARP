@@ -163,11 +163,16 @@ def compile(
     for t in results:
         
         timerange = t.attrs["timerange"]
-        timerange = timerange.replace("days", "d").replace("years", "Y")
+        timerange = timerange.replace("days", "d").replace("years", "y")
+        
+        timeres = str(t.attrs["timeres"]).strip()
+        timeres = timeres.replace("24", "hourly").replace("8", "tri-hourly").replace("1", "daily")
         
         dataset_source = t.attrs["collection"] + "." + t.attrs["dataset"] # + " " # removed: t.attrs["institution"] + "." + 
         t["dataset"] = dataset_source
         t["timerange"] = timerange
+        t["steps"] = timeres
+        
         t["uscore"] = t["score"].apply(lambda x: round(x, 2))
         t["score"] = t["score"].apply(lambda x: min(round(x + 0.0499, 1), 1.0))
         t["match"] = t["score"].apply(lambda x: f"{x:.0%}".rjust(5))
@@ -204,7 +209,7 @@ def compile(
     # reordering
     # results = results.drop(["search"], axis=1)
     table = table.rename(columns={"short_name": "param", "spatial": "resolution"})
-    table = table[["match",  "dims", "resolution", "units", "name", "param", "dataset", "timerange", "query_name", "score", "uscore", "search"]]
+    table = table[["match",  "dims", "resolution", "units", "name", "param", "dataset", "timerange", "steps", "query_name", "score", "uscore", "search"]]
     
     table = table.drop(["match"], axis=1)
     
@@ -280,7 +285,10 @@ def _apply_specific_format(t):
 
     _format_units(t)
 
-def _datafram_cols_diff(df, c1, c2, ref=None, output_file=None):
+
+
+
+def _DEBUG_datafram_cols_diff(df, c1, c2, ref=None, output_file=None):
     """
     Tracks changes in a DataFrame column and outputs them in a text format.
     

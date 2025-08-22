@@ -28,6 +28,7 @@ def search(keywords, sources):
             param       = log.rgb.cyan,
             dataset     = log.rgb.blue,
             timerange   = log.rgb.orange,
+            steps       = log.rgb.purple,
             short_name  = None, # log.rgb.green, # log.rgb.cyan,
             query_name  = log.rgb.cyan, # log.rgb.cyan,
         )
@@ -35,17 +36,26 @@ def search(keywords, sources):
         ovrd = 32 if search_cfg.large else 0
         default = 999
         
+        name_def = 60
+        ds_def = 25
+        
+        if search_cfg.compact: 
+            if not search_cfg.large:
+                name_def = 45
+                ds_def = 15
+        
         widths = dict(
-            match       = ovrd or default,
-            dims        = ovrd or default,
-            resolution  = ovrd or default,
-            units       = ovrd or      10,
-            name        = ovrd or      60,
-            param       = ovrd or default,
-            dataset     = ovrd or      25,
-            timerange   = ovrd or default,
-            short_name  = ovrd or default,
-            query_name  = ovrd or default,
+            match       = ovrd or  default,
+            dims        = ovrd or  default,
+            resolution  = ovrd or  default,
+            units       = ovrd or       10,
+            name        = ovrd or name_def,
+            param       = ovrd or  default,
+            dataset     = ovrd or   ds_def,
+            timerange   = ovrd or  default,
+            short_name  = ovrd or  default,
+            query_name  = ovrd or  default,
+            steps       = ovrd or        6,
         )
         
         # modify padding depending on compact param

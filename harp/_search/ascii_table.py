@@ -75,7 +75,7 @@ class ascii_table:
         for c in self.columns:
             if c not in colors:
                 colors[c] = None
-                widths[c] = 999
+                widths[c] = 0
         
         self.colors = [colors[i] for i in self.columns]
         self.widths = [widths[i] for i in self.columns]
