@@ -43,11 +43,13 @@ pydap = "==3.5.0"
 
 
 [tool.setuptools]
-packages = {find = {}}
+packages = {find = {where = ["."], include = ["harp*"]}}
 
-# [tool.setuptools.packages.find]
-# where = ["."]           # Look in current directory
-# include = ["harp*"]     # Include harp and all subpackages -> overkill
+[tool.setuptools.package-data]
+"*" = ["*.json", "*.csv"]
+
+# packages = {find = {}}
+
 
 [tool.pixi.project]
 channels = ["conda-forge"]

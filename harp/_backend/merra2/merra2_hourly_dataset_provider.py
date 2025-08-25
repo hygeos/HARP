@@ -12,7 +12,7 @@ import requests
 from harp._backend.baseprovider import BaseDatasetProvider
 from harp._backend.merra2 import merra2_search_provider
 from harp._backend.nomenclature import Nomenclature
-from harp.datasets.MERRA2._inner import _layout
+from harp.datasets.MERRA2 import _layout
 from harp._backend.harp_query import HarpQuery
 from harp._backend.timerange import Timerange
 from harp._backend._utils import ComputeLock
