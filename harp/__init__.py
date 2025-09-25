@@ -1,3 +1,0 @@
-"""
-Harmonized Ancillary Resource Provider
-"""
