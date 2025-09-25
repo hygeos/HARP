@@ -1,0 +1,18 @@
+﻿name,units,query_name,short_name,id,native_grid,an,fc
+Potential vorticity,K m**2 kg**-1 s**-1,potential_vorticity,pv,60,N320 (N160),x,x
+Specific rain water content,kg kg**-1,specific_rain_water_content,crwc,75,N320 (N160),x,x
+Specific snow water content,kg kg**-1,specific_snow_water_content,cswc,76,N320 (N160),x,x
+Geopotential,m**2 s**-2,geopotential,z,129,T639 (T319),x,x
+Temperature,K,temperature,t,130,T639 (T319),x,x
+U component of wind,m s**-1,u_component_of_wind,u,131,T639 (T319),x,x
+V component of wind,m s**-1,v_component_of_wind,v,132,T639 (T319),x,x
+Specific humidity,kg kg**-1,specific_humidity,q,133,N320 (N160),x,x
+Vertical velocity,Pa s**-1,vertical_velocity,w,135,T639 (T319),x,x
+Vorticity (relative),s**-1,vorticity,vo,138,T639 (T319),x,x
+Divergence,s**-1,divergence,d,155,T639 (T319),x,x
+Relative humidity,%,relative_humidity,r,157,T639 (T319),x,x
+Ozone mass mixing ratio,kg kg**-1,ozone_mass_mixing_ratio,o3,203,N320 (N160),x,x
+Specific cloud liquid water content,kg kg**-1,specific_cloud_liquid_water_content,clwc,246,N320 (N160),x,x
+Specific cloud ice water content,kg kg**-1,specific_cloud_ice_water_content,ciwc,247,N320 (N160),x,x
+Fraction of cloud cover,(0 - 1),fraction_of_cloud_cover,cc,248,N320 (N160),x,x
+

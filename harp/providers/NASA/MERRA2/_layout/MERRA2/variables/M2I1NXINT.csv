@@ -1,9 +1,0 @@
-raw_name,           units,                        long_name
-TQL,                kg m-2,                       total_precipitable_liquid_water
-THV,                K,                            vertically_integrated_virtual_potential_temperature
-TOX,                kg m-2,                       total_column_odd_oxygen
-KE,                 J m-2,                        vertically_integrated_kinetic_energy
-TQI,                kg m-2,                       total_precipitable_ice_water
-TQV,                kg m-2,                       total_precipitable_water_vapor
-CPT,                J m-2,                        vertically_integrated_enthalpy
-MASS,               kg m-2,                       atmospheric_mass

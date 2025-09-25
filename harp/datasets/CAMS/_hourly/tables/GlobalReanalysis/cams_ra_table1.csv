@@ -1,0 +1,36 @@
+﻿name,units,query_name,short_name,id,note
+10m u-component of wind,m s-1,10m_u_component_of_wind,u10,165.13
+10m v-component of wind,m s-1,10m_v_component_of_wind,v10,166.13
+2m dewpoint temperature,K,2m_dewpoint_temperature,d2m,167.13
+2m temperature,K,2m_temperature,t2m,168.13
+Black carbon aerosol optical depth at 550 nm,~,black_carbon_aerosol_optical_depth_550nm,bcaod550,211.21
+Dust aerosol optical depth at 550 nm,~,dust_aerosol_optical_depth_550nm,duaod550,209.21
+Land-sea mask,(0 - 1),land_sea_mask,lsm,172.13
+Mean sea level pressure,Pa,mean_sea_level_pressure,msl,151.13
+Organic matter aerosol optical depth at 550 nm,~,organic_matter_aerosol_optical_depth_550nm,omaod550,210.21
+Particulate matter d < 1 µm,kg m-3,particulate_matter_1um,pm1,72.21
+Particulate matter d < 2.5 µm,kg m-3,particulate_matter_2.5um,pm2p5,73.21
+Particulate matter d < 10 µm,kg m-3,particulate_matter_10um,pm10,74.21
+Sea salt aerosol optical depth at 550 nm,~,sea_salt_aerosol_optical_depth_550nm,ssaod550,208.21
+Sulphate aerosol optical depth at 550 nm,~,"sulphate_aerosol_optical_depth_550nm""",suaod550,212.21
+Surface Geopotential,m2 s-2,surface_geopotential,~,51.16
+Total aerosol optical depth at 469 nm,~,total_aerosol_optical_depth_469nm,aod469,213.21
+Total aerosol optical depth at 550 nm,~,total_aerosol_optical_depth_550nm,aod550,207.21
+Total aerosol optical depth at 670 nm,~,total_aerosol_optical_depth_670nm,aod670,214.21
+Total aerosol optical depth at 865 nm,~,total_aerosol_optical_depth_865nm,aod865,215.21
+Total aerosol optical depth at 1240 nm,~,total_aerosol_optical_depth_1240nm,aod1240,216.21
+Total column carbon monoxide*,kg m-2,total_column_carbon_monoxide,tcco,127.21
+Total column ethane*,kg m-2,total_column_ethane,tc_c2h6,45.22
+Total column formaldehyde*,kg m-2,total_column_formaldehyde,tchcho,128.21
+Total column hydrogen peroxide*,kg m-2,total_column_hydrogen_peroxide,tc_h2o2,3.22
+Total column hydroxyl radical*,kg m-2,total_column_hydroxyl_radical,tc_oh,30.22
+Total column isoprene*,kg m-2,total_column_isoprene,tc_c5h8,16.22
+Total column nitric acid*,kg m-2,total_column_nitric_acid,tc_hno3,6.22
+Total column nitrogen dioxide*,kg m-2,total_column_nitrogen_dioxide,tcno2,125.21
+Total column nitrogen monoxide*,kg m-2,total_column_nitrogen_monoxide,tc_no,27.22
+Total column ozone*,kg m-2,total_column_ozone,tco3,206.13
+Total column peroxyacetyl nitrate*,kg m-2,total_column_peroxyacetyl_nitrate,tc_pan,13.22
+Total column propane*,kg m-2,total_column_propane,tc_c3h8,47.22
+Total column sulphur dioxide*,kg m-2,total_column_sulphur_dioxide,tcso2,126.21
+Total column water vapour*,kg m-2,total_column_water_vapour,tcwv,137.13
+

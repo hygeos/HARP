@@ -1,0 +1,43 @@
+query_name,         units,          long_name
+EFLUXICE,           W m-2,          sea_ice_latent_energy_flux
+TAUXWTR,            N m-2,          eastward_stress_over_water
+SWGNTICE,           W m-2,          sea_ice_net_downward_shortwave_flux
+TSKINICE,           K,              sea_ice_skin_temperature
+LWGNTICE,           W m-2,          sea_ice_net_downward_longwave_flux
+TAUYWTR,            N m-2,          northward_stress_over_water
+Var_LWGNTWTR,       W m-2 W m-2,    Variance_of_LWGNTWTR
+Var_QV10M,          kg kg-1 kg kg-1,Variance_of_QV10M
+Var_U10M,           m s-1 m s-1,    Variance_of_U10M
+HFLUXICE,           W m-2,          sea_ice_upward_sensible_heat_flux
+Var_EFLUXWTR,       W m-2 W m-2,    Variance_of_EFLUXWTR
+Var_EFLUXICE,       W m-2 W m-2,    Variance_of_EFLUXICE
+Var_V10M,           m s-1 m s-1,    Variance_of_V10M
+EFLUXWTR,           W m-2,          open_water_latent_energy_flux
+Var_TSKINICE,       K K,            Variance_of_TSKINICE
+SWGNTWTR,           W m-2,          open_water_net_downward_shortwave_flux
+Var_TAUYWTR,        N m-2 N m-2,    Variance_of_TAUYWTR
+TAUYICE,            N m-2,          northward_stress_over_ice
+TSKINWTR,           K,              open_water_skin_temperature
+T10M,               K,              10-meter_air_temperature
+RAINOCN,            kg m-2 s-1,     ocean_rainfall
+Var_SWGNTICE,       W m-2 W m-2,    Variance_of_SWGNTICE
+Var_TAUXICE,        N m-2 N m-2,    Variance_of_TAUXICE
+Var_TAUXWTR,        N m-2 N m-2,    Variance_of_TAUXWTR
+Var_PRECSNOOCN,     kg m-2 s-1 kg m-2 s-1,Variance_of_PRECSNOOCN
+V10M,               m s-1,          10-meter_northward_wind
+Var_HFLUXWTR,       W m-2 W m-2,    Variance_of_HFLUXWTR
+Var_HFLUXICE,       W m-2 W m-2,    Variance_of_HFLUXICE
+Var_SWGNTWTR,       W m-2 W m-2,    Variance_of_SWGNTWTR
+Var_LWGNTICE,       W m-2 W m-2,    Variance_of_LWGNTICE
+PRECSNOOCN,         kg m-2 s-1,     ocean_snowfall
+HFLUXWTR,           W m-2,          open_water_upward_sensible_heat_flux
+Var_T10M,           K K,            Variance_of_T10M
+U10M,               m s-1,          10-meter_eastward_wind
+Var_RAINOCN,        kg m-2 s-1 kg m-2 s-1,Variance_of_RAINOCN
+TAUXICE,            N m-2,          eastward_stress_over_ice
+FRSEAICE,           1,              ice_covered_fraction_of_tile
+Var_TAUYICE,        N m-2 N m-2,    Variance_of_TAUYICE
+Var_TSKINWTR,       K K,            Variance_of_TSKINWTR
+QV10M,              kg kg-1,        10-meter_specific_humidity
+LWGNTWTR,           W m-2,          open_water_net_downward_longwave_flux
+Var_FRSEAICE,       1 1,            Variance_of_FRSEAICE

@@ -1,0 +1,16 @@
+query_name,         units,          long_name,                      name
+wpemw,              kg m-2,         Soil_wilting_point_in_units_of_equivalent_mass_of_total_profile_water,Soil wilting point in units of equivalent mass of total profile water
+dzsf,               m,              Thickness_of_soil_layer_associated_with_SFMC_and_GWETTOP,Thickness of soil layer associated with SFMC and GWETTOP
+dzgt5,              m,              Thickness_of_soil_layer_associated_with_TSOIL5,Thickness of soil layer associated with TSOIL5
+dzpr,               m,              Thickness_of_soil_layer_associated_with_PRMC_and_GWETPROF,Thickness of soil layer associated with PRMC and GWETPROF
+wpmc,               m3 m-3,         Soil_wilting_point_in_volumetric_units,Soil wilting point in volumetric units
+wpwet,              fraction,       Soil_wilting_point_in_degree_of_saturation_units,Soil wilting point in degree of saturation units
+dzgt1,              m,              Thickness_of_soil_layer_associated_with_TSOIL1,Thickness of soil layer associated with TSOIL1
+poros,              m3 m-3,         Soil_porosity_in_volumetric_units,Soil porosity in volumetric units
+dzgt6,              m,              Thickness_of_soil_layer_associated_with_TSOIL6,Thickness of soil layer associated with TSOIL6
+cdcr2,              kg m-2,         Maximum_water_holding_capacity_of_land_element,Maximum water holding capacity of land element
+dzgt2,              m,              Thickness_of_soil_layer_associated_with_TSOIL2,Thickness of soil layer associated with TSOIL2
+dzrz,               m,              Thickness_of_soil_layer_associated_with_RZMC_and_GWETROOT,Thickness of soil layer associated with RZMC and GWETROOT
+dzts,               m,              Thickness_of_soil_layer_associated_with_TSAT_TUNST_and_TWLT,Thickness of soil layer associated with TSAT TUNST and TWLT
+dzgt3,              m,              Thickness_of_soil_layer_associated_with_TSOIL3,Thickness of soil layer associated with TSOIL3
+dzgt4,              m,              Thickness_of_soil_layer_associated_with_TSOIL4,Thickness of soil layer associated with TSOIL4

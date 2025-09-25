@@ -1,0 +1,41 @@
+﻿name,units,query_name,short_name,id,access_type,fc,an,note
+Ammonium aerosol mass mixing ratio,kg kg-1,ammonium_aerosol_mass_mixing_ratio,aermr18,210249,Fast access,X,X,
+Anthropogenic secondary organic aerosol mass mixing ratio,kg kg-1,anthropogenic_secondary_organic_aerosol_mixing_ratio,aermr20,210253,Fast access,,,Available from 28 June 2023
+Biogenic secondary organic aerosol mass mixing ratio,kg kg-1,biogenic_secondary_organic_aerosol_mixing_ratio,aermr19,210252,Fast access,,,Available from 28 June 2023
+Carbon monoxide,kg kg-1,carbon_monoxide,co,210123,Fast access,X,X,
+Chlorine monoxide,kg kg-1,chlorine_monoxide,clo,217174,Fast access,X,X,Available from 28 June 2023
+Chlorine nitrate,kg kg-1,chlorine_nitrate,clono2,217064,Fast access,X,X,Available from 28 June 2023
+Dust Aerosol (0.03 - 0.55 um) Mixing Ratio,kg kg-1,dust_aerosol_0.03-0.55um_mixing_ratio,aermr04,210004,Fast access,X,X,
+Dust Aerosol (0.55 - 0.9 um) Mixing Ratio,kg kg-1,dust_aerosol_0.55-0.9um_mixing_ratio,aermr05,210005,Fast access,X,X,
+Dust Aerosol (0.9 - 20 um) Mixing Ratio,kg kg-1,dust_aerosol_0.9-20um_mixing_ratio,aermr06,210006,Fast access,X,X,
+Ethane,kg kg-1,ethane,c2h6,217045,Fast access,X,X,
+Formaldehyde,kg kg-1,formaldehyde,hcho,210124,Fast access,X,X,
+Hydrogen chloride,kg kg-1,hydrogen_chloride,hcl,217200,,X,X,Available from 28 June 2023
+Hydrogen cyanide,kg kg-1,hydrogen_cyanide,HCN,217226,,X,X,Available from 28 June 2023
+Hydrogen peroxide,kg kg-1,hydrogen_peroxide,h2o2,217003,Fast access,X,X,
+Hydrophilic Black Carbon Aerosol Mixing Ratio,kg kg-1,hydrophilic_black_carbon_aerosol_mixing_ratio,aermr09,210009,Fast access,X,X,
+Hydrophilic Organic Matter Aerosol Mixing Ratio,kg kg-1,hydrophilic_organic_matter_aerosol_mixing_ratio,aermr07,210007,Fast access,X,X,
+Hydrophobic Black Carbon Aerosol Mixing Ratio,kg kg-1,hydrophobic_black_carbon_aerosol_mixing_ratio,aermr10,210010,Fast access,X,X,
+Hydrophobic Organic Matter Aerosol Mixing Ratio,kg kg-1,hydrophobic_organic_matter_aerosol_mixing_ratio,aermr08,210008,Fast access,X,X,
+Hydroxyl radical,kg kg-1,hydroxyl_radical,oh,217030,Fast access,X,X,
+Isoprene,kg kg-1,isoprene,c5h8,217016,Fast access,X,X,
+Logarithm of surface pressure,~,logarithm_of_surface_pressure,lnsp,152,Fast access,X,X,Available only at level=1
+Methane,kg kg-1,methane,ch4_c,217004,Fast access,X,X,Differences between CH4 and CH4_C
+Nitrate coarse mode aerosol mass mixing ratio,kg kg-1,nitrate_coarse_mode_aerosol_mass_mixing_ratio,aermr17,210248,Fast access,X,X,
+Nitrate fine mode aerosol mass mixing ratio,kg kg-1,nitrate_fine_mode_aerosol_mass_mixing_ratio,aermr16,210247,Fast access,X,X,
+Nitric acid,kg kg-1,nitric_acid,hno3,217006,Fast access,X,X,
+Nitrogen dioxide,kg kg-1,nitrogen_dioxide,no2,210121,Fast access,X,X,
+Nitrogen monoxide,kg kg-1,nitrogen_monoxide,no,217027,Fast access,X,X,
+Ozone,kg kg-1,ozone,go3,210203,Fast access,X,X,
+Peroxyacetyl nitrate,kg kg-1,peroxyacetyl_nitrate,pan,217013,Fast access,X,X,
+Propane,kg kg-1,propane,c3h8,217047,Fast access,X,X,
+Sea Salt Aerosol (0.03 - 0.5 um) Mixing Ratio,kg kg-1,sea_salt_aerosol_0.03-0.5um_mixing_ratio,aermr01,210001,Fast access,X,X,CAMS global sea salt aerosol mixing ratios
+Sea Salt Aerosol (0.5 - 5 um) Mixing Ratio,kg kg-1,sea_salt_aerosol_0.5-5um_mixing_ratio,aermr02,210002,Fast access,X,X,CAMS global sea salt aerosol mixing ratios
+Sea Salt Aerosol (5 - 20 um) Mixing Ratio,kg kg-1,sea_salt_aerosol_5-20um_mixing_ratio,aermr03,210003,Fast access,X,X,CAMS global sea salt aerosol mixing ratios
+Specific humidity,kg kg-1,specific_humidity,q,133,Fast access,X,X,
+Sulphate Aerosol Mixing Ratio,kg kg-1,sulphate_aerosol_mixing_ratio,aermr11,210011,Fast access,X,X,
+Sulphur dioxide,kg kg-1,sulphur_dioxide,so2,210122,Fast access,X,X,
+Volcanic sulphur dioxide,kg kg-1,volcanic_sulphur_dioxide,VSO2,210170,Fast access,X,X,Only available from 12 November 2024
+Temperature,K,temperature,t,130,Fast access,X,X,
+U component of wind,m s-1,u_component_of_wind,u,131,Fast access,X,X,
+V component of wind,m s-1,v_component_of_wind,v,132,Fast access,X,X,

@@ -1,0 +1,335 @@
+﻿name,units,query_name,shortname,id,access_type,fc,an,note
+10 metre wind gust in the last 3 hours,m s-1,10m_wind_gust_in_the_last_3_hours,10fg3,228028,,,X,Only available from 21 June 2016 00UTC
+Asymmetry factor at 1020 nm,dimensionless,asymmetry_factor_1020nm,asymmetry1020,215164,,X,X,Only available from 26 June 2018 12UTC
+Asymmetry factor at 1064 nm,dimensionless,asymmetry_factor_1064nm,asymmetry1064,215165,,X,X,Only available from 26 June 2018 12UTC
+Asymmetry factor at 1240 nm,dimensionless,asymmetry_factor_1240nm,asymmetry1240,215166,,X,X,Only available from 26 June 2018 12UTC
+Asymmetry factor at 1640 nm,dimensionless,asymmetry_factor_1640nm,asymmetry1640,215167,,X,X,Only available from 26 June 2018 12UTC
+Asymmetry factor at 2130 nm,dimensionless,asymmetry_factor_2130nm,asymmetry2130,215179,,X,X,Only available from 26 June 2018 12UTC
+Asymmetry factor at 340 nm,dimensionless,asymmetry_factor_340nm,asymmetry340,215150,,X,X,Only available from 26 June 2018 12UTC
+Asymmetry factor at 355 nm,dimensionless,asymmetry_factor_355nm,asymmetry355,215151,,X,X,Only available from 26 June 2018 12UTC
+Asymmetry factor at 380 nm,dimensionless,asymmetry_factor_380nm,asymmetry380,215152,,X,X,Only available from 26 June 2018 12UTC
+Asymmetry factor at 400 nm,dimensionless,asymmetry_factor_400nm,asymmetry400,215153,,X,X,Only available from 27 June 2018 00UTC
+Asymmetry factor at 440 nm,dimensionless,asymmetry_factor_440nm,asymmetry440,215154,,X,X,Only available from 26 June 2018 12UTC
+Asymmetry factor at 469 nm,dimensionless,asymmetry_factor_469nm,asymmetry469,215155,,X,X,Only available from 26 June 2018 12UTC
+Asymmetry factor at 500 nm,dimensionless,asymmetry_factor_500nm,asymmetry500,215156,,X,X,Only available from 26 June 2018 12UTC
+Asymmetry factor at 532 nm,dimensionless,asymmetry_factor_532nm,asymmetry532,215157,,X,X,Only available from 26 June 2018 12UTC
+Asymmetry factor at 550 nm,dimensionless,asymmetry_factor_550nm,asymmetry550,215158,,X,X,Only available from 26 June 2018 12UTC
+Asymmetry factor at 645 nm,dimensionless,asymmetry_factor_645nm,asymmetry645,215159,,X,X,Only available from 26 June 2018 12UTC
+Asymmetry factor at 670 nm,dimensionless,asymmetry_factor_670nm,asymmetry670,215160,,X,X,Only available from 26 June 2018 12UTC
+Asymmetry factor at 800 nm,dimensionless,asymmetry_factor_800nm,asymmetry800,215161,,X,X,Only available from 26 June 2018 12UTC
+Asymmetry factor at 858 nm,dimensionless,asymmetry_factor_858nm,asymmetry858,215162,,X,X,Only available from 26 June 2018 12UTC
+Asymmetry factor at 865 nm,dimensionless,asymmetry_factor_865nm,asymmetry865,215163,,X,X,Only available from 26 June 2018 12UTC
+Boundary layer height,m,boundary_layer_height,blh,159,,X,,
+Clear-sky direct solar radiation at surface,J m-2,clear_sky_direct_solar_radiation_at_surface,cdir,228022,,X,,
+Clear sky surface photosynthetically active radiation,J m-2,clear_sky_surface_photosynthetically_active_radiation,parcs,20,,X,,Only available from 24 January 2017 12UTC
+Cloud base height,m,cloud_base_height,cbh,228023,,X,,
+Convective available potential energy,J kg-1,convective_available_potential_energy,cape,59,,X,,
+Convective inhibition,J kg-1,convective_inhibition,cin,228001,,X,X,
+Convective precipitation,m,convective_precipitation,cp,143,,X,X,
+Direct solar radiation,J m-2,direct_solar_radiation,dsrp,47,,X,,Only available from 24 January 2017 12UTC
+Downward UV radiation at the surface,J m-2,downward_uv_radiation_at_the_surface,uvb,57,,X,,
+Dry deposition of ammonium aerosol,kg m-2 s-1,dry_deposition_of_ammonium_aerosol,aerddpam,215206,,X,,Only available from 9 July 2019 00UTC
+Dry deposition of coarse-mode nitrate aerosol,kg m-2 s-1,dry_deposition_of_coarse_mode_nitrate_aerosol,aerddpnic,215192,,X,,Only available from 9 July 2019 00UTC
+Dry deposition of dust aerosol (0.03 - 0.55 um),kg m-2 s-1,dry_deposition_of_dust_aerosol_0.03-0.55um,aerddpdus,215028,,X,,Only available from 26 June 2018 12UTC
+Dry deposition of dust aerosol (0.55 - 9 um),kg m-2 s-1,dry_deposition_of_dust_aerosol_0.55-9um,aerddpdum,215029,,X,,Only available from 26 June 2018 12UTC
+Dry deposition of dust aerosol (9 - 20 um),kg m-2 s-1,dry_deposition_of_dust_aerosol_9-20um,aerddpdul,215030,,X,,Only available from 26 June 2018 12UTC
+Dry deposition of fine-mode nitrate aerosol,kg m-2 s-1,dry_deposition_of_fine_mode_nitrate_aerosol,aerddpnif,215191,,X,,Only available from 9 July 2019 00UTC
+Dry deposition of hydrophilic black carbon aerosol,kg m-2 s-1,dry_deposition_of_hydrophilic_black_carbon_aerosol,aerddpbchphil,215068,,X,,Only available from 26 June 2018 12UTC
+Dry deposition of hydrophilic organic matter aerosol,kg m-2 s-1,dry_deposition_of_hydrophilic_organic_matter_aerosol,aerddpomhphil,215052,,X,,Only available from 26 June 2018 12UTC
+Dry deposition of hydrophobic black carbon aerosol,kg m-2 s-1,dry_deposition_of_hydrophobic_black_carbon_aerosol,aerddpbchphob,215067,,X,,Only available from 26 June 2018 12UTC
+Dry deposition of hydrophobic organic matter aerosol,kg m-2 s-1,dry_deposition_of_hydrophobic_organic_matter_aerosol,aerddpomhphob,215051,,X,,Only available from 26 June 2018 12UTC
+Dry deposition of sea salt aerosol (0.03 - 0.5 um),kg m-2 s-1,dry_deposition_of_sea_salt_aerosol_0.03-0.5um,aerddpsss,215004,,X,,Only available from 26 June 2018 12UTC
+Dry deposition of sea salt aerosol (0.5 - 5 um),kg m-2 s-1,dry_deposition_of_sea_salt_aerosol_0.5-5um,aerddpssm,215005,,X,,Only available from 26 June 2018 12UTC
+Dry deposition of sea salt aerosol (5 - 20 um),kg m-2 s-1,dry_deposition_of_sea_salt_aerosol_5-20um,aerddpssl,215006,,X,,Only available from 26 June 2018 12UTC
+Dry deposition of sulphate aerosol,kg m-2 s-1,dry_deposition_of_sulphate_aerosol,aerddpsu,215082,,X,,Only available from 26 June 2018 12UTC
+Dust aerosol (0.03 - 0.55 um) optical depth,dimensionless,dust_aerosol_0.03-0.55um_optical_depth_550nm,aeroddus,215046,,X,X,
+Dust aerosol (0.55 - 9 um) optical depth,dimensionless,dust_aerosol_0.55-9um_optical_depth_550nm,aeroddum,215047,,X,X,
+Dust aerosol (9 - 20 um) optical depth,dimensionless,dust_aerosol_9-20um_optical_depth_550nm,aeroddul,215048,,X,X,
+Evaporation,m of water equivalent,evaporation,e,182,,X,,
+Forecast albedo,(0 - 1),forecast_albedo,fal,243,,X,,
+Friction velocity,m s-1,friction_velocity,zust,228003,,X,,
+Height of convective cloud top,m,height_of_convective_cloud_top,hcct,228046,,X,,Only available from 24 January 2017 12UTC
+High cloud cover,(0 - 1),high_cloud_cover,hcc,188,,X,X,
+Hydrophilic black carbon aerosol optical depth,dimensionless,hydrophilic_black_carbon_aerosol_optical_depth_550nm,aerodbchphil,215080,,X,X,
+Hydrophilic organic matter aerosol optical depth,dimensionless,hydrophilic_organic_matter_aerosol_optical_depth_550nm,aerodomhphil,215064,,X,X,
+Hydrophobic black carbon aerosol optical depth,dimensionless,hydrophobic_black_carbon_aerosol_optical_depth_550nm,aerodbchphob,215079,,X,X,
+Hydrophobic organic matter aerosol optical depth,dimensionless,hydrophobic_organic_matter_aerosol_optical_depth_550nm,aerodomhphob,215063,,X,X,
+Lake cover,(0 - 1),lake_cover,cl,26,,X,X,Only available from 03 September 2015 00UTC
+Large-scale precipitation,m,large_scale_precipitation,lsp,142,,X,,
+"Leaf area index, high vegetation",m2 m-2,leaf_area_index_high_vegetation,lai_hv,67,,X,X,
+"Leaf area index, low vegetation",m2 m-2,leaf_area_index_low_vegetation,lai_lv,66,,X,X,
+Lifting threshold speed,m s-1,lifting_threshold_speed,aerlts,210053,,,X,
+Low cloud cover,(0 - 1),low_cloud_cover,lcc,186,,X,X,
+Medium cloud cover,(0 - 1),medium_cloud_cover,mcc,187,,X,X,
+Coarse-mode nitrate aerosol optical depth at 550 nm,dimensionless,nitrate_coarse_mode_aerosol_optical_depth_550nm,aerodnic,215204,,X,X,Only available from 9 July 2019 00UTC
+Fine-mode nitrate aerosol optical depth at 550 nm,dimensionless,nitrate_fine_mode_aerosol_optical_depth_550nm,aerodnif,215203,,X,X,Only available from 9 July 2019 00UTC
+Photosynthetically active radiation at the surface,J m-2,photosynthetically_active_radiation_at_the_surface,par,58,,X,,
+Potential evaporation,m,potential_evaporation,pev,228251,,X,,Only available from 21 June 2016 00UTC
+Precipitation type,code table (4.201),precipitation_type,ptype,260015,,X,,Only available from 21 June 2016 00UTC
+Sea ice area fraction,(0 - 1),sea_ice_cover,ci,31,,X,X,
+Sea salt aerosol (0.03 - 0.5 um) optical depth,dimensionless,sea_salt_aerosol_0.03-0.5um_optical_depth_550nm,aerodsss,215022,,X,X,Only available from 26 June 2018 12UTC
+Sea salt aerosol (0.5 - 5 um) optical depth,dimensionless,sea_salt_aerosol_0.5-5um_optical_depth_550nm,aerodssm,215023,,X,X,Only available from 26 June 2018 12UTC
+Sea salt aerosol (5 - 20 um) optical depth,dimensionless,sea_salt_aerosol_5-20um_optical_depth_550nm,aerodssl,215024,,X,X,Only available from 26 June 2018 12UTC
+Sea surface temperature,K,sea_surface_temperature,sst,34,,,X,
+Secondary organic aerosol optical depth at 550 nm,dimensionless,secondary_organic_aerosol_optical_depth_550nm,soaod550,215226,,X,X,Available from 28 June 2023 
+Sedimentation of ammonium aerosol,kg m-2 s-1,sedimentation_of_ammonium_aerosol,aersdmam,215207,,X,,Only available from 9 July 2019 00UTC
+Sedimentation of coarse-mode nitrate aerosol,kg m-2 s-1,sedimentation_of_coarse_mode_nitrate_aerosol,aersdmnic,215194,,X,,Only available from 9 July 2019 00UTC
+Sedimentation of dust aerosol (0.03 - 0.55 um),kg m-2 s-1,sedimentation_of_dust_aerosol_0.03-0.55um,aersdmdus,215031,,X,,Only available from 26 June 2018 12UTC
+Sedimentation of dust aerosol (0.55 - 9 um),kg m-2 s-1,sedimentation_of_dust_aerosol_0.55-9um,aersdmdum,215032,,X,,Only available from 26 June 2018 12UTC
+Sedimentation of dust aerosol (9 - 20 um),kg m-2 s-1,sedimentation_of_dust_aerosol_9-20um,aersdmdul,215033,,X,,Only available from 26 June 2018 12UTC
+Sedimentation of fine-mode nitrate aerosol,kg m-2 s-1,sedimentation_of_fine_mode_nitrate_aerosol,aersdmnif,215193,,X,,Only available from 9 July 2019 00UTC
+Sedimentation of hydrophilic black carbon aerosol,kg m-2 s-1,sedimentation_of_hydrophilic_black_carbon_aerosol,aersdmbchphil,215070,,X,,Only available from 26 June 2018 12UTC
+Sedimentation of hydrophilic organic matter aerosol,kg m-2 s-1,sedimentation_of_hydrophilic_organic_matter_aerosol,aersdmomhphil,215054,,X,,Only available from 26 June 2018 12UTC
+Sedimentation of hydrophobic black carbon aerosol,kg m-2 s-1,sedimentation_of_hydrophobic_black_carbon_aerosol,aersdmbchphob,215069,,X,,Only available from 26 June 2018 12UTC
+Sedimentation of hydrophobic organic matter aerosol,kg m-2 s-1,sedimentation_of_hydrophobic_organic_matter_aerosol,aersdmomhphob,215053,,X,,Only available from 26 June 2018 12UTC
+Sedimentation of sea salt aerosol (0.03 - 0.5 um),kg m-2 s-1,sedimentation_of_sea_salt_aerosol_0.03-0.5um,aersdmsss,215007,,X,,Only available from 26 June 2018 12UTC
+Sedimentation of sea salt aerosol (0.5 - 5 um),kg m-2 s-1,sedimentation_of_sea_salt_aerosol_0.5-5um,aersdmssm,215008,,X,,Only available from 26 June 2018 12UTC
+Sedimentation of sea salt aerosol (5 - 20 um),kg m-2 s-1,sedimentation_of_sea_salt_aerosol_5-20um,aersdmssl,215009,,X,,Only available from 26 June 2018 12UTC
+Sedimentation of sulphate aerosol,kg m-2 s-1,sedimentation_of_sulphate_aerosol,aersdmsu,215083,,X,,Only available from 26 June 2018 12UTC
+Single scattering albedo at 1020 nm,(0 - 1),single_scattering_albedo_1020nm,ssa1020,215146,,X,X,Only available from 26 June 2018 12UTC
+Single scattering albedo at 1064 nm,(0 - 1),single_scattering_albedo_1064nm,ssa1064,215147,,X,X,Only available from 26 June 2018 12UTC
+Single scattering albedo at 1240 nm,(0 - 1),single_scattering_albedo_1240nm,ssa1240,215148,,X,X,Only available from 26 June 2018 12UTC
+Single scattering albedo at 1640 nm,(0 - 1),single_scattering_albedo_1640nm,ssa1640,215149,,X,X,Only available from 26 June 2018 12UTC
+Single scattering albedo at 2130 nm,(0 - 1),single_scattering_albedo_2130nm,ssa2130,215178,,X,X,Only available from 26 June 2018 12UTC
+Single scattering albedo at 340 nm,(0 - 1),single_scattering_albedo_340nm,ssa340,215132,,X,X,Only available from 26 June 2018 12UTC
+Single scattering albedo at 355 nm,(0 - 1),single_scattering_albedo_355nm,ssa355,215133,,X,X,Only available from 26 June 2018 12UTC
+Single scattering albedo at 380 nm,(0 - 1),single_scattering_albedo_380nm,ssa380,215134,,X,X,Only available from 26 June 2018 12UTC
+Single scattering albedo at 400 nm,(0 - 1),single_scattering_albedo_400nm,ssa400,215135,,X,X,Only available from 26 June 2018 12UTC
+Single scattering albedo at 440 nm,(0 - 1),single_scattering_albedo_440nm,ssa440,215136,,X,X,Only available from 26 June 2018 12UTC
+Single scattering albedo at 469 nm,(0 - 1),single_scattering_albedo_469nm,ssa469,215137,,X,X,Only available from 26 June 2018 12UTC
+Single scattering albedo at 500 nm,(0 - 1),single_scattering_albedo_500nm,ssa500,215138,,X,X,Only available from 26 June 2018 12UTC
+Single scattering albedo at 532 nm,(0 - 1),single_scattering_albedo_532nm,ssa532,215139,,X,X,Only available from 26 June 2018 12UTC
+Single scattering albedo at 550 nm,(0 - 1),single_scattering_albedo_550nm,ssa550,215140,,X,X,Only available from 26 June 2018 12UTC
+Single scattering albedo at 645 nm,(0 - 1),single_scattering_albedo_645nm,ssa645,215141,,X,X,Only available from 26 June 2018 12UTC
+Single scattering albedo at 670 nm,(0 - 1),single_scattering_albedo_670nm,ssa670,215142,,X,X,Only available from 26 June 2018 12UTC
+Single scattering albedo at 800 nm,(0 - 1),single_scattering_albedo_800nm,ssa800,215143,,X,X,Only available from 26 June 2018 12UTC
+Single scattering albedo at 858 nm,(0 - 1),single_scattering_albedo_858nm,ssa858,215144,,X,X,Only available from 26 June 2018 12UTC
+Single scattering albedo at 865 nm,(0 - 1),single_scattering_albedo_865nm,ssa865,215145,,X,X,Only available from 26 June 2018 12UTC
+Skin reservoir content,m of water equivalent,skin_reservoir_content,src,198,,X,X,
+Skin temperature,K,skin_temperature,skt,235,,X,X,
+Snow albedo,(0 - 1),snow_albedo,asn,32,,X,X,
+Snow depth,m of water equivalent,snow_depth,sd,141,,X,X,
+Sulphate Aerosol Optical Depth at 550nm,dimensionless,sulphate_aerosol_optical_depth_550nm,suaod550,210212,,,X,
+Sunshine duration,s,sunshine_duration,sund,189,,X,,
+Surface latent heat flux,J m-2,surface_latent_heat_flux,slhf,147,,X,,
+Surface net solar radiation,J m-2,surface_net_solar_radiation,ssr,176,,X,,
+"Surface net solar radiation, clear sky",J m-2,surface_net_solar_radiation_clear_sky,ssrc,210,,X,,
+Surface net thermal radiation,J m-2,surface_net_thermal_radiation,str,177,,X,,
+"Surface net thermal radiation, clear sky",J m-2,surface_net_thermal_radiation_clear_sky,strc,211,,X,,
+Surface sensible heat flux,J m-2,surface_sensible_heat_flux,sshf,146,,X,X,
+Surface solar radiation downward clear-sky,J m-2,surface_solar_radiation_downward_clear_sky,ssrdc,228129,,X,,
+Surface solar radiation downwards,J m-2,surface_solar_radiation_downwards,ssrd,169,,X,,
+Surface thermal radiation downward clear-sky,J m-2,surface_thermal_radiation_downward_clear_sky,strdc,228130,,X,,
+Surface thermal radiation downwards,J m-2,surface_thermal_radiation_downwards,strd,175,,X,,
+Time-integrated dry deposition mass flux of Ammonia,kg m-2,time_integrated_dry_deposition_mass_flux_of_ammonia,acc_dry_depm_NH3,222019,,X,X,Available from 28 June 2023
+Time-integrated dry deposition mass flux of Dinitrogen pentoxide,kg m-2,time_integrated_dry_deposition_mass_flux_of_dinitrogen_pentoxide,acc_dry_depm_N2O5,222033,,X,X,Available from 28 June 2023
+Time-integrated dry deposition mass flux of Nitric acid,kg m-2,time_integrated_dry_deposition_mass_flux_of_nitric_acid,acc_dry_depm_HNO3,222006,,X,X,Available from 28 June 2023
+Time-integrated dry deposition mass flux of Nitrogen dioxide,kg m-2,time_integrated_dry_deposition_mass_flux_of_nitrogen_dioxide,acc_dry_depm_NO2,222031,,X,X,Available from 28 June 2023
+Time-integrated dry deposition mass flux of Nitrogen monoxide,kg m-2,time_integrated_dry_deposition_mass_flux_of_nitrogen_monoxide,acc_dry_depm_NO,222027,,X,X,Available from 28 June 2023
+Time-integrated dry deposition mass flux of Organic nitrates,kg m-2,time_integrated_dry_deposition_mass_flux_of_organic_nitrates,acc_dry_depm_ONIT,222015,,X,X,Available from 28 June 2023
+Time-integrated dry deposition mass flux of Ozone,kg m-2,time_integrated_dry_deposition_mass_flux_of_ozone,acc_dry_depm_O3,222001,,X,X,Available from 28 June 2023
+Time-integrated dry deposition mass flux of Peroxyacetyl nitrate,kg m-2,time_integrated_dry_deposition_mass_flux_of_peroxyacetyl_nitrate,acc_dry_depm_PAN,222013,,X,X,Available from 28 June 2023
+Time-integrated dry deposition mass flux of Sulphur dioxide,kg m-2,time_integrated_dry_deposition_mass_flux_of_sulphur_dioxide,acc_dry_depm_SO2,222017,,X,X,Available from 28 June 2023
+Time-integrated wet deposition mass flux of Ammonia,kg m-2,time_integrated_wet_deposition_mass_flux_of_ammonia,acc_wet_depm_NH3,223019,,X,X,Available from 28 June 2023
+Time-integrated wet deposition mass flux of Dinitrogen pentoxide,kg m-2,time_integrated_wet_deposition_mass_flux_of_dinitrogen_pentoxide,acc_wet_depm_N2O5,223033,,X,X,Available from 28 June 2023
+Time-integrated wet deposition mass flux of Nitric acid,kg m-2,time_integrated_wet_deposition_mass_flux_of_nitric_acid,acc_wet_depm_HNO3,223006,,X,X,Available from 28 June 2023
+Time-integrated wet deposition mass flux of Nitrogen dioxide,kg m-2,time_integrated_wet_deposition_mass_flux_of_nitrogen_dioxide,acc_wet_depm_NO2,223031,,X,X,Available from 28 June 2023
+Time-integrated wet deposition mass flux of Nitrogen monoxide,kg m-2,time_integrated_wet_deposition_mass_flux_of_nitrogen_monoxide,acc_wet_depm_NO,223027,,X,X,Available from 28 June 2023
+Time-integrated wet deposition mass flux of Organic nitrates,kg m-2,time_integrated_wet_deposition_mass_flux_of_organic_nitrates,acc_wet_depm_ONIT,223015,,X,X,Available from 28 June 2023
+Time-integrated wet deposition mass flux of Peroxyacetyl nitrate,kg m-2,time_integrated_wet_deposition_mass_flux_of_peroxyacetyl_nitrate,acc_wet_depm_PAN,223013,,X,X,Available from 28 June 2023
+Time-integrated wet deposition mass flux of Sulphur dioxide,kg m-2,time_integrated_wet_deposition_mass_flux_of_sulphur_dioxide,acc_wet_depm_SO2,223017,,X,X,Available from 28 June 2023
+TOA incident solar radiation,J m-2,toa_incident_solar_radiation,tisr,212,,X,,
+Top net solar radiation,J m-2,top_net_solar_radiation,tsr,178,,X,,
+"Top net solar radiation, clear sky",J m-2,top_net_solar_radiation_clear_sky,tsrc,208,,X,,
+Top net thermal radiation,J m-2,top_net_thermal_radiation,ttr,179,,X,,
+"Top net thermal radiation, clear sky",J m-2,top_net_thermal_radiation_clear_sky,ttrc,209,,X,,
+Total absorption aerosol optical depth at 1020 nm,dimensionless,total_absorption_aerosol_optical_depth_1020nm,aodabs1020,215110,,X,X,Only available from 26 June 2018 12UTC
+Total absorption aerosol optical depth at 1064 nm,dimensionless,total_absorption_aerosol_optical_depth_1064nm,aodabs1064,215111,,X,X,Only available from 26 June 2018 12UTC
+Total absorption aerosol optical depth at 1240 nm,dimensionless,total_absorption_aerosol_optical_depth_1240nm,aodabs1240,215112,,X,X,Only available from 26 June 2018 12UTC
+Total absorption aerosol optical depth at 1640 nm,dimensionless,total_absorption_aerosol_optical_depth_1640nm,aodabs1640,215113,,X,X,Only available from 26 June 2018 12UTC
+Total absorption aerosol optical depth at 2130 nm,dimensionless,total_absorption_aerosol_optical_depth_2130nm,aodabs2130,215176,,X,X,Only available from 26 June 2018 12UTC
+Total absorption aerosol optical depth at 340 nm,dimensionless,total_absorption_aerosol_optical_depth_340nm,aodabs340,215096,,X,X,Only available from 26 June 2018 12UTC
+Total absorption aerosol optical depth at 355 nm,dimensionless,total_absorption_aerosol_optical_depth_355nm,aodabs355,215097,,X,X,Only available from 26 June 2018 12UTC
+Total absorption aerosol optical depth at 380 nm,dimensionless,total_absorption_aerosol_optical_depth_380nm,aodabs380,215098,,X,X,Only available from 26 June 2018 12UTC
+Total absorption aerosol optical depth at 400 nm,dimensionless,total_absorption_aerosol_optical_depth_400nm,aodabs400,215099,,X,X,Only available from 26 June 2018 12UTC
+Total absorption aerosol optical depth at 440 nm,dimensionless,total_absorption_aerosol_optical_depth_440nm,aodabs440,215100,,X,X,Only available from 26 June 2018 12UTC
+Total absorption aerosol optical depth at 469 nm,dimensionless,total_absorption_aerosol_optical_depth_469nm,aodabs469,215101,,X,X,Only available from 26 June 2018 12UTC
+Total absorption aerosol optical depth at 500 nm,dimensionless,total_absorption_aerosol_optical_depth_500nm,aodabs500,215102,,X,X,Only available from 26 June 2018 12UTC
+Total absorption aerosol optical depth at 532 nm,dimensionless,total_absorption_aerosol_optical_depth_532nm,aodabs532,215103,,X,X,Only available from 26 June 2018 12UTC
+Total absorption aerosol optical depth at 550 nm,dimensionless,total_absorption_aerosol_optical_depth_550nm,aodabs550,215104,,X,X,Only available from 26 June 2018 12UTC
+Total absorption aerosol optical depth at 645 nm,dimensionless,total_absorption_aerosol_optical_depth_645nm,aodabs645,215105,,X,X,Only available from 26 June 2018 12UTC
+Total absorption aerosol optical depth at 670 nm,dimensionless,total_absorption_aerosol_optical_depth_670nm,aodabs670,215106,,X,X,Only available from 26 June 2018 12UTC
+Total absorption aerosol optical depth at 800 nm,dimensionless,total_absorption_aerosol_optical_depth_800nm,aodabs800,215107,,X,X,Only available from 26 June 2018 12UTC
+Total absorption aerosol optical depth at 858 nm,dimensionless,total_absorption_aerosol_optical_depth_858nm,aodabs858,215108,,X,X,Only available from 26 June 2018 12UTC
+Total absorption aerosol optical depth at 865 nm,dimensionless,total_absorption_aerosol_optical_depth_865nm,aodabs865,215109,,X,X,Only available from 26 June 2018 12UTC
+Total aerosol optical depth at 1020 nm,dimensionless,total_aerosol_optical_depth_1020nm,aod1020,210227,,X,X,Only available from 26 June 2018 12UTC
+Total aerosol optical depth at 1064 nm,dimensionless,total_aerosol_optical_depth_1064nm,aod1064,210228,,X,X,Only available from 26 June 2018 12UTC
+Total aerosol optical depth at 1640 nm,dimensionless,total_aerosol_optical_depth_1640nm,aod1640,210229,,X,X,Only available from 26 June 2018 12UTC
+Total aerosol optical depth at 2130 nm,dimensionless,total_aerosol_optical_depth_2130nm,aod2130,210230,,X,X,Only available from 26 June 2018 12UTC
+Total aerosol optical depth at 340 nm,dimensionless,total_aerosol_optical_depth_340nm,aod340,210217,,X,X,Only available from 26 June 2018 12UTC
+Total aerosol optical depth at 355 nm,dimensionless,total_aerosol_optical_depth_355nm,aod355,210218,,X,X,Only available from 26 June 2018 12UTC
+Total aerosol optical depth at 380 nm,dimensionless,total_aerosol_optical_depth_380nm,aod380,210219,,X,X,Only available from 26 June 2018 12UTC
+Total aerosol optical depth at 400 nm,dimensionless,total_aerosol_optical_depth_400nm,aod400,210220,,X,X,Only available from 26 June 2018 12UTC
+Total aerosol optical depth at 440 nm,dimensionless,total_aerosol_optical_depth_440nm,aod440,210221,,X,X,Only available from 26 June 2018 12UTC
+Total aerosol optical depth at 500 nm,dimensionless,total_aerosol_optical_depth_500nm,aod500,210222,,X,X,Only available from 26 June 2018 12UTC
+Total aerosol optical depth at 532 nm,dimensionless,total_aerosol_optical_depth_532nm,aod532,210223,,X,X,Only available from 26 June 2018 12UTC
+Total aerosol optical depth at 645 nm,dimensionless,total_aerosol_optical_depth_645nm,aod645,210224,,X,X,Only available from 26 June 2018 12UTC
+Total aerosol optical depth at 800 nm,dimensionless,total_aerosol_optical_depth_800nm,aod800,210225,,X,X,Only available from 26 June 2018 12UTC
+Total aerosol optical depth at 858 nm,dimensionless,total_aerosol_optical_depth_858nm,aod858,210226,,X,X,Only available from 26 June 2018 12UTC
+Total cloud cover,(0 - 1),total_cloud_cover,tcc,164,,X,X,
+Total column acetone,kg m-2,total_column_acetone,tc_ch3coch3,218052,,X,X,Only available from 26 June 2018 12UTC
+Total column acetone product,kg m-2,total_column_acetone_product,tc_aco2,218053,,X,X,Only available from 06 October 2020 00UTC
+Total column acetonitrile,kg m-2,total_column_acetonitrile,tc_CH3CN,218224,,X,X,Available from 28 June 2023
+Total column aldehydes,kg m-2,total_column_aldehydes,tc_ald2,218012,,X,X,Only available from 26 June 2018 12UTC
+Total column amine,kg m-2,total_column_amine,tc_nh2,218040,,X,X,Only available from 06 October 2020 00UTC
+Total column ammonia,kg m-2,total_column_ammonia,tc_nh3,218019,,X,X,Only available from 06 October 2020 00UTC
+Total column ammonium,kg m-2,total_column_ammonium,tc_nh4,218021,,X,X,Only available from 9 July 2019 00UTC
+Total column asymmetric chlorine dioxide radical,kg m-2,total_column_asymmetric_chlorine_dioxide_radical,tc_cloo,218198,,X,X,Available from 28 June 2023
+Total column bromine,kg m-2,total_column_bromine,tc_br2,218192,,X,X,Available from 28 June 2023
+Total column bromine atom,kg m-2,total_column_bromine_atom,tc_br,218191,,X,X,Available from 28 June 2023
+Total column bromine monochloride,kg m-2,total_column_bromine_monochloride,tc_brcl,218193,,X,X,Available from 28 June 2023
+Total column bromine monoxide,kg m-2,total_column_bromine_monoxide,tc_bro,218176,,X,X,Available from 28 June 2023
+Total column bromine nitrate,kg m-2,total_column_bromine_nitrate,tc_brono2,218194,,X,X,Available from 28 June 2023
+Total column bromochlorodifluoromethane,kg m-2,total_column_bromochlorodifluoromethane,tc_ha1211,218082,,X,X,Available from 28 June 2023
+Total column chlorine,kg m-2,total_column_chlorine,tc_cl2,218066,,X,X,Available from 28 June 2023
+Total column chlorine atom,kg m-2,total_column_chlorine_atom,tc_cl_c,218175,,X,X,Available from 28 June 2023
+Total column chlorine dioxide,kg m-2,total_column_chlorine_dioxide,tc_oclo,218063,,X,X,Available from 28 June 2023
+Total column chlorodifluoromethane,kg m-2,total_column_chlorodifluoromethane,tc_hcfc22,218079,,X,X,Available from 28 June 2023
+Total column chloropentafluoroethane,kg m-2,total_column_chloropentafluoroethane,tc_cfc115,218075,,X,X,Available from 28 June 2023
+Total column cloud ice water,kg m-2,total_column_cloud_ice_water,tciw,79,,X,X,
+Total column cloud liquid water,kg m-2,total_column_cloud_liquid_water,tclw,78,,X,X,
+Total column dibromomethane,kg m-2,total_column_dibromomethane,tc_ch2br2,218195,,X,X,Available from 28 June 2023
+Total column dichlorine dioxide,kg m-2,total_column_dichlorine_dioxide,tc_cl2o2,218069,,X,X,Available from 28 June 2023
+Total column dichlorodifluoromethane,kg m-2,total_column_dichlorodifluoromethane,tc_cfc12,218072,,X,X,Available from 28 June 2023
+Total column dichlorotetrafluoroethane,kg m-2,total_column_dichlorotetrafluoroethane,tc_cfc114,218074,,X,X,Available from 28 June 2023
+Total column dimethyl sulfide,kg m-2,total_column_dimethyl_sulfide,tc_dms,218018,,X,X,Only available from 06 October 2020 00UTC
+Total column dinitrogen pentoxide,kg m-2,total_column_dinitrogen_pentoxide,tc_n2o5,218033,,X,X,Only available from 06 October 2020 00UTC
+Total column ethanol,kg m-2,total_column_ethanol,tc_c2h5oh,218046,,X,X,Only available from 26 June 2018 12UTC
+Total column ethene,kg m-2,total_column_ethene,tc_c2h4,218010,,X,X,Only available from 26 June 2018 12UTC
+Total column formic acid,kg m-2,total_column_formic_acid,tc_hcooh,218043,,X,X,Only available from 26 June 2018 12UTC
+Total column Glyoxal,kg m-2,total_column_glyoxal,tc_glyoxal,218107,,X,X,Available from 28 June 2023
+Total column hydrogen bromide,kg m-2,total_column_hydrogen_bromide,tc_hbr,218068,,X,X,Available from 28 June 2023
+Total column hydrogen fluoride,kg m-2,total_column_hydrogen_fluoride,tc_hf,218202,,X,X,Available from 28 June 2023
+Total column hydroperoxy radical,kg m-2,total_column_hydroperoxy_radical,tc_ho2,218028,,X,X,Only available from 20 June 2017 00UTC
+Total column of hypobromous acid,kg m-2,total_column_hypobromous_acid,tc_hobr,218070,,X,X,Available from 28 June 2023
+Total column of hypochlorous acid,kg m-2,total_column_hypochlorous_acid,tc_hocl,218065,,X,X,Available from 28 June 2023
+Total column HYPROPO2,kg m-2,total_column_hypropo2,tc_hypropo2,218055,,X,X,Only available from 06 October 2020 00UTC
+Total column IC3H7O2,kg m-2,total_column_ic3h7o2,tc_ic3h7o2,218054,,X,X,Only available from 06 October 2020 00UTC
+Total column lead,kg m-2,total_column_lead,tc_pb,218026,,X,X,Only available from 06 October 2020 00UTC
+Total column methacrolein MVK,kg m-2,total_column_methacrolein_mvk,tc_ispd,218050,,X,X,Only available from 06 October 2020 00UTC
+Total column methacrylic acid,kg m-2,total_column_methacrylic_acid,tc_mcooh,218044,,X,X,Only available from 06 October 2020 00UTC
+Total column methane sulfonic acid,kg m-2,total_column_methane_sulfonic_acid,tc_msa,218022,,X,X,Only available from 06 October 2020 00UTC
+Total column methanol,kg m-2,total_column_methanol,tc_ch3oh,218042,,X,X,Only available from 26 June 2018 12UTC
+Total column of methyl bromide,kg m-2,total_column_methyl_bromide,tc_ch3br,218080,,X,X,Available from 28 June 2023
+Total column of methyl chloride,kg m-2,total_column_methyl_chloride,tc_ch3cl,218078,,X,X,Available from 28 June 2023
+Total column of methyl chloroform,kg m-2,total_column_methyl_chloroform,tc_ch3ccl3,218077,,X,X,Available from 28 June 2023
+Total column methyl glyoxal,kg m-2,total_column_methyl_glyoxal,tc_ch3cocho,218023,,X,X,Only available from 06 October 2020 00UTC
+Total column methyl peroxide,kg m-2,total_column_methyl_peroxide,tc_ch3ooh,218007,,X,X,Only available from 26 June 2018 12UTC
+Total column methylperoxy radical,kg m-2,total_column_methylperoxy_radical,tc_ch3o2,218029,,X,X,Only available from 06 October 2020 00UTC
+Total column nitrate,kg m-2,total_column_nitrate,tc_no3_a,218051,,X,X,Only available from 06 October 2020 00UTC
+Total column nitrate radical,kg m-2,total_column_nitrate_radical,tc_no3,218032,,X,X,Only available from 06 October 2020 00UTC
+Total column nitrogen oxides Transp,kg m-2,total_column_nitrogen_oxides_transp,tc_noxa,218056,,X,X,Only available from 06 October 2020 00UTC
+Total column of nitryl chloride,kg m-2,total_column_nitryl_chloride,tc_clno2,218067,,X,X,Available from 28 June 2023
+Total column NO to alkyl nitrate operator,kg m-2,total_column_no_to_alkyl_nitrate_operator,tc_xo2n,218039,,X,X,Only available from 06 October 2020 00UTC
+Total column NO to NO2 operator,kg m-2,total_column_no_to_no2_operator,tc_xo2,218038,,X,X,Only available from 06 October 2020 00UTC
+Total column olefins,kg m-2,total_column_olefins,tc_ole,218011,,X,X,Only available from 26 June 2018 12UTC
+Total column organic ethers,kg m-2,total_column_organic_ethers,tc_ror,218036,,X,X,Only available from 06 October 2020 00UTC
+Total column organic nitrates,kg m-2,total_column_organic_nitrates,tc_onit,218015,,X,X,Only available from 26 June 2018 12UTC
+Total column paraffins,kg m-2,total_column_paraffins,tc_par,218009,,X,X,Only available from 26 June 2018 12UTC
+Total column pernitric acid,kg m-2,total_column_pernitric_acid,tc_ho2no2,218034,,X,X,Only available from 06 October 2020 00UTC
+Total column peroxides,kg m-2,total_column_peroxides,tc_rooh,218014,,X,X,Only available from 06 October 2020 00UTC
+Total column peroxy acetyl radical,kg m-2,total_column_peroxy_acetyl_radical,tc_c2o3,218035,,X,X,Only available from 06 October 2020 00UTC
+Total column polar stratospheric cloud,kg m-2,total_column_polar_stratospheric_cloud,tc_psc,218041,,X,X,Only available from 06 October 2020 00UTC
+Total column propene,kg m-2,total_column_propene,tc_c3h6,218048,,X,X,Only available from 06 October 2020 00UTC
+Total column Radon,kg m-2,total_column_radon,tcra,210183,,X,X,Only available from 06 October 2020 00UTC
+Total column rain water,kg m-2,total_column_rain_water,tcrw,228089,,X,X,Only available from 21 June 2016 00UTC
+Total column snow water,kg m-2,total_column_snow_water,tcsw,228090,,X,X,Only available from 21 June 2016 00UTC
+Source/gain of ammonium aerosol,kg m-2 s-1,total_column_source_of_ammonium_aerosol,aersrcam,215205,,X,,Only available from 9 July 2019 00UTC
+Source/gain of coarse-mode nitrate aerosol,kg m-2 s-1,total_column_source_of_coarse_mode_nitrate_aerosol,aersrcnic,215190,,X,,Only available from 9 July 2019 00UTC
+Source/gain of dust aerosol (0.03 - 0.55 um),kg m-2 s-1,total_column_source_of_dust_aerosol_0.03-0.55um,aersrcdus,215025,,X,,Only available from 26 June 2018 12UTC
+Source/gain of dust aerosol (0.55 - 9 um),kg m-2 s-1,total_column_source_of_dust_aerosol_0.55-9um,aersrcdum,215026,,X,,Only available from 26 June 2018 12UTC
+Source/gain of dust aerosol (9 - 20 um),kg m-2 s-1,total_column_source_of_dust_aerosol_9-20um,aersrcdul,215027,,X,,Only available from 26 June 2018 12UTC
+Source/gain of fine-mode nitrate aerosol,kg m-2 s-1,total_column_source_of_fine_mode_nitrate_aerosol,aersrcnif,215189,,X,,Only available from 26 June 2018 12UTC
+Source/gain of hydrophilic black carbon aerosol,kg m-2 s-1,total_column_source_of_hydrophilic_black_carbon_aerosol,aersrcbchphil,215066,,X,,Only available from 26 June 2018 12UTC
+Source/gain of hydrophilic organic matter aerosol,kg m-2 s-1,total_column_source_of_hydrophilic_organic_matter_aerosol,aersrcomhphil,215050,,X,,Only available from 26 June 2018 12UTC
+Source/gain of hydrophobic black carbon aerosol,kg m-2 s-1,total_column_source_of_hydrophobic_black_carbon_aerosol,aersrcbchphob,215065,,X,,Only available from 26 June 2018 12UTC
+Source/gain of hydrophobic organic matter aerosol,kg m-2 s-1,total_column_source_of_hydrophobic_organic_matter_aerosol,aersrcomhphob,215049,,X,,Only available from 26 June 2018 12UTC
+Source/gain of sea salt aerosol (0.03 - 0.5 um),kg m-2 s-1,total_column_source_of_sea_salt_aerosol_0.03-0.5um,aersrcsss,215001,,X,,Only available from 26 June 2018 12UTC
+Source/gain of sea salt aerosol (0.5 - 5 um),kg m-2 s-1,total_column_source_of_sea_salt_aerosol_0.5-5um,aersrcssm,215002,,X,,Only available from 26 June 2018 12UTC
+Source/gain of sea salt aerosol (5 - 20 um),kg m-2 s-1,total_column_source_of_sea_salt_aerosol_5-20um,aersrcssl,215003,,X,,Only available from 26 June 2018 12UTC
+Source/gain of sulphate aerosol,kg m-2 s-1,total_column_source_of_sulphate_aerosol,aersrcsu,215081,,X,,Only available from 26 June 2018 12UTC
+Total column stratospheric ozone,kg m-2,total_column_stratospheric_ozone,tc_o3s,218024,,X,X,Only available from 20 June 2017 00UTC
+Total column supercooled liquid water,kg m-2,total_column_supercooled_liquid_water,tcslw,228088,,X,,Only available from 21 June 2016 00UTC
+Total column terpenes,kg m-2,total_column_terpenes,tc_c10h16,218049,,X,X,Only available from 06 October 2020 00UTC
+Total column of tetrachloromethane,kg m-2,total_column_tetrachloromethane,tc_ccl4,218076,,X,X,Available from 28 June 2023
+Total column of tribromomethane,kg m-2,total_column_tribromomethane,tc_chbr3,218197,,X,X,Available from 28 June 2023
+Total column of trichlorofluoromethane,kg m-2,total_column_trichlorofluoromethane,tc_cfc11,218071,,X,X,Available from 28 June 2023
+Total column of trichlorotrifluoroethane,kg m-2,total_column_trichlorotrifluoroethane,tc_cfc113,218073,,X,X,Available from 28 June 2023
+Total column of trifluorobromomethane,kg m-2,total_column_trifluorobromomethane,tc_ha1301,218083,,X,X,Available from 28 June 2023
+Total column water,kg m-2,total_column_water,tcw,136,,X,X,
+Total column of water vapour (chemistry),kg m-2,total_column_water_vapour_chemistry,tc_h2o,218059,,X,X,Available from 28 June 2023
+Total fine mode (r < 0.5 um) aerosol optical depth at 1020 nm,dimensionless,total_fine_mode_aerosol_optical_depth_1020nm,aodfm1020,215128,,X,X,Only available from 26 June 2018 12UTC
+Total fine mode (r < 0.5 um) aerosol optical depth at 1064 nm,dimensionless,total_fine_mode_aerosol_optical_depth_1064nm,aodfm1064,215129,,X,X,Only available from 26 June 2018 12UTC
+Total fine mode (r < 0.5 um) aerosol optical depth at 1240 nm,dimensionless,total_fine_mode_aerosol_optical_depth_1240nm,aodfm1240,215130,,X,X,Only available from 26 June 2018 12UTC
+Total fine mode (r < 0.5 um) aerosol optical depth at 1640 nm,dimensionless,total_fine_mode_aerosol_optical_depth_1640nm,aodfm1640,215131,,X,X,Only available from 26 June 2018 12UTC
+Total fine mode (r < 0.5 um) aerosol optical depth at 2130 nm,dimensionless,total_fine_mode_aerosol_optical_depth_2130nm,aodfm2130,215177,,X,X,Only available from 26 June 2018 12UTC
+Total fine mode (r < 0.5 um) aerosol optical depth at 340 nm,dimensionless,total_fine_mode_aerosol_optical_depth_340nm,aodfm340,215114,,X,X,Only available from 26 June 2018 12UTC
+Total fine mode (r < 0.5 um) aerosol optical depth at 355 nm,dimensionless,total_fine_mode_aerosol_optical_depth_355nm,aodfm355,215115,,X,X,Only available from 26 June 2018 12UTC
+Total fine mode (r < 0.5 um) aerosol optical depth at 380 nm,dimensionless,total_fine_mode_aerosol_optical_depth_380nm,aodfm380,215116,,X,X,Only available from 26 June 2018 12UTC
+Total fine mode (r < 0.5 um) aerosol optical depth at 400 nm,dimensionless,total_fine_mode_aerosol_optical_depth_400nm,aodfm400,215117,,X,X,Only available from 26 June 2018 12UTC
+Total fine mode (r < 0.5 um) aerosol optical depth at 440 nm,dimensionless,total_fine_mode_aerosol_optical_depth_440nm,aodfm440,215118,,X,X,Only available from 26 June 2018 12UTC
+Total fine mode (r < 0.5 um) aerosol optical depth at 469 nm,dimensionless,total_fine_mode_aerosol_optical_depth_469nm,aodfm469,215119,,X,X,Only available from 26 June 2018 12UTC
+Total fine mode (r < 0.5 um) aerosol optical depth at 500 nm,dimensionless,total_fine_mode_aerosol_optical_depth_500nm,aodfm500,215120,,X,X,Only available from 26 June 2018 12UTC
+Total fine mode (r < 0.5 um) aerosol optical depth at 532 nm,dimensionless,total_fine_mode_aerosol_optical_depth_532nm,aodfm532,215121,,X,X,Only available from 26 June 2018 12UTC
+Total fine mode (r < 0.5 um) aerosol optical depth at 550 nm,dimensionless,total_fine_mode_aerosol_optical_depth_550nm,aodfm550,215122,,X,X,Only available from 26 June 2018 12UTC
+Total fine mode (r < 0.5 um) aerosol optical depth at 645 nm,dimensionless,total_fine_mode_aerosol_optical_depth_645nm,aodfm645,215123,,X,X,Only available from 26 June 2018 12UTC
+Total fine mode (r < 0.5 um) aerosol optical depth at 670 nm,dimensionless,total_fine_mode_aerosol_optical_depth_670nm,aodfm670,215124,,X,X,Only available from 26 June 2018 12UTC
+Total fine mode (r < 0.5 um) aerosol optical depth at 800 nm,dimensionless,total_fine_mode_aerosol_optical_depth_800nm,aodfm800,215125,,X,X,Only available from 26 June 2018 12UTC
+Total fine mode (r < 0.5 um) aerosol optical depth at 858 nm,dimensionless,total_fine_mode_aerosol_optical_depth_858nm,aodfm858,215126,,X,X,Only available from 26 June 2018 12UTC
+Total fine mode (r < 0.5 um) aerosol optical depth at 865 nm,dimensionless,total_fine_mode_aerosol_optical_depth_865nm,aodfm865,215127,,X,X,Only available from 26 June 2018 12UTC
+Total precipitation,m,total_precipitation,tp,228,,X,,
+Total sky direct solar radiation at surface,J m-2,total_sky_direct_solar_radiation_at_surface,fdir,228021,,X,,
+Vertically integrated mass of ammonium aerosol,kg m-2,vertically_integrated_mass_of_ammonium_aerosol,aermssam,215211,,X,X,Only available from 9 July 2019 00UTC
+Vertically integrated mass of coarse-mode nitrate aerosol,kg m-2,vertically_integrated_mass_of_coarse_mode_nitrate_aerosol,aermssnic,215202,,X,X,Only available from 9 July 2019 00UTC
+Vertically integrated mass of dust aerosol (0.03 - 0.55 um),kg m-2,vertically_integrated_mass_of_dust_aerosol_0.03-0.55um,aermssdus,215043,,X,X,Only available from 26 September 2017 00UTC
+Vertically integrated mass of dust aerosol (0.55 - 9 um),kg m-2,vertically_integrated_mass_of_dust_aerosol_0.55-9um,aermssdum,215044,,X,X,Only available from 26 September 2017 00UTC
+Vertically integrated mass of dust aerosol (9 - 20 um),kg m-2,vertically_integrated_mass_of_dust_aerosol_9-20um,aermssdul,215045,,X,X,Only available from 26 September 2017 00UTC
+Vertically integrated mass of fine-mode nitrate aerosol,kg m-2,vertically_integrated_mass_of_fine_mode_nitrate_aerosol,aermssnif,215201,,X,X,Only available from 9 July 2019 00UTC
+Vertically integrated mass of hydrophilic black carbon aerosol,kg m-2,vertically_integrated_mass_of_hydrophilic_black_carbon_aerosol,aermssbchphil,215078,,X,X,Only available from 26 September 2017 00UTC
+Vertically integrated mass of hydrophilic organic matter aerosol,kg m-2,vertically_integrated_mass_of_hydrophilic_organic_matter_aerosol,aermssomhphil,215062,,X,X,Only available from 26 September 2017 00UTC
+Vertically integrated mass of hydrophobic black carbon aerosol,kg m-2,vertically_integrated_mass_of_hydrophobic_black_carbon_aerosol,aermssbchphob,215077,,X,X,Only available from 26 September 2017 00UTC
+Vertically integrated mass of hydrophobic organic matter aerosol,kg m-2,vertically_integrated_mass_of_hydrophobic_organic_matter_aerosol,aermssomhphob,215061,,X,X,Only available from 26 September 2017 00UTC
+Vertically integrated mass of sea salt aerosol (0.03 - 0.5 um),kg m-2,vertically_integrated_mass_of_sea_salt_aerosol_0.03-0.5um,aermsssss,215019,,X,X,Only available from 26 September 2017 00UTC
+Vertically integrated mass of sea salt aerosol (0.5 - 5 um),kg m-2,vertically_integrated_mass_of_sea_salt_aerosol_0.5-5um,aermssssm,215020,,X,X,Only available from 26 September 2017 00UTC
+Vertically integrated mass of sea salt aerosol (5 - 20 um),kg m-2,vertically_integrated_mass_of_sea_salt_aerosol_5-20um,aermssssl,215021,,X,X,Only available from 26 September 2017 00UTC
+Vertically integrated mass of sulphate aerosol,kg m-2,vertically_integrated_mass_of_sulphate_aerosol,aermsssu,215087,,X,X,Only available from 26 September 2017 00UTC
+Vertically integrated moisture divergence,kg m-2,vertically_integrated_moisture_divergence,vimd,213,,X,,Only available from 21 June 2016 00UTC
+Visibility,km,visibility,vis,3020,,X,,Only available from 21 June 2016 00UTC
+Wet deposition of ammonium aerosol by convective precipitation,kg m-2 s-1,wet_deposition_of_ammonium_aerosol_by_convective_precipitation,aerwdcam,215209,,X,,Only available from 9 July 2019 00UTC
+Wet deposition of ammonium aerosol by large-scale precipitation,kg m-2 s-1,wet_deposition_of_ammonium_aerosol_by_large_scale_precipitation,aerwdlam,215208,,X,,Only available from 9 July 2019 00UTC
+Wet deposition of coarse-mode nitrate aerosol by convective precipitation,kg m-2 s-1,wet_deposition_of_coarse_mode_nitrate_aerosol_by_convective_precipitation,aerwdcnic,215198,,X,,Only available from 9 July 2019 00UTC
+Wet deposition of coarse-mode nitrate aerosol by large-scale precipitation,kg m-2 s-1,wet_deposition_of_coarse_mode_nitrate_aerosol_by_large_scale_precipitation,aerwdlnic,215196,,X,,Only available from 9 July 2019 00UTC
+Wet deposition of dust aerosol (0.03 - 0.55 um) by convective precipitation,kg m-2 s-1,wet_deposition_of_dust_aerosol_0.03-0.55um_by_convective_precipitation,aerwdccdus,215037,,X,,Only available from 26 June 2018 12UTC
+Wet deposition of dust aerosol (0.03 - 0.55 um) by large-scale precipitation,kg m-2 s-1,wet_deposition_of_dust_aerosol_0.03-0.55um_by_large_scale_precipitation,aerwdlsdus,215034,,X,,Only available from 26 June 2018 12UTC
+Wet deposition of dust aerosol (0.55 - 9 um) by convective precipitation,kg m-2 s-1,wet_deposition_of_dust_aerosol_0.55-9um_by_convective_precipitation,aerwdccdum,215038,,X,,Only available from 26 June 2018 12UTC
+Wet deposition of dust aerosol (0.55 - 9 um) by large-scale precipitation,kg m-2 s-1,wet_deposition_of_dust_aerosol_0.55-9um_by_large_scale_precipitation,aerwdlsdum,215035,,X,,Only available from 26 June 2018 12UTC
+Wet deposition of dust aerosol (9 - 20 um) by convective precipitation,kg m-2 s-1,wet_deposition_of_dust_aerosol_9-20um_by_convective_precipitation,aerwdccdul,215039,,X,,Only available from 26 June 2018 12UTC
+Wet deposition of dust aerosol (9 - 20 um) by large-scale precipitation,kg m-2 s-1,wet_deposition_of_dust_aerosol_9-20um_by_large_scale_precipitation,aerwdlsdul,215036,,X,,Only available from 26 June 2018 12UTC
+Wet deposition of fine-mode nitrate aerosol by convective precipitation,kg m-2 s-1,wet_deposition_of_fine_mode_nitrate_aerosol_by_convective_precipitation,aerwdcnif,215197,,X,,Only available from 26 June 2018 12UTC
+Wet deposition of fine-mode nitrate aerosol by large-scale precipitation,kg m-2 s-1,wet_deposition_of_fine_mode_nitrate_aerosol_by_large_scale_precipitation,aerwdlnif,215195,,X,,Only available from 26 June 2018 12UTC
+Wet deposition of hydrophilic black carbon aerosol by convective precipitation,kg m-2 s-1,wet_deposition_of_hydrophilic_black_carbon_aerosol_by_convective_precipitation,aerwdccbchphil,215074,,X,,Only available from 26 June 2018 12UTC
+Wet deposition of hydrophilic black carbon aerosol by large-scale precipitation,kg m-2 s-1,wet_deposition_of_hydrophilic_black_carbon_aerosol_by_large_scale_precipitation,aerwdlsbchphil,215072,,X,,Only available from 26 June 2018 12UTC
+Wet deposition of hydrophilic organic matter aerosol by convective precipitation,kg m-2 s-1,wet_deposition_of_hydrophilic_organic_matter_aerosol_by_convective_precipitation,aerwdccomhphil,215058,,X,,Only available from 26 June 2018 12UTC
+Wet deposition of hydrophilic organic matter aerosol by large-scale precipitation,kg m-2 s-1,wet_deposition_of_hydrophilic_organic_matter_aerosol_by_large_scale_precipitation,aerwdlsomhphil,215056,,X,,Only available from 26 June 2018 12UTC
+Wet deposition of hydrophobic black carbon aerosol by convective precipitation,kg m-2 s-1,wet_deposition_of_hydrophobic_black_carbon_aerosol_by_convective_precipitation,aerwdccbchphob,215073,,X,,Only available from 26 June 2018 12UTC
+Wet deposition of hydrophobic black carbon aerosol by large-scale precipitation,kg m-2 s-1,wet_deposition_of_hydrophobic_black_carbon_aerosol_by_large_scale_precipitation,aerwdlsbchphob,215071,,X,,Only available from 26 June 2018 12UTC
+Wet deposition of hydrophobic organic matter aerosol by convective precipitation,kg m-2 s-1,wet_deposition_of_hydrophobic_organic_matter_aerosol_by_convective_precipitation,aerwdccomhphob,215057,,X,,Only available from 26 June 2018 12UTC
+Wet deposition of hydrophobic organic matter aerosol by large-scale precipitation,kg m-2 s-1,wet_deposition_of_hydrophobic_organic_matter_aerosol_by_large_scale_precipitation,aerwdlsomhphob,215055,,X,,Only available from 26 June 2018 12UTC
+Wet deposition of sea salt aerosol (0.03 - 0.5 um) by convective precipitation,kg m-2 s-1,wet_deposition_of_sea_salt_aerosol_0.03-0.5um_by_convective_precipitation,aerwdccsss,215013,,X,,Only available from 26 June 2018 12UTC
+Wet deposition of sea salt aerosol (0.03 - 0.5 um) by large-scale precipitation,kg m-2 s-1,wet_deposition_of_sea_salt_aerosol_0.03-0.5um_by_large_scale_precipitation,aerwdlssss,215010,,X,,Only available from 26 June 2018 12UTC
+Wet deposition of sea salt aerosol (0.5 - 5 um) by convective precipitation,kg m-2 s-1,wet_deposition_of_sea_salt_aerosol_0.5-5um_by_convective_precipitation,aerwdccssm,215014,,X,,Only available from 26 June 2018 12UTC
+Wet deposition of sea salt aerosol (0.5 - 5 um) by large-scale precipitation,kg m-2 s-1,wet_deposition_of_sea_salt_aerosol_0.5-5um_by_large_scale_precipitation,aerwdlsssm,215011,,X,,Only available from 26 June 2018 12UTC
+Wet deposition of sea salt aerosol (5 - 20 um) by convective precipitation,kg m-2 s-1,wet_deposition_of_sea_salt_aerosol_5-20um_by_convective_precipitation,aerwdccssl,215015,,X,,Only available from 26 June 2018 12UTC
+Wet deposition of sea salt aerosol (5 - 20 um) by large-scale precipitation,kg m-2 s-1,wet_deposition_of_sea_salt_aerosol_5-20um_by_large_scale_precipitation,aerwdlsssl,215012,,X,,Only available from 26 June 2018 12UTC
+Wet deposition of sulphate aerosol by convective precipitation,kg m-2 s-1,wet_deposition_of_sulphate_aerosol_by_convective_precipitation,aerwdccsu,215085,,X,,Only available from 26 June 2018 12UTC
+Wet deposition of sulphate aerosol by large-scale precipitation,kg m-2 s-1,wet_deposition_of_sulphate_aerosol_by_large_scale_precipitation,aerwdlssu,215084,,X,,Only available from 26 June 2018 12UTC

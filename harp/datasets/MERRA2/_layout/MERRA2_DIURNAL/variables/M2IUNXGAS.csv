@@ -1,0 +1,3 @@
+query_name,         units,          long_name
+AODANA,             1,              Aerosol Optical Depth Analysis
+AODINC,             1,              Aerosol Optical Depth Analysis Increment

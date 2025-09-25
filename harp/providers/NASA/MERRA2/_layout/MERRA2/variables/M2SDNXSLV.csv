@@ -1,6 +1,0 @@
-raw_name,           units,                        long_name
-HOURNORAIN,         s,                            time-during_an_hour_with_no_precipitation
-T2MMAX,             K,                            2-meter_air_temperature
-T2MMEAN,            K,                            2-meter_air_temperature
-T2MMIN,             K,                            2-meter_air_temperature
-TPRECMAX,           kg m-2 s-1,                   total_precipitation

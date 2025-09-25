@@ -1,0 +1,37 @@
+
+import string
+from harp._backend.baseprovider import BaseDatasetProvider
+
+
+def format_search_table(self: BaseDatasetProvider):
+    """
+    Formats and standardize the pandas table to:
+    columns: "short_name", "dims", "spatial", "units", "name", "query_name", "search"
+    attrs: "dataset", "import_path", "collection", "institution", "timerange"
+    """
+    table = self.nomenclature.table.copy()
+    
+    table["short_name"] = table["query_name"]
+    
+    table['name'] = table['long_name'].str.replace(f"[{string.punctuation}]", " ", regex=True)
+    table["search"] = table["name"] + "   " + table["short_name"] # + "   " + self.institution
+    
+    table.attrs["dataset"]      = str(self.__class__.__name__)
+    table.attrs["import_path"]  = str(self.__class__).split("\'")[1]
+    table.attrs["collection"] = self.collection
+    table.attrs["institution"] = self.institution
+    table.attrs["timerange"] = self.timerange_str
+    
+    table.attrs["timeres"] = self.timespecs.count
+    
+    
+    table["spatial"] = self.infos["spatial_degrees"]
+    
+    dims = " ".join(self.infos["dimensions"][::-1])
+    dims = dims.replace("time", "t").replace("latitude", "y").replace("longitude", "x").replace(" ", "")
+    table["dims"] = dims
+    
+    # reorder columns
+    table = table[["short_name", "dims", "spatial", "units", "name", "query_name", "search"]]
+    
+    return table

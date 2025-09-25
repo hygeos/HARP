@@ -1,0 +1,15 @@
+query_name,         units,          long_name
+COSC,               1e-9,           CO Surface Concentration in ppbv 
+COPD,               kg m-2 s-1,     CO Chemical Production 
+Var_TO3,            Dobsons Dobsons,Variance_of_TO3
+Var_COLS,           kg m-2 s-1 kg m-2 s-1,Variance_of_COLS
+TO3,                Dobsons,        total_column_ozone
+COEM,               kg m-2 s-1,     CO Emission 
+Var_COPD,           kg m-2 s-1 kg m-2 s-1,Variance_of_COPD
+Var_COSC,           1e-9 1e-9,      Variance_of_COSC
+COLS,               kg m-2 s-1,     CO Chemical Loss 
+COCL,               kg m-2,         CO Column Burden 
+Var_COCL,           kg m-2 kg m-2,  Variance_of_COCL
+Var_LWI,            1 1,            Variance_of_LWI
+Var_COEM,           kg m-2 s-1 kg m-2 s-1,Variance_of_COEM
+LWI,                1,              land(1)_water(0)_ice(2)_flag

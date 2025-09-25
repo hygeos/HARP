@@ -1,0 +1,8 @@
+query_name,         units,          long_name
+WESNSC,             kg m-2 s-1,     top_snow_layer_mass_change_due_to_sub_con
+RUNOFF,             kg m-2 s-1,     runoff_flux
+SNOMAS_GL,          kg m-2,         snow_mass_over_glaciated_surface
+WESNEXT,            kg m-2 s-1,     total_snow_mass_residual_due_to_densification
+SNOWDP_GL,          m,              snow_depth_over_glaciated_surface
+ASNOW_GL,           1,              fractional_area_of_glaciated_surface_snowcover
+SNICEALB,           1,              aggregated_snow_ice_broadband_albedo

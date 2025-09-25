@@ -1,0 +1,87 @@
+﻿name,units,query_name,short_name,id,access_type,fc,an,note
+Acetone,kg kg-1,acetone,ch3coch3,217052,,X,X,
+Acetone product,kg kg-1,acetone_product,aco2,217053,,X,X,
+Acetonitrile,kg kg-1,,CH3CN,217224,,X,X,Available from 28 June 2023
+Aerosol extinction coefficient at 1064 nm,m-1,aerosol_extinction_coefficient_1064nm,aerext1064,215182,,X,,Only available from 26 September 2017 00UTC
+Aerosol extinction coefficient at 355 nm,m-1,aerosol_extinction_coefficient_355nm,aerext355,215180,,X,,Only available from 26 September 2017 00UTC
+Aerosol extinction coefficient at 532 nm,m-1,aerosol_extinction_coefficient_532nm,aerext532,215181,,X,,Only available from 26 September 2017 00UTC
+Aldehydes,kg kg-1,aldehydes,ald2,217012,,X,X,
+Amine,kg kg-1,amine,nh2,217040,,X,X,
+Ammonia,kg kg-1,ammonia,nh3,217019,,X,X,
+Ammonium,kg kg-1,ammonium,nh4,217021,,X,X,
+Aerosol backscatter coefficient at 1064 nm (from ground),m-1 sr-1,attenuated_backscatter_due_to_aerosol_1064nm_from_ground,aerbackscatgnd1064,215188,,X,,Only available from 26 September 2017 00UTC
+Aerosol backscatter coefficient at 1064 nm (from top of atmosphere),m-1 sr-1,attenuated_backscatter_due_to_aerosol_1064nm_from_top_of_atmosphere,aerbackscattoa1064,215185,,X,,Only available from 26 September 2017 00UTC
+Aerosol backscatter coefficient at 355 nm (from ground),m-1 sr-1,attenuated_backscatter_due_to_aerosol_355nm_from_ground,aerbackscatgnd355,215186,,X,,Only available from 26 September 2017 00UTC
+Aerosol backscatter coefficient at 355 nm (from top of atmosphere),m-1 sr-1,attenuated_backscatter_due_to_aerosol_355nm_from_top_of_atmosphere,aerbackscattoa355,215183,,X,,Only available from 26 September 2017 00UTC
+Aerosol backscatter coefficient at 532 nm (from ground),m-1 sr-1,attenuated_backscatter_due_to_aerosol_532nm_from_ground,aerbackscatgnd532,215187,,X,,Only available from 26 September 2017 00UTC
+Aerosol backscatter coefficient at 532 nm (from top of atmosphere),m-1 sr-1,attenuated_backscatter_due_to_aerosol_532nm_from_top_of_atmosphere,aerbackscattoa532,215184,,X,,Only available from 26 September 2017 00UTC
+Anthropogenic secondary organic aerosol mass mixing ratio,kg kg-1,anthropogenic_secondary_organic_aerosol_mixing_ratio,aermr20,210253,,X,X,Available from 28 June 2023
+Asymmetric chlorine dioxide radical,,,,,,,,
+Biogenic secondary organic aerosol mass mixing ratio,kg kg-1,biogenic_secondary_organic_aerosol_mixing_ratio,aermr19,210252,,X,X,Available from 28 June 2023
+Bromine,kg kg-1,bromine,br2,217192,,X,X,Available from 28 June 2023
+Bromine atom,kg kg-1,bromine_atom,br,217191,,X,X,Available from 28 June 2023
+Bromine monochloride,kg kg-1,bromine_monochloride,brcl,217193,,X,X,Available from 28 June 2023
+Bromine monoxide,kg kg-1,bromine_monoxide,bro,217176,,X,X,Available from 28 June 2023
+Bromine nitrate,kg kg-1,bromine_nitrate,brono2,217194,,X,X,Available from 28 June 2023
+Bromochlorodifluoromethane,kg kg-1,bromochlorodifluoromethane,ha1211,217082,,X,X,Available from 28 June 2023
+Chlorine,kg kg-1,chlorine,cl2,217066,,X,X,Available from 28 June 2023
+Chlorine atom,kg kg-1,chlorine_atom,cl_c,217175,,X,X,Available from 28 June 2023
+Chlorine dioxide,kg kg-1,chlorine_dioxide,oclo,217063,,X,X,Available from 28 June 2023
+Chlorodifluoromethane,kg kg-1,chlorodifluoromethane,hcfc22,217079,,X,X,Available from 28 June 2023
+Chloropentafluoroethane,kg kg-1,chloropentafluoroethane,cfc115,217075,,X,X,Available from 28 June 2023
+Dibromomethane,kg kg-1,dibromomethane,ch2br2,217195,,X,X,Available from 28 June 2023
+Dichlorine dioxide,kg kg-1,dichlorine_dioxide,cl2o2,217069,,X,X,Available from 28 June 2023
+Dichlorodifluoromethane,kg kg-1,dichlorodifluoromethane,cfc12,217072,,X,X,Available from 28 June 2023
+Dichlorotetrafluoroethane,kg kg-1,dichlorotetrafluoroethane,cfc114,217074,,X,X,Available from 28 June 2023
+Dimethyl sulfide,kg kg-1,dimethyl_sulfide,dms,217018,,X,X,
+Dinitrogen pentoxide,kg kg-1,dinitrogen_pentoxide,n2o5,217033,,X,X,
+Ethanol,kg kg-1,ethanol,c2h5oh,217046,,X,X,
+Ethene,kg kg-1,ethene,c2h4,217010,,X,X,
+Formic acid,kg kg-1,formic_acid,hcooh,217043,,X,X,
+Fraction of cloud cover,(0 - 1),fraction_of_cloud_cover,cc,248,,X,X,
+Geopotential,m2 s-2,geopotential,z,129,,X,X,
+Glyoxal,kg kg-1,glyoxal,glyoxal,217107,,X,X,Available from 28 June 2023
+Hydrogen bromide,kg kg-1,hydrogen_bromide,hbr,217068,,X,X,Available from 28 June 2023
+Hydrogen fluoride,kg kg-1,hydrogen_fluoride,hf,217202,,X,X,Available from 28 June 2023
+Hydroperoxy radical,kg kg-1,hydroperoxy_radical,ho2,217028,,X,X,
+Hypobromous acid,kg kg-1,hypobromous_acid,hobr,217070,,X,X,Available from 28 June 2023
+Hypochlorous acid,kg kg-1,hypochlorous_acid,hocl,217065,,X,X,Available from 28 June 2023
+Logarithm of surface pressure,Numeric,logarithm_of_surface_pressure,lnsp,152,,X,X,
+Lead,kg kg-1,lead,pb,217026,,X,X,
+Methacrolein MVK,kg kg-1,methacrolein_mvk,ispd,217050,,,X,
+Methacrylic acid,kg kg-1,methacrylic_acid,mcooh,217044,,X,X,
+Methane sulfonic acid,kg kg-1,methane_sulfonic_acid,msa,217022,,X,X,
+Methanol,kg kg-1,methanol,ch3oh,217042,,X,X,
+Methyl bromide,kg kg-1,methyl_bromide,ch3br,217080,,X,X,Available from 28 June 2023
+Methyl chloride,kg kg-1,methyl_chloride,ch3cl,217078,,X,X,Available from 28 June 2023
+Methyl chloroform,kg kg-1,methyl_chloroform,ch3ccl3,217077,,X,X,Available from 28 June 2023
+Methyl glyoxal,kg kg-1,methyl_glyoxal,ch3cocho,217023,,X,X,
+Methyl peroxide,kg kg-1,methyl_peroxide,ch3ooh,217007,,X,X,
+Methylperoxy radical,kg kg-1,methylperoxy_radical,ch3o2,217029,,X,X,
+Nitrate,kg kg-1,nitrate,no3_a,217051,,X,X,
+Nitrate radical,kg kg-1,nitrate_radical,no3,217032,,X,X,
+Nitryl chloride,kg kg-1,nitryl_chloride,clno2,217067,,X,X,Available from 28 June 2023
+Olefins,kg kg-1,olefins,ole,217011,,X,X,
+Organic ethers,kg kg-1,organic_ethers,ror,217036,,X,X,
+Organic nitrates,kg kg-1,organic_nitrates,onit,217015,,X,X,
+Paraffins,kg kg-1,paraffins,par,217009,,X,X,
+Pernitric acid,kg kg-1,pernitric_acid,ho2no2,217034,,X,X,
+Peroxides,kg kg-1,peroxides,rooh,217014,,X,X,
+Peroxy acetyl radical,kg kg-1,peroxy_acetyl_radical,c2o3,217035,,X,X,
+Potential vorticity,K m2 kg-1 s-1,potential_vorticity,pv,60,,X,X,
+Propene,kg kg-1,propene,c3h6,217048,,X,X,
+Radon,kg kg-1,radon,ra,210181,,X,X,
+Relative humidity,%,relative_humidity,r,157,,X,X,
+Specific cloud ice water content,kg kg-1,specific_cloud_ice_water_content,ciwc,247,,X,X,
+Specific cloud liquid water content,kg kg-1,specific_cloud_liquid_water_content,clwc,246,,X,X,
+Specific rain water content,kg kg-1,specific_rain_water_content,crwc,75,,X,X,
+Specific snow water content,kg kg-1,specific_snow_water_content,cswc,76,,X,X,
+Stratospheric ozone,kg kg-1,stratospheric_ozone_tracer,o3s,217024,,X,X,
+Terpenes,kg kg-1,terpenes,c10h16,217049,,X,X,
+Tetrachloromethane,kg kg-1,tetrachloromethane,ccl4,217076,,X,X,Available from 28 June 2023
+Tribromomethane,kg kg-1,tribromomethane,chbr3,217197,,X,X,Available from 28 June 2023
+Trichlorofluoromethane,kg kg-1,trichlorofluoromethane,cfc11,217071,,X,X,Available from 28 June 2023
+Trichlorotrifluoroethane,kg kg-1,trichlorotrifluoroethane,cfc113,217073,,X,X,Available from 28 June 2023
+Trifluorobromomethane,kg kg-1,trifluorobromomethane,ha1301,217083,,X,X,Available from 28 June 2023
+Vertical velocity,Pa s-1,vertical_velocity,w,135,,X,X,
+Water vapour (chemistry),kg kg-1,water_vapour_chemistry,h2o,217059,,X,X,Available from 28 June 2023

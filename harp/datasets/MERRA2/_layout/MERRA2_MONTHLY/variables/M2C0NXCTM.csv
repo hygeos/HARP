@@ -1,0 +1,7 @@
+query_name,         units,          long_name,                      name
+FRLAND,             1,              fraction_of_land,               fraction of land
+PHIS,               m+2 s-2,        surface geopotential height,    surface geopotential height
+FRACI,              1,              fraction_of_ice,                fraction of ice
+FRLANDICE,          1,              fraction_of_land_ice,           fraction of land ice
+FROCEAN,            1,              fraction_of_ocean,              fraction of ocean
+FRLAKE,             1,              fraction_of_lake,               fraction of lake
