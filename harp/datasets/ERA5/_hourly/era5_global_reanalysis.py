@@ -45,7 +45,7 @@ class GlobalReanalysis(cds.CdsDatasetProvider):
     def _execute_cds_request(self, target_filepath: Path, hq: HarpQuery):
         
         # TODO area
-        times = [t.strftime("%H:%M") for t in hq.times]
+        times = [t.strftime("%H:%M") for t in hq.timesteps]
         
         dataset = self.name
         request = {

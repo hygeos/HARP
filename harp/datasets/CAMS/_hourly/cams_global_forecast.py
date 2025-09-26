@@ -75,7 +75,7 @@ class GlobalForecast(cds.CdsDatasetProvider):
         dataset = self.product_type
         
         time = hq.ref_time.strftime("%H:%M")
-        leadtimes = [str(round((t - hq.ref_time).total_seconds() / 3600)) for t in hq.times]
+        leadtimes = [str(round((t - hq.ref_time).total_seconds() / 3600)) for t in hq.timesteps]
         
         request = {
             "variable":         hq.variables,
@@ -118,24 +118,23 @@ class GlobalForecast(cds.CdsDatasetProvider):
         
         """
         
-        if len(hq.times) > 1:
-            log.error("Time range query not implemented yet", e=ValueError)
-        
-        timesteps = self.timespecs.get_encompassing_timesteps(hq.times)
-        
-        latest_pub_ref = self.timespecs_ref.get_encompassing_timesteps([datetime.now() - self.latency_ref])[0]
-        
+        timesteps = self.timespecs.get_encompassing_timesteps(hq.time)
+        latest_pub_ref = self.timespecs_ref.get_encompassing_timesteps(datetime.now() - self.latency_ref)[0]
         ref_times = {}
         
         for timestep in timesteps:
-            res = self.timespecs_ref.get_encompassing_timesteps([timestep])
+            res = self.timespecs_ref.get_encompassing_timesteps(timestep)
             lower_ref = res[0]
             
             ref = lower_ref
             
-            # Timerange error management  
-            if lower_ref > latest_pub_ref and not self.allow_extended_forecast:
-                    raise InvalidQueryError("Querying outside of restricted forecast (>11h leadtime) without setting allow_extended_forecast param. \nTry setting allow_extended_forecast=True in the provider constructor")
+
+            if lower_ref < latest_pub_ref: # No NRT forecast (in between actualizations)
+                ref = lower_ref
+                 
+            elif lower_ref > latest_pub_ref and not self.allow_extended_forecast:
+                raise InvalidQueryError("Querying outside of restricted forecast (>11h leadtime) without setting allow_extended_forecast param. \nTry setting allow_extended_forecast=True in the provider constructor")
+                
             else:
                 ref = latest_pub_ref
             
@@ -156,7 +155,7 @@ class GlobalForecast(cds.CdsDatasetProvider):
             
             hqs = HarpQuery(
                 variables   = hq.variables, 
-                times       = timesteps, 
+                timesteps   = timesteps, 
                 area        = hq.area, 
                 levels      = hq.levels, 
                 offline     = hq.offline,

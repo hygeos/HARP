@@ -62,22 +62,42 @@ class HarpQuery:
     
     def __init__(self, *,
         variables: list[str], 
-        times: datetime | list[datetime, datetime],
+        time: datetime=None, # type dictates if dt or range
+        timesteps: list[datetime]=None,
         offline: bool = False,
         area: dict = None,
         levels: list[int] = None,
         ref_time: datetime = None,
     ):
+        """
+        Class to store a query to a dataset provider
+        Args:
+            variables (list[str]): list of variable names to query
+            time (datetime): single datetime of query
+            timesteps (list[datetime] | datetime): list of the timesteps to encompassing the query
+            offline (bool, optional): if True, do not attempt to download missing data. Defaults to False.
+            area (dict, optional): NOT IMPLEMENTED YET.
+            levels (list[int], optional): list of pressure levels to query. Defaults to None.
+            ref_time (datetime, optional): reference time for forecast datasets.
+        """
     
         self.variables  = variables.copy()
-        self.times      = times
+        self.time       = time
+        self.timesteps  = timesteps
         self.offline    = offline
         self.area       = area
         self.levels     = None if levels is None else sorted(levels)
         self.ref_time   = ref_time 
         
-        if isinstance(times, list): self.times = times.copy()
-        elif isinstance(times, datetime): self.times = [times]
+        # assert type(self.time) == datetime
+        if self.time is not None:
+            assert type(self.time) == datetime
+            
+        if self.timesteps is not None:
+            assert type(self.timesteps) == list
+        
+        if isinstance(timesteps, list): self.timesteps = timesteps.copy()
+        elif isinstance(timesteps, datetime): self.timesteps = [timesteps]
         
         self.extra = {} # extra data (mostly formating)
 
@@ -85,7 +105,7 @@ class HarpQuery:
         
         return dict(
             variables   = self.variables,
-            times       = self.times,
+            times       = self.timesteps,
             offline     = self.offline,
             area        = self.area,
             levels      = self.levels,
@@ -99,7 +119,7 @@ class HarpQuery:
         
         units = []
         for v in self.variables:
-            for t in self.times:
+            for t in self.timesteps:
                 hast = HarpAtomicStorageUnit(variable=v, time=t, area=self.area, levels=self.levels, ref_time=self.ref_time)
                 units += [hast]
                 
@@ -109,7 +129,7 @@ class HarpQuery:
         
         s  = "QUERY{"
         s += "variables: " + str(self.variables) + "; "
-        s += "timesteps: " + str(self.times) + "; "
+        s += "timesteps: " + str(self.timesteps) + "; "
         s += "area: " + str(self.area) + "; "
         s += "levels: " + str(self.levels) + "; "
         s += "ref_time: " +  str(self.ref_time) + "; "

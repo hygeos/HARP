@@ -65,10 +65,10 @@ class CdsDatasetProvider(BaseDatasetProvider):
                 
             with lock.locked(): # lock query and make query download
                 if hq.offline or self.config.get("offline"):
-                    log.error(f"Offline mode is activated and data is missing locally [{', '.join(hqs.variables)}] for {hq.times}",
+                    log.error(f"Offline mode is activated and data is missing locally [{', '.join(hqs.variables)}] for {hq.timesteps}",
                         e=FileNotFoundError)
             
-                log.info(f"Querying {self.name} for variables {', '.join(hqs.variables)} on {hqs.times}")
+                log.info(f"Querying {self.name} for variables {', '.join(hqs.variables)} on {hqs.timesteps}")
                         
                 with TemporaryDirectory() as tmpdir:
                     tmpfile = Path(tmpdir) / f"tmp_{uuid.uuid4().hex}_.nc"

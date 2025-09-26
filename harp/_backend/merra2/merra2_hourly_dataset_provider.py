@@ -75,15 +75,15 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
             with lock.locked(): # lock query and make query download
                 if hq.offline or self.config.get("offline"):
                     log.error(f"Offline mode is activated and data is missing locally [\
-                        {', '.join(hqs.variables)}] for {hq.times}",
+                        {', '.join(hqs.variables)}] for {hq.timesteps}",
                         e=FileNotFoundError)
                 
                 self.auth = auth.get_auth(self.host)  # credentials from netrc file
                 
-                log.info(f"Querying {self.name} for variables {', '.join(hqs.variables)} on {hqs.times}")
+                log.info(f"Querying {self.name} for variables {', '.join(hqs.variables)} on {hqs.timesteps}")
 
                 ds = self._access_day_file(hqs)
-                ds = ds[hqs.variables].sel(time=hqs.times).compute()
+                ds = ds[hqs.variables].sel(time=hqs.timesteps).compute()
                 
                 # TODO area selection
                 

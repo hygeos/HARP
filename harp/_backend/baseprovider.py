@@ -96,7 +96,7 @@ class BaseDatasetProvider:
         
         hq = HarpQuery(
             variables   = query, 
-            times       = time, 
+            time        = time, 
             offline     = offline, 
             area        = area, 
             levels      = levels, 
@@ -311,7 +311,7 @@ class BaseDatasetProvider:
         for v in stored_variables.keys(): # For each variable (stored != cds_name but short_name)
             all_timesteps_stored_locally = True                     
         
-            for t in hq.times: # Check that all timesteps are present
+            for t in hq.timesteps: # Check that all timesteps are present
                 
                 hast = HarpAtomicStorageUnit(variable=v, time=t, area=hq.area, levels=hq.levels)
                 if not self._exists_locally(hast): # already missing one, need to query anyway
@@ -319,7 +319,7 @@ class BaseDatasetProvider:
                     break
             
             if all_timesteps_stored_locally:
-                log.debug(log.rgb.green, "Found locally: ", v, " for ", hq.times, flush=True)
+                log.debug(log.rgb.green, "Found locally: ", v, " for ", hq.timesteps, flush=True)
                 
                 _query_name = stored_variables[v]
                 hq.variables.remove(_query_name)
@@ -334,11 +334,13 @@ class BaseDatasetProvider:
         """
         From the query object, returns all expected atomic slices paths
         """
-        timesteps = self.timespecs.get_encompassing_timesteps(hq.times)
-        # TODO manage multiple times
         
-        times_tmp = hq.times
-        hq.times  = timesteps
+        assert type(hq.time) == datetime
+        
+        timesteps = self.timespecs.get_encompassing_timesteps(hq.time)
+        
+        times_tmp = hq.timesteps
+        hq.timesteps  = timesteps
         
         files = []
         units = hq.get_atomic_storage_units()
@@ -347,7 +349,7 @@ class BaseDatasetProvider:
         for u in units:
             files.append(self._get_target_file_path(u))
         
-        hq.times = times_tmp
+        hq.timesteps = times_tmp
         
         return files
         
@@ -363,11 +365,9 @@ class BaseDatasetProvider:
         
         """
         
-        if len(hq.times) > 1: # TODO: should be easy to add with current functionning
-            log.error("Time range query not implemented yet", e=ValueError)
+        assert type(hq.timesteps) == datetime
         
-        timesteps = self.timespecs.get_encompassing_timesteps(hq.times) # TODO
-        
+        timesteps = self.timespecs.get_encompassing_timesteps(hq.time)
         dates = {}
         
         for timestep in timesteps:
@@ -383,7 +383,7 @@ class BaseDatasetProvider:
             dates[d] = list(set(dates[d]))
             timesteps = dates[d]
             
-            hqs = HarpQuery(variables=hq.variables, times=timesteps, area=hq.area, levels=hq.levels, offline=hq.offline)
+            hqs = HarpQuery(variables=hq.variables, timesteps=timesteps, area=hq.area, levels=hq.levels, offline=hq.offline)
             hqs.extra["day"] = d
             
             queries.append(hqs)

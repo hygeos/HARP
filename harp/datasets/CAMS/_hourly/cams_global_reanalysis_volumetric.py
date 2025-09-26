@@ -73,7 +73,7 @@ class GlobalReanalysisVolumetric(cds.CdsDatasetProvider):
     def _execute_cds_request(self, target_filepath: Path, hq: HarpQuery):
         
         # TODO area
-        times = [t.strftime("%H:%M") for t in hq.times]
+        times = [t.strftime("%H:%M") for t in hq.timesteps]
         d = hq.extra["day"]
         
         dataset = self.name

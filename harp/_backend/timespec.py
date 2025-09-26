@@ -19,25 +19,15 @@ class RegularTimespec:
         self.midnight_start = (start == timedelta(seconds=0)) # True if first timestep is 00:00 False otherwise
             
     
-    def get_encompassing_timesteps(self, times: list[datetime]) -> list[datetime, datetime]: # TODO support multi times
+    def get_encompassing_timesteps(self, time: datetime) -> list[datetime, datetime]:
         """Returns the datetimes bound of the specs, around the provided time
-
-        Args:
-            time (datetime): _description_
-
-        Returns:
-            _type_: _description_
+        If the time is exactly on a timestep, only that timestep is returned
         """
         
-        if not isinstance(times, list):     
-            t = times
-        elif len(times) == 1:                   
-            t = times[0]
-        else: log.error("Not implemented yet")
-        
-        
-        day = datetime(t.year, t.month, t.day)
-        intra_day_time = t - day
+        assert type(time) == datetime
+
+        day = datetime(time.year, time.month, time.day)
+        intra_day_time = time - day
         
         timesteps = np.array(self.intraday_timesteps)
        
