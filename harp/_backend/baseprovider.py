@@ -180,6 +180,10 @@ class BaseDatasetProvider:
     def _check_config(self):
         context = self.__class__.__name__
         path = self.config.get("dir_storage")
+        
+        if path is None:
+            log.error(f"HARP_CACHE_DIR, nor DIR_ANCILLARY env variables are set. Config path (Key \'dir_storage\') not provided either in direct config for {context} object", e=RuntimeError)
+        
         if type(path) == str:
             path = Path(path)
         
