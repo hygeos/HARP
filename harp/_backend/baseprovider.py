@@ -369,8 +369,6 @@ class BaseDatasetProvider:
         
         """
         
-        assert type(hq.timesteps) == datetime
-        
         timesteps = self.timespecs.get_encompassing_timesteps(hq.time)
         dates = {}
         
@@ -381,13 +379,18 @@ class BaseDatasetProvider:
             
             dates[day].append(timestep)
         
-        
         queries = []
         for d in dates: # format one query per date required
             dates[d] = list(set(dates[d]))
             timesteps = dates[d]
             
-            hqs = HarpQuery(variables=hq.variables, timesteps=timesteps, area=hq.area, levels=hq.levels, offline=hq.offline)
+            hqs = HarpQuery(
+                variables   = hq.variables, 
+                timesteps   = timesteps, 
+                area        = hq.area, 
+                levels      = hq.levels, 
+                offline     = hq.offline
+            )
             hqs.extra["day"] = d
             
             queries.append(hqs)

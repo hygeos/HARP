@@ -3,6 +3,7 @@ import pandas as pd
 
 from core import log
 
+from harp import config
 from harp._backend.cds import cds_tables_meta_infos
 
 # @interface
@@ -44,7 +45,8 @@ class cds_table:
         doubles = list(self.table[self.table.duplicated('query_name')].dropna()["query_name"].values)
         
         if len(doubles) > 0:
-            log.debug(f"Nomenclature: droping variables {doubles} because of ambigous definition (duplicate)")
+            if config._debug:
+                log.debug(f"Nomenclature: droping variables {doubles} because of ambigous definition (duplicate)")
             self.table = self.table.drop_duplicates(subset=['query_name'])
         
         
