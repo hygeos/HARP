@@ -112,8 +112,6 @@ class CdsDatasetProvider(BaseDatasetProvider):
         
         ds = harp_std.center_longitude(ds, center=harp_std.longitude_center)
         
-        print(ds)
-        
         return ds
         
         
