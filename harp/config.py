@@ -23,7 +23,7 @@ if path_from_env:
 if not path_from_env:
     path_from_env = None
     
-log.debug(log.rgb.red, path_from_env)
+# log.debug(log.rgb.red, path_from_env)
 
 default_config_dict = dict(
     dir_storage = path_from_env,
