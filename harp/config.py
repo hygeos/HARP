@@ -12,9 +12,7 @@ import toml
 default_config = Config({}) # just the 'general' subsection
 
 # cascading source for value
-path_from_env = env.getvar("HARP_CACHE_DIR", False)
-if not path_from_env:
-    env.getvar("DIR_ANCILLARY", False)
+path_from_env = env.getvar("HARP_CACHE_DIR", env.getdir("DIR_ANCILLARY"))
 
 if path_from_env:
     if not Path(path_from_env).exists():
@@ -23,7 +21,7 @@ if path_from_env:
 if not path_from_env:
     path_from_env = None
     
-# log.debug(log.rgb.red, path_from_env)
+log.debug(log.rgb.red, path_from_env)
 
 default_config_dict = dict(
     dir_storage = path_from_env,
