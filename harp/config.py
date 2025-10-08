@@ -12,7 +12,14 @@ import toml
 default_config = Config({}) # just the 'general' subsection
 
 # cascading source for value
-path_from_env = env.getvar("HARP_CACHE_DIR", env.getdir("DIR_ANCILLARY"))
+# HARP_CACHE_DIR > DIR_ANCILLARY > DIR_DATA/ancillary
+# else: False >>> require user to set dir_storage in constructor
+path_from_env = env.getvar("HARP_CACHE_DIR", default=env.getvar("DIR_ANCILLARY", default=False))
+
+if path_from_env == False:
+    path_from_env = env.getvar("DIR_DATA", default=False)
+    if path_from_env != False:
+        path_from_env = Path(path_from_env) / "ancillary"
 
 if path_from_env:
     if not Path(path_from_env).exists():
@@ -21,7 +28,7 @@ if path_from_env:
 if not path_from_env:
     path_from_env = None
     
-log.debug(log.rgb.red, path_from_env)
+# log.debug(log.rgb.red, path_from_env)
 
 default_config_dict = dict(
     dir_storage = path_from_env,
@@ -30,7 +37,6 @@ default_config_dict = dict(
     lock_timeout = -1, # in seconds
     lock_lifetime = timedelta(days=1),
 )
-
 
 default_config.ingest(default_config_dict)
 
