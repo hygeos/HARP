@@ -14,10 +14,8 @@ def test_metatest():
     variables = dict(wind_10u = "u10", wind_10v = "v10")
     GenericDatasetTester.test_basic_get(CAMS.GlobalForecast, variables=variables)
     
-    
 
 def test_fail_extended_forecast_not_set():
-    
     
     with TemporaryDirectory() as tmpdir:
         tmpdir = Path(tmpdir)
@@ -33,7 +31,6 @@ def test_fail_extended_forecast_not_set():
         with pytest.raises(InvalidQueryError):
             ext = datetime.now() + timedelta(days=2) # inside extended forecast, -> outside of 12 hour leadtime 
             ds = cams.get(time = ext)
-            
 
 
 def test_fail_outside_max_forecast_range():
@@ -52,7 +49,6 @@ def test_fail_outside_max_forecast_range():
         with pytest.raises(InvalidQueryError):
             ext = datetime.now() + timedelta(days=25, hours=3) # inside extended forecast, -> outside of 12 hour leadtime 
             ds = cams.get(time = ext)
-
 
 
 def test_ok_forecast_within_range():

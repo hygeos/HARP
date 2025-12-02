@@ -26,18 +26,15 @@ class Nomenclature:
     contains helpful function for harp
     """
     
-    # NOTE: legacy
-    # harp_nomenclature_path = Path(Path(__file__).parent.parent / "harp_nomenclature.csv")
-    # harp_ref_table = _load_csv_table(harp_nomenclature_path)
-    
     # # @interface
     def __init__(self, 
         csv: Path|list[Path]|pd.DataFrame, 
         context: str,
-        # cols:list[str], 
         query_col: str,
         harp_col: str = None,
-        # alias_column=None
+        res_col: str = None,
+        *,
+        stub = False # used for BaseProvider init without loading any file
     ):
         """
 
@@ -47,6 +44,9 @@ class Nomenclature:
             raw_col (str): column used for download query (provider specific names)
             context (str): context str used only for better error messages
         """        
+        
+        if stub: return
+        
         if isinstance(csv, Path): csv = [csv]
         if isinstance(csv, pd.DataFrame):
             self.table = csv
@@ -64,9 +64,11 @@ class Nomenclature:
         
         self.query_col  = query_col
         self.harp_col   = harp_col
+        self.res_col    = res_col
         
         cols = [query_col] 
         if harp_col != None: cols += [harp_col]
+        if res_col != None: cols += [res_col]
         
         # assert cols exist and verify them 
         for col in cols:
@@ -86,7 +88,22 @@ class Nomenclature:
             lines = table.select(self.table, where=(self.query_col, "=", param), cols=self.harp_col)
             return lines.values[0]
         
+    
+    def translate_query_to_result_name(self, param: str):
+        """
+        If necessary translate param from self.query_col to self.res_col
+        """
         
+        if self.res_col is None: # no translation
+            self.assert_has_query_param(param)
+            return param
+            
+        else:
+            self.assert_has_query_param(param)
+            lines = table.select(self.table, where=(self.query_col, "=", param), cols=self.res_col)
+            return lines.values[0]
+    
+    
     def translate_to_query_name(self, param: str):
         """
         If necessary translate param from self.harp_col to self.query_col

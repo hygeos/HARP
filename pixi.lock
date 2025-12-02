@@ -149,12 +149,14 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/07/77/983a53adadd3e8e25195d4a232b6f672daf53f1889b3e7ba5e1640991dbd/cdsapi-0.7.6-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/85/32/10bb5764d90a8eee674e9dc6f4db6a0ab47c8c4d0d83c27f7c39ac415a4d/click-8.2.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/7e/e8/64c37fadfc2816a7701fa8a6ed8d87327c7d54eacfbfb6edab14a2f2be75/cloudpickle-3.1.1-py3-none-any.whl
-      - pypi: git+https://github.com/hygeos/core#088dfa0396d1018642b4d6f1fe258de36c6b0cfb
+      - pypi: git+https://github.com/hygeos/core#e176f674eb93ec058e33822bf268295fc5a2e3d4
       - pypi: https://files.pythonhosted.org/packages/b3/f9/3e04725358c17329652da8c1b2dbd88de723f3dc78bf52ca6d28d52c9279/dask-2025.7.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/50/d8/99025aa78d947ca2f457be15238ed9baf962588ca8efc0476021eeb6dbce/ecmwf_datastores_client-0.2.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/2f/e0/014d5d9d7a4564cf1c40b5039bc882db69fd881111e03ab3657ac0b218e2/fsspec-2025.7.0-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/f7/97/ad1a907c0173a90dd4df7228f24a3ec61058bc1a9ff8a0caec20a0cc622e/llvmlite-0.45.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/db/bc/83e112abc66cd466c6b83f99118035867cecd41802f8d044638aa78a106e/locket-1.0.0-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/7f/a7/7fc6c6c456508a55c35fb0e034b9f70edefa93e880905bf4db0ad26be045/multiurl-0.3.6-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/78/7e/bf2e3634993d57f95305c7cee4c9c6cb3c9c78404ee7b49569a0dfecfe33/numba-0.62.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl
       - pypi: https://files.pythonhosted.org/packages/71/e7/40fb618334dcdf7c5a316c0e7343c5cd82d3d866edc100d98e29bc945ecd/partd-1.4.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/5f/ed/539768cf28c661b5b068d66d96a2f155c4971a5d55684a514c1a0e0dec2f/python_dotenv-1.1.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/04/24/b7721e4845c2f162d26f50521b825fb061bc0a5afcf9a386840f23ea19fa/PyYAML-6.0.2-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
@@ -448,18 +450,19 @@ packages:
   - pkg:pypi/comm?source=hash-mapping
   size: 14690
   timestamp: 1753453984907
-- pypi: git+https://github.com/hygeos/core#088dfa0396d1018642b4d6f1fe258de36c6b0cfb
+- pypi: git+https://github.com/hygeos/core#e176f674eb93ec058e33822bf268295fc5a2e3d4
   name: core
-  version: 1.1.0
+  version: 1.2.0
   requires_dist:
   - tqdm
   - xarray
   - dask
-  - scipy
+  - numba
   - h5netcdf
   - python-dotenv
   - toml
   - lxml
+  requires_python: '>=3.10,<3.14'
 - conda: https://conda.anaconda.org/conda-forge/noarch/cpython-3.13.7-py313hd8ed1ab_100.conda
   noarch: generic
   sha256: e9ac20662d1c97ef96e44751a78c0057ec308f7cc208ef1fbdc868993c9f5eb3
@@ -738,8 +741,8 @@ packages:
   timestamp: 1749298469522
 - pypi: ./
   name: harp
-  version: 1.1.0
-  sha256: 5e8d9b09f4c57711994e8bb332fc47627711e4126b42491c7c3533cb1634a555
+  version: 1.1.1
+  sha256: e0541ecbe4c2a6353dd5212177e7a5cb6e4968d221143ce7fb2531fc56eaa9ce
   requires_dist:
   - numpy
   - netcdf4
@@ -1443,6 +1446,11 @@ packages:
   purls: []
   size: 60963
   timestamp: 1727963148474
+- pypi: https://files.pythonhosted.org/packages/f7/97/ad1a907c0173a90dd4df7228f24a3ec61058bc1a9ff8a0caec20a0cc622e/llvmlite-0.45.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl
+  name: llvmlite
+  version: 0.45.1
+  sha256: 57c48bf2e1083eedbc9406fb83c4e6483017879714916fe8be8a72a9672c995a
+  requires_python: '>=3.10'
 - pypi: https://files.pythonhosted.org/packages/db/bc/83e112abc66cd466c6b83f99118035867cecd41802f8d044638aa78a106e/locket-1.0.0-py2.py3-none-any.whl
   name: locket
   version: 1.0.0
@@ -1554,6 +1562,14 @@ packages:
   - pkg:pypi/netcdf4?source=hash-mapping
   size: 1148365
   timestamp: 1745588783461
+- pypi: https://files.pythonhosted.org/packages/78/7e/bf2e3634993d57f95305c7cee4c9c6cb3c9c78404ee7b49569a0dfecfe33/numba-0.62.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl
+  name: numba
+  version: 0.62.1
+  sha256: 8c9460b9e936c5bd2f0570e20a0a5909ee6e8b694fd958b210e3bde3a6dba2d7
+  requires_dist:
+  - llvmlite>=0.45.0.dev0,<0.46
+  - numpy>=1.22,<2.4
+  requires_python: '>=3.10'
 - conda: https://conda.anaconda.org/conda-forge/linux-64/numpy-2.3.1-py313hf6604e3_1.conda
   sha256: 634de365f5b2407defc11d3ffb4089316c8ec8d8343e83004a43469dfc7cd761
   md5: 392b48cb8239fee6d03c6c38a74b0cf4

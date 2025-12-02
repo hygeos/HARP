@@ -32,6 +32,12 @@ class GenericDatasetTester:
         assert len(variables.keys()) >= 2, "Test [Computable] requires at least to variables, with same dimensionnality"
         
         
+        def assert_renaming(ds: xr.Dataset, variables: dict):
+            for nv, qv in variables.items():
+                assert nv in ds.data_vars, f"Variable {nv} not found in dataset variables {list(ds.data_vars)}"
+                assert qv not in ds.data_vars, f"Variable {qv} found in dataset variables {list(ds.data_vars)} when it should have been renamed to {nv}"
+        
+        
         with TemporaryDirectory() as tmpdir:
             tmpdir = Path(tmpdir)
             config = dict(dir_storage = tmpdir)
@@ -46,10 +52,12 @@ class GenericDatasetTester:
                 datasetprovider.get(time, offline=True, **kwargs) 
                 
             # test [2]: standard online mode -------------------------------------
-            ds = datasetprovider.get(time, offline=False, **kwargs) 
+            ds = datasetprovider.get(time, offline=False, **kwargs)
+            assert_renaming(ds, variables)
             
             # test[3]: offline mode with cache -----------------------------------
             ds = datasetprovider.get(time, offline=True, **kwargs) 
+            assert_renaming(ds, variables)
     
             # test[4]: renaming --------------------------------------------------
             qvars = list(variables.values())
@@ -66,11 +74,13 @@ class GenericDatasetTester:
             x, y   = qvars[0], qvars[1]  
             nx, ny = nvars[0], nvars[1]
             
-            variables["computable"] = Computable(operands=qvars, func=lambda ds: ds[x] * ds[y], keep_operands=True) 
+            variables["computable"] = Computable(operands=qvars, func=lambda ds: ds[x] * ds[y], keep_operands=False) 
+            variables[ny] = y # keep one of the operands
             
             # Re-Instantiate the dataset provider with a temporary directory 
-            datasetprovider: BaseDatasetProvider = DatasetProvider(config=config, variables=variables)            
+            datasetprovider: BaseDatasetProvider = DatasetProvider(config=config, variables=variables)           
             ds = datasetprovider.get(time, offline=True, **kwargs) # operands already downloaded -> offline = True
+            assert_renaming(ds, variables)
             
             assert "computable" in ds.data_vars
             np.testing.assert_allclose(ds["computable"], ds[ny] * ds[nx], rtol=1e-9, atol=1e-9)

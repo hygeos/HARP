@@ -13,6 +13,7 @@ from core.static import abstract
 from harp._backend._utils import ComputeLock
 from harp._backend.harp_query import HarpAtomicStorageUnit, HarpQuery
 
+from harp._backend.nomenclature import Nomenclature
 import harp.config
 from harp._backend.computable import Computable
 
@@ -31,6 +32,9 @@ class BaseDatasetProvider:
         
         self._check_config()
         self.computables = {}    # map of computable variables
+        
+        # to be defined in subclass
+        self.nomenclature = Nomenclature(stub=True, csv=0, context="", query_col="", harp_col="") 
     
     # # @interface
     def get(self,
@@ -42,24 +46,22 @@ class BaseDatasetProvider:
         variables is a dict of the form:
             new_name: provider_specific_nane
             
-            ex: {"temp": "2m_temperature"}
+            ex: {"surface_temperature": "t2m"}
+            
         Standardize the dataset:
-            - names
-            - longitude uses [-180; 180] convention 
-            - make longitude circular (-180 AND +180 by duplicating)
-        Return data interpolated on time=dt
-     
+            - longitude uses [-180; 180[ convention 
+            
+        Returns as a xarray dataset, the requested data variables with encompassing time steps
         """
         
+        # TODO: remove from kwargs, use explicit parameters instead
         # KWARGS management
         # optional internal parameters, specific providers are free to overload their interface with theses
         area = kwargs.get("area")
         levels = kwargs.get("levels")
-        # ------------------------------------------
         
         koffline = kwargs.pop('offline', None)
         offline = koffline if koffline is not None else self.config.get("offline")
-        
         
         
         query    = [] # variables to query
@@ -104,15 +106,12 @@ class BaseDatasetProvider:
         files = self.download(hq)
         ds = xr.open_mfdataset(files, engine='netcdf4')
                 
-        # harmonize if not disabled
-        # if self.config.get("harmonize"): 
         ds = self._standardize(ds)
         
-        # unstranslate 
+        # unstranslate from query request to user aliased names
         operands = [self.nomenclature.untranslate_query_name(op) for op in operands]
         query    = [self.nomenclature.untranslate_query_name(qu) for qu in query]
-        
-        keep = direct_query.copy()
+        keep     = [self.nomenclature.untranslate_query_name(qu) for qu in direct_query]
         
         for dst_var in computed:
             comp: Computable = self.variables[dst_var]

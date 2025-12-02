@@ -32,7 +32,6 @@ if not path_from_env:
 
 default_config_dict = dict(
     dir_storage = path_from_env,
-    harmonize = True,
     offline = False,
     lock_timeout = -1, # in seconds
     lock_lifetime = timedelta(days=1),

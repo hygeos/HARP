@@ -102,7 +102,7 @@ class GlobalForecast(cds.CdsDatasetProvider):
         """
         ds = ds.isel(forecast_reference_time=0)  # Remove the singleton dimension
         ds = ds.assign_coords(forecast_period=ds.time.values)
-        ds = ds.drop(["time"])
+        ds = ds.drop_vars(["time"])
         ds = ds.rename({'forecast_period': 'time'})
         
         return ds
