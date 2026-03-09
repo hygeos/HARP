@@ -22,8 +22,11 @@ from harp._backend.computable import Computable
 class BaseDatasetProvider:
     
     # @interface    
-    def __init__(self, variables: dict[str: str], config: dict={}):
+    def __init__(self, variables: list|dict[str: str], config: dict={}):
         
+        if type(variables) in [list, tuple]:
+            variables = {v: v for v in variables}
+            
         self.variables = variables
         
         # Load default config and override keys passed through the config dict parameter
@@ -270,7 +273,7 @@ class BaseDatasetProvider:
         query must contains unique IDs (self.collection + self.name are added for uniqueness)
         """
         
-        h = hashlib.blake2b(digest_size=16)  # 16 bytes = 128-bit digest
+        h = hashlib.blake2b(digest_size=64)
         h.update(str(hq).encode('utf-8'))
         h = h.hexdigest()
         
