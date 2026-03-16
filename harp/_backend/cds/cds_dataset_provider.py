@@ -47,9 +47,6 @@ class CdsDatasetProvider(BaseDatasetProvider):
     
     def download(self, hq: HarpQuery) -> list[Path]:
         
-        if hq.area is not None:
-            log.error("Regionalized query not implemented yet (area parameter)", e=ValueError)
-            
         subqueries: list[HarpQuery] = self._decompose_into_subqueries(hq)
         subqueries: list[HarpQuery] = self._filter_cached_variables_from_queries(subqueries)
         

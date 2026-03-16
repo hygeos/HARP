@@ -25,10 +25,10 @@ class GlobalReanalysisVolumetric(cds.CdsDatasetProvider):
     timespecs = RegularTimespec(timedelta(seconds=0), 24)
     
     pressure_levels = [ # all pressure levels 
-            1,   2,   3,   5,   7,  10,  20,  30,  50,  70, 100, 125, 150, 
-            175, 200, 225, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 
-            750, 775, 800, 825, 850, 875, 900, 925, 950, 975, 1000
-        ]
+        1,   2,   3,   5,   7,  10,  20,  30,  50,  70, 100, 125, 150, 
+        175, 200, 225, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 
+        750, 775, 800, 825, 850, 875, 900, 925, 950, 975, 1000
+    ]
         
     
     def __init__(self, *, variables: dict[str: str], config: dict={}):
@@ -46,18 +46,25 @@ class GlobalReanalysisVolumetric(cds.CdsDatasetProvider):
     def get(self,
             time: datetime, # type dictates if dt or range
             levels: list[int] = pressure_levels,
+            area: dict = None, # [N, W, S, E]
             **kwargs,  # catch-all for additional keyword arguments
             ) -> xr.Dataset:
-        
+        """
+        Get a dataset from the provider, with the specified parameters
+        Args:
+            time (datetime): single datetime of query
+            levels (list[int], optional): list of pressure levels to query. Defaults to all available levels.
+            area (dict, optional): [N, W, S, E] bounding box of query. Defaults to None (global).
+            **kwargs: additional keyword arguments to pass to the provider (not used currently)
+        """
         levels = [str(i) for i in levels]
             
-        return BaseDatasetProvider.get(self, time=time, levels=levels, **kwargs)
+        return BaseDatasetProvider.get(self, time=time, levels=levels, area=area, **kwargs)
         
     
     # @interface
     def _execute_cds_request(self, target_filepath: Path, hq: HarpQuery):
         
-        # TODO area
         times = [t.strftime("%H:%M") for t in hq.timesteps]
         
         dataset = self.name
@@ -75,8 +82,10 @@ class GlobalReanalysisVolumetric(cds.CdsDatasetProvider):
                 "download_format":  "unarchived"
         }
         
-        # if area is not None: 
-            # request['area'] = area
+        # insert area to the query if needed
+        if hq.area is not None: 
+            request['area'] = hq.area
+            
         client = cds.auth.get_client(self.url)
         client.retrieve(dataset, request, target_filepath)
         

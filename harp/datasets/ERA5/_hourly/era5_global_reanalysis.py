@@ -61,6 +61,10 @@ class GlobalReanalysis(cds.CdsDatasetProvider):
                 "download_format":  "unarchived"
         }
         
+        # insert area to the query if needed
+        if hq.area is not None: 
+            request['area'] = hq.area
+        
         # if area is not None: 
             # request['area'] = area
         client = cds.auth.get_client(self.url)

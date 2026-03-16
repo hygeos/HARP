@@ -80,12 +80,21 @@ class GlobalForecastVolumetric(cds.CdsDatasetProvider):
     def get(self,
             time: datetime, # type dictates if dt or range
             levels: list[int] = pressure_levels,
+            area: dict = None, # [N, W, S, E]
             **kwargs,  # catch-all for additional keyword arguments
             ) -> xr.Dataset:
+        """
+        Get a dataset from the provider, with the specified parameters
+        Args:
+            time (datetime): single datetime of query
+            levels (list[int], optional): list of pressure levels to query. Defaults to all available levels.
+            area (dict, optional): [N, W, S, E] bounding box of query. Defaults to None (global).
+            **kwargs: additional keyword arguments to pass to the provider (not used currently)
+        """
         
         levels = [str(i) for i in levels]
             
-        return BaseDatasetProvider.get(self, time=time, levels=levels, **kwargs)
+        return BaseDatasetProvider.get(self, time=time, levels=levels, area=area,**kwargs)
     
     # @interface
     def _execute_cds_request(self, target_filepath: Path, hq: HarpQuery):
@@ -112,8 +121,8 @@ class GlobalForecastVolumetric(cds.CdsDatasetProvider):
             # "download_format":  "unarchived"
         }
         
-        # if area is not None: 
-            # request['area'] = area
+        if hq.area is not None: 
+            request['area'] = hq.area
             
         client = cds.auth.get_client(self.url)
         client.retrieve(dataset, request, target_filepath)

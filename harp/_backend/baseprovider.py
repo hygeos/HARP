@@ -42,30 +42,21 @@ class BaseDatasetProvider:
     # # @interface
     def get(self,
             time: datetime, # type dictates if dt or range
+            levels = None,
+            area = None,
             **kwargs,  # catch-all for additional keyword arguments
             ) -> xr.Dataset:
         """
-        Download and apply post-process to the downloaded data for the given date
-        variables is a dict of the form:
-            new_name: provider_specific_nane
-            
-            ex: {"surface_temperature": "t2m"}
-            
-        Standardize the dataset:
-            - longitude uses [-180; 180[ convention 
-            
-        Returns as a xarray dataset, the requested data variables with encompassing time steps
+        Get a dataset from the provider, with the specified parameters
+        Args:
+            time (datetime): single datetime of query
+            levels (list[int], optional): list of pressure levels to query. Defaults to all available levels.
+            area (dict, optional): [N, W, S, E] bounding box of query. Defaults to None (global).
+            **kwargs: additional keyword arguments to pass to the provider (not used currently)
         """
-        
-        # TODO: remove from kwargs, use explicit parameters instead
-        # KWARGS management
-        # optional internal parameters, specific providers are free to overload their interface with theses
-        area = kwargs.get("area")
-        levels = kwargs.get("levels")
         
         koffline = kwargs.pop('offline', None)
         offline = koffline if koffline is not None else self.config.get("offline")
-        
         
         query    = [] # variables to query
         operands = [] # operands for computable variables
@@ -98,7 +89,6 @@ class BaseDatasetProvider:
         for dst_var in query: # check that every raw variable exist in the dataset provider nomenclature 
             self.nomenclature.assert_has_query_param(dst_var)
         
-        
         hq = HarpQuery(
             variables   = query, 
             time        = time, 
@@ -106,6 +96,7 @@ class BaseDatasetProvider:
             area        = area, 
             levels      = levels, 
         )
+        
         files = self.download(hq)
         ds = xr.open_mfdataset(files, engine='netcdf4')
                 

@@ -42,12 +42,15 @@ class HarpAtomicStorageUnit:
             hs = h.hexdigest() + "_"
         
         
+        # ERA5_o3_[55.31,0.01,45.12,10.03]_ml_2018-12-15T
+        # ERA5_o3_[55d31_0d01_45d12_10d03]_ml_2018-12-15T
+        region_str = "global" if not self.area else str(self.area) \
+            .replace(".", "p").replace(" ", "").replace(",", "_").replace("[", "region_").replace("]", "_end_") \
+        
         filestr = prefix
         filestr += f"_{self.variable}_"
-        rg = "global_" if not self.area else log.error("Not implemented yet")
-        filestr += rg
-        lvl = "sl_" if not self.levels else "ml_"
-        filestr += lvl
+        filestr += region_str
+        filestr += "sl_" if not self.levels else "ml_"
         filestr += self.time.strftime("%Y-%m-%dT%H:%MZ_")
         filestr += hs
         filestr += f"{self.storage_version}.nc"
@@ -88,6 +91,8 @@ class HarpQuery:
         self.area       = area
         self.levels     = None if levels is None else sorted(levels)
         self.ref_time   = ref_time 
+        
+        assert area[0] > area[2] and area[1] < area[3], "Invalid area definition, expected [N, W, S, E]"
         
         # assert type(self.time) == datetime
         if self.time is not None:
