@@ -1,4 +1,5 @@
 from core import log
+from harp._code_sample import code_sample
 from harp._search import search_cfg
 from harp._search.search import search
     
@@ -15,6 +16,10 @@ def entry(args=None):
     )
 
     subs = parser.add_subparsers(dest="command", required=True)
+    
+    cmd = subs.add_parser(help="Display a code sample to query the specified dataset", name="code-sample")
+    cmd.add_argument("--dataset", nargs=1, help="Dataset name to query")
+    cmd.add_argument("--param", nargs=1, help="Parameter name to query")
     
     # > search command
     cmd = subs.add_parser(help="search variables in the datasets interfaced by HARP", name="search")
@@ -57,46 +62,55 @@ def entry(args=None):
     
     args = parser.parse_args()
     
-    if args.minimum is not None: 
-        minimum = str(args.minimum).replace("%", " ")
-        minimum = int(minimum)
-        if minimum < 0 or minimum > 100:
-            print("Expected range for --minimum param: [20-100]")    
-            exit()
-        if 0 <= minimum < 20:
-            minimum = 20
+    # detect if command is search or code-sample
+    if args.command == "code-sample":
+        dataset = args.dataset[0] if args.dataset else None
+        param = args.param[0] if args.param else None
+        
+        code_sample(dataset, param)
+        
+    elif args.command == "search":
+        
+        if args.minimum is not None: 
+            minimum = str(args.minimum).replace("%", " ")
+            minimum = int(minimum)
+            if minimum < 0 or minimum > 100:
+                print("Expected range for --minimum param: [20-100]")    
+                exit()
+            if 0 <= minimum < 20:
+                minimum = 20
+                
+            search_cfg.match_threshold = minimum
+            search_cfg.user_match_treshold = True
+        
+        
+        search_cfg.display_query_name = False # args.show_query_name
+        
+        if args.exact: search_cfg.match_exact = True
+        if args.strict: search_cfg.match_strict = True
+        # if args.approximate: search_cfg.match_approx = True
+        if args.debug: search_cfg.debug = True
+        if args.nocolor: 
+            search_cfg.ascii_nocolor = True
+            log.config.show_color = False
+        
+        search_cfg.compact = args.compact
+        search_cfg.large = args.large
+        
+        
+        sources = getattr(args, "from")
+        if sources and not isinstance(sources, list):
+            sources = [sources]
             
-        search_cfg.match_threshold = minimum
-        search_cfg.user_match_treshold = True
-    
-    
-    search_cfg.display_query_name = False # args.show_query_name
-    
-    if args.exact: search_cfg.match_exact = True
-    if args.strict: search_cfg.match_strict = True
-    # if args.approximate: search_cfg.match_approx = True
-    if args.debug: search_cfg.debug = True
-    if args.nocolor: 
-        search_cfg.ascii_nocolor = True
-        log.config.show_color = False
-    
-    search_cfg.compact = args.compact
-    search_cfg.large = args.large
-    
-    
-    sources = getattr(args, "from")
-    if sources and not isinstance(sources, list):
-        sources = [sources]
+        search_cfg.ascii_style = args.style
+            
+        if not args.debug:
+            log.silence(_backend, log.lvl.DEBUG)
+            
+            
+        apply_user_search_config()
         
-    search_cfg.ascii_style = args.style
-        
-    if not args.debug:
-        log.silence(_backend, log.lvl.DEBUG)
-        
-        
-    apply_user_search_config()
-    
-    search(args.keywords, sources=sources)
+        search(args.keywords, sources=sources)
 
 
 def apply_user_search_config():
