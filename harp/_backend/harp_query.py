@@ -11,7 +11,7 @@ class HarpAtomicStorageUnit:
     def __init__(self, *,
         variable: str, 
         time: datetime,
-        area: dict = None,
+        area: list = None,
         levels: list[int] = None,
         ref_time: datetime = None,
     ):
@@ -68,7 +68,7 @@ class HarpQuery:
         time: datetime=None, # type dictates if dt or range
         timesteps: list[datetime]=None,
         offline: bool = False,
-        area: dict = None,
+        area: list = None,
         levels: list[int] = None,
         ref_time: datetime = None,
     ):
@@ -79,7 +79,7 @@ class HarpQuery:
             time (datetime): single datetime of query
             timesteps (list[datetime] | datetime): list of the timesteps to encompassing the query
             offline (bool, optional): if True, do not attempt to download missing data. Defaults to False.
-            area (dict, optional): NOT IMPLEMENTED YET.
+            area (list, optional): [N, W, S, E] bounding box of query. Defaults to None (global).
             levels (list[int], optional): list of pressure levels to query. Defaults to None.
             ref_time (datetime, optional): reference time for forecast datasets.
         """
@@ -92,7 +92,9 @@ class HarpQuery:
         self.levels     = None if levels is None else sorted(levels)
         self.ref_time   = ref_time 
         
-        assert area[0] > area[2] and area[1] < area[3], "Invalid area definition, expected [N, W, S, E]"
+        if area is not None:
+            assert len(area) == 4, "Invalid area definition, expected [N, W, S, E]"
+            assert area[0] > area[2] and area[1] < area[3], "Invalid area definition, expected [N, W, S, E]"
         
         # assert type(self.time) == datetime
         if self.time is not None:

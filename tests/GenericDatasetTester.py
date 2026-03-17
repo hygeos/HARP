@@ -54,6 +54,7 @@ class GenericDatasetTester:
             # test [2]: standard online mode -------------------------------------
             ds = datasetprovider.get(time, offline=False, **kwargs)
             assert_renaming(ds, variables)
+            ds_save = ds.copy() # save for later comparison with area
             
             # test[3]: offline mode with cache -----------------------------------
             ds = datasetprovider.get(time, offline=True, **kwargs) 
@@ -97,3 +98,35 @@ class GenericDatasetTester:
             
             assert -90.01 < minlat < 90.01
             assert -90.01 < maxlat < 90.01
+
+            # test [7]: area query ------------------------------------------------------
+            area = [10, -10, -10, 10] # [N, W, S, E]
+            ds_area = datasetprovider.get(time, area=area, offline=False, **kwargs)
+            
+            # compare with ds_save to check that the area query is working as expected
+            assert ds_area[harp_std.lat_name].max() != ds_save[harp_std.lat_name].max()
+            assert ds_area[harp_std.lat_name].min() != ds_save[harp_std.lat_name].min()
+            assert ds_area[harp_std.lon_name].max() != ds_save[harp_std.lon_name].max()
+            assert ds_area[harp_std.lon_name].min() != ds_save[harp_std.lon_name].min()
+            
+            area_sel = ds_area.sel(
+                {harp_std.lat_name: 0, harp_std.lon_name: 0, "time": time}, 
+                method="nearest"
+            )
+            
+            save_sel = ds_save.sel(
+                {harp_std.lat_name: 0, harp_std.lon_name: 0, "time": time}, 
+                method="nearest"
+            )
+            
+            # compare lats and lons
+            assert np.isclose(area_sel[harp_std.lat_name].values, save_sel[harp_std.lat_name].values)
+            assert np.isclose(area_sel[harp_std.lon_name].values, save_sel[harp_std.lon_name].values)
+            
+            # assert values nearest to 0, 0 are the same
+            for variable in nvars:
+                
+                a = area_sel.get(variable).values
+                b = save_sel.get(variable).values
+                
+                assert np.all(np.isclose(a, b, rtol=1e-3, atol=1e-3))

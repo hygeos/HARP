@@ -52,7 +52,6 @@ class GlobalReanalysis(cds.CdsDatasetProvider):
     # @interface
     def _execute_cds_request(self, target_filepath: Path, hq: HarpQuery):
         
-        # TODO area
         times = [t.strftime("%H:%M") for t in hq.timesteps]
         d = hq.extra["day"]
         
@@ -64,8 +63,10 @@ class GlobalReanalysis(cds.CdsDatasetProvider):
                 "data_format":      "netcdf",
                 "download_format":  "unarchived"
         }
-        # if area is not None: 
-            # request['area'] = area
+        
+        # insert area to the query if needed
+        if hq.area is not None: 
+            request['area'] = hq.area
             
         client = cds.auth.get_client(self.url)
         client.retrieve(dataset, request, target_filepath)

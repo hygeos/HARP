@@ -60,19 +60,27 @@ class GlobalReanalysisVolumetric(cds.CdsDatasetProvider):
         # overload baseprovider definition to add parameters
     def get(self,
             time: datetime, # type dictates if dt or range
+            area: list = None, # [N, W, S, E]
             levels: list[int] = pressure_levels,
             **kwargs,  # catch-all for additional keyword arguments
             ) -> xr.Dataset:
+        """
+        Get a dataset from the provider, with the specified parameters
+        Args:
+            time (datetime): single datetime of query
+            levels (list[int], optional): list of pressure levels to query. Defaults to all available levels.
+            area (list, optional): [N, W, S, E] bounding box of query. Defaults to None (global).
+            **kwargs: additional keyword arguments to pass to the provider (not used currently)
+        """
         
         levels = [str(i) for i in levels]
             
-        return BaseDatasetProvider.get(self, time=time, levels=levels, **kwargs)
+        return BaseDatasetProvider.get(self, time=time, levels=levels, area=area, **kwargs)
 
     
     # @interface
     def _execute_cds_request(self, target_filepath: Path, hq: HarpQuery):
         
-        # TODO area
         times = [t.strftime("%H:%M") for t in hq.timesteps]
         d = hq.extra["day"]
         
@@ -87,9 +95,9 @@ class GlobalReanalysisVolumetric(cds.CdsDatasetProvider):
                 'data_format':'netcdf',
         }
         
-        
-        # if area is not None: 
-            # request['area'] = area
+        # insert area to the query if needed
+        if hq.area is not None: 
+            request['area'] = hq.area
             
         client = cds.auth.get_client(self.url)
         client.retrieve(dataset, request, target_filepath)

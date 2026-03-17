@@ -51,7 +51,7 @@ class BaseDatasetProvider:
         Args:
             time (datetime): single datetime of query
             levels (list[int], optional): list of pressure levels to query. Defaults to all available levels.
-            area (dict, optional): [N, W, S, E] bounding box of query. Defaults to None (global).
+            area (list, optional): [N, W, S, E] bounding box of query. Defaults to None (global).
             **kwargs: additional keyword arguments to pass to the provider (not used currently)
         """
         
@@ -100,7 +100,7 @@ class BaseDatasetProvider:
         files = self.download(hq)
         ds = xr.open_mfdataset(files, engine='netcdf4')
                 
-        ds = self._standardize(ds)
+        ds = self._standardize(ds, area=area)
         
         # unstranslate from query request to user aliased names
         operands = [self.nomenclature.untranslate_query_name(op) for op in operands]

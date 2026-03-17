@@ -149,7 +149,7 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/07/77/983a53adadd3e8e25195d4a232b6f672daf53f1889b3e7ba5e1640991dbd/cdsapi-0.7.6-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/85/32/10bb5764d90a8eee674e9dc6f4db6a0ab47c8c4d0d83c27f7c39ac415a4d/click-8.2.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/7e/e8/64c37fadfc2816a7701fa8a6ed8d87327c7d54eacfbfb6edab14a2f2be75/cloudpickle-3.1.1-py3-none-any.whl
-      - pypi: git+https://github.com/hygeos/core#e176f674eb93ec058e33822bf268295fc5a2e3d4
+      - pypi: git+https://github.com/hygeos/core#c2f299c31087f695f92fa9c81143708a5651a59f
       - pypi: https://files.pythonhosted.org/packages/b3/f9/3e04725358c17329652da8c1b2dbd88de723f3dc78bf52ca6d28d52c9279/dask-2025.7.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/50/d8/99025aa78d947ca2f457be15238ed9baf962588ca8efc0476021eeb6dbce/ecmwf_datastores_client-0.2.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/2f/e0/014d5d9d7a4564cf1c40b5039bc882db69fd881111e03ab3657ac0b218e2/fsspec-2025.7.0-py3-none-any.whl
@@ -450,9 +450,9 @@ packages:
   - pkg:pypi/comm?source=hash-mapping
   size: 14690
   timestamp: 1753453984907
-- pypi: git+https://github.com/hygeos/core#e176f674eb93ec058e33822bf268295fc5a2e3d4
+- pypi: git+https://github.com/hygeos/core#c2f299c31087f695f92fa9c81143708a5651a59f
   name: core
-  version: 1.2.0
+  version: 1.2.1
   requires_dist:
   - tqdm
   - xarray
@@ -462,7 +462,7 @@ packages:
   - python-dotenv
   - toml
   - lxml
-  requires_python: '>=3.10,<3.14'
+  requires_python: '>=3.10'
 - conda: https://conda.anaconda.org/conda-forge/noarch/cpython-3.13.7-py313hd8ed1ab_100.conda
   noarch: generic
   sha256: e9ac20662d1c97ef96e44751a78c0057ec308f7cc208ef1fbdc868993c9f5eb3

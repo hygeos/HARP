@@ -56,8 +56,6 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
         variables are expected to be raw
         """
         
-        if hq.area is not None:
-            log.error("Regionalized query not implemented yet (area parameter)", e=ValueError)
             
         subqueries: list[HarpQuery] = self._decompose_into_subqueries(hq)
         subqueries: list[HarpQuery] = self._filter_cached_variables_from_queries(subqueries)
@@ -85,7 +83,11 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
                 ds = self._access_day_file(hqs)
                 ds = ds[hqs.variables].sel(time=hqs.timesteps).compute()
                 
-                # TODO area selection
+                # area (list, optional): [N, W, S, E] bounding box of query. Defaults to None (global).
+                area = hqs.area
+                if area is not None:
+                    N, W, S, E = area
+                    ds = ds.where((ds.lat <= N) & (ds.lat >= S) & (ds.lon >= W) & (ds.lon <= E), drop=True)
                 
                 # split and store per variable, per timestep
                 self._split_and_store_atomic(ds, hqs)
@@ -137,7 +139,7 @@ class Merra2HourlyDatasetProvider(BaseDatasetProvider):
         return "https://" + str(url)
         
     
-    def _standardize(self, ds):
+    def _standardize(self, ds, area=None):
         
         ds = ds.rename_dims({'lat': harp_std.lat_name, 'lon': harp_std.lon_name}) # rename merra2 names to ECMWF convention
         ds = ds.rename_vars({'lat': harp_std.lat_name, 'lon': harp_std.lon_name})

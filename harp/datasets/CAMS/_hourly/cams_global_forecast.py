@@ -62,7 +62,7 @@ class GlobalForecast(cds.CdsDatasetProvider):
     # overload baseprovider definition to add parameters
     def get(self,
             time: datetime, # type dictates if dt or range
-            area: dict = None, # [N, W, S, E]
+            area: list = None, # [N, W, S, E]
             # TODO: add ref time support
             **kwargs,  # catch-all for additional keyword arguments
             ) -> xr.Dataset:
@@ -71,7 +71,7 @@ class GlobalForecast(cds.CdsDatasetProvider):
         Get a dataset from the provider, with the specified parameters
         Args:
             time (datetime): single datetime of query
-            area (dict, optional): [N, W, S, E] bounding box of query. Defaults to None (global).
+            area (list, optional): [N, W, S, E] bounding box of query. Defaults to None (global).
             **kwargs: additional keyword arguments to pass to the provider (not used currently)
         """
         

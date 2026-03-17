@@ -80,7 +80,7 @@ class GlobalForecastVolumetric(cds.CdsDatasetProvider):
     def get(self,
             time: datetime, # type dictates if dt or range
             levels: list[int] = pressure_levels,
-            area: dict = None, # [N, W, S, E]
+            area: list = None, # [N, W, S, E]
             **kwargs,  # catch-all for additional keyword arguments
             ) -> xr.Dataset:
         """
@@ -88,7 +88,7 @@ class GlobalForecastVolumetric(cds.CdsDatasetProvider):
         Args:
             time (datetime): single datetime of query
             levels (list[int], optional): list of pressure levels to query. Defaults to all available levels.
-            area (dict, optional): [N, W, S, E] bounding box of query. Defaults to None (global).
+            area (list, optional): [N, W, S, E] bounding box of query. Defaults to None (global).
             **kwargs: additional keyword arguments to pass to the provider (not used currently)
         """
         
